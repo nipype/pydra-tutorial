@@ -1,4 +1,5 @@
 pydra
+psutil
 tornado==4.5.3
 nbformat
 notebook==5.7.8
