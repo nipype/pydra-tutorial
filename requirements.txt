@@ -6,3 +6,4 @@ jupyter_contrib_nbextensions
 pytest
 nbval
 nest_asyncio
+jupytext
