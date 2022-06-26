@@ -19,4 +19,6 @@ if __name__ == '__main__':
     for test in notebooks:
         pytest_cmd = 'pytest --nbval-lax --nbval-cell-timeout 7200 -v -s %s' % test
         print(pytest_cmd)
-        os.system(pytest_cmd)
+        ex_code = os.system(pytest_cmd)
+        if ex_code:
+            sys.exit(ex_code)
