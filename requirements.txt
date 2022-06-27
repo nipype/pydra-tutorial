@@ -1,5 +1,9 @@
 pydra
 psutil
+nibabel
+nilearn
+pandas
+scipy
 nbformat
 jupyter
 jupyter_contrib_nbextensions
