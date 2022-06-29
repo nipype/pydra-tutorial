@@ -22,4 +22,4 @@ if __name__ == '__main__':
         print(pytest_cmd)
         ex_code = os.system(pytest_cmd)
         if ex_code:
-            sys.exit(ex_code)
+            raise Exception(f"notebook {test} fails")
