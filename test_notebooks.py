@@ -17,6 +17,7 @@ if __name__ == '__main__':
     notebooks = notebook_path.glob("*.ipynb")
 
     for test in notebooks:
+        print("\n testing notebook: ", test)
         pytest_cmd = 'pytest --nbval-lax --nbval-cell-timeout 7200 -v -s %s' % test
         print(pytest_cmd)
         ex_code = os.system(pytest_cmd)
