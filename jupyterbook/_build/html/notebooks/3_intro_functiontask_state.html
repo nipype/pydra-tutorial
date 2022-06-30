@@ -1,0 +1,1140 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>3. Tasks with States &#8212; Pydra Tutorial</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4. Workflow" href="4_intro_workflow.html" />
+    <link rel="prev" title="2. FunctionTask" href="2_intro_functiontask.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Pydra Tutorial</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../welcome.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tutorials
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1_intro_pydra.html">
+   1. Pydra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2_intro_functiontask.html">
+   2. FunctionTask
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   3. Tasks with States
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4_intro_workflow.html">
+   4. Workflow
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="5_intro_shelltask.html">
+   5. ShellCommandTask
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="6_glm_from_nilearn.html">
+   6. First level GLM
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  About Pydra
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../about/team.html">
+   Team
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../about/cite_pydra.html">
+   Cite Pydra
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/Yibeichan/pydra-tutorial/yc-pydra-book?urlpath=tree/docs/notebooks/3_intro_functiontask_state.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/Yibeichan/pydra-tutorial"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/Yibeichan/pydra-tutorial/issues/new?title=Issue%20on%20page%20%2Fnotebooks/3_intro_functiontask_state.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/notebooks/3_intro_functiontask_state.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../_sources/notebooks/3_intro_functiontask_state.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multiple-inputs-and-state-splitting">
+   Multiple inputs and state splitting
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#scalar-splitter">
+     Scalar splitter
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#outer-splitter">
+     Outer splitter
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#combining-the-output">
+   Combining the output
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lists-as-an-input">
+   Lists as an input
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise-1">
+   Exercise 1
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parallel-execution">
+   Parallel execution
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>3. Tasks with States</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multiple-inputs-and-state-splitting">
+   Multiple inputs and state splitting
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#scalar-splitter">
+     Scalar splitter
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#outer-splitter">
+     Outer splitter
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#combining-the-output">
+   Combining the output
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lists-as-an-input">
+   Lists as an input
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise-1">
+   Exercise 1
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parallel-execution">
+   Parallel execution
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="tasks-with-states">
+<h1>3. Tasks with States<a class="headerlink" href="#tasks-with-states" title="Permalink to this headline">#</a></h1>
+<p>Task might be run for a single set of input values or we can generate multiple sets, that will be called “states”. If we want to run our <code class="docutils literal notranslate"><span class="pre">Task</span></code> multiple times we have to provide an input that is an iterable and specify the way we want to map values of the inputs to the specific states. In order to do it, we set so-called <code class="docutils literal notranslate"><span class="pre">splitter</span></code>.</p>
+<p>Let’s start from a simple <code class="docutils literal notranslate"><span class="pre">FunctionTask</span></code> that takes a list as an input:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nest_asyncio</span>
+<span class="n">nest_asyncio</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pydra</span>
+
+<span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
+<span class="k">def</span> <span class="nf">add_two</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
+
+<span class="n">task1</span> <span class="o">=</span> <span class="n">add_two</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Before we set any splitter, the task’s <code class="docutils literal notranslate"><span class="pre">state</span></code> should be <code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task1</span><span class="o">.</span><span class="n">state</span> <span class="ow">is</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we can set the <code class="docutils literal notranslate"><span class="pre">splitter</span></code> by using the <code class="docutils literal notranslate"><span class="pre">split</span></code> method. Since our task has only one input, there is only one option to create a set of inputs, i.e. <code class="docutils literal notranslate"><span class="pre">splitter=&quot;x&quot;</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task1</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pydra.engine.task.FunctionTask at 0x7fb0205e3b90&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we can check that our task has a <code class="docutils literal notranslate"><span class="pre">state</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task1</span><span class="o">.</span><span class="n">state</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pydra.engine.state.State at 0x7fb01813fd10&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>And we can print information about the state:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">task1</span><span class="o">.</span><span class="n">state</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>State for add_two with a splitter: add_two.x and combiner: []
+</pre></div>
+</div>
+</div>
+</div>
+<p>within the <code class="docutils literal notranslate"><span class="pre">state</span></code> information about the splitter has been stored:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task1</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">splitter</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;add_two.x&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note, that <em>pydra</em> adds name of the function to the name of the input.</p>
+<p>Now, we can run the task and check results:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task1</span><span class="p">()</span>
+<span class="n">task1</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Result(output=Output(out=3), runtime=None, errored=False),
+ Result(output=Output(out=4), runtime=None, errored=False),
+ Result(output=Output(out=5), runtime=None, errored=False)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also return results together with values of the input, we just have to set an additional argument <code class="docutils literal notranslate"><span class="pre">return_inputs</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> (or <code class="docutils literal notranslate"><span class="pre">val</span></code>)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task1</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="n">return_inputs</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[({&#39;add_two.x&#39;: 1}, Result(output=Output(out=3), runtime=None, errored=False)),
+ ({&#39;add_two.x&#39;: 2}, Result(output=Output(out=4), runtime=None, errored=False)),
+ ({&#39;add_two.x&#39;: 3}, Result(output=Output(out=5), runtime=None, errored=False))]
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we want to return indices instead of values, we can set <code class="docutils literal notranslate"><span class="pre">return_inputs</span></code> to <code class="docutils literal notranslate"><span class="pre">ind</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task1</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="n">return_inputs</span><span class="o">=</span><span class="s2">&quot;ind&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[({&#39;add_two.x&#39;: 0}, Result(output=Output(out=3), runtime=None, errored=False)),
+ ({&#39;add_two.x&#39;: 1}, Result(output=Output(out=4), runtime=None, errored=False)),
+ ({&#39;add_two.x&#39;: 2}, Result(output=Output(out=5), runtime=None, errored=False))]
+</pre></div>
+</div>
+</div>
+</div>
+<p>For tasks with a state <em>pydra</em> prepare all sets of inputs and run the task for each of the set. We could simply represent this by the following figure:</p>
+<p><img alt="nd_spl_1.png" src="../_images/nd_spl_1.png" /></p>
+<section id="multiple-inputs-and-state-splitting">
+<h2>Multiple inputs and state splitting<a class="headerlink" href="#multiple-inputs-and-state-splitting" title="Permalink to this headline">#</a></h2>
+<p>We can also use <code class="docutils literal notranslate"><span class="pre">State</span></code> for functions with multiple inputs:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
+<span class="k">def</span> <span class="nf">add_var</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we have more options to define <code class="docutils literal notranslate"><span class="pre">splitter</span></code>, it depends on the type of inputs and on our application. For example, we could have <code class="docutils literal notranslate"><span class="pre">a</span></code> that is a list, <code class="docutils literal notranslate"><span class="pre">b</span></code> that is a single value, and split over <code class="docutils literal notranslate"><span class="pre">a</span></code> values:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task2</span> <span class="o">=</span> <span class="n">add_var</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
+<span class="n">task2</span><span class="p">()</span>
+<span class="n">task2</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Result(output=Output(out=11), runtime=None, errored=False),
+ Result(output=Output(out=12), runtime=None, errored=False),
+ Result(output=Output(out=13), runtime=None, errored=False)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we have three results for each element from the <code class="docutils literal notranslate"><span class="pre">a</span></code> list and the value of <code class="docutils literal notranslate"><span class="pre">b</span></code> is always the same.</p>
+<p><img alt="nd_spl_2.png" src="../_images/nd_spl_2.png" /></p>
+<p>But we can have lists for both inputs, and use both inputs in the splitter. Let’s assume that <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> are two elements lists.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task3</span> <span class="o">=</span> <span class="n">add_var</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we have two options to map the input values, we might want to run the task for two sets of values: (<code class="docutils literal notranslate"><span class="pre">a</span></code>=1, <code class="docutils literal notranslate"><span class="pre">b</span></code>=10) and (<code class="docutils literal notranslate"><span class="pre">a</span></code>=2, <code class="docutils literal notranslate"><span class="pre">b</span></code>=100), or we might want to run the task for four sets: (<code class="docutils literal notranslate"><span class="pre">a</span></code>=1, <code class="docutils literal notranslate"><span class="pre">b</span></code>=10), (<code class="docutils literal notranslate"><span class="pre">a</span></code>=1, <code class="docutils literal notranslate"><span class="pre">b</span></code>=100), (<code class="docutils literal notranslate"><span class="pre">a</span></code>=2, <code class="docutils literal notranslate"><span class="pre">b</span></code>=10) and (<code class="docutils literal notranslate"><span class="pre">a</span></code>=2, <code class="docutils literal notranslate"><span class="pre">b</span></code>=100).</p>
+<p><strong>The first situation will be represented by the so-called “scalar” splitter, the later by the so-called “outer” splitter.</strong></p>
+<section id="scalar-splitter">
+<h3>Scalar splitter<a class="headerlink" href="#scalar-splitter" title="Permalink to this headline">#</a></h3>
+<p>Let’s start from the scalar splitter, that uses parentheses in the syntax:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task3</span><span class="o">.</span><span class="n">split</span><span class="p">((</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">))</span>
+<span class="n">task3</span><span class="p">()</span>
+<span class="n">task3</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Result(output=Output(out=11), runtime=None, errored=False),
+ Result(output=Output(out=102), runtime=None, errored=False)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>As we expected, we have two outputs: <code class="docutils literal notranslate"><span class="pre">1+10=11</span></code> and <code class="docutils literal notranslate"><span class="pre">2+100=102</span></code>.</p>
+<p>We can represent the execution by the graph:</p>
+<p><img alt="nd_spl_4.png" src="../_images/nd_spl_4.png" /></p>
+</section>
+<section id="outer-splitter">
+<h3>Outer splitter<a class="headerlink" href="#outer-splitter" title="Permalink to this headline">#</a></h3>
+<p>For the outer splitter we will use brackets:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task4</span> <span class="o">=</span> <span class="n">add_var</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+<span class="n">task4</span><span class="o">.</span><span class="n">split</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">])</span>
+<span class="n">task4</span><span class="p">()</span>
+<span class="n">task4</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Result(output=Output(out=11), runtime=None, errored=False),
+ Result(output=Output(out=101), runtime=None, errored=False),
+ Result(output=Output(out=12), runtime=None, errored=False),
+ Result(output=Output(out=102), runtime=None, errored=False)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we have results for all of the combinations of values from <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code>.</p>
+<p><img alt="nd_spl_3.png" src="../_images/nd_spl_3.png" /></p>
+<p>Note, that once you set the splitter, you will get error when you try to set the splitter again. However, you can always set <code class="docutils literal notranslate"><span class="pre">overwrite</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> if you really intend to change the splitter.</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task4</span><span class="o">.</span><span class="n">split</span><span class="p">((</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">Exception</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="n">wr</span><span class="o">/</span><span class="n">x5xt_yqs2cvc_gb3sf147lvc0000gn</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_2373</span><span class="o">/</span><span class="mf">2635338667.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">task4</span><span class="o">.</span><span class="n">split</span><span class="p">((</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">))</span>
+
+<span class="nn">~/GDrive/GitHub/pydra/pydra/engine/core.py</span> in <span class="ni">split</span><span class="nt">(self, splitter, overwrite, cont_dim, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">557</span>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">overwrite</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">splitter</span> <span class="o">!=</span> <span class="n">splitter</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">558</span>             <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+<span class="ne">--&gt; </span><span class="mi">559</span>                 <span class="s2">&quot;splitter has been already set, &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">560</span>                 <span class="s2">&quot;if you want to overwrite it - use overwrite=True&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">561</span>             <span class="p">)</span>
+
+<span class="ne">Exception</span>: splitter has been already set, if you want to overwrite it - use overwrite=True
+</pre></div>
+</div>
+</div>
+</div>
+<p>For more inputs we can create more complex splitter, and use scalar and outer splitters together. <strong>Note, that the scalar splitter can only work for lists that have the same length, but the outer splitter doesn’t have this limitation.</strong></p>
+<p>Let’s run one more example that takes four inputs, <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> components of two vectors, and calculates all possible sums of vectors. <code class="docutils literal notranslate"><span class="pre">x</span></code> components should be kept together with corresponding <code class="docutils literal notranslate"><span class="pre">y</span></code> components (i.e. scalar splitters: <code class="docutils literal notranslate"><span class="pre">(&quot;x1&quot;,</span> <span class="pre">&quot;y1&quot;)</span></code> and <code class="docutils literal notranslate"><span class="pre">(&quot;x2&quot;,</span> <span class="pre">&quot;y2&quot;)</span></code>), but we should use outer splitter for two vectors to get all combinations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
+<span class="k">def</span> <span class="nf">add_vector</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x1</span> <span class="o">+</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y1</span> <span class="o">+</span> <span class="n">y2</span><span class="p">)</span>
+
+<span class="n">task5</span> <span class="o">=</span> <span class="n">add_vector</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;add_vect&quot;</span><span class="p">,</span> <span class="n">output_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">],</span> 
+                   <span class="n">x1</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span> <span class="n">y1</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">x2</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="n">y2</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">])</span>
+<span class="n">task5</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">splitter</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;x1&quot;</span><span class="p">,</span> <span class="s2">&quot;y1&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;x2&quot;</span><span class="p">,</span> <span class="s2">&quot;y2&quot;</span><span class="p">)])</span>
+<span class="n">task5</span><span class="p">()</span>
+<span class="n">task5</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Result(output=Output(out=(20, 11)), runtime=None, errored=False),
+ Result(output=Output(out=(30, 21)), runtime=None, errored=False),
+ Result(output=Output(out=(40, 31)), runtime=None, errored=False),
+ Result(output=Output(out=(30, 12)), runtime=None, errored=False),
+ Result(output=Output(out=(40, 22)), runtime=None, errored=False),
+ Result(output=Output(out=(50, 32)), runtime=None, errored=False)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We should get six outputs: two elements for vector1 times three elements for vector2.</p>
+</section>
+</section>
+<section id="combining-the-output">
+<h2>Combining the output<a class="headerlink" href="#combining-the-output" title="Permalink to this headline">#</a></h2>
+<p>When we use <code class="docutils literal notranslate"><span class="pre">splitter</span></code>, we can also define <code class="docutils literal notranslate"><span class="pre">combiner</span></code>, if we want to combine together the results.</p>
+<p>If we take the <code class="docutils literal notranslate"><span class="pre">task4</span></code> as an example and combine all results for each element of the input <code class="docutils literal notranslate"><span class="pre">b</span></code>, we can modify the task as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task5</span> <span class="o">=</span> <span class="n">add_var</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+<span class="n">task5</span><span class="o">.</span><span class="n">split</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">])</span>
+<span class="c1"># adding combiner</span>
+<span class="n">task5</span><span class="o">.</span><span class="n">combine</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
+<span class="n">task5</span><span class="p">()</span>
+<span class="n">task5</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[Result(output=Output(out=11), runtime=None, errored=False),
+  Result(output=Output(out=101), runtime=None, errored=False)],
+ [Result(output=Output(out=12), runtime=None, errored=False),
+  Result(output=Output(out=102), runtime=None, errored=False)]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now our result contains two elements, each one is a list. The first one contains results for <code class="docutils literal notranslate"><span class="pre">a=1</span></code> and both values of <code class="docutils literal notranslate"><span class="pre">b</span></code>, and the second contains results for <code class="docutils literal notranslate"><span class="pre">a=2</span></code> and both values of <code class="docutils literal notranslate"><span class="pre">b</span></code>. Let’s print the result again using <code class="docutils literal notranslate"><span class="pre">return_inputs</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_results</span> <span class="o">=</span> <span class="n">task5</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="n">return_inputs</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;first list, a=1: </span><span class="si">{</span><span class="n">all_results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> second list, a=2: </span><span class="si">{</span><span class="n">all_results</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>first list, a=1: [({&#39;add_var.a&#39;: 1, &#39;add_var.b&#39;: 10}, Result(output=Output(out=11), runtime=None, errored=False)), ({&#39;add_var.a&#39;: 1, &#39;add_var.b&#39;: 100}, Result(output=Output(out=101), runtime=None, errored=False))]
+
+ second list, a=2: [({&#39;add_var.a&#39;: 2, &#39;add_var.b&#39;: 10}, Result(output=Output(out=12), runtime=None, errored=False)), ({&#39;add_var.a&#39;: 2, &#39;add_var.b&#39;: 100}, Result(output=Output(out=102), runtime=None, errored=False))]
+</pre></div>
+</div>
+</div>
+</div>
+<p><img alt="nd_spl_3_comb1.png" src="../_images/nd_spl_3_comb1.png" /></p>
+<p>But we could also group all elements from the input <code class="docutils literal notranslate"><span class="pre">a</span></code> and have a different combined output:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task6</span> <span class="o">=</span> <span class="n">add_var</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+<span class="n">task6</span><span class="o">.</span><span class="n">split</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">])</span>
+<span class="c1"># changing the combiner</span>
+<span class="n">task6</span><span class="o">.</span><span class="n">combine</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
+<span class="n">task6</span><span class="p">()</span>
+<span class="n">task6</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[Result(output=Output(out=11), runtime=None, errored=False),
+  Result(output=Output(out=12), runtime=None, errored=False)],
+ [Result(output=Output(out=101), runtime=None, errored=False),
+  Result(output=Output(out=102), runtime=None, errored=False)]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We still have two elements in our results, but this time the first element contains results for <code class="docutils literal notranslate"><span class="pre">b=10</span></code> and both values of <code class="docutils literal notranslate"><span class="pre">a</span></code>, and the second contains results for <code class="docutils literal notranslate"><span class="pre">b=100</span></code> and both values of <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_results</span> <span class="o">=</span> <span class="n">task6</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="n">return_inputs</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;first list, b=10: </span><span class="si">{</span><span class="n">all_results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> second list, b=100: </span><span class="si">{</span><span class="n">all_results</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>first list, b=10: [({&#39;add_var.a&#39;: 1, &#39;add_var.b&#39;: 10}, Result(output=Output(out=11), runtime=None, errored=False)), ({&#39;add_var.a&#39;: 2, &#39;add_var.b&#39;: 10}, Result(output=Output(out=12), runtime=None, errored=False))]
+
+ second list, b=100: [({&#39;add_var.a&#39;: 1, &#39;add_var.b&#39;: 100}, Result(output=Output(out=101), runtime=None, errored=False)), ({&#39;add_var.a&#39;: 2, &#39;add_var.b&#39;: 100}, Result(output=Output(out=102), runtime=None, errored=False))]
+</pre></div>
+</div>
+</div>
+</div>
+<p><img alt="nd_spl_3_comb2.png" src="../_images/nd_spl_3_comb2.png" /></p>
+<p>We can also combine all elements by providing a list of all inputs to the <code class="docutils literal notranslate"><span class="pre">combiner</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task7</span> <span class="o">=</span> <span class="n">add_var</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+<span class="n">task7</span><span class="o">.</span><span class="n">split</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">])</span>
+<span class="c1"># combining all inputs</span>
+<span class="n">task7</span><span class="o">.</span><span class="n">combine</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">])</span>
+<span class="n">task7</span><span class="p">()</span>
+<span class="n">task7</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Result(output=Output(out=11), runtime=None, errored=False),
+ Result(output=Output(out=101), runtime=None, errored=False),
+ Result(output=Output(out=12), runtime=None, errored=False),
+ Result(output=Output(out=102), runtime=None, errored=False)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>This time the output contains one element that is a list of all outputs:</p>
+<p><img alt="nd_spl_3_comb3.png" src="../_images/nd_spl_3_comb3.png" /></p>
+</section>
+<section id="lists-as-an-input">
+<h2>Lists as an input<a class="headerlink" href="#lists-as-an-input" title="Permalink to this headline">#</a></h2>
+<p>Note that list can be used as an input even without using any splitter, there are functions that take a list as a single input value:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
+<span class="k">def</span> <span class="nf">moment</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">([</span><span class="n">i</span> <span class="o">**</span> <span class="n">n</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+
+<span class="n">task8</span> <span class="o">=</span> <span class="n">moment</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">lst</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+
+<span class="n">task8</span><span class="p">()</span>
+<span class="n">task8</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(out=33.0), runtime=None, errored=False)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-1">
+<h2>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this headline">#</a></h2>
+<p>Let’s say we want to calculate squares and cubes of integers from 2 to 5, and combine separately all squares and all cubes:</p>
+<p>First we will define a function that returns powers:</p>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
+<span class="k">def</span> <span class="nf">power</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="n">n</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can create a task that takes two lists as its input, outer splitter for <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">n</span></code>, and combine all <code class="docutils literal notranslate"><span class="pre">x</span></code>:</p>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task_ex1</span> <span class="o">=</span> <span class="n">power</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">n</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">split</span><span class="p">([</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;n&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">combine</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">task_ex1</span><span class="p">()</span>
+<span class="n">task_ex1</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[Result(output=Output(out=4), runtime=None, errored=False),
+  Result(output=Output(out=9), runtime=None, errored=False),
+  Result(output=Output(out=16), runtime=None, errored=False),
+  Result(output=Output(out=25), runtime=None, errored=False)],
+ [Result(output=Output(out=8), runtime=None, errored=False),
+  Result(output=Output(out=27), runtime=None, errored=False),
+  Result(output=Output(out=64), runtime=None, errored=False),
+  Result(output=Output(out=125), runtime=None, errored=False)]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The result should contain two list, the first one is for squares, the second for cubes.</p>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">squares_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">out</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">task_ex1</span><span class="o">.</span><span class="n">result</span><span class="p">()[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="n">cubes_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">out</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">task_ex1</span><span class="o">.</span><span class="n">result</span><span class="p">()[</span><span class="mi">1</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;squares: </span><span class="si">{</span><span class="n">squares_list</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;cubes: </span><span class="si">{</span><span class="n">cubes_list</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>squares: [4, 9, 16, 25]
+cubes: [8, 27, 64, 125]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="parallel-execution">
+<h2>Parallel execution<a class="headerlink" href="#parallel-execution" title="Permalink to this headline">#</a></h2>
+<p>We run task multiple times for multiple sets of input, but we didn’t talk about the execution time. Let’s create a function that sleeps for a second and run for four values:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
+<span class="k">def</span> <span class="nf">add_two_sleep</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
+
+<span class="n">task9</span> <span class="o">=</span> <span class="n">add_two_sleep</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">task9</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;total time: </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">task9</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total time: 1.3097989559173584
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Result(output=Output(out=3), runtime=None, errored=False),
+ Result(output=Output(out=4), runtime=None, errored=False),
+ Result(output=Output(out=5), runtime=None, errored=False),
+ Result(output=Output(out=6), runtime=None, errored=False)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The total time will depend on the machine you are using, but it could be below <code class="docutils literal notranslate"><span class="pre">1.1s</span></code>, so clearly the tasks are running in parallel!</p>
+<p>If we run <code class="docutils literal notranslate"><span class="pre">Task</span></code> that has a <code class="docutils literal notranslate"><span class="pre">State</span></code>, pydra will automatically create a <code class="docutils literal notranslate"><span class="pre">Submitter</span></code> with a default <code class="docutils literal notranslate"><span class="pre">Worker</span></code> that is <code class="docutils literal notranslate"><span class="pre">cf</span></code>, i.e. <code class="docutils literal notranslate"><span class="pre">concurrent.futures.ProcessPoolExecutor</span></code>.</p>
+<p>We could also create a <code class="docutils literal notranslate"><span class="pre">Submitter</span></code> first, and than use it to run the task:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task10</span> <span class="o">=</span> <span class="n">add_two_sleep</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="k">with</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Submitter</span><span class="p">(</span><span class="n">plugin</span><span class="o">=</span><span class="s2">&quot;cf&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">sub</span><span class="p">:</span>
+    <span class="n">task10</span><span class="p">(</span><span class="n">submitter</span><span class="o">=</span><span class="n">sub</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;total time: </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;results: </span><span class="si">{</span><span class="n">task10</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total time: 1.347938060760498
+results: [Result(output=Output(out=3), runtime=None, errored=False), Result(output=Output(out=4), runtime=None, errored=False), Result(output=Output(out=5), runtime=None, errored=False), Result(output=Output(out=6), runtime=None, errored=False)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>or we can provide the name of the plugin:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task11</span> <span class="o">=</span> <span class="n">add_two_sleep</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">task11</span><span class="p">(</span><span class="n">plugin</span><span class="o">=</span><span class="s2">&quot;cf&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;total time: </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;results: </span><span class="si">{</span><span class="n">task11</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total time: 1.339102029800415
+results: [Result(output=Output(out=3), runtime=None, errored=False), Result(output=Output(out=4), runtime=None, errored=False), Result(output=Output(out=5), runtime=None, errored=False), Result(output=Output(out=6), runtime=None, errored=False)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The last option for running the task is to create a <code class="docutils literal notranslate"><span class="pre">Submitter</span></code> first and run the submitter (<code class="docutils literal notranslate"><span class="pre">Submitter</span></code> is also a callable object) with the task as  a <code class="docutils literal notranslate"><span class="pre">runnable</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task12</span> <span class="o">=</span> <span class="n">add_two_sleep</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="k">with</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Submitter</span><span class="p">(</span><span class="n">plugin</span><span class="o">=</span><span class="s2">&quot;cf&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">sub</span><span class="p">:</span>
+    <span class="n">sub</span><span class="p">(</span><span class="n">runnable</span><span class="o">=</span><span class="n">task12</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;total time: </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;results: </span><span class="si">{</span><span class="n">task12</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total time: 1.3082010746002197
+results: [Result(output=Output(out=3), runtime=None, errored=False), Result(output=Output(out=4), runtime=None, errored=False), Result(output=Output(out=5), runtime=None, errored=False), Result(output=Output(out=6), runtime=None, errored=False)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>All of the execution time should be similar, since all tasks are run by <em>pydra</em> in the same way, i.e. <em>pydra</em> creates a submitter with <code class="docutils literal notranslate"><span class="pre">ConcurrentFutures</span></code> worker, if a number of processors is not provided, <code class="docutils literal notranslate"><span class="pre">ConcurrentFutures</span></code> takes all available processors as <code class="docutils literal notranslate"><span class="pre">max_workers</span></code>. However, if we want to set a specific number of processors, we can set it using <code class="docutils literal notranslate"><span class="pre">n_procs</span></code> when creating a <code class="docutils literal notranslate"><span class="pre">Submitter</span></code>. Let’s see how the execution time changes when we use <code class="docutils literal notranslate"><span class="pre">n_procs=2</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task13</span> <span class="o">=</span> <span class="n">add_two_sleep</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="k">with</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Submitter</span><span class="p">(</span><span class="n">plugin</span><span class="o">=</span><span class="s2">&quot;cf&quot;</span><span class="p">,</span> <span class="n">n_procs</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="n">sub</span><span class="p">:</span>
+    <span class="n">sub</span><span class="p">(</span><span class="n">runnable</span><span class="o">=</span><span class="n">task13</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;total time: </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;results: </span><span class="si">{</span><span class="n">task13</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total time: 2.364259719848633
+results: [Result(output=Output(out=3), runtime=None, errored=False), Result(output=Output(out=4), runtime=None, errored=False), Result(output=Output(out=5), runtime=None, errored=False), Result(output=Output(out=6), runtime=None, errored=False)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, the total time could be significantly different. For example, if your machine has at least 4 processors, the previous <code class="docutils literal notranslate"><span class="pre">tasks9</span></code> - <code class="docutils literal notranslate"><span class="pre">task12</span></code> took around 1s to run, but the task13 took around 2s.
+If you have 2 processors or less, you should not see any difference in the execution time.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="2_intro_functiontask.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">2. FunctionTask</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="4_intro_workflow.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">4. Workflow</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By TODO<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

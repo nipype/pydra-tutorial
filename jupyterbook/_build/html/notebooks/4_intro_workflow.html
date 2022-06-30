@@ -1,0 +1,889 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>4. Workflow &#8212; Pydra Tutorial</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5. ShellCommandTask" href="5_intro_shelltask.html" />
+    <link rel="prev" title="3. Tasks with States" href="3_intro_functiontask_state.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Pydra Tutorial</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../welcome.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tutorials
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1_intro_pydra.html">
+   1. Pydra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="2_intro_functiontask.html">
+   2. FunctionTask
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3_intro_functiontask_state.html">
+   3. Tasks with States
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   4. Workflow
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="5_intro_shelltask.html">
+   5. ShellCommandTask
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="6_glm_from_nilearn.html">
+   6. First level GLM
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  About Pydra
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../about/team.html">
+   Team
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../about/cite_pydra.html">
+   Cite Pydra
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/Yibeichan/pydra-tutorial/yc-pydra-book?urlpath=tree/docs/notebooks/4_intro_workflow.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/Yibeichan/pydra-tutorial"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/Yibeichan/pydra-tutorial/issues/new?title=Issue%20on%20page%20%2Fnotebooks/4_intro_workflow.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/notebooks/4_intro_workflow.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../_sources/notebooks/4_intro_workflow.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#connecting-tasks">
+   Connecting tasks
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#workflow-as-a-node">
+   Workflow as a node
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#workflow-with-a-splitter">
+   Workflow with a splitter
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adding-a-combiner">
+   Adding a combiner
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setting-a-splitter-for-nodes">
+   Setting a splitter for nodes
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>4. Workflow</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#connecting-tasks">
+   Connecting tasks
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#workflow-as-a-node">
+   Workflow as a node
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#workflow-with-a-splitter">
+   Workflow with a splitter
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adding-a-combiner">
+   Adding a combiner
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setting-a-splitter-for-nodes">
+   Setting a splitter for nodes
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="workflow">
+<h1>4. Workflow<a class="headerlink" href="#workflow" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nest_asyncio</span>
+<span class="n">nest_asyncio</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pydra</span>
+
+<span class="c1"># functions used later in the notebook:</span>
+
+<span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
+<span class="k">def</span> <span class="nf">add_two</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
+
+<span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
+<span class="k">def</span> <span class="nf">power</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span><span class="o">**</span><span class="n">n</span>
+
+<span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
+<span class="k">def</span> <span class="nf">mult_var</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In order to run multiple tasks within one pipeline, we use another <em>pydra</em> class - <code class="docutils literal notranslate"><span class="pre">Workflow</span></code>. The workflow will contain arbitrary number of tasks that will be treated as a graph.</p>
+<p>Let’s start from a workflow with a single task that has one input <code class="docutils literal notranslate"><span class="pre">x</span></code>. When we create a <code class="docutils literal notranslate"><span class="pre">Workflow</span></code>, we have to specify <code class="docutils literal notranslate"><span class="pre">input_spec</span></code> that contains all of the workflow inputs:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf1</span> <span class="o">=</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;wf1&quot;</span><span class="p">,</span> <span class="n">input_spec</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">x</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we can add a task and specify that <code class="docutils literal notranslate"><span class="pre">x</span></code> will be taken from the workflow input by using so-called <em>Lazy Input</em>, <code class="docutils literal notranslate"><span class="pre">x=wf1.lzin.x</span></code>. We should also add the <code class="docutils literal notranslate"><span class="pre">name</span></code> to the task we are using in the <code class="docutils literal notranslate"><span class="pre">Workflow</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf1</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">add_two</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;sum&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">wf1</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pydra.engine.core.Workflow at 0x7fc0305fa7d0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we can access the task by using the task name:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf1</span><span class="o">.</span><span class="n">sum</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pydra.engine.task.FunctionTask at 0x7fbfe0852d90&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We have to also specify what would be the workflow output, for this one-task workflow, we simply take the output of <code class="docutils literal notranslate"><span class="pre">sum</span></code> and we use <em>Lazy Output</em> to set it to <code class="docutils literal notranslate"><span class="pre">wf.output.out</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf1</span><span class="o">.</span><span class="n">set_output</span><span class="p">([(</span><span class="s2">&quot;out&quot;</span><span class="p">,</span> <span class="n">wf1</span><span class="o">.</span><span class="n">sum</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">out</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We could also use dictionary to set the output - <code class="docutils literal notranslate"><span class="pre">wf1.set_output({&quot;out&quot;:</span> <span class="pre">wf1.sum.lzout.out})</span></code>, or as a tuple if we set a single element: <code class="docutils literal notranslate"><span class="pre">wf1.set_output((&quot;out&quot;,</span> <span class="pre">wf1.sum.lzout.out))</span></code></p>
+<p>Now, we are ready to run the workflow:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Submitter</span><span class="p">(</span><span class="n">plugin</span><span class="o">=</span><span class="s2">&quot;cf&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">sub</span><span class="p">:</span>
+    <span class="n">sub</span><span class="p">(</span><span class="n">wf1</span><span class="p">)</span>
+
+<span class="n">wf1</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(out=5), runtime=None, errored=False)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The result of the workflow should be the same as the output of the task, i.e., 5.</p>
+<p>We could think about the workflow as follows: the workflow has an input <code class="docutils literal notranslate"><span class="pre">x</span></code> that is passed to the “sum” <code class="docutils literal notranslate"><span class="pre">Task</span></code>, once the task has its input it runs and produces an output, the output is later set to the workflow output.</p>
+<p><img alt="wf_1.png" src="../_images/wf_1.png" /></p>
+<p>You can add as many tasks as you want to the workflow and return multiple variables:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf2</span> <span class="o">=</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;wf2&quot;</span><span class="p">,</span> <span class="n">input_spec</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">x</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">wf2</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">add_two</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;add_two&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">wf2</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+<span class="n">wf2</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">power</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;power&quot;</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">wf2</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+
+<span class="c1"># setting multiple workflow output</span>
+<span class="n">wf2</span><span class="o">.</span><span class="n">set_output</span><span class="p">([(</span><span class="s2">&quot;out_s&quot;</span><span class="p">,</span> <span class="n">wf2</span><span class="o">.</span><span class="n">add_two</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">out</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;out_p&quot;</span><span class="p">,</span> <span class="n">wf2</span><span class="o">.</span><span class="n">power</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">out</span><span class="p">)</span>
+               <span class="p">])</span>
+
+<span class="k">with</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Submitter</span><span class="p">(</span><span class="n">plugin</span><span class="o">=</span><span class="s2">&quot;cf&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">sub</span><span class="p">:</span>
+    <span class="n">sub</span><span class="p">(</span><span class="n">wf2</span><span class="p">)</span>
+
+<span class="n">wf2</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(out_s=5, out_p=9), runtime=None, errored=False)
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this example we had two tasks, that took inputs from the workflow input and pass the outputs to the workflow output:</p>
+<p><img alt="wf_2.png" src="../_images/wf_2.png" /></p>
+<section id="connecting-tasks">
+<h2>Connecting tasks<a class="headerlink" href="#connecting-tasks" title="Permalink to this headline">#</a></h2>
+<p>The previous example showed a workflow with two nodes, but they were not connected with each other.</p>
+<p>If we want to connect the tasks with each other, we have to set the input of the second task to the output of the first task, and we use again the <code class="docutils literal notranslate"><span class="pre">Lazy</span> <span class="pre">Output</span></code> concept:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf3</span> <span class="o">=</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;wf3&quot;</span><span class="p">,</span> <span class="n">input_spec</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">x</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">wf3</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">add_two</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;sum&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">wf3</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+<span class="c1"># by setting a=wf3.sum.lzout.out we create a connection</span>
+<span class="n">wf3</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">power</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;power&quot;</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">wf3</span><span class="o">.</span><span class="n">sum</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">out</span><span class="p">))</span>
+
+<span class="n">wf3</span><span class="o">.</span><span class="n">set_output</span><span class="p">([(</span><span class="s2">&quot;out_s&quot;</span><span class="p">,</span> <span class="n">wf3</span><span class="o">.</span><span class="n">sum</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">out</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;out_p&quot;</span><span class="p">,</span> <span class="n">wf3</span><span class="o">.</span><span class="n">power</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">out</span><span class="p">)</span>
+               <span class="p">])</span>
+
+<span class="k">with</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Submitter</span><span class="p">(</span><span class="n">plugin</span><span class="o">=</span><span class="s2">&quot;cf&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">sub</span><span class="p">:</span>
+    <span class="n">sub</span><span class="p">(</span><span class="n">wf3</span><span class="p">)</span>
+
+<span class="n">wf3</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(out_s=5, out_p=25), runtime=None, errored=False)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we could see that the second task took an input from the first one:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf3</span><span class="o">.</span><span class="n">power</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LF(&#39;sum&#39;, &#39;out&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>So this time the workflow graph will look like this:</p>
+<p><img alt="wf_3.png" src="../_images/wf_3.png" /></p>
+<p>The node can be connected to multiple nodes, we can modify <code class="docutils literal notranslate"><span class="pre">wf</span></code> to add additional node that uses <code class="docutils literal notranslate"><span class="pre">mult_var</span></code> to multiple the outputs of two previous tasks:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf4</span> <span class="o">=</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;wf4&quot;</span><span class="p">,</span> <span class="n">input_spec</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">x</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">wf4</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">add_two</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;add_two&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">wf4</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+<span class="n">wf4</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">power</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;power&quot;</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">wf4</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+<span class="n">wf4</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">mult_var</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;mult&quot;</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">wf4</span><span class="o">.</span><span class="n">add_two</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">wf4</span><span class="o">.</span><span class="n">power</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">out</span><span class="p">))</span>
+
+<span class="n">wf4</span><span class="o">.</span><span class="n">set_output</span><span class="p">([(</span><span class="s2">&quot;out&quot;</span><span class="p">,</span> <span class="n">wf4</span><span class="o">.</span><span class="n">mult</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">out</span><span class="p">)])</span>
+
+<span class="k">with</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Submitter</span><span class="p">(</span><span class="n">plugin</span><span class="o">=</span><span class="s2">&quot;cf&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">sub</span><span class="p">:</span>
+    <span class="n">sub</span><span class="p">(</span><span class="n">wf4</span><span class="p">)</span>
+
+<span class="n">wf4</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(out=45), runtime=None, errored=False)
+</pre></div>
+</div>
+</div>
+</div>
+<p>This time the graph should look like this:</p>
+<p><img alt="wf_4.png" src="../_images/wf_4.png" /></p>
+</section>
+<section id="workflow-as-a-node">
+<h2>Workflow as a node<a class="headerlink" href="#workflow-as-a-node" title="Permalink to this headline">#</a></h2>
+<p>Previously we had workflows that had <code class="docutils literal notranslate"><span class="pre">Task</span></code>s as nodes, but <em>pydra</em> treats <code class="docutils literal notranslate"><span class="pre">Workflow</span></code> as any other <code class="docutils literal notranslate"><span class="pre">Task</span></code>, so the workflow could be used as a node.</p>
+<p>Let’s modify the previous workflow, and instead of <code class="docutils literal notranslate"><span class="pre">sum</span></code> and <code class="docutils literal notranslate"><span class="pre">power</span></code> tasks we use <code class="docutils literal notranslate"><span class="pre">wf2</span></code> as the first node:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf2a</span> <span class="o">=</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;wf2a&quot;</span><span class="p">,</span> <span class="n">input_spec</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">])</span>
+<span class="n">wf2a</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">add_two</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;add_two&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">wf2a</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+<span class="n">wf2a</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">power</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;power&quot;</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">wf2a</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">wf2a</span><span class="o">.</span><span class="n">set_output</span><span class="p">([(</span><span class="s2">&quot;out_s&quot;</span><span class="p">,</span> <span class="n">wf2a</span><span class="o">.</span><span class="n">add_two</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">out</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;out_p&quot;</span><span class="p">,</span> <span class="n">wf2a</span><span class="o">.</span><span class="n">power</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">out</span><span class="p">)</span>
+               <span class="p">])</span>
+
+
+<span class="n">wf5</span> <span class="o">=</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;wf5&quot;</span><span class="p">,</span> <span class="n">input_spec</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">x</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">wf5</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">wf2a</span><span class="p">)</span>
+<span class="c1"># connecting wfa to the input from the main workflow</span>
+<span class="n">wf2a</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">wf5</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">x</span>
+<span class="n">wf5</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">mult_var</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;mult&quot;</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">wf5</span><span class="o">.</span><span class="n">wf2a</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">out_s</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">wf5</span><span class="o">.</span><span class="n">wf2a</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">out_p</span><span class="p">))</span>
+
+<span class="n">wf5</span><span class="o">.</span><span class="n">set_output</span><span class="p">([(</span><span class="s2">&quot;out&quot;</span><span class="p">,</span> <span class="n">wf5</span><span class="o">.</span><span class="n">mult</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">out</span><span class="p">)])</span>
+
+<span class="k">with</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Submitter</span><span class="p">(</span><span class="n">plugin</span><span class="o">=</span><span class="s2">&quot;cf&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">sub</span><span class="p">:</span>
+    <span class="n">sub</span><span class="p">(</span><span class="n">wf5</span><span class="p">)</span>
+
+<span class="n">wf5</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(out=45), runtime=None, errored=False)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We should get exactly the same result as previously, but this time we run <code class="docutils literal notranslate"><span class="pre">wf2a</span></code> inside our main workflow:</p>
+<p><img alt="wf_5.png" src="../_images/wf_5.png" /></p>
+</section>
+<section id="workflow-with-a-splitter">
+<h2>Workflow with a splitter<a class="headerlink" href="#workflow-with-a-splitter" title="Permalink to this headline">#</a></h2>
+<p>Workflow as any other task could also have a splitter. Let’s take one of our previous workflows and add a splitter for the workflow input by setting <code class="docutils literal notranslate"><span class="pre">splitter</span></code> using the <code class="docutils literal notranslate"><span class="pre">split</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf6</span> <span class="o">=</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;wf6&quot;</span><span class="p">,</span> <span class="n">input_spec</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">])</span>
+<span class="c1"># setting a plitter for the entire workflow</span>
+<span class="n">wf6</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="n">wf6</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">add_two</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;add_two&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">wf6</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+<span class="n">wf6</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">power</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;power&quot;</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">wf6</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+<span class="n">wf6</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">mult_var</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;mult&quot;</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">wf6</span><span class="o">.</span><span class="n">add_two</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">wf6</span><span class="o">.</span><span class="n">power</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">out</span><span class="p">))</span>
+
+<span class="n">wf6</span><span class="o">.</span><span class="n">set_output</span><span class="p">([(</span><span class="s2">&quot;wf_out&quot;</span><span class="p">,</span> <span class="n">wf6</span><span class="o">.</span><span class="n">mult</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">out</span><span class="p">)])</span>
+
+<span class="k">with</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Submitter</span><span class="p">(</span><span class="n">plugin</span><span class="o">=</span><span class="s2">&quot;cf&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">sub</span><span class="p">:</span>
+    <span class="n">sub</span><span class="p">(</span><span class="n">wf6</span><span class="p">)</span>
+
+<span class="n">wf6</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Result(output=Output(wf_out=45), runtime=None, errored=False),
+ Result(output=Output(wf_out=175), runtime=None, errored=False)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>As we could expect, we received a list with two <code class="docutils literal notranslate"><span class="pre">Result</span></code>s, one is for <code class="docutils literal notranslate"><span class="pre">wf.x=3</span></code>, and the other is for <code class="docutils literal notranslate"><span class="pre">wf.x=5</span></code>.</p>
+<p>Behind the scene <em>pydra</em> expanded two workflows for two values of the workflow input:</p>
+<p><img alt="wf_6.png" src="../_images/wf_6.png" /></p>
+<p>Let’s create a new workflow that has two inputs and more complicated splitter.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf7</span> <span class="o">=</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;wf7&quot;</span><span class="p">,</span> <span class="n">input_spec</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">])</span>
+<span class="n">wf7</span><span class="o">.</span><span class="n">split</span><span class="p">([</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">],</span> <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">wf7</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">add_two</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;sum&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">wf7</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+<span class="n">wf7</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">power</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;power&quot;</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">wf7</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">y</span><span class="p">))</span>
+<span class="n">wf7</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">mult_var</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;mult&quot;</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">wf7</span><span class="o">.</span><span class="n">sum</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">out</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">wf7</span><span class="o">.</span><span class="n">power</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">out</span><span class="p">))</span>
+
+<span class="n">wf7</span><span class="o">.</span><span class="n">set_output</span><span class="p">([(</span><span class="s2">&quot;out&quot;</span><span class="p">,</span> <span class="n">wf7</span><span class="o">.</span><span class="n">mult</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">out</span><span class="p">)])</span>
+
+<span class="k">with</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Submitter</span><span class="p">(</span><span class="n">plugin</span><span class="o">=</span><span class="s2">&quot;cf&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">sub</span><span class="p">:</span>
+    <span class="n">sub</span><span class="p">(</span><span class="n">wf7</span><span class="p">)</span>
+
+<span class="n">wf7</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Result(output=Output(out=20), runtime=None, errored=False),
+ Result(output=Output(out=45), runtime=None, errored=False),
+ Result(output=Output(out=28), runtime=None, errored=False),
+ Result(output=Output(out=63), runtime=None, errored=False)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We should have four results for four sets of inputs, and the graph should look like this:</p>
+<p><img alt="wf_7.png" src="../_images/wf_7.png" /></p>
+</section>
+<section id="adding-a-combiner">
+<h2>Adding a combiner<a class="headerlink" href="#adding-a-combiner" title="Permalink to this headline">#</a></h2>
+<p>In the same way as we did for <code class="docutils literal notranslate"><span class="pre">Task</span></code>, we can add a <code class="docutils literal notranslate"><span class="pre">combiner</span></code> to the entire workflow:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf7</span><span class="o">.</span><span class="n">combine</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Submitter</span><span class="p">(</span><span class="n">plugin</span><span class="o">=</span><span class="s2">&quot;cf&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">sub</span><span class="p">:</span>
+    <span class="n">sub</span><span class="p">(</span><span class="n">wf7</span><span class="p">)</span>
+
+<span class="n">wf7</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[Result(output=Output(out=20), runtime=None, errored=False),
+  Result(output=Output(out=28), runtime=None, errored=False)],
+ [Result(output=Output(out=45), runtime=None, errored=False),
+  Result(output=Output(out=63), runtime=None, errored=False)]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we should have two lists in the results, one for <code class="docutils literal notranslate"><span class="pre">y=2</span></code> and one for <code class="docutils literal notranslate"><span class="pre">y=3</span></code>:</p>
+<p><img alt="wf_8.png" src="../_images/wf_8.png" /></p>
+</section>
+<section id="setting-a-splitter-for-nodes">
+<h2>Setting a splitter for nodes<a class="headerlink" href="#setting-a-splitter-for-nodes" title="Permalink to this headline">#</a></h2>
+<p>We presented how to set a <code class="docutils literal notranslate"><span class="pre">splitter</span></code> and a <code class="docutils literal notranslate"><span class="pre">combiner</span></code> for entire workflow, but we could also set a <code class="docutils literal notranslate"><span class="pre">splitter</span></code> and a <code class="docutils literal notranslate"><span class="pre">combiner</span></code> on the level of a single node.</p>
+<p>Let’s create a workflow that takes a list as an input, and pass this input to two nodes. One node can take entire list as its input and the second node splits the input:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
+<span class="k">def</span> <span class="nf">mean</span><span class="p">(</span><span class="n">x_list</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x_list</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">x_list</span><span class="p">)</span>
+
+<span class="n">wf8</span> <span class="o">=</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;wf8&quot;</span><span class="p">,</span> <span class="n">input_spec</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+<span class="n">wf8</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="n">x_list</span><span class="o">=</span><span class="n">wf8</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+<span class="c1"># adding a task that has its own splitter</span>
+<span class="n">wf8</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">power</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;power&quot;</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">wf8</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">))</span>
+
+<span class="n">wf8</span><span class="o">.</span><span class="n">set_output</span><span class="p">([(</span><span class="s2">&quot;out_m&quot;</span><span class="p">,</span> <span class="n">wf8</span><span class="o">.</span><span class="n">mean</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">out</span><span class="p">),</span>
+                <span class="p">(</span><span class="s2">&quot;out_p&quot;</span><span class="p">,</span> <span class="n">wf8</span><span class="o">.</span><span class="n">power</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">out</span><span class="p">)])</span>
+
+<span class="k">with</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Submitter</span><span class="p">(</span><span class="n">plugin</span><span class="o">=</span><span class="s2">&quot;cf&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">sub</span><span class="p">:</span>
+    <span class="n">sub</span><span class="p">(</span><span class="n">wf8</span><span class="p">)</span>
+
+<span class="n">wf8</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(out_m=5.0, out_p=[9, 25, 49]), runtime=None, errored=False)
+</pre></div>
+</div>
+</div>
+</div>
+<p>This time we have in the workflow output a single value from the <code class="docutils literal notranslate"><span class="pre">mean</span></code> task and three values from the <code class="docutils literal notranslate"><span class="pre">power</span></code> task. The graph should look like this:</p>
+<p><img alt="wf_9.png" src="../_images/wf_9.png" /></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="3_intro_functiontask_state.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">3. Tasks with States</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="5_intro_shelltask.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">5. ShellCommandTask</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By TODO<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

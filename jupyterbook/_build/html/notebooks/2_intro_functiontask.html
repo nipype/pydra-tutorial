@@ -1,0 +1,1111 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>2. FunctionTask &#8212; Pydra Tutorial</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3. Tasks with States" href="3_intro_functiontask_state.html" />
+    <link rel="prev" title="1. Pydra" href="1_intro_pydra.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Pydra Tutorial</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../welcome.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tutorials
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1_intro_pydra.html">
+   1. Pydra
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   2. FunctionTask
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3_intro_functiontask_state.html">
+   3. Tasks with States
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4_intro_workflow.html">
+   4. Workflow
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="5_intro_shelltask.html">
+   5. ShellCommandTask
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="6_glm_from_nilearn.html">
+   6. First level GLM
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  About Pydra
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../about/team.html">
+   Team
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../about/cite_pydra.html">
+   Cite Pydra
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/Yibeichan/pydra-tutorial/yc-pydra-book?urlpath=tree/docs/notebooks/2_intro_functiontask.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/Yibeichan/pydra-tutorial"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/Yibeichan/pydra-tutorial/issues/new?title=Issue%20on%20page%20%2Fnotebooks/2_intro_functiontask.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/notebooks/2_intro_functiontask.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../_sources/notebooks/2_intro_functiontask.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#customizing-output-names">
+   Customizing output names
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setting-the-input">
+   Setting the input
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#output-directory-and-caching-the-results">
+   Output directory and caching the results
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1">
+     Exercise 1
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-audit">
+   Using Audit
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>2. FunctionTask</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#customizing-output-names">
+   Customizing output names
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setting-the-input">
+   Setting the input
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#output-directory-and-caching-the-results">
+   Output directory and caching the results
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1">
+     Exercise 1
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-audit">
+   Using Audit
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="functiontask">
+<h1>2. FunctionTask<a class="headerlink" href="#functiontask" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nest_asyncio</span>
+<span class="n">nest_asyncio</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>A <code class="docutils literal notranslate"><span class="pre">FunctionTask</span></code> is a <code class="docutils literal notranslate"><span class="pre">Task</span></code> that can be created from every <em>python</em> function by using <em>pydra</em> decorator: <code class="docutils literal notranslate"><span class="pre">pydra.mark.task</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pydra</span>
+
+<span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
+<span class="k">def</span> <span class="nf">add_var</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Once we decorate the function, we can create a pydra <code class="docutils literal notranslate"><span class="pre">Task</span></code> and specify the input:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task1</span> <span class="o">=</span> <span class="n">add_var</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can check the type of <code class="docutils literal notranslate"><span class="pre">task1</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">task1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pydra.engine.task.FunctionTask
+</pre></div>
+</div>
+</div>
+</div>
+<p>and we can check if the task has correct values of <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code>, they should be saved in the task <code class="docutils literal notranslate"><span class="pre">inputs</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;a = </span><span class="si">{</span><span class="n">task1</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">a</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;b = </span><span class="si">{</span><span class="n">task1</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a = 4
+b = 5
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also check content of entire <code class="docutils literal notranslate"><span class="pre">inputs</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task1</span><span class="o">.</span><span class="n">inputs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inputs(a=4, b=5, _func=b&#39;\x80\x04\x95\xf0\x01\x00\x00\x00\x00\x00\x00\x8c\x17cloudpickle.cloudpickle\x94\x8c\x0e_make_function\x94\x93\x94(h\x00\x8c\r_builtin_type\x94\x93\x94\x8c\x08CodeType\x94\x85\x94R\x94(K\x02K\x00K\x02K\x02KCC\x08|\x00|\x01\x17\x00S\x00\x94N\x85\x94)\x8c\x01a\x94\x8c\x01b\x94\x86\x94\x8cM/var/folders/wr/x5xt_yqs2cvc_gb3sf147lvc0000gn/T/ipykernel_2026/3542708107.py\x94\x8c\x07add_var\x94K\x03C\x02\x00\x02\x94))t\x94R\x94}\x94(\x8c\x0b__package__\x94N\x8c\x08__name__\x94\x8c\x08__main__\x94uNNNt\x94R\x94\x8c\x1ccloudpickle.cloudpickle_fast\x94\x8c\x12_function_setstate\x94\x93\x94h\x17}\x94}\x94(h\x14h\x0e\x8c\x0c__qualname__\x94h\x0e\x8c\x0f__annotations__\x94}\x94\x8c\x0e__kwdefaults__\x94N\x8c\x0c__defaults__\x94N\x8c\n__module__\x94h\x15\x8c\x07__doc__\x94N\x8c\x0b__closure__\x94N\x8c\x17_cloudpickle_submodules\x94]\x94\x8c\x0b__globals__\x94}\x94u\x86\x94\x86R0.&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you could see, <code class="docutils literal notranslate"><span class="pre">task.inputs</span></code> contains also information about the function, that is an inseparable part of the <code class="docutils literal notranslate"><span class="pre">FunctionTask</span></code>.</p>
+<p>Once we have the task with set input, we can run it. Since <code class="docutils literal notranslate"><span class="pre">Task</span></code> is a “callable object”, we can use the syntax:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task1</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(out=9), runtime=None, errored=False)
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, the result was returned right away, but we can also access it later:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task1</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(out=9), runtime=None, errored=False)
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Result</span></code> contains more than just an output, so if we want to get the task output, we can type:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">task1</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">result</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">out</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9
+</pre></div>
+</div>
+</div>
+</div>
+<p>And if we want to see the input that was used in the task, we can set an optional argument <code class="docutils literal notranslate"><span class="pre">return_inputs</span></code> to True.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task1</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="n">return_inputs</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>({&#39;add_var.a&#39;: 4, &#39;add_var.b&#39;: 5},
+ Result(output=Output(out=9), runtime=None, errored=False))
+</pre></div>
+</div>
+</div>
+</div>
+<section id="customizing-output-names">
+<h2>Customizing output names<a class="headerlink" href="#customizing-output-names" title="Permalink to this headline">#</a></h2>
+<p>Note, that “out” is the default name for the task output, but we can always customize it. There are two ways of doing it: using <em>python</em> function annotation and using another <em>pydra</em> decorator:</p>
+<p>Let’s start from the function annotation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">typing</span> <span class="k">as</span> <span class="nn">ty</span>
+
+<span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
+<span class="k">def</span> <span class="nf">add_var_an</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">{</span><span class="s2">&quot;sum_a_b&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">}:</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+
+<span class="n">task1a</span> <span class="o">=</span> <span class="n">add_var_an</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">task1a</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(sum_a_b=9), runtime=None, errored=False)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The annotation might be very useful to specify the output names when the function returns multiple values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
+<span class="k">def</span> <span class="nf">modf_an</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">{</span><span class="s2">&quot;fractional&quot;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="s2">&quot;integer&quot;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">}:</span>
+    <span class="kn">import</span> <span class="nn">math</span>
+    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">modf</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+<span class="n">task2</span> <span class="o">=</span> <span class="n">modf_an</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mf">3.5</span><span class="p">)</span>
+<span class="n">task2</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(fractional=0.5, integer=3.0), runtime=None, errored=False)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The second way of customizing the output requires another decorator - <code class="docutils literal notranslate"><span class="pre">pydra.mark.annotate</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
+<span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">({</span><span class="s2">&quot;return&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;fractional&quot;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="s2">&quot;integer&quot;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">}})</span>
+<span class="k">def</span> <span class="nf">modf</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">math</span>
+    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">modf</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+<span class="n">task2a</span> <span class="o">=</span> <span class="n">modf</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mf">3.5</span><span class="p">)</span>
+<span class="n">task2a</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(fractional=0.5, integer=3.0), runtime=None, errored=False)
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Note, that the order of the pydra decorators is important!</strong></p>
+</section>
+<section id="setting-the-input">
+<h2>Setting the input<a class="headerlink" href="#setting-the-input" title="Permalink to this headline">#</a></h2>
+<p>We don’t have to provide the input when we create a task, we can always set it later:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task3</span> <span class="o">=</span> <span class="n">add_var</span><span class="p">()</span>
+<span class="n">task3</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">task3</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">task3</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(out=9), runtime=None, errored=False)
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we don’t specify the input, <code class="docutils literal notranslate"><span class="pre">attr.NOTHING</span></code> will be used as the default value</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task3a</span> <span class="o">=</span> <span class="n">add_var</span><span class="p">()</span>
+<span class="n">task3a</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="c1"># importing attr library, and checking the type pf `b`</span>
+<span class="kn">import</span> <span class="nn">attr</span>
+<span class="n">task3a</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">b</span> <span class="o">==</span> <span class="n">attr</span><span class="o">.</span><span class="n">NOTHING</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>And if we try to run the task, an error will be raised:</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task3a</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="n">wr</span><span class="o">/</span><span class="n">x5xt_yqs2cvc_gb3sf147lvc0000gn</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_2026</span><span class="o">/</span><span class="mf">3698768266.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">task3a</span><span class="p">()</span>
+
+<span class="nn">~/GDrive/GitHub/pydra/pydra/engine/core.py</span> in <span class="ni">__call__</span><span class="nt">(self, submitter, plugin, plugin_kwargs, rerun, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">450</span>                 <span class="n">res</span> <span class="o">=</span> <span class="n">sub</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">451</span>         <span class="k">else</span><span class="p">:</span>  <span class="c1"># tasks without state could be run without a submitter</span>
+<span class="ne">--&gt; </span><span class="mi">452</span>             <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span><span class="n">rerun</span><span class="o">=</span><span class="n">rerun</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">453</span>         <span class="k">return</span> <span class="n">res</span>
+<span class="g g-Whitespace">    </span><span class="mi">454</span> 
+
+<span class="nn">~/GDrive/GitHub/pydra/pydra/engine/core.py</span> in <span class="ni">_run</span><span class="nt">(self, rerun, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">504</span>             <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">505</span>                 <span class="bp">self</span><span class="o">.</span><span class="n">audit</span><span class="o">.</span><span class="n">monitor</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">506</span>                 <span class="bp">self</span><span class="o">.</span><span class="n">_run_task</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">507</span>                 <span class="n">result</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_collect_outputs</span><span class="p">(</span><span class="n">output_dir</span><span class="o">=</span><span class="n">output_dir</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">508</span>             <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+
+<span class="nn">~/GDrive/GitHub/pydra/pydra/engine/task.py</span> in <span class="ni">_run_task</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">190</span>         <span class="k">del</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;_func&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">191</span>         <span class="bp">self</span><span class="o">.</span><span class="n">output_</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="ne">--&gt; </span><span class="mi">192</span>         <span class="n">output</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">_func</span><span class="p">)(</span><span class="o">**</span><span class="n">inputs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">193</span>         <span class="n">output_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_spec</span><span class="o">.</span><span class="n">fields</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">194</span>         <span class="k">if</span> <span class="n">output</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="nn">/var/folders/wr/x5xt_yqs2cvc_gb3sf147lvc0000gn/T/ipykernel_2026/3542708107.py</span> in <span class="ni">add_var</span><span class="nt">(a, b)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="k">def</span> <span class="nf">add_var</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="ne">----&gt; </span><span class="mi">5</span>     <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="ne">TypeError</span>: unsupported operand type(s) for +: &#39;int&#39; and &#39;_Nothing&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="output-directory-and-caching-the-results">
+<h2>Output directory and caching the results<a class="headerlink" href="#output-directory-and-caching-the-results" title="Permalink to this headline">#</a></h2>
+<p>After running the task, we can check where the output directory with the results was created:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task3</span><span class="o">.</span><span class="n">output_dir</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PosixPath(&#39;/private/var/folders/wr/x5xt_yqs2cvc_gb3sf147lvc0000gn/T/tmpshc1jznz/FunctionTask_83c0e4e7caf9e1b91a9298d989a17279429f3b317b9f60aa3f28937c8957f48d&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Within the directory you can find the file with the results: <code class="docutils literal notranslate"><span class="pre">_result.pklz</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">task3</span><span class="o">.</span><span class="n">output_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;_task.pklz&#39;, &#39;_result.pklz&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>But we can also provide the path where we want to store the results. If a path is provided for the cache directory, then pydra will use the cached results of a node instead of recomputing the result. Let’s create a temporary directory and a specific subdirectory “task4”:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">mkdtemp</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="n">cache_dir_tmp</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">mkdtemp</span><span class="p">())</span> <span class="o">/</span> <span class="s2">&quot;task4&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cache_dir_tmp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/wr/x5xt_yqs2cvc_gb3sf147lvc0000gn/T/tmp8ilk9c23/task4
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can pass this path to the argument of <code class="docutils literal notranslate"><span class="pre">FunctionTask</span></code> - <code class="docutils literal notranslate"><span class="pre">cache_dir</span></code>. To observe the execution time, we specify a function that is sleeping for 5s:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
+<span class="k">def</span> <span class="nf">add_var_wait</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">time</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="n">task4</span> <span class="o">=</span> <span class="n">add_var_wait</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir_tmp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you’re running the cell first time, it should take around 5s.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task4</span><span class="p">()</span>
+<span class="n">task4</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(out=10), runtime=None, errored=False)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can check <code class="docutils literal notranslate"><span class="pre">output_dir</span></code> of our task, it should contain the path of <code class="docutils literal notranslate"><span class="pre">cache_dir_tmp</span></code> and the last part contains the name of the task class <code class="docutils literal notranslate"><span class="pre">FunctionTask</span></code> and the task checksum:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task4</span><span class="o">.</span><span class="n">output_dir</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PosixPath(&#39;/private/var/folders/wr/x5xt_yqs2cvc_gb3sf147lvc0000gn/T/tmp8ilk9c23/task4/FunctionTask_61b258bcd93fc0e38b07f3deee014fe1ddb5cea09eebc66b80d9fd2090c79f1e&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s see what happens when we defined identical task again with the same <code class="docutils literal notranslate"><span class="pre">cache_dir</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task4a</span> <span class="o">=</span> <span class="n">add_var_wait</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir_tmp</span><span class="p">)</span>
+<span class="n">task4a</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(out=10), runtime=None, errored=False)
+</pre></div>
+</div>
+</div>
+</div>
+<p>This time the result should be ready right away! <em>pydra</em> uses available results and do not recompute the task.</p>
+<p><em>pydra</em> not only checks for the results in <code class="docutils literal notranslate"><span class="pre">cache_dir</span></code>, but you can provide a list of other locations that should be checked. Let’s create another directory that will be used as <code class="docutils literal notranslate"><span class="pre">cache_dir</span></code> and previous working directory will be used in <code class="docutils literal notranslate"><span class="pre">cache_locations</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cache_dir_tmp_new</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">mkdtemp</span><span class="p">())</span> <span class="o">/</span> <span class="s2">&quot;task4b&quot;</span>
+
+<span class="n">task4b</span> <span class="o">=</span> <span class="n">add_var_wait</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir_tmp_new</span><span class="p">,</span> <span class="n">cache_locations</span><span class="o">=</span><span class="p">[</span><span class="n">cache_dir_tmp</span><span class="p">])</span>
+<span class="n">task4b</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(out=10), runtime=None, errored=False)
+</pre></div>
+</div>
+</div>
+</div>
+<p>This time the results should be also returned quickly! And we can check that <code class="docutils literal notranslate"><span class="pre">task4b.output_dir</span></code> was not created:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task4b</span><span class="o">.</span><span class="n">output_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you want to rerun the task regardless having already the results, you can set <code class="docutils literal notranslate"><span class="pre">rerun</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code>. The task will take several seconds and new <code class="docutils literal notranslate"><span class="pre">output_dir</span></code> will be created:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cache_dir_tmp_new</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">mkdtemp</span><span class="p">())</span> <span class="o">/</span> <span class="s2">&quot;task4c&quot;</span>
+
+<span class="n">task4c</span> <span class="o">=</span> <span class="n">add_var_wait</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir_tmp_new</span><span class="p">,</span> <span class="n">cache_locations</span><span class="o">=</span><span class="p">[</span><span class="n">cache_dir_tmp</span><span class="p">])</span>
+<span class="n">task4c</span><span class="p">(</span><span class="n">rerun</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">task4c</span><span class="o">.</span><span class="n">output_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we update the input of the task, and run again, the new directory will be created and task will be recomputed:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task4b</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">task4b</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">task4b</span><span class="o">.</span><span class="n">output_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(out=7), runtime=None, errored=False)
+True
+</pre></div>
+</div>
+</div>
+</div>
+<p>and when we check the <code class="docutils literal notranslate"><span class="pre">output_dir</span></code>, we can see that it’s different than last time:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task4b</span><span class="o">.</span><span class="n">output_dir</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PosixPath(&#39;/private/var/folders/wr/x5xt_yqs2cvc_gb3sf147lvc0000gn/T/tmp8wd9f_or/task4b/FunctionTask_bc523c04f0488215dd6a15b0a149c012e4b456cec8c77c07148bbd9f3abd214d&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is because, the checksum changes when we change either input or function.</p>
+<section id="exercise-1">
+<h3>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this headline">#</a></h3>
+<p>Create a task that take a list of numbers as an input and returns two fields: <code class="docutils literal notranslate"><span class="pre">mean</span></code> with the mean value and <code class="docutils literal notranslate"><span class="pre">std</span></code> with the standard deviation value.</p>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
+<span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">({</span><span class="s2">&quot;return&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;mean&quot;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">}})</span>
+<span class="k">def</span> <span class="nf">mean_dev</span><span class="p">(</span><span class="n">my_list</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">statistics</span> <span class="k">as</span> <span class="nn">st</span>
+    <span class="k">return</span> <span class="n">st</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">my_list</span><span class="p">),</span> <span class="n">st</span><span class="o">.</span><span class="n">stdev</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+
+<span class="n">my_task</span> <span class="o">=</span> <span class="n">mean_dev</span><span class="p">(</span><span class="n">my_list</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">my_task</span><span class="p">()</span>
+<span class="n">my_task</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(mean=2, std=0.0), runtime=None, errored=False)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># write your solution here (you can use statistics module)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="using-audit">
+<h2>Using Audit<a class="headerlink" href="#using-audit" title="Permalink to this headline">#</a></h2>
+<p><em>pydra</em> can record various run time information, including the workflow provenance, by setting <code class="docutils literal notranslate"><span class="pre">audit_flags</span></code> and the type of messengers.</p>
+<p><code class="docutils literal notranslate"><span class="pre">AuditFlag.RESOURCE</span></code> allows you to monitor resource usage for the <code class="docutils literal notranslate"><span class="pre">Task</span></code>, while <code class="docutils literal notranslate"><span class="pre">AuditFlag.PROV</span></code> tracks the provenance of the <code class="docutils literal notranslate"><span class="pre">Task</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pydra.utils.messenger</span> <span class="kn">import</span> <span class="n">AuditFlag</span><span class="p">,</span> <span class="n">PrintMessenger</span>
+
+<span class="n">task5</span> <span class="o">=</span> <span class="n">add_var</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">audit_flags</span><span class="o">=</span><span class="n">AuditFlag</span><span class="o">.</span><span class="n">RESOURCE</span><span class="p">)</span>
+<span class="n">task5</span><span class="p">()</span>
+<span class="n">task5</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(out=9), runtime=Runtime(rss_peak_gb=0.068885802734375, vms_peak_gb=34.051189422851564, cpu_peak_percent=102.1), errored=False)
+</pre></div>
+</div>
+</div>
+</div>
+<p>One can turn on both audit flags using <code class="docutils literal notranslate"><span class="pre">AuditFlag.ALL</span></code>, and print the messages on the terminal using the <code class="docutils literal notranslate"><span class="pre">PrintMessenger</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task5</span> <span class="o">=</span> <span class="n">add_var</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">audit_flags</span><span class="o">=</span><span class="n">AuditFlag</span><span class="o">.</span><span class="n">ALL</span><span class="p">,</span> <span class="n">messengers</span><span class="o">=</span><span class="n">PrintMessenger</span><span class="p">())</span>
+<span class="n">task5</span><span class="p">()</span>
+<span class="n">task5</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>id: bab3b3fa52044888a8c9d7cae27d76fb
+{
+  &quot;@context&quot;: &quot;https://raw.githubusercontent.com/nipype/pydra/master/pydra/schema/context.jsonld&quot;,
+  &quot;@id&quot;: &quot;uid:0c7310bd0bf545f6a41393cbb5b4f824&quot;,
+  &quot;@type&quot;: &quot;task&quot;,
+  &quot;startedAtTime&quot;: &quot;2022-06-30T21:09:56.326172&quot;
+}
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>id: 5f35f79ede714624a82520c6f4fbe737
+{
+  &quot;@context&quot;: &quot;https://raw.githubusercontent.com/nipype/pydra/master/pydra/schema/context.jsonld&quot;,
+  &quot;@id&quot;: &quot;uid:344ab03dc33a4b8f84a14a1cf53845d9&quot;,
+  &quot;@type&quot;: &quot;monitor&quot;,
+  &quot;startedAtTime&quot;: &quot;2022-06-30T21:09:56.558980&quot;,
+  &quot;wasStartedBy&quot;: &quot;uid:0c7310bd0bf545f6a41393cbb5b4f824&quot;
+}
+id: 07eece2fc6094b94bbd75d718405751c
+{
+  &quot;@context&quot;: &quot;https://raw.githubusercontent.com/nipype/pydra/master/pydra/schema/context.jsonld&quot;,
+  &quot;@id&quot;: &quot;uid:344ab03dc33a4b8f84a14a1cf53845d9&quot;,
+  &quot;endedAtTime&quot;: &quot;2022-06-30T21:09:56.608558&quot;,
+  &quot;wasEndedBy&quot;: &quot;uid:0c7310bd0bf545f6a41393cbb5b4f824&quot;
+}
+id: 0a91162990bb4c1685e616d743c77b98
+{
+  &quot;@context&quot;: &quot;https://raw.githubusercontent.com/nipype/pydra/master/pydra/schema/context.jsonld&quot;,
+  &quot;rss_peak_gb&quot;: 0.069889068359375,
+  &quot;vms_peak_gb&quot;: 34.051189422851564,
+  &quot;cpu_peak_percent&quot;: 104.0,
+  &quot;@id&quot;: &quot;uid:463e8d0b12e2422c803e40376619274a&quot;,
+  &quot;@type&quot;: &quot;runtime&quot;,
+  &quot;prov:wasGeneratedBy&quot;: &quot;uid:0c7310bd0bf545f6a41393cbb5b4f824&quot;
+}
+id: d4c4b557a7f44a499c6e34da5e59ee81
+{
+  &quot;@context&quot;: &quot;https://raw.githubusercontent.com/nipype/pydra/master/pydra/schema/context.jsonld&quot;,
+  &quot;@type&quot;: &quot;prov:Generation&quot;,
+  &quot;entity_generated&quot;: &quot;uid:463e8d0b12e2422c803e40376619274a&quot;,
+  &quot;hadActivity&quot;: &quot;uid:344ab03dc33a4b8f84a14a1cf53845d9&quot;
+}
+id: 48feec47699e4902b07c2a67be688594
+{
+  &quot;@context&quot;: &quot;https://raw.githubusercontent.com/nipype/pydra/master/pydra/schema/context.jsonld&quot;,
+  &quot;@id&quot;: &quot;uid:0c7310bd0bf545f6a41393cbb5b4f824&quot;,
+  &quot;endedAtTime&quot;: &quot;2022-06-30T21:09:56.608833&quot;,
+  &quot;errored&quot;: false
+}
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(out=9), runtime=Runtime(rss_peak_gb=0.069889068359375, vms_peak_gb=34.051189422851564, cpu_peak_percent=104.0), errored=False)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="1_intro_pydra.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">1. Pydra</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="3_intro_functiontask_state.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">3. Tasks with States</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By TODO<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
