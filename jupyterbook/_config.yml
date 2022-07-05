@@ -33,3 +33,6 @@ repository:
 html:
   use_issues_button: true
   use_repository_button: true
+  
+launch_buttons:
+  binderhub_url: "https://mybinder.org/v2/gh/nipype/pydra-tutorial/master"  # The URL for your BinderHub (e.g., https://mybinder.org)
