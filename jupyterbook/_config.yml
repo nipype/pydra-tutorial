@@ -2,7 +2,7 @@
 # Learn more at https://jupyterbook.org/customize/config.html
 
 title: Pydra Tutorial
-author: TODO
+author: Pydra Developers
 logo: logo.jpg
 
 # Force re-execution of notebooks on each build.
