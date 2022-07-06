@@ -20,7 +20,9 @@ jobs:
       run: |
         pip install --upgrade pip
         pip install -r requirements.txt
-    - name: Build
+    - name: Disable etelemetry
+      run: echo "NO_ET=TRUE" >> $GITHUB_ENV
+    - name: Build JupyterBook
       run: jb build -W jupyterbook
     - uses: peaceiris/actions-gh-pages@v3
       if: ${{ github.ref == 'refs/heads/master' }}
