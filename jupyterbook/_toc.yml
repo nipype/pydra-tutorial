@@ -12,7 +12,7 @@ parts:
     - file: notebooks/4_intro_workflow
     - file: notebooks/5_intro_shelltask
     - file: notebooks/6_glm_from_nilearn
-  - caption: About Pydra
-    chapters:
-    - file: about/team
-    - file: about/cite_pydra
+#  - caption: About Pydra
+#    chapters:
+#    - file: about/team
+#    - file: about/cite_pydra
