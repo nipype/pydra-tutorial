@@ -3,3 +3,6 @@
 */*/.ipynb_checkpoints
 outputs/*
 .DS_Store
+*/_build/*
+*/*.ipynb
+jupyterbook/outputs
