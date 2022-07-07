@@ -1,11 +1,10 @@
 ---
 jupytext:
-  formats: ipynb,md:myst
   text_representation:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.13.8
+    jupytext_version: 1.14.0
 kernelspec:
   display_name: Python 3
   language: python
@@ -18,7 +17,7 @@ kernelspec:
 
 Pydra is a lightweight, Python 3.7+ dataflow engine for computational graph construction, manipulation, and distributed execution.
 Designed as a general-purpose engine to support analytics in any scientific domain; created for [Nipype](https://github.com/nipy/nipype), and helps build reproducible, scalable, reusable, and fully automated, provenance tracked scientific workflows.
-The power of Pydra lies in ease of workflow creation 
+The power of Pydra lies in ease of workflow creation
 and execution for complex multiparameter map-reduce operations, and the use of global cache.
 
 Pydra's key features are:
@@ -43,7 +42,6 @@ There are two main types of objects in *pydra*: `Task` and `Workflow`, that is a
       - `DockerTask`: `ContainerTask` that uses Docker
       - `SingularityTask`: `ContainerTask` that uses Singularity
 
-
 +++
 
 ## Pydra Workers
@@ -56,6 +54,6 @@ Pydra supports multiple workers to execute `Tasks` and `Workflows`:
 
 **Before going to next notebooks, let's check if pydra is properly installed**
 
-```{code-cell} ipython3
+```{code-cell}
 import pydra
 ```
