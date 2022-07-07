@@ -225,7 +225,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/nipype/pydra-tutorial/master/v2/gh/nipype/pydra-tutorial/master?urlpath=tree/docs/notebooks/5_intro_shelltask.md"
+        <a href="https://mybinder.org/v2/gh/nipype/pydra-tutorial/master?urlpath=tree/jupyterbook/notebooks/5_intro_shelltask.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -556,6 +556,16 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="nn">Input In [2],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">pydra</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;pydra&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -569,7 +579,16 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;pwd&#39;
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">Input In [3],</span> in <span class="ni">&lt;cell line: 3&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;pwd&quot;</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1"># we should use executable to pass the command we want to run</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">shelly</span> <span class="o">=</span> <span class="n">pydra</span><span class="o">.</span><span class="n">ShellCommandTask</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;shelly&quot;</span><span class="p">,</span> <span class="n">executable</span><span class="o">=</span><span class="n">cmd</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># we can always check the cmdline of our task</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">shelly</span><span class="o">.</span><span class="n">cmdline</span>
+
+<span class="ne">NameError</span>: name &#39;pydra&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -582,6 +601,17 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">Input In [4],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="k">with</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Submitter</span><span class="p">(</span><span class="n">plugin</span><span class="o">=</span><span class="s2">&quot;cf&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">sub</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="n">sub</span><span class="p">(</span><span class="n">shelly</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;pydra&#39; is not defined
+</pre></div>
+</div>
+</div>
 </div>
 <p>and check the result</p>
 <div class="cell docutils container">
@@ -591,7 +621,12 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(return_code=0, stdout=&#39;/tmp/tmp6eqap0b4/ShellCommandTask_50215383834238ce614b4428a1e9943ddff15f8580a384a0a57b34c760864b3a\n&#39;, stderr=&#39;&#39;), runtime=None, errored=False)
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">Input In [5],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">shelly</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+
+<span class="ne">NameError</span>: name &#39;shelly&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -613,10 +648,15 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cmndline =  echo hail pydra
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(return_code=0, stdout=&#39;hail pydra\n&#39;, stderr=&#39;&#39;), runtime=None, errored=False)
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">Input In [6],</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;echo&quot;</span><span class="p">,</span> <span class="s2">&quot;hail&quot;</span><span class="p">,</span> <span class="s2">&quot;pydra&quot;</span><span class="p">]</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">shelly</span> <span class="o">=</span> <span class="n">pydra</span><span class="o">.</span><span class="n">ShellCommandTask</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;shelly&quot;</span><span class="p">,</span> <span class="n">executable</span><span class="o">=</span><span class="n">cmd</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;cmndline = &quot;</span><span class="p">,</span> <span class="n">shelly</span><span class="o">.</span><span class="n">cmdline</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="k">with</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Submitter</span><span class="p">(</span><span class="n">plugin</span><span class="o">=</span><span class="s2">&quot;cf&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">sub</span><span class="p">:</span>
+
+<span class="ne">NameError</span>: name &#39;pydra&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -639,10 +679,16 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cmndline =  echo hail pydra
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(return_code=0, stdout=&#39;hail pydra\n&#39;, stderr=&#39;&#39;), runtime=None, errored=False)
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">Input In [7],</span> in <span class="ni">&lt;cell line: 4&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;echo&quot;</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;hail&quot;</span><span class="p">,</span> <span class="s2">&quot;pydra&quot;</span><span class="p">]</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">shelly</span> <span class="o">=</span> <span class="n">pydra</span><span class="o">.</span><span class="n">ShellCommandTask</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;shelly&quot;</span><span class="p">,</span> <span class="n">executable</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;cmndline = &quot;</span><span class="p">,</span> <span class="n">shelly</span><span class="o">.</span><span class="n">cmdline</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="k">with</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Submitter</span><span class="p">(</span><span class="n">plugin</span><span class="o">=</span><span class="s2">&quot;cf&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">sub</span><span class="p">:</span>
+
+<span class="ne">NameError</span>: name &#39;pydra&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -669,6 +715,29 @@ title="Print to PDF"
     <span class="p">],</span>
     <span class="n">bases</span><span class="o">=</span><span class="p">(</span><span class="n">pydra</span><span class="o">.</span><span class="n">specs</span><span class="o">.</span><span class="n">ShellSpec</span><span class="p">,),</span>
 <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">Input In [8],</span> in <span class="ni">&lt;cell line: 3&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">attr</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">my_input_spec</span> <span class="o">=</span> <span class="n">pydra</span><span class="o">.</span><span class="n">specs</span><span class="o">.</span><span class="n">SpecInfo</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Input&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">fields</span><span class="o">=</span><span class="p">[</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>         <span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>             <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>             <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>                 <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>                 <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;argstr&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;help_string&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;mandatory&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>                 <span class="p">),</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>         <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="p">],</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="n">bases</span><span class="o">=</span><span class="p">(</span><span class="n">pydra</span><span class="o">.</span><span class="n">specs</span><span class="o">.</span><span class="n">ShellSpec</span><span class="p">,),</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;pydra&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -718,10 +787,18 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cmndline =  echo HELLO
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(return_code=0, stdout=&#39;HELLO\n&#39;, stderr=&#39;&#39;), runtime=None, errored=False)
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">Input In [9],</span> in <span class="ni">&lt;cell line: 3&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">cmd_exec</span> <span class="o">=</span> <span class="s2">&quot;echo&quot;</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">hello</span> <span class="o">=</span> <span class="s2">&quot;HELLO&quot;</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">shelly</span> <span class="o">=</span> <span class="n">pydra</span><span class="o">.</span><span class="n">ShellCommandTask</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;shelly&quot;</span><span class="p">,</span> <span class="n">executable</span><span class="o">=</span><span class="n">cmd_exec</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">hello</span><span class="p">,</span> <span class="n">input_spec</span><span class="o">=</span><span class="n">my_input_spec</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;cmndline = &quot;</span><span class="p">,</span> <span class="n">shelly</span><span class="o">.</span><span class="n">cmdline</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="k">with</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Submitter</span><span class="p">(</span><span class="n">plugin</span><span class="o">=</span><span class="s2">&quot;cf&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">sub</span><span class="p">:</span>
+
+<span class="ne">NameError</span>: name &#39;pydra&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -737,6 +814,20 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
     <span class="n">fields</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;newfile&quot;</span><span class="p">,</span> <span class="n">pydra</span><span class="o">.</span><span class="n">specs</span><span class="o">.</span><span class="n">File</span><span class="p">,</span> <span class="s2">&quot;newfile_tmp.txt&quot;</span><span class="p">)],</span>
     <span class="n">bases</span><span class="o">=</span><span class="p">(</span><span class="n">pydra</span><span class="o">.</span><span class="n">specs</span><span class="o">.</span><span class="n">ShellOutSpec</span><span class="p">,),</span>
 <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">Input In [10],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">my_output_spec</span> <span class="o">=</span> <span class="n">pydra</span><span class="o">.</span><span class="n">specs</span><span class="o">.</span><span class="n">SpecInfo</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Output&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">fields</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;newfile&quot;</span><span class="p">,</span> <span class="n">pydra</span><span class="o">.</span><span class="n">specs</span><span class="o">.</span><span class="n">File</span><span class="p">,</span> <span class="s2">&quot;newfile_tmp.txt&quot;</span><span class="p">)],</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">bases</span><span class="o">=</span><span class="p">(</span><span class="n">pydra</span><span class="o">.</span><span class="n">specs</span><span class="o">.</span><span class="n">ShellOutSpec</span><span class="p">,),</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;pydra&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -756,10 +847,15 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cmndline =  touch newfile_tmp.txt
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(return_code=0, stdout=&#39;&#39;, stderr=&#39;&#39;, newfile=PosixPath(&#39;/tmp/tmphs68ce4v/ShellCommandTask_76e73f8b52e6d5d1920bda2a22e309fb4fd89cec14e6ab25755e2caf66cf0294/newfile_tmp.txt&#39;)), runtime=None, errored=False)
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">Input In [11],</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;touch&quot;</span><span class="p">,</span> <span class="s2">&quot;newfile_tmp.txt&quot;</span><span class="p">]</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">shelly</span> <span class="o">=</span> <span class="n">pydra</span><span class="o">.</span><span class="n">ShellCommandTask</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;shelly&quot;</span><span class="p">,</span> <span class="n">executable</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span> <span class="n">output_spec</span><span class="o">=</span><span class="n">my_output_spec</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;cmndline = &quot;</span><span class="p">,</span> <span class="n">shelly</span><span class="o">.</span><span class="n">cmdline</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="k">with</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Submitter</span><span class="p">(</span><span class="n">plugin</span><span class="o">=</span><span class="s2">&quot;cf&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">sub</span><span class="p">:</span>
+
+<span class="ne">NameError</span>: name &#39;pydra&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -793,6 +889,33 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">Input In [12],</span> in <span class="ni">&lt;cell line: 4&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;touch&quot;</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;newfile_1.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;newfile_2.txt&quot;</span><span class="p">]</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">my_output_spec</span> <span class="o">=</span> <span class="n">pydra</span><span class="o">.</span><span class="n">specs</span><span class="o">.</span><span class="n">SpecInfo</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Output&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">fields</span><span class="o">=</span><span class="p">[</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>         <span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>             <span class="s2">&quot;out1&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>             <span class="n">attr</span><span class="o">.</span><span class="n">ib</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>                 <span class="nb">type</span><span class="o">=</span><span class="n">pydra</span><span class="o">.</span><span class="n">specs</span><span class="o">.</span><span class="n">File</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>                 <span class="n">metadata</span><span class="o">=</span><span class="p">{</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>                     <span class="s2">&quot;output_file_template&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{args}</span><span class="s2">&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>                     <span class="s2">&quot;help_string&quot;</span><span class="p">:</span> <span class="s2">&quot;output file&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>                 <span class="p">},</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span>             <span class="p">),</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>         <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="p">],</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="n">bases</span><span class="o">=</span><span class="p">(</span><span class="n">pydra</span><span class="o">.</span><span class="n">specs</span><span class="o">.</span><span class="n">ShellOutSpec</span><span class="p">,),</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;pydra&#39; is not defined
+</pre></div>
+</div>
+</div>
 </div>
 <p><mark> DO NOT RUN IF Docker IS NOT AVAILABLE </mark></p>
 <p><strong>Note, that the following task use Docker, so they will fail if the Docker is not available. It will also fail in Binder.</strong></p>
@@ -814,7 +937,15 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(return_code=0, stdout=&#39;root\n&#39;, stderr=&quot;Unable to find image &#39;busybox:latest&#39; locally\nlatest: Pulling from library/busybox\n19d511225f94: Pulling fs layer\n19d511225f94: Verifying Checksum\n19d511225f94: Download complete\n19d511225f94: Pull complete\nDigest: sha256:3614ca5eacf0a3a1bcc361c939202a974b4902b9334ff36eb29ffe9011aaad83\nStatus: Downloaded newer image for busybox:latest\n&quot;), runtime=None, errored=False)
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">Input In [13],</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;whoami&quot;</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">docky</span> <span class="o">=</span> <span class="n">pydra</span><span class="o">.</span><span class="n">DockerTask</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;docky&quot;</span><span class="p">,</span> <span class="n">executable</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="s2">&quot;busybox&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="k">with</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Submitter</span><span class="p">()</span> <span class="k">as</span> <span class="n">sub</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">docky</span><span class="p">(</span><span class="n">submitter</span><span class="o">=</span><span class="n">sub</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;pydra&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -835,8 +966,15 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Result(output=Output(return_code=0, stdout=&#39;root\n&#39;, stderr=&#39;&#39;), runtime=None, errored=False),
- Result(output=Output(return_code=0, stdout=&#39;root\n&#39;, stderr=&quot;Unable to find image &#39;ubuntu:latest&#39; locally\nlatest: Pulling from library/ubuntu\n405f018f9d1d: Pulling fs layer\n405f018f9d1d: Verifying Checksum\n405f018f9d1d: Download complete\n405f018f9d1d: Pull complete\nDigest: sha256:b6b83d3c331794420340093eb706a6f152d9c1fa51b262d9bf34594887c2c7ac\nStatus: Downloaded newer image for ubuntu:latest\n&quot;), runtime=None, errored=False)]
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">Input In [14],</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;whoami&quot;</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">docky</span> <span class="o">=</span> <span class="n">pydra</span><span class="o">.</span><span class="n">DockerTask</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;docky&quot;</span><span class="p">,</span> <span class="n">executable</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;busybox&quot;</span><span class="p">,</span> <span class="s2">&quot;ubuntu&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;image&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="k">with</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Submitter</span><span class="p">()</span> <span class="k">as</span> <span class="n">sub</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">docky</span><span class="p">(</span><span class="n">submitter</span><span class="o">=</span><span class="n">sub</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;pydra&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -862,7 +1000,14 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(return_code=0, stdout=&#39;root\n&#39;, stderr=&#39;&#39;), runtime=None, errored=False)
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">Input In [16],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">shelly</span> <span class="o">=</span> <span class="n">pydra</span><span class="o">.</span><span class="n">ShellCommandTask</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;shelly&quot;</span><span class="p">,</span> <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;whoami&quot;</span><span class="p">,</span> <span class="n">container_info</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;docker&quot;</span><span class="p">,</span> <span class="s2">&quot;busybox&quot;</span><span class="p">))</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="k">with</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Submitter</span><span class="p">()</span> <span class="k">as</span> <span class="n">sub</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">shelly</span><span class="p">(</span><span class="n">submitter</span><span class="o">=</span><span class="n">sub</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;pydra&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -879,7 +1024,14 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(return_code=0, stdout=&#39;runner\n&#39;, stderr=&#39;&#39;), runtime=None, errored=False)
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">Input In [17],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">shelly</span> <span class="o">=</span> <span class="n">pydra</span><span class="o">.</span><span class="n">ShellCommandTask</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;shelly&quot;</span><span class="p">,</span> <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;whoami&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="k">with</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Submitter</span><span class="p">()</span> <span class="k">as</span> <span class="n">sub</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">shelly</span><span class="p">(</span><span class="n">submitter</span><span class="o">=</span><span class="n">sub</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;pydra&#39; is not defined
 </pre></div>
 </div>
 </div>
