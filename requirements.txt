@@ -1,6 +1,7 @@
 pydra
 jupyter
 jupyter_contrib_nbextensions
+jupytext
 jupyterlab
 matplotlib
 nbformat
