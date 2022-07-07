@@ -1,11 +1,10 @@
 ---
 jupytext:
-  formats: ipynb,md:myst
   text_representation:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.13.8
+    jupytext_version: 1.14.0
 kernelspec:
   display_name: Python 3
   language: python
@@ -14,8 +13,7 @@ kernelspec:
 
 # 5. ShellCommandTask
 
-
-```{code-cell} ipython3
+```{code-cell}
 ---
 jupyter:
   outputs_hidden: false
@@ -25,23 +23,22 @@ pycharm:
     '
 ---
 import nest_asyncio
+
 nest_asyncio.apply()
 ```
-
-
 
 In addition to `FunctionTask`, pydra allows for creating tasks from shell commands by using `ShellCommandTask`.
 
 Let's run a simple command `pwd` using pydra
 
-```{code-cell} ipython3
+```{code-cell}
 import pydra
 ```
 
-```{code-cell} ipython3
-cmd = "pwd"
+```{code-cell}
+cmd = 'pwd'
 # we should use executable to pass the command we want to run
-shelly = pydra.ShellCommandTask(name="shelly", executable=cmd)
+shelly = pydra.ShellCommandTask(name='shelly', executable=cmd)
 
 # we can always check the cmdline of our task
 shelly.cmdline
@@ -49,14 +46,14 @@ shelly.cmdline
 
 and now let's try to run it:
 
-```{code-cell} ipython3
-with pydra.Submitter(plugin="cf") as sub:
+```{code-cell}
+with pydra.Submitter(plugin='cf') as sub:
     sub(shelly)
 ```
 
 and check the result
 
-```{code-cell} ipython3
+```{code-cell}
 shelly.result()
 ```
 
@@ -67,12 +64,12 @@ the result should have `return_code`, `stdout` and `stderr`. If everything goes 
 ## Commands with arguments and inputs
 you can also use longer command by providing a list:
 
-```{code-cell} ipython3
-cmd = ["echo", "hail", "pydra"]
-shelly = pydra.ShellCommandTask(name="shelly", executable=cmd)
-print("cmndline = ", shelly.cmdline)
+```{code-cell}
+cmd = ['echo', 'hail', 'pydra']
+shelly = pydra.ShellCommandTask(name='shelly', executable=cmd)
+print('cmndline = ', shelly.cmdline)
 
-with pydra.Submitter(plugin="cf") as sub:
+with pydra.Submitter(plugin='cf') as sub:
     sub(shelly)
 shelly.result()
 ```
@@ -80,14 +77,14 @@ shelly.result()
 ### using args
 In addition to `executable`, we can also use `args`. Last example can be also rewritten:
 
-```{code-cell} ipython3
-cmd = "echo"
-args = ["hail", "pydra"]
+```{code-cell}
+cmd = 'echo'
+args = ['hail', 'pydra']
 
-shelly = pydra.ShellCommandTask(name="shelly", executable=cmd, args=args)
-print("cmndline = ", shelly.cmdline)
+shelly = pydra.ShellCommandTask(name='shelly', executable=cmd, args=args)
+print('cmndline = ', shelly.cmdline)
 
-with pydra.Submitter(plugin="cf") as sub:
+with pydra.Submitter(plugin='cf') as sub:
     sub(shelly)
 shelly.result()
 ```
@@ -96,18 +93,23 @@ shelly.result()
 
 Pydra always checks `executable` and `args`, but we can also provide additional inputs, in order to do it, we have to modify `input_spec` first by using `SpecInfo` class:
 
-```{code-cell} ipython3
+```{code-cell}
 import attr
 
 my_input_spec = pydra.specs.SpecInfo(
-    name="Input",
+    name='Input',
     fields=[
         (
-            "text",
+            'text',
             attr.ib(
                 type=str,
-                metadata={"position": 1, "argstr": "", "help_string": "text", "mandatory": True},
-                ),
+                metadata={
+                    'position': 1,
+                    'argstr': '',
+                    'help_string': 'text',
+                    'mandatory': True,
+                },
+            ),
         )
     ],
     bases=(pydra.specs.ShellSpec,),
@@ -120,20 +122,19 @@ Notice, that in order to create your own `input_spec`, you have to provide a lis
 - `(name, type, default, metadata)`
 - `(name, type, metadata)`
 
-where `name`, `type`, and `default` are the name, type and default values of the field. `attribute` is defined by using `attr.ib`, in the example the attribute has `type` and `metadata`, but the full specification can be found [here](https://www.attrs.org/en/stable/api.html#attr.ib). 
+where `name`, `type`, and `default` are the name, type and default values of the field. `attribute` is defined by using `attr.ib`, in the example the attribute has `type` and `metadata`, but the full specification can be found [here](https://www.attrs.org/en/stable/api.html#attr.ib).
 
 In `metadata`, you can provide additional information that is used by `pydra`, `help_string` is the only key that is required, and the full list of supported keys is `['position', 'argstr', 'requires', 'mandatory', 'allowed_values', 'output_field_name', 'copyfile', 'separate_ext', 'container_path', 'help_string', 'xor', 'output_file_template']`. Among the supported keys, you have:
 - `help_string`: a sring, description of the argument;
 - `position`: integer grater than 0, defines the relative position of the arguments when the shell command is constructed;
-- `argstr`: a string, e.g. "-o", can be used to specify a flag if needed for the command argument; 
+- `argstr`: a string, e.g. "-o", can be used to specify a flag if needed for the command argument;
 - `mandatory`: a bool, if True, pydra will raise an exception, if the argument is not provided;
 
 The complete documentations for all suported keys is available [here](https://pydra.readthedocs.io/en/latest/input_spec.html).
- 
 
 +++
 
-To define `my_input_spec` we used the most general syntax that requires `(name, attribute)`, but 
+To define `my_input_spec` we used the most general syntax that requires `(name, attribute)`, but
 perhaps the simplest syntax is the last one, that contains `(name, type, metadata)`. Using this syntax, `my_input_spec` could look like this:
 
 ```
@@ -150,16 +151,16 @@ my_input_spec_short = pydra.specs.SpecInfo(
 
 After defining `my_input_spec`, we can define our task:
 
-```{code-cell} ipython3
-cmd_exec = "echo"
-hello = "HELLO"
+```{code-cell}
+cmd_exec = 'echo'
+hello = 'HELLO'
 shelly = pydra.ShellCommandTask(
-    name="shelly", executable=cmd_exec, text=hello, input_spec=my_input_spec
+    name='shelly', executable=cmd_exec, text=hello, input_spec=my_input_spec
 )
 
-print("cmndline = ", shelly.cmdline)
+print('cmndline = ', shelly.cmdline)
 
-with pydra.Submitter(plugin="cf") as sub:
+with pydra.Submitter(plugin='cf') as sub:
     sub(shelly)
 shelly.result()
 ```
@@ -168,23 +169,25 @@ shelly.result()
 
 We can also customized output if we want to return something more than the `stdout`, e.g. a file.
 
-```{code-cell} ipython3
+```{code-cell}
 my_output_spec = pydra.specs.SpecInfo(
-    name="Output",
-    fields=[("newfile", pydra.specs.File, "newfile_tmp.txt")],
+    name='Output',
+    fields=[('newfile', pydra.specs.File, 'newfile_tmp.txt')],
     bases=(pydra.specs.ShellOutSpec,),
 )
 ```
 
 now we can create a task that returns a new file:
 
-```{code-cell} ipython3
-cmd = ["touch", "newfile_tmp.txt"]
-shelly = pydra.ShellCommandTask(name="shelly", executable=cmd, output_spec=my_output_spec)
+```{code-cell}
+cmd = ['touch', 'newfile_tmp.txt']
+shelly = pydra.ShellCommandTask(
+    name='shelly', executable=cmd, output_spec=my_output_spec
+)
 
-print("cmndline = ", shelly.cmdline)
+print('cmndline = ', shelly.cmdline)
 
-with pydra.Submitter(plugin="cf") as sub:
+with pydra.Submitter(plugin='cf') as sub:
     sub(shelly)
 shelly.result()
 ```
@@ -195,20 +198,20 @@ shelly.result()
 
 Write a task that creates two new files, use provided output spec.
 
-```{code-cell} ipython3
-cmd = "touch"
-args = ["newfile_1.txt", "newfile_2.txt"]
+```{code-cell}
+cmd = 'touch'
+args = ['newfile_1.txt', 'newfile_2.txt']
 
 my_output_spec = pydra.specs.SpecInfo(
-    name="Output",
+    name='Output',
     fields=[
         (
-            "out1",
+            'out1',
             attr.ib(
                 type=pydra.specs.File,
                 metadata={
-                    "output_file_template": "{args}",
-                    "help_string": "output file",
+                    'output_file_template': '{args}',
+                    'help_string': 'output file',
                 },
             ),
         )
@@ -229,29 +232,29 @@ my_output_spec = pydra.specs.SpecInfo(
 
 all the commands can be also run in a docker container using `DockerTask`. Syntax is very similar, but additional argument `image` is required.
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [raises-exception]
 
-cmd = "whoami"
-docky = pydra.DockerTask(name="docky", executable=cmd, image="busybox")
+cmd = 'whoami'
+docky = pydra.DockerTask(name='docky', executable=cmd, image='busybox')
 
 with pydra.Submitter() as sub:
     docky(submitter=sub)
 
 docky.result()
 ```
-
-+++  
 
 ### Exercise2
 
 Use splitter to run the same command in two different images:
 
-```{code-cell} ipython3
-:tags: [hide-cell,raises-exception]
+```{code-cell}
+:tags: [hide-cell, raises-exception]
 
-cmd = "whoami"
-docky = pydra.DockerTask(name="docky", executable=cmd, image=["busybox", "ubuntu"]).split("image")
+cmd = 'whoami'
+docky = pydra.DockerTask(
+    name='docky', executable=cmd, image=['busybox', 'ubuntu']
+).split('image')
 
 with pydra.Submitter() as sub:
     docky(submitter=sub)
@@ -259,18 +262,20 @@ with pydra.Submitter() as sub:
 docky.result()
 ```
 
-```{code-cell} ipython3
-#write your solution here
+```{code-cell}
+# write your solution here
 ```
 
 #### Using `ShellCommandTask` with `container_info` argument:
 
 You can run the shell command in a docker container by adding `container_info` argument to `ShellCommandTask`:
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [raises-exception]
 
-shelly = pydra.ShellCommandTask(name="shelly", executable="whoami", container_info=("docker", "busybox"))
+shelly = pydra.ShellCommandTask(
+    name='shelly', executable='whoami', container_info=('docker', 'busybox')
+)
 with pydra.Submitter() as sub:
     shelly(submitter=sub)
 
@@ -279,14 +284,10 @@ shelly.result()
 
 If we don't provide `container_info` the output should be different:
 
-```{code-cell} ipython3
-shelly = pydra.ShellCommandTask(name="shelly", executable="whoami")
+```{code-cell}
+shelly = pydra.ShellCommandTask(name='shelly', executable='whoami')
 with pydra.Submitter() as sub:
     shelly(submitter=sub)
 
 shelly.result()
-```
-
-```{code-cell} ipython3
-
 ```
