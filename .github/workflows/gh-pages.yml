@@ -19,7 +19,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install --upgrade pip
-        pip install -r requirements.txt
+        pip install -r jupyterbook/requirements.txt
     - name: Disable etelemetry
       run: echo "NO_ET=TRUE" >> $GITHUB_ENV
     - name: Build JupyterBook
