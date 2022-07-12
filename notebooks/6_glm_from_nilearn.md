@@ -1,11 +1,10 @@
 ---
 jupytext:
-  formats: ipynb,md:myst
   text_representation:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.13.8
+    jupytext_version: 1.14.0
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -22,8 +21,11 @@ In this tutorial, we will go through a simple workflow of the first level genera
 
 This tutorial is based on the [Nilearn GLM tutorial](https://nilearn.github.io/stable/auto_examples/04_glm_first_level/plot_bids_features.html#sphx-glr-auto-examples-04-glm-first-level-plot-bids-features-py).
 
-```{code-cell} ipython3
+```{code-cell}
 import nest_asyncio
+```
+
+```{code-cell}
 nest_asyncio.apply()
 ```
 
@@ -33,7 +35,7 @@ nest_asyncio.apply()
 
 Import packages that will be used globally and set up output directory
 
-```{code-cell} ipython3
+```{code-cell}
 import os
 import pydra
 from pydra import Workflow
@@ -45,11 +47,11 @@ from pathlib import Path
 pydra_tutorial_dir = os.path.dirname(os.getcwd())
 
 # set up output directory
-workflow_dir = Path(pydra_tutorial_dir) / "outputs" 
-workflow_out_dir = workflow_dir / "6_glm"
+workflow_dir = Path(pydra_tutorial_dir) / 'outputs'
+workflow_out_dir = workflow_dir / '6_glm'
 
 # create the output directory if not exit
-os.makedirs(workflow_out_dir, exist_ok = True) 
+os.makedirs(workflow_out_dir, exist_ok=True)
 ```
 
 +++ {"tags": []}
@@ -75,54 +77,83 @@ In this task, we do the following:
 
 **Notes:** Here we still use `n_subjects` as an argument. Given that we will only analyze one subject, you can also remove this argument and specify `n_subjects =1` in `select_from_index`. If you do, do not forget to modify the argument in the workflow later.
 
-```{code-cell} ipython3
+```{code-cell}
 @pydra.mark.task
-@pydra.mark.annotate({"exclusion_patterns": list, "n_subjects":int, "return": {"data_dir":str}})
+@pydra.mark.annotate(
+    {
+        'exclusion_patterns': list,
+        'n_subjects': int,
+        'return': {'data_dir': str},
+    }
+)
 def get_openneuro_dataset(exclusion_patterns, n_subjects):
-    
-    from nilearn.datasets import (fetch_openneuro_dataset_index,
-                              fetch_openneuro_dataset, select_from_index)
+
+    from nilearn.datasets import (
+        fetch_openneuro_dataset_index,
+        fetch_openneuro_dataset,
+        select_from_index,
+    )
+
     _, urls = fetch_openneuro_dataset_index()
     urls = select_from_index(
-        urls, exclusion_filters=exclusion_patterns, n_subjects = n_subjects)
+        urls, exclusion_filters=exclusion_patterns, n_subjects=n_subjects
+    )
     data_dir, _ = fetch_openneuro_dataset(urls=urls)
     return data_dir
 ```
 
 ### obtain FirstLevelModel objects automatically and fit arguments
 
-To get the first level model(s) we have to specify 
+To get the first level model(s) we have to specify
 1. the dataset directory
 2. the task_label
-3. the space_label 
+3. the space_label
 4. the folder with the desired derivatives (fMRIPrep)
 
 In our case, we only have one subject so we will only have one first level model.
-Then, for this model, we will obtain 
-1. the list of run images 
+Then, for this model, we will obtain
+1. the list of run images
 2. events
-3. confound regressors 
+3. confound regressors
 
 Those are inferred from the confounds.tsv files available in the BIDS dataset.
 
-```{code-cell} ipython3
+```{code-cell}
 @pydra.mark.task
-@pydra.mark.annotate({"data_dir": str, "task_label": str, "space_label": str,"derivatives_folder": str, "smoothing_fwhm": float, 
-                      "return": {"model": ty.Any, "imgs": list, "subject": str}})
+@pydra.mark.annotate(
+    {
+        'data_dir': str,
+        'task_label': str,
+        'space_label': str,
+        'derivatives_folder': str,
+        'smoothing_fwhm': float,
+        'return': {'model': ty.Any, 'imgs': list, 'subject': str},
+    }
+)
 def get_info_from_bids(
-    data_dir,
-    task_label,
-    space_label,
-    smoothing_fwhm,
-    derivatives_folder
+    data_dir, task_label, space_label, smoothing_fwhm, derivatives_folder
 ):
     from nilearn.glm.first_level import first_level_from_bids
-    models, models_run_imgs, models_events, models_confounds = \
-    first_level_from_bids(dataset_path = data_dir, task_label = task_label, space_label = space_label,
-                          smoothing_fwhm = smoothing_fwhm, derivatives_folder = derivatives_folder)
+
+    (
+        models,
+        models_run_imgs,
+        models_events,
+        models_confounds,
+    ) = first_level_from_bids(
+        dataset_path=data_dir,
+        task_label=task_label,
+        space_label=space_label,
+        smoothing_fwhm=smoothing_fwhm,
+        derivatives_folder=derivatives_folder,
+    )
     model, imgs, events, confounds = (
-        models[0], models_run_imgs[0], models_events[0], models_confounds[0])
-    subject = "sub-" + model.subject_label
+        models[0],
+        models_run_imgs[0],
+        models_events[0],
+        models_confounds[0],
+    )
+    subject = 'sub-' + model.subject_label
     return model, imgs, subject
 ```
 
@@ -135,23 +166,36 @@ This task does the following:
 
 **Think:** What if we don't save the new design matrix, but `return` it directly? In other words, we `return` a `pandas.DataFrame` instead of a `path`. What will happen? Worth a try :)
 
-```{code-cell} ipython3
+```{code-cell}
 @pydra.mark.task
-@pydra.mark.annotate({"data_dir":str, "subject":str, "return": {"dm_path": str}})
+@pydra.mark.annotate(
+    {'data_dir': str, 'subject': str, 'return': {'dm_path': str}}
+)
 def get_designmatrix(data_dir, subject):
-    
+
     from nilearn.interfaces.fsl import get_design_from_fslmat
+
     fsl_design_matrix_path = os.path.join(
-        data_dir, 'derivatives', 'task', subject, 'stopsignal.feat', 'design.mat')
-    design_matrix = get_design_from_fslmat(fsl_design_matrix_path, column_names=None)
-    
-    design_columns = ['cond_%02d' % i for i in range(len(design_matrix.columns))]
+        data_dir,
+        'derivatives',
+        'task',
+        subject,
+        'stopsignal.feat',
+        'design.mat',
+    )
+    design_matrix = get_design_from_fslmat(
+        fsl_design_matrix_path, column_names=None
+    )
+
+    design_columns = [
+        'cond_%02d' % i for i in range(len(design_matrix.columns))
+    ]
     design_columns[0] = 'Go'
     design_columns[4] = 'StopSuccess'
     design_matrix.columns = design_columns
-    dm_path = os.path.join(workflow_out_dir, "designmatrix.csv")
-    design_matrix.to_csv(dm_path,index=None)
-    return dm_path                      
+    dm_path = os.path.join(workflow_out_dir, 'designmatrix.csv')
+    design_matrix.to_csv(dm_path, index=None)
+    return dm_path
 ```
 
 ### Fit the first level model
@@ -161,24 +205,26 @@ What we are doing here is:
 2. compute the contrast
 3. save the z_map and masker for futher use
 
-```{code-cell} ipython3
+```{code-cell}
 @pydra.mark.task
-@pydra.mark.annotate({"model": ty.Any,"imgs": ty.Any,
-                      "dm_path": ty.Any,"contrast": str,
-                      "return": {"model": ty.Any, "z_map_path":str, "masker":ty.Any}})
-def model_fit(
-    model, 
-    imgs,
-    dm_path,
-    contrast
-):
+@pydra.mark.annotate(
+    {
+        'model': ty.Any,
+        'imgs': ty.Any,
+        'dm_path': ty.Any,
+        'contrast': str,
+        'return': {'model': ty.Any, 'z_map_path': str, 'masker': ty.Any},
+    }
+)
+def model_fit(model, imgs, dm_path, contrast):
     import pandas as pd
+
     design_matrix = pd.read_csv(dm_path)
-    model.fit(imgs, design_matrices = [design_matrix])
+    model.fit(imgs, design_matrices=[design_matrix])
     z_map = model.compute_contrast(contrast)
-    z_map_path = os.path.join(workflow_out_dir, "firstlevel_z_map.nii.gz")
+    z_map_path = os.path.join(workflow_out_dir, 'firstlevel_z_map.nii.gz')
     z_map.to_filename(z_map_path)
-    masker_path = os.path.join(workflow_out_dir, "firstlevel_masker.nii.gz")
+    masker_path = os.path.join(workflow_out_dir, 'firstlevel_masker.nii.gz')
     masker = model.masker_
     return model, z_map_path, masker
 ```
@@ -187,39 +233,38 @@ def model_fit(
 
 For publication purposes, we obtain a cluster table and a summary report.
 
-```{code-cell} ipython3
+```{code-cell}
 @pydra.mark.task
-@pydra.mark.annotate({"z_map_path":str,
-                    "return":{"output_file":str}})
+@pydra.mark.annotate({'z_map_path': str, 'return': {'output_file': str}})
 def cluster_table(z_map_path):
     import nibabel as nib
     from nilearn.reporting import get_clusters_table
     from scipy.stats import norm
-    
+
     stat_img = nib.load(z_map_path)
-    output_file = os.path.join(workflow_out_dir, "cluster_table.csv")
-    df = get_clusters_table(stat_img,
-                            stat_threshold = norm.isf(0.001), 
-                            cluster_threshold=10)
+    output_file = os.path.join(workflow_out_dir, 'cluster_table.csv')
+    df = get_clusters_table(
+        stat_img, stat_threshold=norm.isf(0.001), cluster_threshold=10
+    )
     df.to_csv(output_file, index=None)
     return output_file
 
+
 # get glm report
 @pydra.mark.task
-@pydra.mark.annotate({"model":ty.Any, "contrasts":str,
-                    "return":{"output_file":str}})
-def glm_report(
-    model,
-    contrasts
-):
+@pydra.mark.annotate(
+    {'model': ty.Any, 'contrasts': str, 'return': {'output_file': str}}
+)
+def glm_report(model, contrasts):
     from nilearn.reporting import make_glm_report
-    output_file = os.path.join(workflow_out_dir, "glm_report.html")
+
+    output_file = os.path.join(workflow_out_dir, 'glm_report.html')
     report = make_glm_report(model, contrasts)
     report.save_as_html(output_file)
     return output_file
 ```
 
-### Make plots 
+### Make plots
 
 Here we want to make some plots to display our results and compare the result from FSL.
 1. plot nilearn z-map
@@ -229,12 +274,24 @@ Here we want to make some plots to display our results and compare the result fr
 
 You can also seperate this task into multiple sub-tasks. But it makes more sense to put them into one task as they use the same files and function `nilearn.plotting` repeatedly.
 
-```{code-cell} ipython3
+```{code-cell}
 @pydra.mark.task
-@pydra.mark.annotate({"data_dir":str, "dm_path":str, "z_map_path":str, 
-                      "contrast":str,"subject":str, "masker":ty.Any, 
-                      "return":{"output_file1":str, "output_file2":str,
-                                "output_file3":str, "output_file4":str}})
+@pydra.mark.annotate(
+    {
+        'data_dir': str,
+        'dm_path': str,
+        'z_map_path': str,
+        'contrast': str,
+        'subject': str,
+        'masker': ty.Any,
+        'return': {
+            'output_file1': str,
+            'output_file2': str,
+            'output_file3': str,
+            'output_file4': str,
+        },
+    }
+)
 def plots(
     data_dir,
     dm_path,
@@ -245,37 +302,67 @@ def plots(
 ):
     import pandas as pd
     import nibabel as nib
-    from nilearn.plotting import plot_glass_brain, plot_img_comparison, plot_contrast_matrix
+    from nilearn.plotting import (
+        plot_glass_brain,
+        plot_img_comparison,
+        plot_contrast_matrix,
+    )
     import matplotlib.pyplot as plt
     from scipy.stats import norm
-    
+
     # plot and save nilearn z-map
     z_map = nib.load(z_map_path)
-    output_file1 = os.path.join(workflow_out_dir, "nilearn_z_map.jpg")
-    plot_glass_brain(z_map, output_file = output_file1, colorbar = True,
-                     threshold = norm.isf(0.001), title = 'Nilearn Z map of "StopSuccess - Go" (unc p<0.001)',
-                     plot_abs = False, display_mode = 'ortho')
-    
+    output_file1 = os.path.join(workflow_out_dir, 'nilearn_z_map.jpg')
+    plot_glass_brain(
+        z_map,
+        output_file=output_file1,
+        colorbar=True,
+        threshold=norm.isf(0.001),
+        title='Nilearn Z map of "StopSuccess - Go" (unc p<0.001)',
+        plot_abs=False,
+        display_mode='ortho',
+    )
+
     # plot and save fsl z-map
     fsl_z_map = nib.load(
-    os.path.join(data_dir, 'derivatives', 'task', subject, 'stopsignal.feat',
-                 'stats', 'zstat12.nii.gz'))
-    output_file2 = os.path.join(workflow_out_dir, "fsl_z_map.jpg")
-    plot_glass_brain(fsl_z_map, output_file = output_file2, colorbar = True, 
-                     threshold = norm.isf(0.001), title = 'FSL Z map of "StopSuccess - Go" (unc p<0.001)',
-                     plot_abs = False, display_mode = 'ortho')
-    
+        os.path.join(
+            data_dir,
+            'derivatives',
+            'task',
+            subject,
+            'stopsignal.feat',
+            'stats',
+            'zstat12.nii.gz',
+        )
+    )
+    output_file2 = os.path.join(workflow_out_dir, 'fsl_z_map.jpg')
+    plot_glass_brain(
+        fsl_z_map,
+        output_file=output_file2,
+        colorbar=True,
+        threshold=norm.isf(0.001),
+        title='FSL Z map of "StopSuccess - Go" (unc p<0.001)',
+        plot_abs=False,
+        display_mode='ortho',
+    )
+
     # plot and save nilearn and fsl comparison
-    plot_img_comparison([z_map], [fsl_z_map], masker, output_dir = workflow_out_dir, 
-                        ref_label = 'Nilearn', src_label = 'FSL')
-    old = os.path.join(workflow_out_dir, "0000.png")
-    new = os.path.join(workflow_out_dir, "nilearn_fsl_comp.jpg")
-    output_file3 = os.rename(old,new)
-    
+    plot_img_comparison(
+        [z_map],
+        [fsl_z_map],
+        masker,
+        output_dir=workflow_out_dir,
+        ref_label='Nilearn',
+        src_label='FSL',
+    )
+    old = os.path.join(workflow_out_dir, '0000.png')
+    new = os.path.join(workflow_out_dir, 'nilearn_fsl_comp.jpg')
+    output_file3 = os.rename(old, new)
+
     # plot and save design matrix contrast
     design_matrix = pd.read_csv(dm_path)
-    output_file4 = os.path.join(workflow_out_dir, "firstlevel_contrast.jpg")
-    plot_contrast_matrix(contrast, design_matrix, output_file = output_file4)
+    output_file4 = os.path.join(workflow_out_dir, 'firstlevel_contrast.jpg')
+    plot_contrast_matrix(contrast, design_matrix, output_file=output_file4)
     return output_file1, output_file2, output_file3, output_file4
 ```
 
@@ -291,16 +378,20 @@ We recommand the second approach as it is alway a good practice to group tasks, 
 
 Our analysis can be divided into three parts: (1) get/read the data, (2) analyze the data, and (3) plot the result, where (1) and (3) only have one task each. So we can put all tasks in (2) into one workflow and name it as `firstlevel` or whatever you prefer.
 
-```{code-cell} ipython3
+```{code-cell}
 # initiate a workflow
-wf_firstlevel = Workflow(name="wf_firstlevel", input_spec=["data_dir",
-                                     "task_label",
-                                     "space_label",
-                                     "derivatives_folder",
-                                     "smoothing_fwhm",
-                                     "contrast",
-                                     "output_dir"]
-                     )
+wf_firstlevel = Workflow(
+    name='wf_firstlevel',
+    input_spec=[
+        'data_dir',
+        'task_label',
+        'space_label',
+        'derivatives_folder',
+        'smoothing_fwhm',
+        'contrast',
+        'output_dir',
+    ],
+)
 
 # specify input
 wf_firstlevel.inputs.task_label = 'stopsignal'
@@ -309,45 +400,59 @@ wf_firstlevel.inputs.derivatives_folder = 'derivatives/fmriprep'
 wf_firstlevel.inputs.smoothing_fwhm = 5.0
 
 # add task - get_info_from_bids
-wf_firstlevel.add(get_info_from_bids(name="get_info_from_bids",
-                          data_dir = wf_firstlevel.lzin.data_dir,
-                          task_label = wf_firstlevel.lzin.task_label,
-                          space_label = wf_firstlevel.lzin.space_label,
-                          derivatives_folder = wf_firstlevel.lzin.derivatives_folder,
-                          smoothing_fwhm = wf_firstlevel.lzin.smoothing_fwhm
-                         )
-      )
+wf_firstlevel.add(
+    get_info_from_bids(
+        name='get_info_from_bids',
+        data_dir=wf_firstlevel.lzin.data_dir,
+        task_label=wf_firstlevel.lzin.task_label,
+        space_label=wf_firstlevel.lzin.space_label,
+        derivatives_folder=wf_firstlevel.lzin.derivatives_folder,
+        smoothing_fwhm=wf_firstlevel.lzin.smoothing_fwhm,
+    )
+)
 # add task - get_designmatrix
-wf_firstlevel.add(get_designmatrix(name = "get_designmatrix",
-                        data_dir = wf_firstlevel.lzin.data_dir,
-                        subject = wf_firstlevel.get_info_from_bids.lzout.subject,
-                       )
-      )
-wf_firstlevel.add(model_fit(name = "l1estimation",
-                   model = wf_firstlevel.get_info_from_bids.lzout.model, 
-                   imgs = wf_firstlevel.get_info_from_bids.lzout.imgs, 
-                   dm_path = wf_firstlevel.get_designmatrix.lzout.dm_path,
-                   contrast = wf_firstlevel.lzin.contrast
-                )
-      )
+wf_firstlevel.add(
+    get_designmatrix(
+        name='get_designmatrix',
+        data_dir=wf_firstlevel.lzin.data_dir,
+        subject=wf_firstlevel.get_info_from_bids.lzout.subject,
+    )
+)
+wf_firstlevel.add(
+    model_fit(
+        name='l1estimation',
+        model=wf_firstlevel.get_info_from_bids.lzout.model,
+        imgs=wf_firstlevel.get_info_from_bids.lzout.imgs,
+        dm_path=wf_firstlevel.get_designmatrix.lzout.dm_path,
+        contrast=wf_firstlevel.lzin.contrast,
+    )
+)
 # add task - cluster_table
-wf_firstlevel.add(cluster_table(name = "cluster_table", 
-                     z_map_path = wf_firstlevel.l1estimation.lzout.z_map_path))
+wf_firstlevel.add(
+    cluster_table(
+        name='cluster_table',
+        z_map_path=wf_firstlevel.l1estimation.lzout.z_map_path,
+    )
+)
 # add task - glm_report
-wf_firstlevel.add(glm_report(name = "glm_report",
-                  model = wf_firstlevel.l1estimation.lzout.model,
-                  contrasts = wf_firstlevel.lzin.contrast
-                 )
-      )
+wf_firstlevel.add(
+    glm_report(
+        name='glm_report',
+        model=wf_firstlevel.l1estimation.lzout.model,
+        contrasts=wf_firstlevel.lzin.contrast,
+    )
+)
 # specify output
-wf_firstlevel.set_output([
-    ("z_map", wf_firstlevel.l1estimation.lzout.z_map_path),
-    ("masker", wf_firstlevel.l1estimation.lzout.masker),
-    ("subject", wf_firstlevel.get_info_from_bids.lzout.subject),
-    ("dm_path", wf_firstlevel.get_designmatrix.lzout.dm_path),
-    ("cluster_table", wf_firstlevel.cluster_table.lzout.output_file),
-    ("glm_report", wf_firstlevel.glm_report.lzout.output_file)
-])
+wf_firstlevel.set_output(
+    [
+        ('z_map', wf_firstlevel.l1estimation.lzout.z_map_path),
+        ('masker', wf_firstlevel.l1estimation.lzout.masker),
+        ('subject', wf_firstlevel.get_info_from_bids.lzout.subject),
+        ('dm_path', wf_firstlevel.get_designmatrix.lzout.dm_path),
+        ('cluster_table', wf_firstlevel.cluster_table.lzout.output_file),
+        ('glm_report', wf_firstlevel.glm_report.lzout.output_file),
+    ]
+)
 ```
 
 +++ {"tags": []}
@@ -358,57 +463,74 @@ Connect other tasks and the above workflow into one
 
 Now we need to create the overaching glm workflow that connects the above workflow and other tasks (e.g., `get/read the data` and `plot the result`)
 
-```{code-cell} ipython3
-wf = Workflow(name = "firstlevel_glm",
-              input_spec = ["exclusion_patterns","n_subjects","contrast","output_dir"],
-             )
+```{code-cell}
+wf = Workflow(
+    name='firstlevel_glm',
+    input_spec=['exclusion_patterns', 'n_subjects', 'contrast', 'output_dir'],
+)
 
-wf.inputs.exclusion_patterns = ['*group*', '*phenotype*', '*mriqc*',
-                                '*parameter_plots*', '*physio_plots*',
-                                '*space-fsaverage*', '*space-T1w*',
-                                '*dwi*', '*beh*', '*task-bart*',
-                                '*task-rest*', '*task-scap*', '*task-task*']
+wf.inputs.exclusion_patterns = [
+    '*group*',
+    '*phenotype*',
+    '*mriqc*',
+    '*parameter_plots*',
+    '*physio_plots*',
+    '*space-fsaverage*',
+    '*space-T1w*',
+    '*dwi*',
+    '*beh*',
+    '*task-bart*',
+    '*task-rest*',
+    '*task-scap*',
+    '*task-task*',
+]
 wf.inputs.n_subjects = 1
 wf.inputs.output_dir = workflow_out_dir
 wf.inputs.contrast = 'StopSuccess - Go'
 
-wf.add(get_openneuro_dataset(name = "get_openneuro_dataset", 
-                             exclusion_patterns = wf.lzin.exclusion_patterns,
-                             n_subjects = wf.lzin.n_subjects
-                            )
-      )
+wf.add(
+    get_openneuro_dataset(
+        name='get_openneuro_dataset',
+        exclusion_patterns=wf.lzin.exclusion_patterns,
+        n_subjects=wf.lzin.n_subjects,
+    )
+)
 
 wf_firstlevel.inputs.data_dir = wf.get_openneuro_dataset.lzout.data_dir
 wf_firstlevel.inputs.contrast = wf.inputs.contrast
 wf_firstlevel.inputs.output_dir = wf.inputs.output_dir
 wf.add(wf_firstlevel)
 
-wf.add(plots(name = "plots",
-             data_dir = wf.get_openneuro_dataset.lzout.data_dir,
-             dm_path = wf_firstlevel.lzout.dm_path,
-             z_map_path = wf_firstlevel.lzout.z_map,
-             contrast = wf.lzin.contrast,
-             subject =  wf_firstlevel.lzout.subject,
-             masker = wf_firstlevel.lzout.masker
-            )
-      )
+wf.add(
+    plots(
+        name='plots',
+        data_dir=wf.get_openneuro_dataset.lzout.data_dir,
+        dm_path=wf_firstlevel.lzout.dm_path,
+        z_map_path=wf_firstlevel.lzout.z_map,
+        contrast=wf.lzin.contrast,
+        subject=wf_firstlevel.lzout.subject,
+        masker=wf_firstlevel.lzout.masker,
+    )
+)
 
-wf.set_output([
-    ("output1", wf.plots.lzout.output_file1),
-    ("output2", wf.plots.lzout.output_file2),
-    ("output3", wf.plots.lzout.output_file3),
-    ("output4", wf.plots.lzout.output_file4)
-])
+wf.set_output(
+    [
+        ('output1', wf.plots.lzout.output_file1),
+        ('output2', wf.plots.lzout.output_file2),
+        ('output3', wf.plots.lzout.output_file3),
+        ('output4', wf.plots.lzout.output_file4),
+    ]
+)
 ```
 
 ## Run Workflow Run
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: []
 
 from pydra import Submitter
 
-with Submitter(plugin="cf", n_procs=4) as submitter:
+with Submitter(plugin='cf', n_procs=4) as submitter:
     submitter(wf)
 
 results = wf.result()
@@ -430,7 +552,7 @@ If you arrive here without any errors, yay, you just made your first pydra workf
 
 Let's take a look at what you have got.
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [hide-output]
 
 !ls ../outputs/6_glm
@@ -442,31 +564,36 @@ Let's take a look at what you have got.
 
 #### First level contrast
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [hide-input]
+
 from IPython.display import Image
-Image(filename='../outputs/6_glm/firstlevel_contrast.jpg') 
+
+Image(filename='../outputs/6_glm/firstlevel_contrast.jpg')
 ```
 
 #### Nilearn Z map
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [hide-input]
-Image(filename='../outputs/6_glm/nilearn_z_map.jpg') 
+
+Image(filename='../outputs/6_glm/nilearn_z_map.jpg')
 ```
 
 #### FSL Z map
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [hide-input]
-Image(filename='../outputs/6_glm/fsl_z_map.jpg') 
+
+Image(filename='../outputs/6_glm/fsl_z_map.jpg')
 ```
 
 #### Nilearn FSL comparison
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [hide-input]
-Image(filename='../outputs/6_glm/nilearn_fsl_comp.jpg') 
+
+Image(filename='../outputs/6_glm/nilearn_fsl_comp.jpg')
 ```
 
 +++ {"tags": []}
@@ -475,6 +602,6 @@ Image(filename='../outputs/6_glm/nilearn_fsl_comp.jpg')
 
 +++
 
-What if we need to run the first-level GLM on multiple subject? We will need the `splitter`. 
+What if we need to run the first-level GLM on multiple subject? We will need the `splitter`.
 
 So, where should we add `.split`?
