@@ -477,6 +477,7 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nest_asyncio</span>
+
 <span class="n">nest_asyncio</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -486,6 +487,7 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pydra</span>
+
 
 <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
 <span class="k">def</span> <span class="nf">add_var</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
@@ -498,9 +500,9 @@ title="Print to PDF"
 <span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
 <span class="nn">Input In [2],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">pydra</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="k">def</span> <span class="nf">add_var</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="k">def</span> <span class="nf">add_var</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
 
 <span class="ne">ModuleNotFoundError</span>: No module named &#39;pydra&#39;
 </pre></div>
@@ -546,8 +548,8 @@ title="Print to PDF"
 <p>and we can check if the task has correct values of <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code>, they should be saved in the task <code class="docutils literal notranslate"><span class="pre">inputs</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;a = </span><span class="si">{</span><span class="n">task1</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">a</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;b = </span><span class="si">{</span><span class="n">task1</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;a = </span><span class="si">{</span><span class="n">task1</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">a</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;b = </span><span class="si">{</span><span class="n">task1</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">b</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -555,8 +557,8 @@ title="Print to PDF"
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
 <span class="nn">Input In [5],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;a = </span><span class="si">{</span><span class="n">task1</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">a</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;b = </span><span class="si">{</span><span class="n">task1</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;a = </span><span class="si">{</span><span class="n">task1</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">a</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;b = </span><span class="si">{</span><span class="n">task1</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">b</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
 <span class="ne">NameError</span>: name &#39;task1&#39; is not defined
 </pre></div>
@@ -664,8 +666,9 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">typing</span> <span class="k">as</span> <span class="nn">ty</span>
 
+
 <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
-<span class="k">def</span> <span class="nf">add_var_an</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">{</span><span class="s2">&quot;sum_a_b&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">}:</span>
+<span class="k">def</span> <span class="nf">add_var_an</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">{</span><span class="s1">&#39;sum_a_b&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">}:</span>
     <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
 
 
@@ -677,12 +680,12 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">Input In [11],</span> in <span class="ni">&lt;cell line: 3&gt;</span><span class="nt">()</span>
+<span class="nn">Input In [11],</span> in <span class="ni">&lt;cell line: 4&gt;</span><span class="nt">()</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">typing</span> <span class="k">as</span> <span class="nn">ty</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="k">def</span> <span class="nf">add_var_an</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">{</span><span class="s2">&quot;sum_a_b&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">}:</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">task1a</span> <span class="o">=</span> <span class="n">add_var_an</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="k">def</span> <span class="nf">add_var_an</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">{</span><span class="s1">&#39;sum_a_b&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">}:</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">task1a</span> <span class="o">=</span> <span class="n">add_var_an</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
 <span class="ne">NameError</span>: name &#39;pydra&#39; is not defined
 </pre></div>
@@ -693,9 +696,11 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
-<span class="k">def</span> <span class="nf">modf_an</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">{</span><span class="s2">&quot;fractional&quot;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="s2">&quot;integer&quot;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">}:</span>
+<span class="k">def</span> <span class="nf">modf_an</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">{</span><span class="s1">&#39;fractional&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="s1">&#39;integer&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">}:</span>
     <span class="kn">import</span> <span class="nn">math</span>
+
     <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">modf</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
 
 <span class="n">task2</span> <span class="o">=</span> <span class="n">modf_an</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mf">3.5</span><span class="p">)</span>
 <span class="n">task2</span><span class="p">()</span>
@@ -707,9 +712,9 @@ title="Print to PDF"
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
 <span class="nn">Input In [12],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="k">def</span> <span class="nf">modf_an</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">{</span><span class="s2">&quot;fractional&quot;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="s2">&quot;integer&quot;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">}:</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="k">def</span> <span class="nf">modf_an</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">{</span><span class="s1">&#39;fractional&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="s1">&#39;integer&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">}:</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="kn">import</span> <span class="nn">math</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">modf</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">modf</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 
 <span class="ne">NameError</span>: name &#39;pydra&#39; is not defined
 </pre></div>
@@ -720,10 +725,12 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
-<span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">({</span><span class="s2">&quot;return&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;fractional&quot;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="s2">&quot;integer&quot;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">}})</span>
+<span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">({</span><span class="s1">&#39;return&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;fractional&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="s1">&#39;integer&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">}})</span>
 <span class="k">def</span> <span class="nf">modf</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
     <span class="kn">import</span> <span class="nn">math</span>
+
     <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">modf</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
 
 <span class="n">task2a</span> <span class="o">=</span> <span class="n">modf</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mf">3.5</span><span class="p">)</span>
 <span class="n">task2a</span><span class="p">()</span>
@@ -735,10 +742,10 @@ title="Print to PDF"
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
 <span class="nn">Input In [13],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">({</span><span class="s2">&quot;return&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;fractional&quot;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="s2">&quot;integer&quot;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">}})</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">({</span><span class="s1">&#39;return&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;fractional&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="s1">&#39;integer&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">}})</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="k">def</span> <span class="nf">modf</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="kn">import</span> <span class="nn">math</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">modf</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">modf</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 
 <span class="ne">NameError</span>: name &#39;pydra&#39; is not defined
 </pre></div>
@@ -780,6 +787,7 @@ title="Print to PDF"
 
 <span class="c1"># importing attr library, and checking the type pf `b`</span>
 <span class="kn">import</span> <span class="nn">attr</span>
+
 <span class="n">task3a</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">b</span> <span class="o">==</span> <span class="n">attr</span><span class="o">.</span><span class="n">NOTHING</span>
 </pre></div>
 </div>
@@ -840,16 +848,21 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">task3</span><span class="o">.</span><span class="n">output_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">task3</span><span class="o">.</span><span class="n">output_dir</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">Input In [18],</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">os</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">task3</span><span class="o">.</span><span class="n">output_dir</span><span class="p">)</span>
+<span class="nn">Input In [19],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">task3</span><span class="o">.</span><span class="n">output_dir</span><span class="p">)</span>
 
 <span class="ne">NameError</span>: name &#39;task3&#39; is not defined
 </pre></div>
@@ -861,13 +874,19 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">mkdtemp</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="n">cache_dir_tmp</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">mkdtemp</span><span class="p">())</span> <span class="o">/</span> <span class="s2">&quot;task4&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cache_dir_tmp</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">mkdtemp</span><span class="p">())</span> <span class="o">/</span> <span class="s1">&#39;task4&#39;</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">cache_dir_tmp</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/tmp6syk7k14/task4
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/tmpqj754mwl/task4
 </pre></div>
 </div>
 </div>
@@ -878,8 +897,10 @@ title="Print to PDF"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
 <span class="k">def</span> <span class="nf">add_var_wait</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
     <span class="kn">import</span> <span class="nn">time</span>
+
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
 
 <span class="n">task4</span> <span class="o">=</span> <span class="n">add_var_wait</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir_tmp</span><span class="p">)</span>
 </pre></div>
@@ -888,11 +909,11 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">Input In [20],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="nn">Input In [22],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="k">def</span> <span class="nf">add_var_wait</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="kn">import</span> <span class="nn">time</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 
 <span class="ne">NameError</span>: name &#39;pydra&#39; is not defined
 </pre></div>
@@ -910,7 +931,7 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">Input In [21],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="nn">Input In [23],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">task4</span><span class="p">()</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">task4</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
 
@@ -929,7 +950,7 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">Input In [22],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="nn">Input In [24],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">task4</span><span class="o">.</span><span class="n">output_dir</span>
 
 <span class="ne">NameError</span>: name &#39;task4&#39; is not defined
@@ -948,7 +969,7 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">Input In [23],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="nn">Input In [25],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">task4a</span> <span class="o">=</span> <span class="n">add_var_wait</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir_tmp</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">task4a</span><span class="p">()</span>
 
@@ -961,9 +982,11 @@ title="Print to PDF"
 <p><em>pydra</em> not only checks for the results in <code class="docutils literal notranslate"><span class="pre">cache_dir</span></code>, but you can provide a list of other locations that should be checked. Let’s create another directory that will be used as <code class="docutils literal notranslate"><span class="pre">cache_dir</span></code> and previous working directory will be used in <code class="docutils literal notranslate"><span class="pre">cache_locations</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cache_dir_tmp_new</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">mkdtemp</span><span class="p">())</span> <span class="o">/</span> <span class="s2">&quot;task4b&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cache_dir_tmp_new</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">mkdtemp</span><span class="p">())</span> <span class="o">/</span> <span class="s1">&#39;task4b&#39;</span>
 
-<span class="n">task4b</span> <span class="o">=</span> <span class="n">add_var_wait</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir_tmp_new</span><span class="p">,</span> <span class="n">cache_locations</span><span class="o">=</span><span class="p">[</span><span class="n">cache_dir_tmp</span><span class="p">])</span>
+<span class="n">task4b</span> <span class="o">=</span> <span class="n">add_var_wait</span><span class="p">(</span>
+    <span class="n">a</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir_tmp_new</span><span class="p">,</span> <span class="n">cache_locations</span><span class="o">=</span><span class="p">[</span><span class="n">cache_dir_tmp</span><span class="p">]</span>
+<span class="p">)</span>
 <span class="n">task4b</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -971,10 +994,12 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">Input In [24],</span> in <span class="ni">&lt;cell line: 3&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">cache_dir_tmp_new</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">mkdtemp</span><span class="p">())</span> <span class="o">/</span> <span class="s2">&quot;task4b&quot;</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">task4b</span> <span class="o">=</span> <span class="n">add_var_wait</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir_tmp_new</span><span class="p">,</span> <span class="n">cache_locations</span><span class="o">=</span><span class="p">[</span><span class="n">cache_dir_tmp</span><span class="p">])</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">task4b</span><span class="p">()</span>
+<span class="nn">Input In [26],</span> in <span class="ni">&lt;cell line: 3&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">cache_dir_tmp_new</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">mkdtemp</span><span class="p">())</span> <span class="o">/</span> <span class="s1">&#39;task4b&#39;</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">task4b</span> <span class="o">=</span> <span class="n">add_var_wait</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">a</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir_tmp_new</span><span class="p">,</span> <span class="n">cache_locations</span><span class="o">=</span><span class="p">[</span><span class="n">cache_dir_tmp</span><span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">task4b</span><span class="p">()</span>
 
 <span class="ne">NameError</span>: name &#39;add_var_wait&#39; is not defined
 </pre></div>
@@ -991,7 +1016,7 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">Input In [25],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="nn">Input In [27],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">task4b</span><span class="o">.</span><span class="n">output_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
 
 <span class="ne">NameError</span>: name &#39;task4b&#39; is not defined
@@ -1002,9 +1027,11 @@ title="Print to PDF"
 <p>If you want to rerun the task regardless having already the results, you can set <code class="docutils literal notranslate"><span class="pre">rerun</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code>. The task will take several seconds and new <code class="docutils literal notranslate"><span class="pre">output_dir</span></code> will be created:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cache_dir_tmp_new</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">mkdtemp</span><span class="p">())</span> <span class="o">/</span> <span class="s2">&quot;task4c&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cache_dir_tmp_new</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">mkdtemp</span><span class="p">())</span> <span class="o">/</span> <span class="s1">&#39;task4c&#39;</span>
 
-<span class="n">task4c</span> <span class="o">=</span> <span class="n">add_var_wait</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir_tmp_new</span><span class="p">,</span> <span class="n">cache_locations</span><span class="o">=</span><span class="p">[</span><span class="n">cache_dir_tmp</span><span class="p">])</span>
+<span class="n">task4c</span> <span class="o">=</span> <span class="n">add_var_wait</span><span class="p">(</span>
+    <span class="n">a</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir_tmp_new</span><span class="p">,</span> <span class="n">cache_locations</span><span class="o">=</span><span class="p">[</span><span class="n">cache_dir_tmp</span><span class="p">]</span>
+<span class="p">)</span>
 <span class="n">task4c</span><span class="p">(</span><span class="n">rerun</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">task4c</span><span class="o">.</span><span class="n">output_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
@@ -1014,11 +1041,13 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">Input In [26],</span> in <span class="ni">&lt;cell line: 3&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">cache_dir_tmp_new</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">mkdtemp</span><span class="p">())</span> <span class="o">/</span> <span class="s2">&quot;task4c&quot;</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">task4c</span> <span class="o">=</span> <span class="n">add_var_wait</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir_tmp_new</span><span class="p">,</span> <span class="n">cache_locations</span><span class="o">=</span><span class="p">[</span><span class="n">cache_dir_tmp</span><span class="p">])</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">task4c</span><span class="p">(</span><span class="n">rerun</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">task4c</span><span class="o">.</span><span class="n">output_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+<span class="nn">Input In [28],</span> in <span class="ni">&lt;cell line: 3&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">cache_dir_tmp_new</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">mkdtemp</span><span class="p">())</span> <span class="o">/</span> <span class="s1">&#39;task4c&#39;</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">task4c</span> <span class="o">=</span> <span class="n">add_var_wait</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">a</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">cache_dir</span><span class="o">=</span><span class="n">cache_dir_tmp_new</span><span class="p">,</span> <span class="n">cache_locations</span><span class="o">=</span><span class="p">[</span><span class="n">cache_dir_tmp</span><span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">task4c</span><span class="p">(</span><span class="n">rerun</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">task4c</span><span class="o">.</span><span class="n">output_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
 
 <span class="ne">NameError</span>: name &#39;add_var_wait&#39; is not defined
 </pre></div>
@@ -1037,7 +1066,7 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">Input In [27],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="nn">Input In [29],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">task4b</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nb">print</span><span class="p">(</span><span class="n">task4b</span><span class="p">())</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="nb">print</span><span class="p">(</span><span class="n">task4b</span><span class="o">.</span><span class="n">output_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
@@ -1057,7 +1086,7 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">Input In [28],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="nn">Input In [30],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">task4b</span><span class="o">.</span><span class="n">output_dir</span>
 
 <span class="ne">NameError</span>: name &#39;task4b&#39; is not defined
@@ -1072,10 +1101,12 @@ title="Print to PDF"
 <div class="cell tag_hide-cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
-<span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">({</span><span class="s2">&quot;return&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;mean&quot;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">}})</span>
+<span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">({</span><span class="s1">&#39;return&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mean&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">}})</span>
 <span class="k">def</span> <span class="nf">mean_dev</span><span class="p">(</span><span class="n">my_list</span><span class="p">):</span>
     <span class="kn">import</span> <span class="nn">statistics</span> <span class="k">as</span> <span class="nn">st</span>
+
     <span class="k">return</span> <span class="n">st</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">my_list</span><span class="p">),</span> <span class="n">st</span><span class="o">.</span><span class="n">stdev</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+
 
 <span class="n">my_task</span> <span class="o">=</span> <span class="n">mean_dev</span><span class="p">(</span><span class="n">my_list</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
 <span class="n">my_task</span><span class="p">()</span>
@@ -1086,12 +1117,12 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">Input In [29],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="nn">Input In [31],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">({</span><span class="s2">&quot;return&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;mean&quot;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">}})</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">({</span><span class="s1">&#39;return&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mean&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">}})</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="k">def</span> <span class="nf">mean_dev</span><span class="p">(</span><span class="n">my_list</span><span class="p">):</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="kn">import</span> <span class="nn">statistics</span> <span class="k">as</span> <span class="nn">st</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="k">return</span> <span class="n">st</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">my_list</span><span class="p">),</span> <span class="n">st</span><span class="o">.</span><span class="n">stdev</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="k">return</span> <span class="n">st</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">my_list</span><span class="p">),</span> <span class="n">st</span><span class="o">.</span><span class="n">stdev</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
 
 <span class="ne">NameError</span>: name &#39;pydra&#39; is not defined
 </pre></div>
@@ -1124,7 +1155,7 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="nn">Input In [31],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="nn">Input In [33],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">pydra.utils.messenger</span> <span class="kn">import</span> <span class="n">AuditFlag</span><span class="p">,</span> <span class="n">PrintMessenger</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">task5</span> <span class="o">=</span> <span class="n">add_var</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">audit_flags</span><span class="o">=</span><span class="n">AuditFlag</span><span class="o">.</span><span class="n">RESOURCE</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">task5</span><span class="p">()</span>
@@ -1137,7 +1168,9 @@ title="Print to PDF"
 <p>One can turn on both audit flags using <code class="docutils literal notranslate"><span class="pre">AuditFlag.ALL</span></code>, and print the messages on the terminal using the <code class="docutils literal notranslate"><span class="pre">PrintMessenger</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task5</span> <span class="o">=</span> <span class="n">add_var</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">audit_flags</span><span class="o">=</span><span class="n">AuditFlag</span><span class="o">.</span><span class="n">ALL</span><span class="p">,</span> <span class="n">messengers</span><span class="o">=</span><span class="n">PrintMessenger</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task5</span> <span class="o">=</span> <span class="n">add_var</span><span class="p">(</span>
+    <span class="n">a</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">audit_flags</span><span class="o">=</span><span class="n">AuditFlag</span><span class="o">.</span><span class="n">ALL</span><span class="p">,</span> <span class="n">messengers</span><span class="o">=</span><span class="n">PrintMessenger</span><span class="p">()</span>
+<span class="p">)</span>
 <span class="n">task5</span><span class="p">()</span>
 <span class="n">task5</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
 </pre></div>
@@ -1146,10 +1179,12 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">Input In [32],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">task5</span> <span class="o">=</span> <span class="n">add_var</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">audit_flags</span><span class="o">=</span><span class="n">AuditFlag</span><span class="o">.</span><span class="n">ALL</span><span class="p">,</span> <span class="n">messengers</span><span class="o">=</span><span class="n">PrintMessenger</span><span class="p">())</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">task5</span><span class="p">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">task5</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="nn">Input In [34],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">task5</span> <span class="o">=</span> <span class="n">add_var</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="n">a</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">audit_flags</span><span class="o">=</span><span class="n">AuditFlag</span><span class="o">.</span><span class="n">ALL</span><span class="p">,</span> <span class="n">messengers</span><span class="o">=</span><span class="n">PrintMessenger</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">task5</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">task5</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
 
 <span class="ne">NameError</span>: name &#39;add_var&#39; is not defined
 </pre></div>

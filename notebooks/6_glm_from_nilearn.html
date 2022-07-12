@@ -627,7 +627,13 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nest_asyncio</span>
-<span class="n">nest_asyncio</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nest_asyncio</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -648,18 +654,18 @@ title="Print to PDF"
 <span class="n">pydra_tutorial_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
 
 <span class="c1"># set up output directory</span>
-<span class="n">workflow_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">pydra_tutorial_dir</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;outputs&quot;</span> 
-<span class="n">workflow_out_dir</span> <span class="o">=</span> <span class="n">workflow_dir</span> <span class="o">/</span> <span class="s2">&quot;6_glm&quot;</span>
+<span class="n">workflow_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">pydra_tutorial_dir</span><span class="p">)</span> <span class="o">/</span> <span class="s1">&#39;outputs&#39;</span>
+<span class="n">workflow_out_dir</span> <span class="o">=</span> <span class="n">workflow_dir</span> <span class="o">/</span> <span class="s1">&#39;6_glm&#39;</span>
 
 <span class="c1"># create the output directory if not exit</span>
-<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="n">exist_ok</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> 
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="nn">Input In [2],</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
+<span class="nn">Input In [3],</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">os</span>
 <span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pydra</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">pydra</span> <span class="kn">import</span> <span class="n">Workflow</span>
@@ -692,14 +698,25 @@ Each pydra task can have multiple python functions. We recommand to put those lo
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
-<span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">({</span><span class="s2">&quot;exclusion_patterns&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="s2">&quot;n_subjects&quot;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s2">&quot;return&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;data_dir&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">}})</span>
+<span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;exclusion_patterns&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+        <span class="s1">&#39;n_subjects&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="s1">&#39;return&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;data_dir&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">},</span>
+    <span class="p">}</span>
+<span class="p">)</span>
 <span class="k">def</span> <span class="nf">get_openneuro_dataset</span><span class="p">(</span><span class="n">exclusion_patterns</span><span class="p">,</span> <span class="n">n_subjects</span><span class="p">):</span>
-    
-    <span class="kn">from</span> <span class="nn">nilearn.datasets</span> <span class="kn">import</span> <span class="p">(</span><span class="n">fetch_openneuro_dataset_index</span><span class="p">,</span>
-                              <span class="n">fetch_openneuro_dataset</span><span class="p">,</span> <span class="n">select_from_index</span><span class="p">)</span>
+
+    <span class="kn">from</span> <span class="nn">nilearn.datasets</span> <span class="kn">import</span> <span class="p">(</span>
+        <span class="n">fetch_openneuro_dataset_index</span><span class="p">,</span>
+        <span class="n">fetch_openneuro_dataset</span><span class="p">,</span>
+        <span class="n">select_from_index</span><span class="p">,</span>
+    <span class="p">)</span>
+
     <span class="n">_</span><span class="p">,</span> <span class="n">urls</span> <span class="o">=</span> <span class="n">fetch_openneuro_dataset_index</span><span class="p">()</span>
     <span class="n">urls</span> <span class="o">=</span> <span class="n">select_from_index</span><span class="p">(</span>
-        <span class="n">urls</span><span class="p">,</span> <span class="n">exclusion_filters</span><span class="o">=</span><span class="n">exclusion_patterns</span><span class="p">,</span> <span class="n">n_subjects</span> <span class="o">=</span> <span class="n">n_subjects</span><span class="p">)</span>
+        <span class="n">urls</span><span class="p">,</span> <span class="n">exclusion_filters</span><span class="o">=</span><span class="n">exclusion_patterns</span><span class="p">,</span> <span class="n">n_subjects</span><span class="o">=</span><span class="n">n_subjects</span>
+    <span class="p">)</span>
     <span class="n">data_dir</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">fetch_openneuro_dataset</span><span class="p">(</span><span class="n">urls</span><span class="o">=</span><span class="n">urls</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">data_dir</span>
 </pre></div>
@@ -708,13 +725,22 @@ Each pydra task can have multiple python functions. We recommand to put those lo
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">Input In [3],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="nn">Input In [4],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">({</span><span class="s2">&quot;exclusion_patterns&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="s2">&quot;n_subjects&quot;</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="s2">&quot;return&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;data_dir&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">}})</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="k">def</span> <span class="nf">get_openneuro_dataset</span><span class="p">(</span><span class="n">exclusion_patterns</span><span class="p">,</span> <span class="n">n_subjects</span><span class="p">):</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="kn">from</span> <span class="nn">nilearn.datasets</span> <span class="kn">import</span> <span class="p">(</span><span class="n">fetch_openneuro_dataset_index</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span>                               <span class="n">fetch_openneuro_dataset</span><span class="p">,</span> <span class="n">select_from_index</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">_</span><span class="p">,</span> <span class="n">urls</span> <span class="o">=</span> <span class="n">fetch_openneuro_dataset_index</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="p">{</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>         <span class="s1">&#39;exclusion_patterns&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>         <span class="s1">&#39;n_subjects&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>         <span class="s1">&#39;return&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;data_dir&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">},</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="p">}</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="k">def</span> <span class="nf">get_openneuro_dataset</span><span class="p">(</span><span class="n">exclusion_patterns</span><span class="p">,</span> <span class="n">n_subjects</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="kn">from</span> <span class="nn">nilearn.datasets</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>         <span class="n">fetch_openneuro_dataset_index</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>         <span class="n">fetch_openneuro_dataset</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>         <span class="n">select_from_index</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span>     <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="n">_</span><span class="p">,</span> <span class="n">urls</span> <span class="o">=</span> <span class="n">fetch_openneuro_dataset_index</span><span class="p">()</span>
 
 <span class="ne">NameError</span>: name &#39;pydra&#39; is not defined
 </pre></div>
@@ -742,22 +768,40 @@ Then, for this model, we will obtain</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
-<span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">({</span><span class="s2">&quot;data_dir&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;task_label&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;space_label&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span><span class="s2">&quot;derivatives_folder&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;smoothing_fwhm&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> 
-                      <span class="s2">&quot;return&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="s2">&quot;imgs&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="s2">&quot;subject&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">}})</span>
+<span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;data_dir&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;task_label&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;space_label&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;derivatives_folder&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;smoothing_fwhm&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="s1">&#39;return&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="s1">&#39;imgs&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="s1">&#39;subject&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">},</span>
+    <span class="p">}</span>
+<span class="p">)</span>
 <span class="k">def</span> <span class="nf">get_info_from_bids</span><span class="p">(</span>
-    <span class="n">data_dir</span><span class="p">,</span>
-    <span class="n">task_label</span><span class="p">,</span>
-    <span class="n">space_label</span><span class="p">,</span>
-    <span class="n">smoothing_fwhm</span><span class="p">,</span>
-    <span class="n">derivatives_folder</span>
+    <span class="n">data_dir</span><span class="p">,</span> <span class="n">task_label</span><span class="p">,</span> <span class="n">space_label</span><span class="p">,</span> <span class="n">smoothing_fwhm</span><span class="p">,</span> <span class="n">derivatives_folder</span>
 <span class="p">):</span>
     <span class="kn">from</span> <span class="nn">nilearn.glm.first_level</span> <span class="kn">import</span> <span class="n">first_level_from_bids</span>
-    <span class="n">models</span><span class="p">,</span> <span class="n">models_run_imgs</span><span class="p">,</span> <span class="n">models_events</span><span class="p">,</span> <span class="n">models_confounds</span> <span class="o">=</span> \
-    <span class="n">first_level_from_bids</span><span class="p">(</span><span class="n">dataset_path</span> <span class="o">=</span> <span class="n">data_dir</span><span class="p">,</span> <span class="n">task_label</span> <span class="o">=</span> <span class="n">task_label</span><span class="p">,</span> <span class="n">space_label</span> <span class="o">=</span> <span class="n">space_label</span><span class="p">,</span>
-                          <span class="n">smoothing_fwhm</span> <span class="o">=</span> <span class="n">smoothing_fwhm</span><span class="p">,</span> <span class="n">derivatives_folder</span> <span class="o">=</span> <span class="n">derivatives_folder</span><span class="p">)</span>
+
+    <span class="p">(</span>
+        <span class="n">models</span><span class="p">,</span>
+        <span class="n">models_run_imgs</span><span class="p">,</span>
+        <span class="n">models_events</span><span class="p">,</span>
+        <span class="n">models_confounds</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">=</span> <span class="n">first_level_from_bids</span><span class="p">(</span>
+        <span class="n">dataset_path</span><span class="o">=</span><span class="n">data_dir</span><span class="p">,</span>
+        <span class="n">task_label</span><span class="o">=</span><span class="n">task_label</span><span class="p">,</span>
+        <span class="n">space_label</span><span class="o">=</span><span class="n">space_label</span><span class="p">,</span>
+        <span class="n">smoothing_fwhm</span><span class="o">=</span><span class="n">smoothing_fwhm</span><span class="p">,</span>
+        <span class="n">derivatives_folder</span><span class="o">=</span><span class="n">derivatives_folder</span><span class="p">,</span>
+    <span class="p">)</span>
     <span class="n">model</span><span class="p">,</span> <span class="n">imgs</span><span class="p">,</span> <span class="n">events</span><span class="p">,</span> <span class="n">confounds</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">models</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">models_run_imgs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">models_events</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">models_confounds</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="n">subject</span> <span class="o">=</span> <span class="s2">&quot;sub-&quot;</span> <span class="o">+</span> <span class="n">model</span><span class="o">.</span><span class="n">subject_label</span>
+        <span class="n">models</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">models_run_imgs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">models_events</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">models_confounds</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+    <span class="p">)</span>
+    <span class="n">subject</span> <span class="o">=</span> <span class="s1">&#39;sub-&#39;</span> <span class="o">+</span> <span class="n">model</span><span class="o">.</span><span class="n">subject_label</span>
     <span class="k">return</span> <span class="n">model</span><span class="p">,</span> <span class="n">imgs</span><span class="p">,</span> <span class="n">subject</span>
 </pre></div>
 </div>
@@ -765,21 +809,28 @@ Then, for this model, we will obtain</p>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">Input In [4],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="nn">Input In [5],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">({</span><span class="s2">&quot;data_dir&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;task_label&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;space_label&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span><span class="s2">&quot;derivatives_folder&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;smoothing_fwhm&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> 
-<span class="g g-Whitespace">      </span><span class="mi">3</span>                       <span class="s2">&quot;return&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="s2">&quot;imgs&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="s2">&quot;subject&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">}})</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="k">def</span> <span class="nf">get_info_from_bids</span><span class="p">(</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">data_dir</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">task_label</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">space_label</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">smoothing_fwhm</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">derivatives_folder</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="kn">from</span> <span class="nn">nilearn.glm.first_level</span> <span class="kn">import</span> <span class="n">first_level_from_bids</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="n">models</span><span class="p">,</span> <span class="n">models_run_imgs</span><span class="p">,</span> <span class="n">models_events</span><span class="p">,</span> <span class="n">models_confounds</span> <span class="o">=</span> \
-<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="n">first_level_from_bids</span><span class="p">(</span><span class="n">dataset_path</span> <span class="o">=</span> <span class="n">data_dir</span><span class="p">,</span> <span class="n">task_label</span> <span class="o">=</span> <span class="n">task_label</span><span class="p">,</span> <span class="n">space_label</span> <span class="o">=</span> <span class="n">space_label</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span>                           <span class="n">smoothing_fwhm</span> <span class="o">=</span> <span class="n">smoothing_fwhm</span><span class="p">,</span> <span class="n">derivatives_folder</span> <span class="o">=</span> <span class="n">derivatives_folder</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="p">{</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>         <span class="s1">&#39;data_dir&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>         <span class="s1">&#39;task_label&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>         <span class="s1">&#39;space_label&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>         <span class="s1">&#39;derivatives_folder&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>         <span class="s1">&#39;smoothing_fwhm&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>         <span class="s1">&#39;return&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="s1">&#39;imgs&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="s1">&#39;subject&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">},</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="p">}</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="k">def</span> <span class="nf">get_info_from_bids</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="n">data_dir</span><span class="p">,</span> <span class="n">task_label</span><span class="p">,</span> <span class="n">space_label</span><span class="p">,</span> <span class="n">smoothing_fwhm</span><span class="p">,</span> <span class="n">derivatives_folder</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span>     <span class="kn">from</span> <span class="nn">nilearn.glm.first_level</span> <span class="kn">import</span> <span class="n">first_level_from_bids</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span>         <span class="n">models</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span>         <span class="n">models_run_imgs</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span>         <span class="n">derivatives_folder</span><span class="o">=</span><span class="n">derivatives_folder</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">28</span>     <span class="p">)</span>
 
 <span class="ne">NameError</span>: name &#39;pydra&#39; is not defined
 </pre></div>
@@ -799,34 +850,53 @@ Then, for this model, we will obtain</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
-<span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">({</span><span class="s2">&quot;data_dir&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;subject&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;return&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;dm_path&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">}})</span>
+<span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+    <span class="p">{</span><span class="s1">&#39;data_dir&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;subject&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;return&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;dm_path&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">}}</span>
+<span class="p">)</span>
 <span class="k">def</span> <span class="nf">get_designmatrix</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">):</span>
-    
+
     <span class="kn">from</span> <span class="nn">nilearn.interfaces.fsl</span> <span class="kn">import</span> <span class="n">get_design_from_fslmat</span>
+
     <span class="n">fsl_design_matrix_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-        <span class="n">data_dir</span><span class="p">,</span> <span class="s1">&#39;derivatives&#39;</span><span class="p">,</span> <span class="s1">&#39;task&#39;</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;stopsignal.feat&#39;</span><span class="p">,</span> <span class="s1">&#39;design.mat&#39;</span><span class="p">)</span>
-    <span class="n">design_matrix</span> <span class="o">=</span> <span class="n">get_design_from_fslmat</span><span class="p">(</span><span class="n">fsl_design_matrix_path</span><span class="p">,</span> <span class="n">column_names</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    
-    <span class="n">design_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cond_</span><span class="si">%02d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">design_matrix</span><span class="o">.</span><span class="n">columns</span><span class="p">))]</span>
+        <span class="n">data_dir</span><span class="p">,</span>
+        <span class="s1">&#39;derivatives&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;task&#39;</span><span class="p">,</span>
+        <span class="n">subject</span><span class="p">,</span>
+        <span class="s1">&#39;stopsignal.feat&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;design.mat&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">design_matrix</span> <span class="o">=</span> <span class="n">get_design_from_fslmat</span><span class="p">(</span>
+        <span class="n">fsl_design_matrix_path</span><span class="p">,</span> <span class="n">column_names</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">)</span>
+
+    <span class="n">design_columns</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;cond_</span><span class="si">%02d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">design_matrix</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+    <span class="p">]</span>
     <span class="n">design_columns</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Go&#39;</span>
     <span class="n">design_columns</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;StopSuccess&#39;</span>
     <span class="n">design_matrix</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">design_columns</span>
-    <span class="n">dm_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s2">&quot;designmatrix.csv&quot;</span><span class="p">)</span>
-    <span class="n">design_matrix</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">dm_path</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">dm_path</span>                      
+    <span class="n">dm_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s1">&#39;designmatrix.csv&#39;</span><span class="p">)</span>
+    <span class="n">design_matrix</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">dm_path</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dm_path</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">Input In [5],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="nn">Input In [6],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">({</span><span class="s2">&quot;data_dir&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;subject&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;return&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;dm_path&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">}})</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="k">def</span> <span class="nf">get_designmatrix</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">):</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="kn">from</span> <span class="nn">nilearn.interfaces.fsl</span> <span class="kn">import</span> <span class="n">get_design_from_fslmat</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">fsl_design_matrix_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>         <span class="n">data_dir</span><span class="p">,</span> <span class="s1">&#39;derivatives&#39;</span><span class="p">,</span> <span class="s1">&#39;task&#39;</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;stopsignal.feat&#39;</span><span class="p">,</span> <span class="s1">&#39;design.mat&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="p">{</span><span class="s1">&#39;data_dir&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;subject&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;return&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;dm_path&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">}}</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="k">def</span> <span class="nf">get_designmatrix</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="kn">from</span> <span class="nn">nilearn.interfaces.fsl</span> <span class="kn">import</span> <span class="n">get_design_from_fslmat</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">fsl_design_matrix_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>         <span class="n">data_dir</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>         <span class="s1">&#39;derivatives&#39;</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span>         <span class="s1">&#39;design.mat&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="p">)</span>
 
 <span class="ne">NameError</span>: name &#39;pydra&#39; is not defined
 </pre></div>
@@ -845,22 +915,24 @@ Then, for this model, we will obtain</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
-<span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">({</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span><span class="s2">&quot;imgs&quot;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
-                      <span class="s2">&quot;dm_path&quot;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span><span class="s2">&quot;contrast&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-                      <span class="s2">&quot;return&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="s2">&quot;z_map_path&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;masker&quot;</span><span class="p">:</span><span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">}})</span>
-<span class="k">def</span> <span class="nf">model_fit</span><span class="p">(</span>
-    <span class="n">model</span><span class="p">,</span> 
-    <span class="n">imgs</span><span class="p">,</span>
-    <span class="n">dm_path</span><span class="p">,</span>
-    <span class="n">contrast</span>
-<span class="p">):</span>
+<span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
+        <span class="s1">&#39;imgs&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
+        <span class="s1">&#39;dm_path&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
+        <span class="s1">&#39;contrast&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;return&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="s1">&#39;z_map_path&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;masker&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">},</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">model_fit</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">imgs</span><span class="p">,</span> <span class="n">dm_path</span><span class="p">,</span> <span class="n">contrast</span><span class="p">):</span>
     <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
     <span class="n">design_matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">dm_path</span><span class="p">)</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">imgs</span><span class="p">,</span> <span class="n">design_matrices</span> <span class="o">=</span> <span class="p">[</span><span class="n">design_matrix</span><span class="p">])</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">imgs</span><span class="p">,</span> <span class="n">design_matrices</span><span class="o">=</span><span class="p">[</span><span class="n">design_matrix</span><span class="p">])</span>
     <span class="n">z_map</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">compute_contrast</span><span class="p">(</span><span class="n">contrast</span><span class="p">)</span>
-    <span class="n">z_map_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s2">&quot;firstlevel_z_map.nii.gz&quot;</span><span class="p">)</span>
+    <span class="n">z_map_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s1">&#39;firstlevel_z_map.nii.gz&#39;</span><span class="p">)</span>
     <span class="n">z_map</span><span class="o">.</span><span class="n">to_filename</span><span class="p">(</span><span class="n">z_map_path</span><span class="p">)</span>
-    <span class="n">masker_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s2">&quot;firstlevel_masker.nii.gz&quot;</span><span class="p">)</span>
+    <span class="n">masker_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s1">&#39;firstlevel_masker.nii.gz&#39;</span><span class="p">)</span>
     <span class="n">masker</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">masker_</span>
     <span class="k">return</span> <span class="n">model</span><span class="p">,</span> <span class="n">z_map_path</span><span class="p">,</span> <span class="n">masker</span>
 </pre></div>
@@ -869,19 +941,20 @@ Then, for this model, we will obtain</p>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">Input In [6],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="nn">Input In [7],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">({</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span><span class="s2">&quot;imgs&quot;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span>                       <span class="s2">&quot;dm_path&quot;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span><span class="s2">&quot;contrast&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>                       <span class="s2">&quot;return&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="s2">&quot;z_map_path&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;masker&quot;</span><span class="p">:</span><span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">}})</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="k">def</span> <span class="nf">model_fit</span><span class="p">(</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">model</span><span class="p">,</span> 
-<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">imgs</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">dm_path</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">contrast</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="n">design_matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">dm_path</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="p">{</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>         <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>         <span class="s1">&#39;imgs&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>         <span class="s1">&#39;dm_path&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>         <span class="s1">&#39;contrast&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>         <span class="s1">&#39;return&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="s1">&#39;z_map_path&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;masker&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">},</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="p">}</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="k">def</span> <span class="nf">model_fit</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">imgs</span><span class="p">,</span> <span class="n">dm_path</span><span class="p">,</span> <span class="n">contrast</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="n">design_matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">dm_path</span><span class="p">)</span>
 
 <span class="ne">NameError</span>: name &#39;pydra&#39; is not defined
 </pre></div>
@@ -895,31 +968,30 @@ Then, for this model, we will obtain</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
-<span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">({</span><span class="s2">&quot;z_map_path&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
-                    <span class="s2">&quot;return&quot;</span><span class="p">:{</span><span class="s2">&quot;output_file&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">}})</span>
+<span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">({</span><span class="s1">&#39;z_map_path&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;return&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;output_file&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">}})</span>
 <span class="k">def</span> <span class="nf">cluster_table</span><span class="p">(</span><span class="n">z_map_path</span><span class="p">):</span>
     <span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
     <span class="kn">from</span> <span class="nn">nilearn.reporting</span> <span class="kn">import</span> <span class="n">get_clusters_table</span>
     <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
-    
+
     <span class="n">stat_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">z_map_path</span><span class="p">)</span>
-    <span class="n">output_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s2">&quot;cluster_table.csv&quot;</span><span class="p">)</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">get_clusters_table</span><span class="p">(</span><span class="n">stat_img</span><span class="p">,</span>
-                            <span class="n">stat_threshold</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">isf</span><span class="p">(</span><span class="mf">0.001</span><span class="p">),</span> 
-                            <span class="n">cluster_threshold</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">output_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s1">&#39;cluster_table.csv&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">get_clusters_table</span><span class="p">(</span>
+        <span class="n">stat_img</span><span class="p">,</span> <span class="n">stat_threshold</span><span class="o">=</span><span class="n">norm</span><span class="o">.</span><span class="n">isf</span><span class="p">(</span><span class="mf">0.001</span><span class="p">),</span> <span class="n">cluster_threshold</span><span class="o">=</span><span class="mi">10</span>
+    <span class="p">)</span>
     <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">output_file</span>
 
+
 <span class="c1"># get glm report</span>
 <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
-<span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">({</span><span class="s2">&quot;model&quot;</span><span class="p">:</span><span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="s2">&quot;contrasts&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
-                    <span class="s2">&quot;return&quot;</span><span class="p">:{</span><span class="s2">&quot;output_file&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">}})</span>
-<span class="k">def</span> <span class="nf">glm_report</span><span class="p">(</span>
-    <span class="n">model</span><span class="p">,</span>
-    <span class="n">contrasts</span>
-<span class="p">):</span>
+<span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+    <span class="p">{</span><span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="s1">&#39;contrasts&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;return&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;output_file&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">}}</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">glm_report</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">contrasts</span><span class="p">):</span>
     <span class="kn">from</span> <span class="nn">nilearn.reporting</span> <span class="kn">import</span> <span class="n">make_glm_report</span>
-    <span class="n">output_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s2">&quot;glm_report.html&quot;</span><span class="p">)</span>
+
+    <span class="n">output_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s1">&#39;glm_report.html&#39;</span><span class="p">)</span>
     <span class="n">report</span> <span class="o">=</span> <span class="n">make_glm_report</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">contrasts</span><span class="p">)</span>
     <span class="n">report</span><span class="o">.</span><span class="n">save_as_html</span><span class="p">(</span><span class="n">output_file</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">output_file</span>
@@ -929,13 +1001,12 @@ Then, for this model, we will obtain</p>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">Input In [7],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="nn">Input In [8],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">({</span><span class="s2">&quot;z_map_path&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span>                     <span class="s2">&quot;return&quot;</span><span class="p">:{</span><span class="s2">&quot;output_file&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">}})</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="k">def</span> <span class="nf">cluster_table</span><span class="p">(</span><span class="n">z_map_path</span><span class="p">):</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="kn">from</span> <span class="nn">nilearn.reporting</span> <span class="kn">import</span> <span class="n">get_clusters_table</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">({</span><span class="s1">&#39;z_map_path&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;return&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;output_file&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">}})</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="k">def</span> <span class="nf">cluster_table</span><span class="p">(</span><span class="n">z_map_path</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="kn">from</span> <span class="nn">nilearn.reporting</span> <span class="kn">import</span> <span class="n">get_clusters_table</span>
 
 <span class="ne">NameError</span>: name &#39;pydra&#39; is not defined
 </pre></div>
@@ -956,10 +1027,22 @@ Then, for this model, we will obtain</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
-<span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">({</span><span class="s2">&quot;data_dir&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;dm_path&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;z_map_path&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> 
-                      <span class="s2">&quot;contrast&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span><span class="s2">&quot;subject&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;masker&quot;</span><span class="p">:</span><span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> 
-                      <span class="s2">&quot;return&quot;</span><span class="p">:{</span><span class="s2">&quot;output_file1&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;output_file2&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
-                                <span class="s2">&quot;output_file3&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;output_file4&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">}})</span>
+<span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;data_dir&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;dm_path&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;z_map_path&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;contrast&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;subject&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="s1">&#39;masker&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
+        <span class="s1">&#39;return&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;output_file1&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;output_file2&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;output_file3&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s1">&#39;output_file4&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">}</span>
+<span class="p">)</span>
 <span class="k">def</span> <span class="nf">plots</span><span class="p">(</span>
     <span class="n">data_dir</span><span class="p">,</span>
     <span class="n">dm_path</span><span class="p">,</span>
@@ -970,37 +1053,67 @@ Then, for this model, we will obtain</p>
 <span class="p">):</span>
     <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
     <span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
-    <span class="kn">from</span> <span class="nn">nilearn.plotting</span> <span class="kn">import</span> <span class="n">plot_glass_brain</span><span class="p">,</span> <span class="n">plot_img_comparison</span><span class="p">,</span> <span class="n">plot_contrast_matrix</span>
+    <span class="kn">from</span> <span class="nn">nilearn.plotting</span> <span class="kn">import</span> <span class="p">(</span>
+        <span class="n">plot_glass_brain</span><span class="p">,</span>
+        <span class="n">plot_img_comparison</span><span class="p">,</span>
+        <span class="n">plot_contrast_matrix</span><span class="p">,</span>
+    <span class="p">)</span>
     <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
     <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
-    
+
     <span class="c1"># plot and save nilearn z-map</span>
     <span class="n">z_map</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">z_map_path</span><span class="p">)</span>
-    <span class="n">output_file1</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s2">&quot;nilearn_z_map.jpg&quot;</span><span class="p">)</span>
-    <span class="n">plot_glass_brain</span><span class="p">(</span><span class="n">z_map</span><span class="p">,</span> <span class="n">output_file</span> <span class="o">=</span> <span class="n">output_file1</span><span class="p">,</span> <span class="n">colorbar</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-                     <span class="n">threshold</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">isf</span><span class="p">(</span><span class="mf">0.001</span><span class="p">),</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Nilearn Z map of &quot;StopSuccess - Go&quot; (unc p&lt;0.001)&#39;</span><span class="p">,</span>
-                     <span class="n">plot_abs</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">display_mode</span> <span class="o">=</span> <span class="s1">&#39;ortho&#39;</span><span class="p">)</span>
-    
+    <span class="n">output_file1</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s1">&#39;nilearn_z_map.jpg&#39;</span><span class="p">)</span>
+    <span class="n">plot_glass_brain</span><span class="p">(</span>
+        <span class="n">z_map</span><span class="p">,</span>
+        <span class="n">output_file</span><span class="o">=</span><span class="n">output_file1</span><span class="p">,</span>
+        <span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">threshold</span><span class="o">=</span><span class="n">norm</span><span class="o">.</span><span class="n">isf</span><span class="p">(</span><span class="mf">0.001</span><span class="p">),</span>
+        <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Nilearn Z map of &quot;StopSuccess - Go&quot; (unc p&lt;0.001)&#39;</span><span class="p">,</span>
+        <span class="n">plot_abs</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">display_mode</span><span class="o">=</span><span class="s1">&#39;ortho&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+
     <span class="c1"># plot and save fsl z-map</span>
     <span class="n">fsl_z_map</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s1">&#39;derivatives&#39;</span><span class="p">,</span> <span class="s1">&#39;task&#39;</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="s1">&#39;stopsignal.feat&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;stats&#39;</span><span class="p">,</span> <span class="s1">&#39;zstat12.nii.gz&#39;</span><span class="p">))</span>
-    <span class="n">output_file2</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s2">&quot;fsl_z_map.jpg&quot;</span><span class="p">)</span>
-    <span class="n">plot_glass_brain</span><span class="p">(</span><span class="n">fsl_z_map</span><span class="p">,</span> <span class="n">output_file</span> <span class="o">=</span> <span class="n">output_file2</span><span class="p">,</span> <span class="n">colorbar</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> 
-                     <span class="n">threshold</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">isf</span><span class="p">(</span><span class="mf">0.001</span><span class="p">),</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;FSL Z map of &quot;StopSuccess - Go&quot; (unc p&lt;0.001)&#39;</span><span class="p">,</span>
-                     <span class="n">plot_abs</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">display_mode</span> <span class="o">=</span> <span class="s1">&#39;ortho&#39;</span><span class="p">)</span>
-    
+        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">data_dir</span><span class="p">,</span>
+            <span class="s1">&#39;derivatives&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;task&#39;</span><span class="p">,</span>
+            <span class="n">subject</span><span class="p">,</span>
+            <span class="s1">&#39;stopsignal.feat&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;stats&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;zstat12.nii.gz&#39;</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">output_file2</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s1">&#39;fsl_z_map.jpg&#39;</span><span class="p">)</span>
+    <span class="n">plot_glass_brain</span><span class="p">(</span>
+        <span class="n">fsl_z_map</span><span class="p">,</span>
+        <span class="n">output_file</span><span class="o">=</span><span class="n">output_file2</span><span class="p">,</span>
+        <span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">threshold</span><span class="o">=</span><span class="n">norm</span><span class="o">.</span><span class="n">isf</span><span class="p">(</span><span class="mf">0.001</span><span class="p">),</span>
+        <span class="n">title</span><span class="o">=</span><span class="s1">&#39;FSL Z map of &quot;StopSuccess - Go&quot; (unc p&lt;0.001)&#39;</span><span class="p">,</span>
+        <span class="n">plot_abs</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">display_mode</span><span class="o">=</span><span class="s1">&#39;ortho&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+
     <span class="c1"># plot and save nilearn and fsl comparison</span>
-    <span class="n">plot_img_comparison</span><span class="p">([</span><span class="n">z_map</span><span class="p">],</span> <span class="p">[</span><span class="n">fsl_z_map</span><span class="p">],</span> <span class="n">masker</span><span class="p">,</span> <span class="n">output_dir</span> <span class="o">=</span> <span class="n">workflow_out_dir</span><span class="p">,</span> 
-                        <span class="n">ref_label</span> <span class="o">=</span> <span class="s1">&#39;Nilearn&#39;</span><span class="p">,</span> <span class="n">src_label</span> <span class="o">=</span> <span class="s1">&#39;FSL&#39;</span><span class="p">)</span>
-    <span class="n">old</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s2">&quot;0000.png&quot;</span><span class="p">)</span>
-    <span class="n">new</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s2">&quot;nilearn_fsl_comp.jpg&quot;</span><span class="p">)</span>
-    <span class="n">output_file3</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">old</span><span class="p">,</span><span class="n">new</span><span class="p">)</span>
-    
+    <span class="n">plot_img_comparison</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">z_map</span><span class="p">],</span>
+        <span class="p">[</span><span class="n">fsl_z_map</span><span class="p">],</span>
+        <span class="n">masker</span><span class="p">,</span>
+        <span class="n">output_dir</span><span class="o">=</span><span class="n">workflow_out_dir</span><span class="p">,</span>
+        <span class="n">ref_label</span><span class="o">=</span><span class="s1">&#39;Nilearn&#39;</span><span class="p">,</span>
+        <span class="n">src_label</span><span class="o">=</span><span class="s1">&#39;FSL&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">old</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s1">&#39;0000.png&#39;</span><span class="p">)</span>
+    <span class="n">new</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s1">&#39;nilearn_fsl_comp.jpg&#39;</span><span class="p">)</span>
+    <span class="n">output_file3</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">)</span>
+
     <span class="c1"># plot and save design matrix contrast</span>
     <span class="n">design_matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">dm_path</span><span class="p">)</span>
-    <span class="n">output_file4</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s2">&quot;firstlevel_contrast.jpg&quot;</span><span class="p">)</span>
-    <span class="n">plot_contrast_matrix</span><span class="p">(</span><span class="n">contrast</span><span class="p">,</span> <span class="n">design_matrix</span><span class="p">,</span> <span class="n">output_file</span> <span class="o">=</span> <span class="n">output_file4</span><span class="p">)</span>
+    <span class="n">output_file4</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s1">&#39;firstlevel_contrast.jpg&#39;</span><span class="p">)</span>
+    <span class="n">plot_contrast_matrix</span><span class="p">(</span><span class="n">contrast</span><span class="p">,</span> <span class="n">design_matrix</span><span class="p">,</span> <span class="n">output_file</span><span class="o">=</span><span class="n">output_file4</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">output_file1</span><span class="p">,</span> <span class="n">output_file2</span><span class="p">,</span> <span class="n">output_file3</span><span class="p">,</span> <span class="n">output_file4</span>
 </pre></div>
 </div>
@@ -1008,22 +1121,34 @@ Then, for this model, we will obtain</p>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">Input In [8],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="nn">Input In [9],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">({</span><span class="s2">&quot;data_dir&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;dm_path&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;z_map_path&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> 
-<span class="g g-Whitespace">      </span><span class="mi">3</span>                       <span class="s2">&quot;contrast&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span><span class="s2">&quot;subject&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;masker&quot;</span><span class="p">:</span><span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> 
-<span class="g g-Whitespace">      </span><span class="mi">4</span>                       <span class="s2">&quot;return&quot;</span><span class="p">:{</span><span class="s2">&quot;output_file1&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;output_file2&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>                                 <span class="s2">&quot;output_file3&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;output_file4&quot;</span><span class="p">:</span><span class="nb">str</span><span class="p">}})</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="k">def</span> <span class="nf">plots</span><span class="p">(</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">data_dir</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">dm_path</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">z_map_path</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="n">contrast</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="n">subject</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="n">masker</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span>     <span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="p">{</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>         <span class="s1">&#39;data_dir&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>         <span class="s1">&#39;dm_path&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>         <span class="s1">&#39;z_map_path&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>         <span class="s1">&#39;contrast&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>         <span class="s1">&#39;subject&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>         <span class="s1">&#39;masker&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>         <span class="s1">&#39;return&#39;</span><span class="p">:</span> <span class="p">{</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>             <span class="s1">&#39;output_file1&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>             <span class="s1">&#39;output_file2&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>             <span class="s1">&#39;output_file3&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>             <span class="s1">&#39;output_file4&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span>         <span class="p">},</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="p">}</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="k">def</span> <span class="nf">plots</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span>     <span class="n">data_dir</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span>     <span class="n">dm_path</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span>     <span class="n">z_map_path</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="n">contrast</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span>     <span class="n">subject</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span>     <span class="n">masker</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span> <span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span>     <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span>     <span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
 
 <span class="ne">NameError</span>: name &#39;pydra&#39; is not defined
 </pre></div>
@@ -1044,14 +1169,18 @@ Then, for this model, we will obtain</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initiate a workflow</span>
-<span class="n">wf_firstlevel</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;wf_firstlevel&quot;</span><span class="p">,</span> <span class="n">input_spec</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;data_dir&quot;</span><span class="p">,</span>
-                                     <span class="s2">&quot;task_label&quot;</span><span class="p">,</span>
-                                     <span class="s2">&quot;space_label&quot;</span><span class="p">,</span>
-                                     <span class="s2">&quot;derivatives_folder&quot;</span><span class="p">,</span>
-                                     <span class="s2">&quot;smoothing_fwhm&quot;</span><span class="p">,</span>
-                                     <span class="s2">&quot;contrast&quot;</span><span class="p">,</span>
-                                     <span class="s2">&quot;output_dir&quot;</span><span class="p">]</span>
-                     <span class="p">)</span>
+<span class="n">wf_firstlevel</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;wf_firstlevel&#39;</span><span class="p">,</span>
+    <span class="n">input_spec</span><span class="o">=</span><span class="p">[</span>
+        <span class="s1">&#39;data_dir&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;task_label&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;space_label&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;derivatives_folder&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;smoothing_fwhm&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;contrast&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;output_dir&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span>
 
 <span class="c1"># specify input</span>
 <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">task_label</span> <span class="o">=</span> <span class="s1">&#39;stopsignal&#39;</span>
@@ -1060,63 +1189,81 @@ Then, for this model, we will obtain</p>
 <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">smoothing_fwhm</span> <span class="o">=</span> <span class="mf">5.0</span>
 
 <span class="c1"># add task - get_info_from_bids</span>
-<span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">get_info_from_bids</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;get_info_from_bids&quot;</span><span class="p">,</span>
-                          <span class="n">data_dir</span> <span class="o">=</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">data_dir</span><span class="p">,</span>
-                          <span class="n">task_label</span> <span class="o">=</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">task_label</span><span class="p">,</span>
-                          <span class="n">space_label</span> <span class="o">=</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">space_label</span><span class="p">,</span>
-                          <span class="n">derivatives_folder</span> <span class="o">=</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">derivatives_folder</span><span class="p">,</span>
-                          <span class="n">smoothing_fwhm</span> <span class="o">=</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">smoothing_fwhm</span>
-                         <span class="p">)</span>
-      <span class="p">)</span>
+<span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="n">get_info_from_bids</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;get_info_from_bids&#39;</span><span class="p">,</span>
+        <span class="n">data_dir</span><span class="o">=</span><span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">data_dir</span><span class="p">,</span>
+        <span class="n">task_label</span><span class="o">=</span><span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">task_label</span><span class="p">,</span>
+        <span class="n">space_label</span><span class="o">=</span><span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">space_label</span><span class="p">,</span>
+        <span class="n">derivatives_folder</span><span class="o">=</span><span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">derivatives_folder</span><span class="p">,</span>
+        <span class="n">smoothing_fwhm</span><span class="o">=</span><span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">smoothing_fwhm</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
 <span class="c1"># add task - get_designmatrix</span>
-<span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">get_designmatrix</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;get_designmatrix&quot;</span><span class="p">,</span>
-                        <span class="n">data_dir</span> <span class="o">=</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">data_dir</span><span class="p">,</span>
-                        <span class="n">subject</span> <span class="o">=</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">get_info_from_bids</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">subject</span><span class="p">,</span>
-                       <span class="p">)</span>
-      <span class="p">)</span>
-<span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">model_fit</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;l1estimation&quot;</span><span class="p">,</span>
-                   <span class="n">model</span> <span class="o">=</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">get_info_from_bids</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> 
-                   <span class="n">imgs</span> <span class="o">=</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">get_info_from_bids</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">imgs</span><span class="p">,</span> 
-                   <span class="n">dm_path</span> <span class="o">=</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">get_designmatrix</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">dm_path</span><span class="p">,</span>
-                   <span class="n">contrast</span> <span class="o">=</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">contrast</span>
-                <span class="p">)</span>
-      <span class="p">)</span>
+<span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="n">get_designmatrix</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;get_designmatrix&#39;</span><span class="p">,</span>
+        <span class="n">data_dir</span><span class="o">=</span><span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">data_dir</span><span class="p">,</span>
+        <span class="n">subject</span><span class="o">=</span><span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">get_info_from_bids</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">subject</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="n">model_fit</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;l1estimation&#39;</span><span class="p">,</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">get_info_from_bids</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">model</span><span class="p">,</span>
+        <span class="n">imgs</span><span class="o">=</span><span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">get_info_from_bids</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">imgs</span><span class="p">,</span>
+        <span class="n">dm_path</span><span class="o">=</span><span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">get_designmatrix</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">dm_path</span><span class="p">,</span>
+        <span class="n">contrast</span><span class="o">=</span><span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">contrast</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
 <span class="c1"># add task - cluster_table</span>
-<span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cluster_table</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;cluster_table&quot;</span><span class="p">,</span> 
-                     <span class="n">z_map_path</span> <span class="o">=</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">l1estimation</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">z_map_path</span><span class="p">))</span>
+<span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="n">cluster_table</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;cluster_table&#39;</span><span class="p">,</span>
+        <span class="n">z_map_path</span><span class="o">=</span><span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">l1estimation</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">z_map_path</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
 <span class="c1"># add task - glm_report</span>
-<span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">glm_report</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;glm_report&quot;</span><span class="p">,</span>
-                  <span class="n">model</span> <span class="o">=</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">l1estimation</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">model</span><span class="p">,</span>
-                  <span class="n">contrasts</span> <span class="o">=</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">contrast</span>
-                 <span class="p">)</span>
-      <span class="p">)</span>
+<span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="n">glm_report</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;glm_report&#39;</span><span class="p">,</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">l1estimation</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">model</span><span class="p">,</span>
+        <span class="n">contrasts</span><span class="o">=</span><span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">contrast</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
 <span class="c1"># specify output</span>
-<span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">set_output</span><span class="p">([</span>
-    <span class="p">(</span><span class="s2">&quot;z_map&quot;</span><span class="p">,</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">l1estimation</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">z_map_path</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;masker&quot;</span><span class="p">,</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">l1estimation</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">masker</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;subject&quot;</span><span class="p">,</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">get_info_from_bids</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">subject</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;dm_path&quot;</span><span class="p">,</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">get_designmatrix</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">dm_path</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;cluster_table&quot;</span><span class="p">,</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">cluster_table</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">output_file</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;glm_report&quot;</span><span class="p">,</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">glm_report</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">output_file</span><span class="p">)</span>
-<span class="p">])</span>
+<span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">set_output</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;z_map&#39;</span><span class="p">,</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">l1estimation</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">z_map_path</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;masker&#39;</span><span class="p">,</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">l1estimation</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">masker</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;subject&#39;</span><span class="p">,</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">get_info_from_bids</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">subject</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;dm_path&#39;</span><span class="p">,</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">get_designmatrix</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">dm_path</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;cluster_table&#39;</span><span class="p">,</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">cluster_table</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">output_file</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;glm_report&#39;</span><span class="p">,</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">glm_report</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">output_file</span><span class="p">),</span>
+    <span class="p">]</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">Input In [9],</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
+<span class="nn">Input In [10],</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># initiate a workflow</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">wf_firstlevel</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;wf_firstlevel&quot;</span><span class="p">,</span> <span class="n">input_spec</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;data_dir&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span>                                      <span class="s2">&quot;task_label&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>                                      <span class="s2">&quot;space_label&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>                                      <span class="s2">&quot;derivatives_folder&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span>                                      <span class="s2">&quot;smoothing_fwhm&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>                                      <span class="s2">&quot;contrast&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span>                                      <span class="s2">&quot;output_dir&quot;</span><span class="p">]</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span>                      <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="c1"># specify input</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">task_label</span> <span class="o">=</span> <span class="s1">&#39;stopsignal&#39;</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">wf_firstlevel</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;wf_firstlevel&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">input_spec</span><span class="o">=</span><span class="p">[</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>         <span class="s1">&#39;data_dir&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>         <span class="s1">&#39;task_label&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>         <span class="s1">&#39;space_label&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>         <span class="s1">&#39;derivatives_folder&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>         <span class="s1">&#39;smoothing_fwhm&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>         <span class="s1">&#39;contrast&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>         <span class="s1">&#39;output_dir&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="p">],</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="c1"># specify input</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">task_label</span> <span class="o">=</span> <span class="s1">&#39;stopsignal&#39;</span>
 
 <span class="ne">NameError</span>: name &#39;Workflow&#39; is not defined
 </pre></div>
@@ -1130,62 +1277,81 @@ Then, for this model, we will obtain</p>
 <p>Now we need to create the overaching glm workflow that connects the above workflow and other tasks (e.g., <code class="docutils literal notranslate"><span class="pre">get/read</span> <span class="pre">the</span> <span class="pre">data</span></code> and <code class="docutils literal notranslate"><span class="pre">plot</span> <span class="pre">the</span> <span class="pre">result</span></code>)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;firstlevel_glm&quot;</span><span class="p">,</span>
-              <span class="n">input_spec</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;exclusion_patterns&quot;</span><span class="p">,</span><span class="s2">&quot;n_subjects&quot;</span><span class="p">,</span><span class="s2">&quot;contrast&quot;</span><span class="p">,</span><span class="s2">&quot;output_dir&quot;</span><span class="p">],</span>
-             <span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;firstlevel_glm&#39;</span><span class="p">,</span>
+    <span class="n">input_spec</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;exclusion_patterns&#39;</span><span class="p">,</span> <span class="s1">&#39;n_subjects&#39;</span><span class="p">,</span> <span class="s1">&#39;contrast&#39;</span><span class="p">,</span> <span class="s1">&#39;output_dir&#39;</span><span class="p">],</span>
+<span class="p">)</span>
 
-<span class="n">wf</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">exclusion_patterns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;*group*&#39;</span><span class="p">,</span> <span class="s1">&#39;*phenotype*&#39;</span><span class="p">,</span> <span class="s1">&#39;*mriqc*&#39;</span><span class="p">,</span>
-                                <span class="s1">&#39;*parameter_plots*&#39;</span><span class="p">,</span> <span class="s1">&#39;*physio_plots*&#39;</span><span class="p">,</span>
-                                <span class="s1">&#39;*space-fsaverage*&#39;</span><span class="p">,</span> <span class="s1">&#39;*space-T1w*&#39;</span><span class="p">,</span>
-                                <span class="s1">&#39;*dwi*&#39;</span><span class="p">,</span> <span class="s1">&#39;*beh*&#39;</span><span class="p">,</span> <span class="s1">&#39;*task-bart*&#39;</span><span class="p">,</span>
-                                <span class="s1">&#39;*task-rest*&#39;</span><span class="p">,</span> <span class="s1">&#39;*task-scap*&#39;</span><span class="p">,</span> <span class="s1">&#39;*task-task*&#39;</span><span class="p">]</span>
+<span class="n">wf</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">exclusion_patterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;*group*&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;*phenotype*&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;*mriqc*&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;*parameter_plots*&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;*physio_plots*&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;*space-fsaverage*&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;*space-T1w*&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;*dwi*&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;*beh*&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;*task-bart*&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;*task-rest*&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;*task-scap*&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;*task-task*&#39;</span><span class="p">,</span>
+<span class="p">]</span>
 <span class="n">wf</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">n_subjects</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">wf</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">output_dir</span> <span class="o">=</span> <span class="n">workflow_out_dir</span>
 <span class="n">wf</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">contrast</span> <span class="o">=</span> <span class="s1">&#39;StopSuccess - Go&#39;</span>
 
-<span class="n">wf</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">get_openneuro_dataset</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;get_openneuro_dataset&quot;</span><span class="p">,</span> 
-                             <span class="n">exclusion_patterns</span> <span class="o">=</span> <span class="n">wf</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">exclusion_patterns</span><span class="p">,</span>
-                             <span class="n">n_subjects</span> <span class="o">=</span> <span class="n">wf</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">n_subjects</span>
-                            <span class="p">)</span>
-      <span class="p">)</span>
+<span class="n">wf</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="n">get_openneuro_dataset</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;get_openneuro_dataset&#39;</span><span class="p">,</span>
+        <span class="n">exclusion_patterns</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">exclusion_patterns</span><span class="p">,</span>
+        <span class="n">n_subjects</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">n_subjects</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
 
 <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">data_dir</span> <span class="o">=</span> <span class="n">wf</span><span class="o">.</span><span class="n">get_openneuro_dataset</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">data_dir</span>
 <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">contrast</span> <span class="o">=</span> <span class="n">wf</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">contrast</span>
 <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">output_dir</span> <span class="o">=</span> <span class="n">wf</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">output_dir</span>
 <span class="n">wf</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">wf_firstlevel</span><span class="p">)</span>
 
-<span class="n">wf</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">plots</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;plots&quot;</span><span class="p">,</span>
-             <span class="n">data_dir</span> <span class="o">=</span> <span class="n">wf</span><span class="o">.</span><span class="n">get_openneuro_dataset</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">data_dir</span><span class="p">,</span>
-             <span class="n">dm_path</span> <span class="o">=</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">dm_path</span><span class="p">,</span>
-             <span class="n">z_map_path</span> <span class="o">=</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">z_map</span><span class="p">,</span>
-             <span class="n">contrast</span> <span class="o">=</span> <span class="n">wf</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">contrast</span><span class="p">,</span>
-             <span class="n">subject</span> <span class="o">=</span>  <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">subject</span><span class="p">,</span>
-             <span class="n">masker</span> <span class="o">=</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">masker</span>
-            <span class="p">)</span>
-      <span class="p">)</span>
+<span class="n">wf</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="n">plots</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;plots&#39;</span><span class="p">,</span>
+        <span class="n">data_dir</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">get_openneuro_dataset</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">data_dir</span><span class="p">,</span>
+        <span class="n">dm_path</span><span class="o">=</span><span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">dm_path</span><span class="p">,</span>
+        <span class="n">z_map_path</span><span class="o">=</span><span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">z_map</span><span class="p">,</span>
+        <span class="n">contrast</span><span class="o">=</span><span class="n">wf</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">contrast</span><span class="p">,</span>
+        <span class="n">subject</span><span class="o">=</span><span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">subject</span><span class="p">,</span>
+        <span class="n">masker</span><span class="o">=</span><span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">masker</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
 
-<span class="n">wf</span><span class="o">.</span><span class="n">set_output</span><span class="p">([</span>
-    <span class="p">(</span><span class="s2">&quot;output1&quot;</span><span class="p">,</span> <span class="n">wf</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">output_file1</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;output2&quot;</span><span class="p">,</span> <span class="n">wf</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">output_file2</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;output3&quot;</span><span class="p">,</span> <span class="n">wf</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">output_file3</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">&quot;output4&quot;</span><span class="p">,</span> <span class="n">wf</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">output_file4</span><span class="p">)</span>
-<span class="p">])</span>
+<span class="n">wf</span><span class="o">.</span><span class="n">set_output</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;output1&#39;</span><span class="p">,</span> <span class="n">wf</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">output_file1</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;output2&#39;</span><span class="p">,</span> <span class="n">wf</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">output_file2</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;output3&#39;</span><span class="p">,</span> <span class="n">wf</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">output_file3</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;output4&#39;</span><span class="p">,</span> <span class="n">wf</span><span class="o">.</span><span class="n">plots</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">output_file4</span><span class="p">),</span>
+    <span class="p">]</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">Input In [10],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">wf</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;firstlevel_glm&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span>               <span class="n">input_spec</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;exclusion_patterns&quot;</span><span class="p">,</span><span class="s2">&quot;n_subjects&quot;</span><span class="p">,</span><span class="s2">&quot;contrast&quot;</span><span class="p">,</span><span class="s2">&quot;output_dir&quot;</span><span class="p">],</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span>              <span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">wf</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">exclusion_patterns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;*group*&#39;</span><span class="p">,</span> <span class="s1">&#39;*phenotype*&#39;</span><span class="p">,</span> <span class="s1">&#39;*mriqc*&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span>                                 <span class="s1">&#39;*parameter_plots*&#39;</span><span class="p">,</span> <span class="s1">&#39;*physio_plots*&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>                                 <span class="s1">&#39;*space-fsaverage*&#39;</span><span class="p">,</span> <span class="s1">&#39;*space-T1w*&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span>                                 <span class="s1">&#39;*dwi*&#39;</span><span class="p">,</span> <span class="s1">&#39;*beh*&#39;</span><span class="p">,</span> <span class="s1">&#39;*task-bart*&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span>                                 <span class="s1">&#39;*task-rest*&#39;</span><span class="p">,</span> <span class="s1">&#39;*task-scap*&#39;</span><span class="p">,</span> <span class="s1">&#39;*task-task*&#39;</span><span class="p">]</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">wf</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">n_subjects</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nn">Input In [11],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">wf</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;firstlevel_glm&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">input_spec</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;exclusion_patterns&#39;</span><span class="p">,</span> <span class="s1">&#39;n_subjects&#39;</span><span class="p">,</span> <span class="s1">&#39;contrast&#39;</span><span class="p">,</span> <span class="s1">&#39;output_dir&#39;</span><span class="p">],</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">wf</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">exclusion_patterns</span> <span class="o">=</span> <span class="p">[</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="s1">&#39;*group*&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="s1">&#39;*phenotype*&#39;</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span>     <span class="s1">&#39;*task-task*&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="n">wf</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">n_subjects</span> <span class="o">=</span> <span class="mi">1</span>
 
 <span class="ne">NameError</span>: name &#39;Workflow&#39; is not defined
 </pre></div>
@@ -1199,7 +1365,7 @@ Then, for this model, we will obtain</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pydra</span> <span class="kn">import</span> <span class="n">Submitter</span>
 
-<span class="k">with</span> <span class="n">Submitter</span><span class="p">(</span><span class="n">plugin</span><span class="o">=</span><span class="s2">&quot;cf&quot;</span><span class="p">,</span> <span class="n">n_procs</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span> <span class="k">as</span> <span class="n">submitter</span><span class="p">:</span>
+<span class="k">with</span> <span class="n">Submitter</span><span class="p">(</span><span class="n">plugin</span><span class="o">=</span><span class="s1">&#39;cf&#39;</span><span class="p">,</span> <span class="n">n_procs</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span> <span class="k">as</span> <span class="n">submitter</span><span class="p">:</span>
     <span class="n">submitter</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
 
 <span class="n">results</span> <span class="o">=</span> <span class="n">wf</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
@@ -1211,9 +1377,9 @@ Then, for this model, we will obtain</p>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="nn">Input In [11],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="nn">Input In [12],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">pydra</span> <span class="kn">import</span> <span class="n">Submitter</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="k">with</span> <span class="n">Submitter</span><span class="p">(</span><span class="n">plugin</span><span class="o">=</span><span class="s2">&quot;cf&quot;</span><span class="p">,</span> <span class="n">n_procs</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span> <span class="k">as</span> <span class="n">submitter</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="k">with</span> <span class="n">Submitter</span><span class="p">(</span><span class="n">plugin</span><span class="o">=</span><span class="s1">&#39;cf&#39;</span><span class="p">,</span> <span class="n">n_procs</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span> <span class="k">as</span> <span class="n">submitter</span><span class="p">:</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">submitter</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
 
 <span class="ne">ModuleNotFoundError</span>: No module named &#39;pydra&#39;
@@ -1248,16 +1414,17 @@ Then, for this model, we will obtain</p>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
-<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../outputs/6_glm/firstlevel_contrast.jpg&#39;</span><span class="p">)</span> 
+
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../outputs/6_glm/firstlevel_contrast.jpg&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="nn">Input In [13],</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
+<span class="nn">Input In [14],</span> in <span class="ni">&lt;cell line: 3&gt;</span><span class="nt">()</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../outputs/6_glm/firstlevel_contrast.jpg&#39;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../outputs/6_glm/firstlevel_contrast.jpg&#39;</span><span class="p">)</span>
 
 <span class="nn">File /opt/hostedtoolcache/Python/3.9.13/x64/lib/python3.9/site-packages/IPython/core/display.py:957,</span> in <span class="ni">Image.__init__</span><span class="nt">(self, data, url, filename, format, embed, width, height, retina, unconfined, metadata, alt)</span>
 <span class="g g-Whitespace">    </span><span class="mi">955</span> <span class="bp">self</span><span class="o">.</span><span class="n">unconfined</span> <span class="o">=</span> <span class="n">unconfined</span>
@@ -1298,14 +1465,14 @@ Then, for this model, we will obtain</p>
 <h4>Nilearn Z map<a class="headerlink" href="#nilearn-z-map" title="Permalink to this headline">#</a></h4>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../outputs/6_glm/nilearn_z_map.jpg&#39;</span><span class="p">)</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../outputs/6_glm/nilearn_z_map.jpg&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="nn">Input In [14],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="nn">Input In [15],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../outputs/6_glm/nilearn_z_map.jpg&#39;</span><span class="p">)</span>
 
 <span class="nn">File /opt/hostedtoolcache/Python/3.9.13/x64/lib/python3.9/site-packages/IPython/core/display.py:957,</span> in <span class="ni">Image.__init__</span><span class="nt">(self, data, url, filename, format, embed, width, height, retina, unconfined, metadata, alt)</span>
@@ -1347,14 +1514,14 @@ Then, for this model, we will obtain</p>
 <h4>FSL Z map<a class="headerlink" href="#fsl-z-map" title="Permalink to this headline">#</a></h4>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../outputs/6_glm/fsl_z_map.jpg&#39;</span><span class="p">)</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../outputs/6_glm/fsl_z_map.jpg&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="nn">Input In [15],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="nn">Input In [16],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../outputs/6_glm/fsl_z_map.jpg&#39;</span><span class="p">)</span>
 
 <span class="nn">File /opt/hostedtoolcache/Python/3.9.13/x64/lib/python3.9/site-packages/IPython/core/display.py:957,</span> in <span class="ni">Image.__init__</span><span class="nt">(self, data, url, filename, format, embed, width, height, retina, unconfined, metadata, alt)</span>
@@ -1396,14 +1563,14 @@ Then, for this model, we will obtain</p>
 <h4>Nilearn FSL comparison<a class="headerlink" href="#nilearn-fsl-comparison" title="Permalink to this headline">#</a></h4>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../outputs/6_glm/nilearn_fsl_comp.jpg&#39;</span><span class="p">)</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../outputs/6_glm/nilearn_fsl_comp.jpg&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="nn">Input In [16],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="nn">Input In [17],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../outputs/6_glm/nilearn_fsl_comp.jpg&#39;</span><span class="p">)</span>
 
 <span class="nn">File /opt/hostedtoolcache/Python/3.9.13/x64/lib/python3.9/site-packages/IPython/core/display.py:957,</span> in <span class="ni">Image.__init__</span><span class="nt">(self, data, url, filename, format, embed, width, height, retina, unconfined, metadata, alt)</span>
