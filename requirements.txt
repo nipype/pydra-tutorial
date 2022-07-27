@@ -1,4 +1,5 @@
 pydra
+datalad
 jupyter
 jupyter_contrib_nbextensions
 jupytext
