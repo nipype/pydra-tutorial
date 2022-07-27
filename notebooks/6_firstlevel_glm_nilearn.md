@@ -4,7 +4,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.14.0
+    jupytext_version: 1.13.8
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -13,7 +13,7 @@ kernelspec:
 
 +++ {"tags": []}
 
-# 6. First level GLM
+# 6. First Level GLM (from Nilearn)
 
 +++
 
@@ -21,11 +21,11 @@ In this tutorial, we will go through a simple workflow of the first level genera
 
 This tutorial is based on the [Nilearn GLM tutorial](https://nilearn.github.io/stable/auto_examples/04_glm_first_level/plot_bids_features.html#sphx-glr-auto-examples-04-glm-first-level-plot-bids-features-py).
 
-```{code-cell}
+```{code-cell} ipython3
 import nest_asyncio
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 nest_asyncio.apply()
 ```
 
@@ -35,7 +35,7 @@ nest_asyncio.apply()
 
 Import packages that will be used globally and set up output directory
 
-```{code-cell}
+```{code-cell} ipython3
 import os
 import pydra
 from pydra import Workflow
@@ -77,7 +77,7 @@ In this task, we do the following:
 
 **Notes:** Here we still use `n_subjects` as an argument. Given that we will only analyze one subject, you can also remove this argument and specify `n_subjects =1` in `select_from_index`. If you do, do not forget to modify the argument in the workflow later.
 
-```{code-cell}
+```{code-cell} ipython3
 @pydra.mark.task
 @pydra.mark.annotate(
     {
@@ -118,7 +118,7 @@ Then, for this model, we will obtain
 
 Those are inferred from the confounds.tsv files available in the BIDS dataset.
 
-```{code-cell}
+```{code-cell} ipython3
 @pydra.mark.task
 @pydra.mark.annotate(
     {
@@ -166,7 +166,7 @@ This task does the following:
 
 **Think:** What if we don't save the new design matrix, but `return` it directly? In other words, we `return` a `pandas.DataFrame` instead of a `path`. What will happen? Worth a try :)
 
-```{code-cell}
+```{code-cell} ipython3
 @pydra.mark.task
 @pydra.mark.annotate(
     {'data_dir': str, 'subject': str, 'return': {'dm_path': str}}
@@ -205,7 +205,7 @@ What we are doing here is:
 2. compute the contrast
 3. save the z_map and masker for futher use
 
-```{code-cell}
+```{code-cell} ipython3
 @pydra.mark.task
 @pydra.mark.annotate(
     {
@@ -233,7 +233,7 @@ def model_fit(model, imgs, dm_path, contrast):
 
 For publication purposes, we obtain a cluster table and a summary report.
 
-```{code-cell}
+```{code-cell} ipython3
 @pydra.mark.task
 @pydra.mark.annotate({'z_map_path': str, 'return': {'output_file': str}})
 def cluster_table(z_map_path):
@@ -274,7 +274,7 @@ Here we want to make some plots to display our results and compare the result fr
 
 You can also seperate this task into multiple sub-tasks. But it makes more sense to put them into one task as they use the same files and function `nilearn.plotting` repeatedly.
 
-```{code-cell}
+```{code-cell} ipython3
 @pydra.mark.task
 @pydra.mark.annotate(
     {
@@ -378,7 +378,7 @@ We recommand the second approach as it is alway a good practice to group tasks, 
 
 Our analysis can be divided into three parts: (1) get/read the data, (2) analyze the data, and (3) plot the result, where (1) and (3) only have one task each. So we can put all tasks in (2) into one workflow and name it as `firstlevel` or whatever you prefer.
 
-```{code-cell}
+```{code-cell} ipython3
 # initiate a workflow
 wf_firstlevel = Workflow(
     name='wf_firstlevel',
@@ -463,7 +463,7 @@ Connect other tasks and the above workflow into one
 
 Now we need to create the overaching glm workflow that connects the above workflow and other tasks (e.g., `get/read the data` and `plot the result`)
 
-```{code-cell}
+```{code-cell} ipython3
 wf = Workflow(
     name='firstlevel_glm',
     input_spec=['exclusion_patterns', 'n_subjects', 'contrast', 'output_dir'],
@@ -525,7 +525,7 @@ wf.set_output(
 
 ## Run Workflow Run
 
-```{code-cell}
+```{code-cell} ipython3
 :tags: []
 
 from pydra import Submitter
@@ -552,7 +552,7 @@ If you arrive here without any errors, yay, you just made your first pydra workf
 
 Let's take a look at what you have got.
 
-```{code-cell}
+```{code-cell} ipython3
 :tags: [hide-output]
 
 !ls ../outputs/6_glm
@@ -564,7 +564,7 @@ Let's take a look at what you have got.
 
 #### First level contrast
 
-```{code-cell}
+```{code-cell} ipython3
 :tags: [hide-input]
 
 from IPython.display import Image
@@ -574,7 +574,7 @@ Image(filename='../outputs/6_glm/firstlevel_contrast.jpg')
 
 #### Nilearn Z map
 
-```{code-cell}
+```{code-cell} ipython3
 :tags: [hide-input]
 
 Image(filename='../outputs/6_glm/nilearn_z_map.jpg')
@@ -582,7 +582,7 @@ Image(filename='../outputs/6_glm/nilearn_z_map.jpg')
 
 #### FSL Z map
 
-```{code-cell}
+```{code-cell} ipython3
 :tags: [hide-input]
 
 Image(filename='../outputs/6_glm/fsl_z_map.jpg')
@@ -590,7 +590,7 @@ Image(filename='../outputs/6_glm/fsl_z_map.jpg')
 
 #### Nilearn FSL comparison
 
-```{code-cell}
+```{code-cell} ipython3
 :tags: [hide-input]
 
 Image(filename='../outputs/6_glm/nilearn_fsl_comp.jpg')
