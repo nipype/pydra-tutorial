@@ -75,11 +75,6 @@ rawdata_path = workflow_out_dir / 'raw_data'
 ```
 
 ```{code-cell} ipython3
-# rawdata_url = 'https://github.com/OpenNeuroDerivatives/ds000001-fmriprep.git'
-# fmriprep_url = 'https://github.com/OpenNeuroDatasets/ds000001.git'
-```
-
-```{code-cell} ipython3
 @pydra.mark.task
 @pydra.mark.annotate(
     {
@@ -106,49 +101,23 @@ def get_data(rawdata_url, fmriprep_url):
     # get events.tsv list
     event_list = glob.glob(os.path.join(rawdata_path, '*', 'func', '*events.tsv'))
     event_list.sort()
-    for i in event_list:
-        dl.get(i, dataset=rawdata_path)
+    # for i in event_list:
+    #     dl.get(i, dataset=rawdata_path)
     # get img list
     img_list = glob.glob(os.path.join(fmriprep_path, '*', 'func', '*space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz'))
     img_list.sort()
-    for i in img_list:
-        dl.get(i, dataset=fmriprep_path)
+    # for i in img_list:
+    #     dl.get(i, dataset=fmriprep_path)
     
      # get img list
     mask_list = glob.glob(os.path.join(fmriprep_path, '*', 'func', '*space-MNI152NLin2009cAsym_res-2_desc-brain_mask.nii.gz'))
     mask_list.sort()
-    for i in mask_list:
-        dl.get(i, dataset=fmriprep_path)
+    # for i in mask_list:
+    #     dl.get(i, dataset=fmriprep_path)
 
     t2 = datetime.datetime.now()
     print(t2-t1)
     return event_list, img_list, mask_list
-```
-
-```{code-cell} ipython3
-:tags: []
-
-# import datalad.api as dl
-# # get events.tsv list
-# event_list = glob.glob(os.path.join(rawdata_path, '*', 'func', '*events.tsv'))
-# event_list.sort()
-# # for i in event_list:
-# #     dl.get(i)
-# # get img list
-# img_list = glob.glob(os.path.join(fmriprep_path, '*', 'func', '*space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz'))
-# img_list.sort()
-# # for i in img_list:
-# #     dl.get(i)
-# # get mask list
-# mask_list  = glob.glob(os.path.join(fmriprep_path, '*', 'func', '*space-MNI152NLin2009cAsym_res-2_desc-brain_mask.nii.gz'))
-# mask_list.sort()
-# # for i in mask_list:
-# #     dl.get(i)
-# # get confounds list
-# confound_list = glob.glob(os.path.join(fmriprep_path, '*', 'func', '*desc-confounds_timeseries.tsv'))
-# confound_list.sort()
-# # for i in confound_list:
-# #     dl.get(i)
 ```
 
 ## First-Level GLM
@@ -175,7 +144,7 @@ each subject will have a list of three (run) of those files
 )
 def get_subj_file(subj_id, n_run, event_list, img_list, mask_list):
     t1 = datetime.datetime.now()
-    print(f"Get subject-{subj_id} file...\n")
+    print(f"\nGet subject-{subj_id+1} file...\n")
     # subj_id starts from 0
     start = subj_id*n_run
     end = (subj_id+1)*n_run
@@ -203,10 +172,8 @@ def get_subj_file(subj_id, n_run, event_list, img_list, mask_list):
     }
 )
 def get_firstlevel_dm(tr, n_scans, hrf_model, subj_id, subj_imgs, subj_events):
-    t3 = datetime.datetime.now()
-    print("Get firstlevel GLM ...\n")
-    print(t3-t2)
-    
+    t1 = datetime.datetime.now()
+    print(f"\nGet subject-{subj_id+1} firstlevel GLM ...\n")
     import numpy as np
     import pandas as pd
     from nilearn.glm.first_level import make_first_level_design_matrix
@@ -236,10 +203,12 @@ def get_firstlevel_dm(tr, n_scans, hrf_model, subj_id, subj_imgs, subj_events):
         assert design_matrix.shape[1] == 52, "This design matrix has the wrong column number"
         # sort the column order alphabetical for contrasts
         design_matrix = design_matrix.reindex(sorted(design_matrix.columns), axis=1)
-        dm_path = os.path.join(workflow_out_dir, 'sub-%s_run-%s_designmatrix.csv' % (subj_id, index+1))
+        dm_path = os.path.join(workflow_out_dir, 'sub-%s_run-%s_designmatrix.csv' % (subj_id+1, index+1))
         design_matrix.to_csv(dm_path, index=None)
         design_matrices.append(design_matrix)
         dm_paths.append(dm_path)
+    t2 = datetime.datetime.now()
+    print(t2-t1)
     return design_matrices, dm_paths
 ```
 
@@ -256,7 +225,7 @@ def get_firstlevel_dm(tr, n_scans, hrf_model, subj_id, subj_imgs, subj_events):
 )
 def set_contrast(subj_id, design_matrices):
     t1 = datetime.datetime.now()
-    print(f"Set firstlevel contrast for subject-{subj_id} ...\n")
+    print(f"\nSet firstlevel contrast for subject-{subj_id+1} ...\n")
     
     import pandas as pd
     import numpy as np
@@ -271,17 +240,14 @@ def set_contrast(subj_id, design_matrices):
         'control-pumps': -basic_contrasts['control_pumps_demean'] + basic_contrasts['pumps_demean'],
         'pumps-baseline': basic_contrasts['pumps_demean'],
         'cash-baseline': basic_contrasts['cash_demean'],
-        'explode-baseline': basic_contrasts['explode_demean'],
-        'effects_of_interest': np.vstack((basic_contrasts['pumps_demean'],
-                                          basic_contrasts['cash_demean'],
-                                          basic_contrasts['explode_demean']))
+        'explode-baseline': basic_contrasts['explode_demean']
         }
     
     contrast_plot = []
     for index, (contrast_id, contrast_val) in enumerate(contrasts.items()):
         print('  Plot Contrast % 2i out of %i: %s' % (
             index + 1, len(contrasts), contrast_id))
-        contrast_plot_path = os.path.join(workflow_out_dir, 'sub-%s_firstlevel_contrast-%s.jpg' % (subj_id, contrast_id))
+        contrast_plot_path = os.path.join(workflow_out_dir, 'sub-%s_firstlevel_contrast-%s.jpg' % (subj_id+1, contrast_id))
         plot_contrast_matrix(contrast_val, design_matrix, output_file=contrast_plot_path)
         contrast_plot.append(contrast_plot_path)
     t2 = datetime.datetime.now()
@@ -306,7 +272,7 @@ def set_contrast(subj_id, design_matrices):
 )
 def firstlevel_estimation(subj_id, subj_imgs, subj_masks, smoothing_fwhm, design_matrices, contrasts):
     t1 = datetime.datetime.now()
-    print(f"Start firstlevel estimation for subject-{subj_id} ...\n")
+    print(f"\nStart firstlevel estimation for subject-{subj_id+1} ...\n")
     
     import nibabel as nib
     from nilearn.image import math_img
@@ -332,7 +298,7 @@ def firstlevel_estimation(subj_id, subj_imgs, subj_masks, smoothing_fwhm, design
             contrast_val, output_type='z_score')
 
         # write the resulting stat images to file
-        z_map_path = os.path.join(workflow_out_dir, 'sub-%s_contrast-%s_z_map.nii.gz' % (subj_id, contrast_id))
+        z_map_path = os.path.join(workflow_out_dir, 'sub-%s_contrast-%s_z_map.nii.gz' % (subj_id+1, contrast_id))
         z_map_path_dict[contrast_id] = z_map_path
         z_map.to_filename(z_map_path)
     
@@ -358,7 +324,7 @@ def cluster_table(subj_id, z_map_path):
     from scipy.stats import norm
 
     stat_img = nib.load(z_map_path)
-    output_file = os.path.join(workflow_out_dir, 'sub-%s_cluster_table.csv' % subj_id)
+    output_file = os.path.join(workflow_out_dir, 'sub-%s_cluster_table.csv' % subj_id+1)
     df = get_clusters_table(
         stat_img, stat_threshold=norm.isf(0.001), cluster_threshold=10
     )
@@ -373,7 +339,7 @@ def cluster_table(subj_id, z_map_path):
 def glm_report(subj_id, model, contrasts):
     from nilearn.reporting import make_glm_report
 
-    output_file = os.path.join(workflow_out_dir, 'sub-%s_glm_report.html' % subj_id)
+    output_file = os.path.join(workflow_out_dir, 'sub-%s_glm_report.html' % subj_id+1)
     report = make_glm_report(model, contrasts)
     report.save_as_html(output_file)
     return output_file
@@ -398,8 +364,8 @@ wf_firstlevel = Workflow(
         'output_dir'
     ],
 )
-wf_firstlevel.split('subj_id')
 
+wf_firstlevel.split('subj_id')
 # add task - get_subj_file
 wf_firstlevel.add(
     get_subj_file(
@@ -408,6 +374,7 @@ wf_firstlevel.add(
         n_run = wf_firstlevel.lzin.n_run, 
         event_list = wf_firstlevel.lzin.event_list, 
         img_list = wf_firstlevel.lzin.img_list, 
+        mask_list = wf_firstlevel.lzin.mask_list
     )
 )
 
@@ -447,7 +414,6 @@ wf_firstlevel.add(
 )
 
 wf_firstlevel.combine('subj_id')
-
 # specify output
 wf_firstlevel.set_output(
     [
@@ -456,7 +422,7 @@ wf_firstlevel.set_output(
         ('first_level_contrast', wf_firstlevel.set_contrast.lzout.contrasts),
         ('first_level_contrast_plot', wf_firstlevel.set_contrast.lzout.contrast_plot),
         ('first_level_model_list', wf_firstlevel.firstlevel_estimation.lzout.first_level_model),
-        ('first_level_z_maps_dict_list', wf_firstlevel.firstlevel_estimation.lzout.z_map_path_dict),
+        ('first_level_z_map_dict_list', wf_firstlevel.firstlevel_estimation.lzout.z_map_path_dict),
     ]
 )
 ```
@@ -475,14 +441,17 @@ The second-level estimation contains the following steps:
 ```{code-cell} ipython3
 @pydra.mark.task
 @pydra.mark.annotate(
-    {'subj_list': list, 'return': {'design_matrix': ty.Any}}
+    {'n_subj': int, 'return': {'design_matrix': ty.Any}}
 )
-def get_secondlevel_dm(subj_list):
+def get_secondlevel_dm(n_subj):
+    t1 = datetime.datetime.now()
+    print(f"\nGet secondlevel design matrix ...\n")
     import pandas as pd
-    n_subj = len(subj_list)
     design_matrix = pd.DataFrame([1] * n_subj,columns=['intercept'])
-    dm_path = os.path.join(output_dir, 'secondlevel_designmatrix.csv')
+    dm_path = os.path.join(workflow_out_dir, 'secondlevel_designmatrix.csv')
     design_matrix.to_csv(dm_path, index=None)
+    t2 = datetime.datetime.now()
+    print(t2-t1)
     return design_matrix
 ```
 
@@ -494,7 +463,7 @@ Here, we use the list of fitted FirstLevelModel objects as the input for the Sec
 @pydra.mark.task
 @pydra.mark.annotate(
     {'second_level_input': ty.Any, 'design_matrix': ty.Any, 'firstlevel_contrast':list, 
-     'return': {'second_level_model': ty.Any, 'stat_maps_dict': dict}}
+     'return': {'secondlevel_mask': ty.Any, 'stat_maps_dict': dict}}
 )
 def secondlevel_estimation(second_level_input, design_matrix, firstlevel_contrast):
     """ task to estimate the second level
@@ -509,19 +478,22 @@ def secondlevel_estimation(second_level_input, design_matrix, firstlevel_contras
 
     Returns
     -------
-    second_level_model : SecondLevelModel object
+    secondlevel_mask : mask from SecondLevelModel
         
     stat_maps_dict : dict
         
     """
+    t1 = datetime.datetime.now()
+    print(f"\nStart secondlevel estimation ...\n")
     from nilearn.glm.second_level import SecondLevelModel
-    second_level_model = SecondLevelModel().fit(second_level_input, design_matrix)
-    
+    second_level_model = SecondLevelModel()
+    second_level_model.fit(second_level_input, design_matrix=design_matrix)
+    secondlevel_mask = second_level_model.masker_.mask_img_
     print('Computing contrasts...')
     stat_maps_dict = {}
-    for index, (contrast_id, contrast_val) in enumerate(firstlevel_contrast.items()):
+    for index, (contrast_id, contrast_val) in enumerate(firstlevel_contrast[0].items()):
         print('  Contrast % 2i out of %i: %s' % (
-            index + 1, len(firstlevel_contrast), contrast_id))
+            index + 1, len(firstlevel_contrast[0]), contrast_id))
         # Estimate the contasts. Note that the model implicitly computes a fixed
         # effect across the two sessions
         stat_maps = second_level_model.compute_contrast(first_level_contrast=contrast_val, output_type='all')
@@ -530,7 +502,9 @@ def secondlevel_estimation(second_level_input, design_matrix, firstlevel_contras
         # z_image_path = path.join(output_dir, 'contrast-%s_z_map.nii.gz' % contrast_id)
         # z_image_path_list.append(z_image_path)
         # z_map.to_filename(z_image_path)
-    return second_level_model, stat_maps_dict
+    t2 = datetime.datetime.now()
+    print(t2-t1)
+    return secondlevel_mask, stat_maps_dict
 ```
 
 ### Cluster-thresholding and Plot without multiple comparison
@@ -544,6 +518,8 @@ Threshold the resulting map without multiple comparisons correction, abs(z) > 3.
      'return': {'thresholded_map_dict': dict, 'plot_contrast_dict': dict}}
 )
 def cluster_thresholding(stat_maps_dict, threshold, cluster_threshold):
+    t1 = datetime.datetime.now()
+    print(f"\nStart cluster thresholding ...\n")
     from nilearn.image import threshold_img
     from nilearn import plotting
     thresholded_map_dict = dict.fromkeys(stat_maps_dict.keys())
@@ -566,6 +542,8 @@ def cluster_thresholding(stat_maps_dict, threshold, cluster_threshold):
         plotting.plot_stat_map(thresholded_map, cut_coords=[0],
                                title='Cluster Thresholded z map',
                                output_file=plot_path)
+    t2 = datetime.datetime.now()
+    print(t2-t1)
     return thresholded_map_dict, plot_contrast_dict
 ```
 
@@ -585,6 +563,8 @@ More details see [here](https://nilearn.github.io/stable/modules/generated/nilea
      'return': {'thresholded_map_dict': dict, 'plot_contrast_dict': dict}}
 )
 def multiple_comparison(stat_maps_dict, alpha, height_control):
+    t1 = datetime.datetime.now()
+    print(f"\nStart multiple comparison ...\n")
     from nilearn.glm import threshold_stats_img
     from nilearn import plotting
     thresholded_map_dict = dict.fromkeys(stat_maps_dict.keys())
@@ -607,6 +587,8 @@ def multiple_comparison(stat_maps_dict, alpha, height_control):
                                title='Thresholded z map, expected fdr = .05',
                                threshold=threshold, 
                                output_file=plot_path)
+    t2 = datetime.datetime.now()
+    print(t2-t1)
     return thresholded_map_dict, plot_contrast_dict
 ```
 
@@ -620,6 +602,8 @@ def multiple_comparison(stat_maps_dict, alpha, height_control):
      'return': {'thresholded_map_dict': dict, 'plot_contrast_dict': dict}}
 )
 def parametric_test(stat_maps_dict, second_level_model):
+    t1 = datetime.datetime.now()
+    print(f"\nStart parametric test ...\n")
     import numpy as np
     from nilearn.image import get_data, math_img
     from nilearn import plotting
@@ -651,6 +635,8 @@ def parametric_test(stat_maps_dict, second_level_model):
         plotting.plot_glass_brain(
             neg_log_pval, colorbar=True, display_mode='z', plot_abs=False, 
             vmax=3, threshold=1, title=title, output_file=plot_path)
+    t2 = datetime.datetime.now()
+    print(t2-t1)
     return thresholded_map_dict, plot_contrast_dict
 ```
 
@@ -682,23 +668,27 @@ def nonparametric_test(z_map_dict_list, smoothing_fwhm, design_matrix, firstleve
     plot_contrast_dict : dict
         
     """
+    t1 = datetime.datetime.now()
+    print(f"\nStart nonparametric test ...\n")
     from nilearn.glm.second_level import non_parametric_inference
     from nilearn import plotting
-    z_map_dict = {con: [sub[con] for sub in z_map_dict_list] for con in firstlevel_contrast.keys() }
+    z_map_dict = {con: [sub[con] for sub in z_map_dict_list] for con in firstlevel_contrast[0].keys() }
     thresholded_map_dict = dict.fromkeys(z_map_dict.keys())
     plot_contrast_dict = dict.fromkeys(z_map_dict.keys())
     for index, (stats_id, stats_val) in enumerate(z_map_dict.items()):
         print('  Contrast % 2i out of %i: %s' % (
             index + 1, len(z_map_dict), stats_id))
-        
+        print("stats_val")
         # here we set threshold as none to do voxel-level FWER-correction.
         neg_log_pvals_permuted_ols_unmasked = \
-            non_parametric_inference(stats_val, design_matrix=design_matrix,
-                                     model_intercept=True, n_perm=n_perm,
+            non_parametric_inference(second_level_input=stats_val, design_matrix=design_matrix,
+                                     model_intercept=True, n_perm=n_perm,first_level_contrast=stats_id,
                                      two_sided_test=False, smoothing_fwhm=smoothing_fwhm, n_jobs=-2)
-        
+        print("test1...")
         thresholded_map_path = os.path.join(workflow_out_dir, 'secondlevel_permutation_contrast-%s_z_map.nii.gz' % stats_id)
+        print("test2...")
         thresholded_map_dict[stats_id] = thresholded_map_path
+        print("test3...")
         neg_log_pvals_permuted_ols_unmasked.to_filename(thresholded_map_path)
         # here I actually have more than one contrast
         title = ('permutation test (FWER < 10%)')
@@ -708,6 +698,8 @@ def nonparametric_test(z_map_dict_list, smoothing_fwhm, design_matrix, firstleve
             neg_log_pvals_permuted_ols_unmasked, colorbar=True, vmax=3,
             display_mode='z', plot_abs=False, threshold=1, 
             title=title, output_file=plot_path)
+    t2 = datetime.datetime.now()
+    print(t2-t1)
     return thresholded_map_dict, plot_contrast_dict
 ```
 
@@ -718,9 +710,9 @@ def nonparametric_test(z_map_dict_list, smoothing_fwhm, design_matrix, firstleve
 wf_secondlevel = Workflow(
     name='wf_secondlevel',
     input_spec=[
-        'subj_list',
+        'n_subj',
         'second_level_input', 
-        'z_maps_dict_list',
+        'z_map_dict_list',
         'smoothing_fwhm',
         'firstlevel_contrast',
         'n_perm',
@@ -732,7 +724,7 @@ wf_secondlevel = Workflow(
 wf_secondlevel.add(
     get_secondlevel_dm(
         name = "get_secondlevel_dm",
-        subj_list = wf_secondlevel.lzin.subj_list, 
+        n_subj = wf_secondlevel.lzin.n_subj, 
     )
 )
 
@@ -776,17 +768,17 @@ wf_secondlevel.add(
     
 )
 
-# add task - nonparametric_test
-wf_secondlevel.add(
-    nonparametric_test(
-        name = "nonparametric_test",
-        z_maps_dict_list = wf_secondlevel.lzin.z_maps_dict_list, 
-        smoothing_fwhm = wf_secondlevel.lzin.smoothing_fwhm, 
-        design_matrix = wf_secondlevel.get_secondlevel_dm.lzout.design_matrix, 
-        firstlevel_contrast = wf_secondlevel.lzin.firstlevel_contrast, 
-        n_perm = wf_secondlevel.lzin.n_perm,
-    )
-)
+# # add task - nonparametric_test
+# wf_secondlevel.add(
+#     nonparametric_test(
+#         name = "nonparametric_test",
+#         z_map_dict_list = wf_secondlevel.lzin.z_map_dict_list, 
+#         smoothing_fwhm = wf_secondlevel.lzin.smoothing_fwhm, 
+#         design_matrix = wf_secondlevel.get_secondlevel_dm.lzout.design_matrix, 
+#         firstlevel_contrast = wf_secondlevel.lzin.firstlevel_contrast, 
+#         n_perm = wf_secondlevel.lzin.n_perm,
+#     )
+# )
 
 # specify output
 wf_secondlevel.set_output(
@@ -797,8 +789,8 @@ wf_secondlevel.set_output(
         ('second_level_mc_plot', wf_secondlevel.multiple_comparison.lzout.plot_contrast_dict),
         ('second_level_parametric_test', wf_secondlevel.parametric_test.lzout.thresholded_map_dict),
         ('second_level_parametric_plot', wf_secondlevel.parametric_test.lzout.plot_contrast_dict),
-        ('second_level_nonparametric_test', wf_secondlevel.nonparametric_test.lzout.thresholded_map_dict),
-        ('second_level_nonparametric_plot', wf_secondlevel.nonparametric_test.lzout.plot_contrast_dict),
+        # ('second_level_nonparametric_test', wf_secondlevel.nonparametric_test.lzout.thresholded_map_dict),
+        # ('second_level_nonparametric_plot', wf_secondlevel.nonparametric_test.lzout.plot_contrast_dict),
     ]
 )
 ```
@@ -810,7 +802,7 @@ Now, let's connect all tasks and workflows together
 ```{code-cell} ipython3
 wf = Workflow(
     name='twolevel_glm',
-    input_spec=['rawdata_url', 'fmriprep_url', 'smoothing_fwhm', 'output_dir'],
+    input_spec=['subj_id', 'rawdata_url', 'fmriprep_url', 'smoothing_fwhm', 'output_dir'],
 )
 
 wf.inputs.rawdata_url = 'https://github.com/OpenNeuroDerivatives/ds000001-fmriprep.git'
@@ -824,39 +816,39 @@ wf.add(
         rawdata_url = wf.lzin.rawdata_url, 
         fmriprep_url = wf.lzin.fmriprep_url)
 )
-
-wf_firstlevel.inputs.subj_id = wf.get_data.lzout.subj_list,
-wf_firstlevel.inputs.n_run = 3,
-wf_firstlevel.inputs.tr = 2.3,
-wf_firstlevel.inputs.n_scans = 300,
-wf_firstlevel.inputs.hrf_model = 'glover',
-wf_firstlevel.inputs.event_list = wf.get_data.lzout.event_list, 
-wf_firstlevel.inputs.img_list = wf.get_data.lzout.img_list, 
-wf_firstlevel.inputs.mask_list = wf.get_data.lzout.mask_list,
-wf_firstlevel.inputs.smoothing_fwhm = wf.lzin.smoothing_fwhm,
+n_subj = 3
+wf_firstlevel.inputs.subj_id = [x for x in range(n_subj)]
+wf_firstlevel.inputs.n_run = 3
+wf_firstlevel.inputs.tr = 2.3
+wf_firstlevel.inputs.n_scans = 300
+wf_firstlevel.inputs.hrf_model = 'glover'
+wf_firstlevel.inputs.event_list = wf.get_data.lzout.event_list
+wf_firstlevel.inputs.img_list = wf.get_data.lzout.img_list
+wf_firstlevel.inputs.mask_list = wf.get_data.lzout.mask_list
+wf_firstlevel.inputs.smoothing_fwhm = wf.lzin.smoothing_fwhm
 wf_firstlevel.inputs.output_dir = wf.lzin.output_dir
 wf.add(wf_firstlevel)
 
-wf_secondlevel.inputs.subj_list = wf.get_data.lzout.subj_list,
-wf_secondlevel.inputs.second_level_input = wf.wf_firstlevel.lzout.first_level_model_list, 
-wf_secondlevel.inputs.z_maps_dict_list = wf.wf_firstlevel.lzout.first_level_z_maps_dict_list,
-wf_secondlevel.inputs.smoothing_fwhm = wf.lzin.smoothing_fwhm,
-wf_secondlevel.inputs.firstlevel_contrast = wf.wf_firstlevel.lzout.first_level_contrast,
-wf_secondlevel.inputs.n_perm = 1,
+wf_secondlevel.inputs.n_subj = n_subj
+wf_secondlevel.inputs.second_level_input = wf.wf_firstlevel.lzout.first_level_model_list 
+wf_secondlevel.inputs.z_map_dict_list = wf.wf_firstlevel.lzout.first_level_z_map_dict_list
+wf_secondlevel.inputs.smoothing_fwhm = wf.lzin.smoothing_fwhm
+wf_secondlevel.inputs.firstlevel_contrast = wf.wf_firstlevel.lzout.first_level_contrast
+wf_secondlevel.inputs.n_perm = 1
 wf_secondlevel.inputs.output_dir = wf.lzin.output_dir
 wf.add(wf_secondlevel)
 
 wf.set_output(
     [
-        ('first_level_outputs', wf.wf_firstlevel.lzout.first_level_z_maps_dict_list),
+        ('first_level_outputs', wf.wf_firstlevel.lzout.first_level_z_map_dict_list),
         ('second_level_clusterthresholding_result', wf.wf_secondlevel.lzout.second_level_clusterthresholding_result),
         ('second_level_clusterthresholding_plot', wf.wf_secondlevel.lzout.second_level_clusterthresholding_plot),
         ('second_level_mc_result', wf.wf_secondlevel.lzout.second_level_mc_result),
         ('second_level_mc_plot', wf.wf_secondlevel.lzout.second_level_mc_plot),
         ('second_level_parametric_test', wf.wf_secondlevel.lzout.second_level_parametric_test),
         ('second_level_parametric_plot', wf.wf_secondlevel.lzout.second_level_parametric_plot),
-        ('second_level_nonparametric_test', wf.wf_secondlevel.lzout.second_level_nonparametric_test),
-        ('second_level_nonparametric_plot', wf.wf_secondlevel.lzout.second_level_nonparametric_plot),    
+        # ('second_level_nonparametric_test', wf.wf_secondlevel.lzout.second_level_nonparametric_test),
+        # ('second_level_nonparametric_plot', wf.wf_secondlevel.lzout.second_level_nonparametric_plot),    
     ]
 )
 ```
@@ -866,7 +858,7 @@ wf.set_output(
 
 from pydra import Submitter
 
-with Submitter(plugin='cf', n_procs=4) as submitter:
+with Submitter(plugin='cf', n_procs=8) as submitter:
     submitter(wf)
 
 results = wf.result()

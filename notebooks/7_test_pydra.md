@@ -1,5 +1,6 @@
 ---
 jupytext:
+  formats: ipynb,md:myst
   text_representation:
     extension: .md
     format_name: myst
@@ -37,14 +38,6 @@ os.makedirs(workflow_out_dir, exist_ok=True)
 ```
 
 ```{code-cell} ipython3
-event_list = glob.glob(os.path.join(rawdata_path, '*', 'func', '*events.tsv'))
-import datalad.api as dl
-event_list.sort()
-for i in event_list:
-    dl.get(i)
-```
-
-```{code-cell} ipython3
 @pydra.mark.task
 @pydra.mark.annotate(
     {
@@ -71,19 +64,19 @@ def get_data(rawdata_url, fmriprep_url):
     # get events.tsv list
     event_list = glob.glob(os.path.join(rawdata_path, '*', 'func', '*events.tsv'))
     event_list.sort()
-    for i in event_list:
-        dl.get(i, dataset=rawdata_path)
+    # for i in event_list:
+    #     dl.get(i, dataset=rawdata_path)
     # get img list
     img_list = glob.glob(os.path.join(fmriprep_path, '*', 'func', '*space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz'))
     img_list.sort()
-    for i in img_list:
-        dl.get(i, dataset=fmriprep_path)
+    # for i in img_list:
+    #     dl.get(i, dataset=fmriprep_path)
     
      # get img list
     mask_list = glob.glob(os.path.join(fmriprep_path, '*', 'func', '*space-MNI152NLin2009cAsym_res-2_desc-brain_mask.nii.gz'))
     mask_list.sort()
-    for i in mask_list:
-        dl.get(i, dataset=fmriprep_path)
+    # for i in mask_list:
+    #     dl.get(i, dataset=fmriprep_path)
 
     t2 = datetime.datetime.now()
     print(t2-t1)
@@ -91,21 +84,18 @@ def get_data(rawdata_url, fmriprep_url):
 ```
 
 ```{code-cell} ipython3
----
-jupyter:
-  outputs_hidden: true
-tags: []
----
-task1 = get_data(
-    rawdata_url = 'https://github.com/OpenNeuroDerivatives/ds000001-fmriprep.git',
-    fmriprep_url = 'https://github.com/OpenNeuroDatasets/ds000001.git')
-task1()
+:tags: []
+
+# task1 = get_data(
+#     rawdata_url = 'https://github.com/OpenNeuroDerivatives/ds000001-fmriprep.git',
+#     fmriprep_url = 'https://github.com/OpenNeuroDatasets/ds000001.git')
+# task1()
 ```
 
 ```{code-cell} ipython3
 :tags: []
 
-result1 = task1.result()
+# result1 = task1.result()
 ```
 
 ```{code-cell} ipython3
@@ -137,12 +127,12 @@ def get_subj_file(subj_id, n_run, event_list, img_list, mask_list):
 ```{code-cell} ipython3
 :tags: []
 
-task2 = get_subj_file(subj_id=[1,2,3], n_run=3, 
-                      event_list=result1.output.event_list, 
-                      img_list=result1.output.img_list, 
-                      mask_list=result1.output.mask_list).split('subj_id')
-task2()
-result2 = task2.result()
+# task2 = get_subj_file(subj_id=[1,2,3], n_run=3, 
+#                       event_list=result1.output.event_list, 
+#                       img_list=result1.output.img_list, 
+#                       mask_list=result1.output.mask_list).split('subj_id')
+# task2()
+# result2 = task2.result()
 ```
 
 ```{code-cell} ipython3
@@ -202,12 +192,12 @@ def get_firstlevel_dm(tr, n_scans, hrf_model, subj_id, subj_imgs, subj_events):
 ```{code-cell} ipython3
 :tags: []
 
-task3 = get_firstlevel_dm(tr=2.3, n_scans=300, hrf_model='glover', 
-                          subj_id=result2[0].output.subj_id, 
-                          subj_imgs=result2[0].output.subj_imgs, 
-                          subj_events=result2[0].output.subj_events)
-task3()
-result3 = task3.result()
+# task3 = get_firstlevel_dm(tr=2.3, n_scans=300, hrf_model='glover', 
+#                           subj_id=result2[0].output.subj_id, 
+#                           subj_imgs=result2[0].output.subj_imgs, 
+#                           subj_events=result2[0].output.subj_events)
+# task3()
+# result3 = task3.result()
 ```
 
 ```{code-cell} ipython3
@@ -237,9 +227,6 @@ def set_contrast(subj_id, design_matrices):
         'pumps-baseline': basic_contrasts['pumps_demean'],
         'cash-baseline': basic_contrasts['cash_demean'],
         'explode-baseline': basic_contrasts['explode_demean'],
-        'effects_of_interest': np.vstack((basic_contrasts['pumps_demean'],
-                                          basic_contrasts['cash_demean'],
-                                          basic_contrasts['explode_demean']))
         }
     
     contrast_plot = []
@@ -255,12 +242,12 @@ def set_contrast(subj_id, design_matrices):
 ```
 
 ```{code-cell} ipython3
-task4 = set_contrast(
-    subj_id=result2[0].output.subj_id, 
-    design_matrices=result3.output.design_matrices)
+# task4 = set_contrast(
+#     subj_id=result2[0].output.subj_id, 
+#     design_matrices=result3.output.design_matrices)
 
-task4()
-result4 = task4.result()
+# task4()
+# result4 = task4.result()
 ```
 
 ```{code-cell} ipython3
@@ -314,16 +301,16 @@ def firstlevel_estimation(subj_id, subj_imgs, subj_masks, smoothing_fwhm, design
 ```
 
 ```{code-cell} ipython3
-task5 = firstlevel_estimation(
-    subj_id=result2[0].output.subj_id, 
-    subj_imgs=result2[0].output.subj_imgs, 
-    subj_masks=result2[0].output.subj_masks, 
-    smoothing_fwhm=5.0, 
-    design_matrices=result3.output.design_matrices, 
-    contrasts=result4.output.contrasts,)
+# task5 = firstlevel_estimation(
+#     subj_id=result2[0].output.subj_id, 
+#     subj_imgs=result2[0].output.subj_imgs, 
+#     subj_masks=result2[0].output.subj_masks, 
+#     smoothing_fwhm=5.0, 
+#     design_matrices=result3.output.design_matrices, 
+#     contrasts=result4.output.contrasts,)
 
-task5()
-result5 = task5.result()
+# task5()
+# result5 = task5.result()
 ```
 
 ```{code-cell} ipython3
@@ -344,6 +331,7 @@ wf_firstlevel = Workflow(
     ],
 )
 
+wf_firstlevel.split('subj_id')
 # add task - get_subj_file
 wf_firstlevel.add(
     get_subj_file(
@@ -391,6 +379,7 @@ wf_firstlevel.add(
     )
 )
 
+wf_firstlevel.combine('subj_id')
 # specify output
 wf_firstlevel.set_output(
     [
@@ -404,13 +393,140 @@ wf_firstlevel.set_output(
 )
 ```
 
+## Second level
+
+```{code-cell} ipython3
+@pydra.mark.task
+@pydra.mark.annotate(
+    {'n_subj': int, 'return': {'design_matrix': ty.Any}}
+)
+def get_secondlevel_dm(n_subj):
+    t1 = datetime.datetime.now()
+    print(f"\nGet secondlevel design matrix ...\n")
+    import pandas as pd
+    design_matrix = pd.DataFrame([1] * n_subj,columns=['intercept'])
+    dm_path = os.path.join(workflow_out_dir, 'secondlevel_designmatrix.csv')
+    design_matrix.to_csv(dm_path, index=None)
+    t2 = datetime.datetime.now()
+    print(t2-t1)
+    return design_matrix
+```
+
+```{code-cell} ipython3
+# task6 = get_secondlevel_dm(n_subj=3)
+# task6()
+# result6 = task6.result()
+```
+
+```{code-cell} ipython3
+@pydra.mark.task
+@pydra.mark.annotate(
+    {'second_level_input': ty.Any, 'design_matrix': ty.Any, 'firstlevel_contrast':list, 
+     'return': {'secondlevel_mask': ty.Any, 'stat_maps_dict': ty.Any}}
+)
+def secondlevel_estimation(second_level_input, design_matrix, firstlevel_contrast):
+    """ task to estimate the second level
+    Parameters
+    ----------
+    second_level_input : list
+        the list of FirstLevelModel
+    design_matrix : ty.Any
+        a pandas.DataFrame that specifies the second level design
+    firstlevel_contrast : dict
+        a dictionary of contrasts
+
+    Returns
+    -------
+    secondlevel_mask : mask from SecondLevelModel
+        
+    stat_maps_dict : dict
+        
+    """
+    t1 = datetime.datetime.now()
+    print(f"\nStart secondlevel estimation ...\n")
+    from nilearn.glm.second_level import SecondLevelModel
+    second_level_model = SecondLevelModel()
+    second_level_model = second_level_model.fit(second_level_input, design_matrix=design_matrix)
+    secondlevel_mask = second_level_model.masker_.mask_img_
+    
+    print('Computing contrasts...')
+    stat_maps_dict = {}
+    for index, (contrast_id, contrast_val) in enumerate(firstlevel_contrast[0].items()):
+        print('  Contrast % 2i out of %i: %s' % (
+            index + 1, len(firstlevel_contrast[0]), contrast_id))
+        # Estimate the contasts. Note that the model implicitly computes a fixed
+        # effect across the two sessions
+        stat_maps = second_level_model.compute_contrast(first_level_contrast=contrast_val, output_type='all')
+        stat_maps_dict[contrast_id] = stat_maps
+        # # write the resulting stat images to file
+        # z_image_path = path.join(output_dir, 'contrast-%s_z_map.nii.gz' % contrast_id)
+        # z_image_path_list.append(z_image_path)
+        # z_map.to_filename(z_image_path)
+    t2 = datetime.datetime.now()
+    print(t2-t1)
+    print(type(stat_maps_dict))
+    print(stat_maps_dict)
+    return secondlevel_mask, stat_maps_dict
+```
+
+```{code-cell} ipython3
+@pydra.mark.task
+@pydra.mark.annotate(
+    {'stat_maps_dict': ty.Any, 'threshold': float, 'cluster_threshold': int, 
+     'return': {'thresholded_map_dict': dict, 'plot_contrast_dict': dict}}
+)
+def cluster_thresholding(stat_maps_dict, threshold, cluster_threshold):
+    print("new")
+    t1 = datetime.datetime.now()
+    print(f"\nStart cluster thresholding ...\n")
+    from nilearn.image import threshold_img
+    from nilearn import plotting
+    thresholded_map_dict = dict.fromkeys(stat_maps_dict.keys())
+    plot_contrast_dict = dict.fromkeys(stat_maps_dict.keys())
+    for index, (stats_id, stats_val) in enumerate(stat_maps_dict.items()):
+        print('  Contrast % 2i out of %i: %s' % (
+            index + 1, len(stat_maps_dict), stats_id))
+        thresholded_map = threshold_img(
+            img = stats_val['z_score'],
+            threshold=threshold,
+            cluster_threshold=cluster_threshold,
+            two_sided=True,
+        )
+        thresholded_map_path = path.join(workflow_out_dir, 'secondlevel_cluster_thresholded_contrast-%s_z_map.nii.gz' % stats_id)
+        thresholded_map_dict[stats_id] = thresholded_map_path
+        thresholded_map.to_filename(thresholded_map_path)
+        plot_path = os.path.join(workflow_out_dir, 
+                                   'secondlevel_cluster_thresholded_contrast-%s_zmap.jpg' % stats_id)
+        plot_contrast_dict[stats_id] = plot_path
+        plotting.plot_stat_map(thresholded_map, cut_coords=[0],
+                               title='Cluster Thresholded z map',
+                               output_file=plot_path)
+    t2 = datetime.datetime.now()
+    print(t2-t1)
+    return thresholded_map_dict, plot_contrast_dict
+```
+
+```{code-cell} ipython3
+@pydra.mark.task
+@pydra.mark.annotate(
+    {
+        'stat_maps_dict':dict,
+        'return': {'out':dict}
+    }
+)
+def test(stat_maps_dict):
+    print("testing...")
+    out = stat_maps_dict
+    return out
+```
+
 ```{code-cell} ipython3
 wf = Workflow(
     name='wf',
     input_spec=['subj_id','rawdata_url', 'fmriprep_url', 'smoothing_fwhm', 'output_dir'],
 )
 
-wf.split('subj_id', subj_id=[1,2,3])
+
 wf.inputs.rawdata_url = 'https://github.com/OpenNeuroDerivatives/ds000001-fmriprep.git'
 wf.inputs.fmriprep_url = 'https://github.com/OpenNeuroDatasets/ds000001.git'
 wf.inputs.smoothing_fwhm = 5.0
@@ -423,23 +539,53 @@ wf.add(
         fmriprep_url = wf.lzin.fmriprep_url)
 )
 
-wf_firstlevel.inputs.subj_id = wf.lzin.subj_id,
-wf_firstlevel.inputs.n_run = 3,
-wf_firstlevel.inputs.tr = 2.3,
-wf_firstlevel.inputs.n_scans = 300,
-wf_firstlevel.inputs.hrf_model = 'glover',
-wf_firstlevel.inputs.event_list = wf.get_data.lzout.event_list, 
-wf_firstlevel.inputs.img_list = wf.get_data.lzout.img_list, 
-wf_firstlevel.inputs.mask_list = wf.get_data.lzout.mask_list,
-wf_firstlevel.inputs.smoothing_fwhm = wf.lzin.smoothing_fwhm,
+n_subj = 2
+wf_firstlevel.inputs.subj_id = [x for x in range(n_subj)]
+wf_firstlevel.inputs.n_run = 3
+wf_firstlevel.inputs.tr = 2.3
+wf_firstlevel.inputs.n_scans = 300
+wf_firstlevel.inputs.hrf_model = 'glover'
+wf_firstlevel.inputs.event_list = wf.get_data.lzout.event_list
+wf_firstlevel.inputs.img_list = wf.get_data.lzout.img_list
+wf_firstlevel.inputs.mask_list = wf.get_data.lzout.mask_list
+wf_firstlevel.inputs.smoothing_fwhm = wf.lzin.smoothing_fwhm
 wf_firstlevel.inputs.output_dir = wf.lzin.output_dir
 wf.add(wf_firstlevel)
 
-wf.combine('subj_id')
+wf.add(
+    get_secondlevel_dm(
+        name = "get_secondlevel_dm",
+        n_subj = n_subj
+    )
+)
+
+wf.add(
+    secondlevel_estimation(
+        name = "secondlevel_estimation",
+        second_level_input = wf.wf_firstlevel.lzout.first_level_model_list, 
+        design_matrix = wf.get_secondlevel_dm.lzout.design_matrix, 
+        firstlevel_contrast = wf.wf_firstlevel.lzout.first_level_contrast)
+)
+
+wf.add(
+    test(
+        name = "test",
+        stat_maps_dict = wf.secondlevel_estimation.lzout.stat_maps_dict, 
+    )
+)
+# wf.add(
+#     cluster_thresholding(
+#         name = "cluster_thresholding",
+#         stat_maps_dict = wf.secondlevel_estimation.lzout.stat_maps_dict, 
+#         threshold = 2.3, 
+#         cluster_threshold = 10)
+# )
 
 wf.set_output(
     [
         ('first_level_outputs', wf.wf_firstlevel.lzout.first_level_z_map_dict_list),
+        # ('second_level_clusterthresholding_result', wf.cluster_thresholding.lzout.thresholded_map_dict),
+        # ('second_level_clusterthresholding_plot', wf.cluster_thresholding.lzout.plot_contrast_dict)
         
     ]
 )
@@ -450,7 +596,7 @@ wf.set_output(
 
 from pydra import Submitter
 
-with Submitter(plugin='cf', n_procs=4) as submitter:
+with Submitter(plugin='cf', n_procs=8) as submitter:
     submitter(wf)
 
 results = wf.result()
