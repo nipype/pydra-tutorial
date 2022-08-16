@@ -422,7 +422,7 @@ def get_secondlevel_dm(n_subj):
 @pydra.mark.task
 @pydra.mark.annotate(
     {'second_level_input': ty.Any, 'design_matrix': ty.Any, 'firstlevel_contrast':list, 
-     'return': {'secondlevel_mask': ty.Any, 'stat_maps_dict': ty.Any}}
+     'return': {'secondlevel_mask': ty.Any, 'stat_maps_dict': dict}}
 )
 def secondlevel_estimation(second_level_input, design_matrix, firstlevel_contrast):
     """ task to estimate the second level
@@ -456,12 +456,14 @@ def secondlevel_estimation(second_level_input, design_matrix, firstlevel_contras
             index + 1, len(firstlevel_contrast[0]), contrast_id))
         # Estimate the contasts. Note that the model implicitly computes a fixed
         # effect across the two sessions
-        stat_maps = second_level_model.compute_contrast(first_level_contrast=contrast_val, output_type='all')
-        stat_maps_dict[contrast_id] = stat_maps
-        # # write the resulting stat images to file
-        # z_image_path = path.join(output_dir, 'contrast-%s_z_map.nii.gz' % contrast_id)
-        # z_image_path_list.append(z_image_path)
-        # z_map.to_filename(z_image_path)
+        z_map = second_level_model.compute_contrast(first_level_contrast=contrast_val, output_type='z_score')
+        print("got z-map")
+        # write the resulting stat images to file
+        z_image_path = os.path.join(workflow_out_dir, 'secondlevel_contrast-%s_z_map.nii.gz' % contrast_id)
+        print("put z-map path to dict")
+        stat_maps_dict[contrast_id] = z_image_path
+        print("save file to path")
+        z_map.to_filename(z_image_path)
     t2 = datetime.datetime.now()
     print(t2-t1)
     print(type(stat_maps_dict))
@@ -487,7 +489,7 @@ def cluster_thresholding(stat_maps_dict, threshold, cluster_threshold):
         print('  Contrast % 2i out of %i: %s' % (
             index + 1, len(stat_maps_dict), stats_id))
         thresholded_map = threshold_img(
-            img = stats_val['z_score'],
+            img = stats_val,
             threshold=threshold,
             cluster_threshold=cluster_threshold,
             two_sided=True,

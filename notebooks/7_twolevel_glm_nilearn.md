@@ -645,14 +645,14 @@ def parametric_test(stat_maps_dict, second_level_model):
 ```{code-cell} ipython3
 @pydra.mark.task
 @pydra.mark.annotate(
-    {'z_map_dict_list': list,'design_matrix': ty.Any, 'firstlevel_contrast': list, 'n_perm': int, 
+    {'second_level_input': list,'design_matrix': ty.Any, 'firstlevel_contrast': list, 'n_perm': int, 
      'return': {'thresholded_map_dict': dict, 'plot_contrast_dict': dict}}
 )
-def nonparametric_test(z_map_dict_list, smoothing_fwhm, design_matrix, firstlevel_contrast, n_perm):
+def nonparametric_test(second_level_input, smoothing_fwhm, design_matrix, firstlevel_contrast, n_perm):
     """ task to estimate the second level
     Parameters
     ----------
-    z_map_dict_list : list
+    second_level_input : list
         the list of first-level output (dictionary)
     design_matrix : ty.Any
         a pandas.DataFrame that specifies the second level design
@@ -672,35 +672,67 @@ def nonparametric_test(z_map_dict_list, smoothing_fwhm, design_matrix, firstleve
     print(f"\nStart nonparametric test ...\n")
     from nilearn.glm.second_level import non_parametric_inference
     from nilearn import plotting
-    z_map_dict = {con: [sub[con] for sub in z_map_dict_list] for con in firstlevel_contrast[0].keys() }
-    thresholded_map_dict = dict.fromkeys(z_map_dict.keys())
-    plot_contrast_dict = dict.fromkeys(z_map_dict.keys())
-    for index, (stats_id, stats_val) in enumerate(z_map_dict.items()):
+    thresholded_map_dict = dict.fromkeys(firstlevel_contrast[0].keys())
+    plot_contrast_dict = dict.fromkeys(firstlevel_contrast[0].keys())
+    for index, (contrast_id, contrast_val) in enumerate(firstlevel_contrast[0].items()):
         print('  Contrast % 2i out of %i: %s' % (
-            index + 1, len(z_map_dict), stats_id))
-        print("stats_val")
+            index + 1, len(firstlevel_contrast[0]), contrast_id))
         # here we set threshold as none to do voxel-level FWER-correction.
         neg_log_pvals_permuted_ols_unmasked = \
-            non_parametric_inference(second_level_input=stats_val, design_matrix=design_matrix,
-                                     model_intercept=True, n_perm=n_perm,first_level_contrast=stats_id,
-                                     two_sided_test=False, smoothing_fwhm=smoothing_fwhm, n_jobs=-2)
+            non_parametric_inference(second_level_input=second_level_input, design_matrix=design_matrix,
+                                     model_intercept=True, n_perm=n_perm,first_level_contrast=contrast_val,
+                                     two_sided_test=False, smoothing_fwhm=smoothing_fwhm, n_jobs=1)
         print("test1...")
-        thresholded_map_path = os.path.join(workflow_out_dir, 'secondlevel_permutation_contrast-%s_z_map.nii.gz' % stats_id)
+        thresholded_map_path = os.path.join(workflow_out_dir, 'secondlevel_permutation_contrast-%s_z_map.nii.gz' % contrast_id)
         print("test2...")
-        thresholded_map_dict[stats_id] = thresholded_map_path
+        thresholded_map_dict[contrast_id] = thresholded_map_path
         print("test3...")
         neg_log_pvals_permuted_ols_unmasked.to_filename(thresholded_map_path)
         # here I actually have more than one contrast
         title = ('permutation test (FWER < 10%)')
-        plot_path = os.path.join(workflow_out_dir, 'secondlevel_permutation_contrast-%s_zmap.jpg' % stats_id)
-        plot_contrast_dict[stats_id] = plot_path
+        plot_path = os.path.join(workflow_out_dir, 'secondlevel_permutation_contrast-%s_zmap.jpg' % contrast_id)
+        plot_contrast_dict[contrast_id] = plot_path
         display = plotting.plot_glass_brain(
             neg_log_pvals_permuted_ols_unmasked, colorbar=True, vmax=3,
             display_mode='z', plot_abs=False, threshold=1, 
             title=title, output_file=plot_path)
     t2 = datetime.datetime.now()
     print(t2-t1)
+    print(f"thresholded_map_dict = {thresholded_map_dict}")
+    print(f"plot_contrast_dict = {plot_contrast_dict}")
     return thresholded_map_dict, plot_contrast_dict
+```
+
+```{code-cell} ipython3
+@pydra.mark.task
+@pydra.mark.annotate(
+    {
+        'test_input1':ty.Any,
+        'test_input2': ty.Any,
+        'return': {'out1':ty.Any, 'out2':ty.Any}
+    }
+)
+def test1(test_input1, test_input2):
+    print("testing...")
+    out1 = test_input1
+    out2 = test_input2
+    return out1, out2
+```
+
+```{code-cell} ipython3
+@pydra.mark.task
+@pydra.mark.annotate(
+    {
+        'test_input1':ty.Any,
+        'test_input2': ty.Any,
+        'return': {'out1':ty.Any, 'out2':ty.Any}
+    }
+)
+def test2(test_input1, test_input2):
+    print("testing...")
+    out1 = test_input1
+    out2 = test_input2
+    return out1, out2
 ```
 
 ### Create the second-level GLM workflow
@@ -712,7 +744,6 @@ wf_secondlevel = Workflow(
     input_spec=[
         'n_subj',
         'second_level_input', 
-        'z_map_dict_list',
         'smoothing_fwhm',
         'firstlevel_contrast',
         'n_perm',
@@ -728,69 +759,82 @@ wf_secondlevel.add(
     )
 )
 
-# add task - secondlevel_estimation
-wf_secondlevel.add(
-    secondlevel_estimation(
-        name = "secondlevel_estimation",
-        second_level_input = wf_secondlevel.lzin.second_level_input,  
-        design_matrix = wf_secondlevel.get_secondlevel_dm.lzout.design_matrix, 
-        firstlevel_contrast = wf_secondlevel.lzin.firstlevel_contrast
-    )
-)
-
-# add task - secondlevel_estimation
-wf_secondlevel.add(
-    cluster_thresholding(
-        name = "cluster_thresholding",
-        stat_maps_dict = wf_secondlevel.secondlevel_estimation.lzout.stat_maps_dict, 
-        threshold = 3.29, 
-        cluster_threshold = 10
-    )
-)
-
-# add task - multiple_comparison
-wf_secondlevel.add(
-    multiple_comparison(
-        name = "multiple_comparison",
-        stat_maps_dict = wf_secondlevel.secondlevel_estimation.lzout.stat_maps_dict, 
-        alpha = 0.05,
-        height_control = 'fdr'
-    )
-)
-
-# add task - parametric_test
-wf_secondlevel.add(
-    parametric_test(
-        name = "parametric_test",
-        stat_maps_dict = wf_secondlevel.secondlevel_estimation.lzout.stat_maps_dict, 
-        second_level_model = wf_secondlevel.secondlevel_estimation.lzout.second_level_model
-    )
-    
-)
-
-# # add task - nonparametric_test
+# # add task - secondlevel_estimation
 # wf_secondlevel.add(
-#     nonparametric_test(
-#         name = "nonparametric_test",
-#         z_map_dict_list = wf_secondlevel.lzin.z_map_dict_list, 
-#         smoothing_fwhm = wf_secondlevel.lzin.smoothing_fwhm, 
+#     secondlevel_estimation(
+#         name = "secondlevel_estimation",
+#         second_level_input = wf_secondlevel.lzin.second_level_input,  
 #         design_matrix = wf_secondlevel.get_secondlevel_dm.lzout.design_matrix, 
-#         firstlevel_contrast = wf_secondlevel.lzin.firstlevel_contrast, 
-#         n_perm = wf_secondlevel.lzin.n_perm,
+#         firstlevel_contrast = wf_secondlevel.lzin.firstlevel_contrast
 #     )
 # )
 
+# # add task - secondlevel_estimation
+# wf_secondlevel.add(
+#     cluster_thresholding(
+#         name = "cluster_thresholding",
+#         stat_maps_dict = wf_secondlevel.secondlevel_estimation.lzout.stat_maps_dict, 
+#         threshold = 3.29, 
+#         cluster_threshold = 10
+#     )
+# )
+
+# # add task - multiple_comparison
+# wf_secondlevel.add(
+#     multiple_comparison(
+#         name = "multiple_comparison",
+#         stat_maps_dict = wf_secondlevel.secondlevel_estimation.lzout.stat_maps_dict, 
+#         alpha = 0.05,
+#         height_control = 'fdr'
+#     )
+# )
+
+# # add task - parametric_test
+# wf_secondlevel.add(
+#     parametric_test(
+#         name = "parametric_test",
+#         stat_maps_dict = wf_secondlevel.secondlevel_estimation.lzout.stat_maps_dict, 
+#         second_level_model = wf_secondlevel.secondlevel_estimation.lzout.second_level_model
+#     )
+    
+# )
+
+# add task - nonparametric_test
+wf_secondlevel.add(
+    nonparametric_test(
+        name = "nonparametric_test",
+        second_level_input = wf_secondlevel.lzin.second_level_input,
+        smoothing_fwhm = wf_secondlevel.lzin.smoothing_fwhm, 
+        design_matrix = wf_secondlevel.get_secondlevel_dm.lzout.design_matrix, 
+        firstlevel_contrast = wf_secondlevel.lzin.firstlevel_contrast, 
+        n_perm = wf_secondlevel.lzin.n_perm,
+    )
+)
+
+# wf_secondlevel.add(
+#     test1(
+#         name = "test1",
+#         test_input1 = wf_secondlevel.get_secondlevel_dm.lzout.design_matrix, 
+#         test_input2 = wf_secondlevel.get_secondlevel_dm.lzout.design_matrix)
+# )
+
+# wf_secondlevel.add(
+#     test2(
+#         name = "test2",
+#         test_input1 = wf_secondlevel.test1.lzout.out1, 
+#         test_input2 = wf_secondlevel.test1.lzout.out2)
+# )
 # specify output
 wf_secondlevel.set_output(
     [
-        ('second_level_clusterthresholding_result', wf_secondlevel.cluster_thresholding.lzout.thresholded_map_dict),
-        ('second_level_clusterthresholding_plot', wf_secondlevel.cluster_thresholding.lzout.plot_contrast_dict),
-        ('second_level_mc_result', wf_secondlevel.multiple_comparison.lzout.thresholded_map_dict),
-        ('second_level_mc_plot', wf_secondlevel.multiple_comparison.lzout.plot_contrast_dict),
-        ('second_level_parametric_test', wf_secondlevel.parametric_test.lzout.thresholded_map_dict),
-        ('second_level_parametric_plot', wf_secondlevel.parametric_test.lzout.plot_contrast_dict),
-        # ('second_level_nonparametric_test', wf_secondlevel.nonparametric_test.lzout.thresholded_map_dict),
-        # ('second_level_nonparametric_plot', wf_secondlevel.nonparametric_test.lzout.plot_contrast_dict),
+        # # ('second_level_clusterthresholding_result', wf_secondlevel.cluster_thresholding.lzout.thresholded_map_dict),
+        # ('second_level_clusterthresholding_plot', wf_secondlevel.cluster_thresholding.lzout.plot_contrast_dict),
+        # ('second_level_mc_result', wf_secondlevel.multiple_comparison.lzout.thresholded_map_dict),
+        # ('second_level_mc_plot', wf_secondlevel.multiple_comparison.lzout.plot_contrast_dict),
+        # ('second_level_parametric_test', wf_secondlevel.parametric_test.lzout.thresholded_map_dict),
+        # ('second_level_parametric_plot', wf_secondlevel.parametric_test.lzout.plot_contrast_dict),
+        ('second_level_nonparametric_test', wf_secondlevel.nonparametric_test.lzout.thresholded_map_dict),
+        ('second_level_nonparametric_plot', wf_secondlevel.nonparametric_test.lzout.plot_contrast_dict),
     ]
 )
 ```
@@ -831,7 +875,6 @@ wf.add(wf_firstlevel)
 
 wf_secondlevel.inputs.n_subj = n_subj
 wf_secondlevel.inputs.second_level_input = wf.wf_firstlevel.lzout.first_level_model_list 
-wf_secondlevel.inputs.z_map_dict_list = wf.wf_firstlevel.lzout.first_level_z_map_dict_list
 wf_secondlevel.inputs.smoothing_fwhm = wf.lzin.smoothing_fwhm
 wf_secondlevel.inputs.firstlevel_contrast = wf.wf_firstlevel.lzout.first_level_contrast
 wf_secondlevel.inputs.n_perm = 1
@@ -841,14 +884,14 @@ wf.add(wf_secondlevel)
 wf.set_output(
     [
         ('first_level_outputs', wf.wf_firstlevel.lzout.first_level_z_map_dict_list),
-        ('second_level_clusterthresholding_result', wf.wf_secondlevel.lzout.second_level_clusterthresholding_result),
-        ('second_level_clusterthresholding_plot', wf.wf_secondlevel.lzout.second_level_clusterthresholding_plot),
-        ('second_level_mc_result', wf.wf_secondlevel.lzout.second_level_mc_result),
-        ('second_level_mc_plot', wf.wf_secondlevel.lzout.second_level_mc_plot),
-        ('second_level_parametric_test', wf.wf_secondlevel.lzout.second_level_parametric_test),
-        ('second_level_parametric_plot', wf.wf_secondlevel.lzout.second_level_parametric_plot),
-        # ('second_level_nonparametric_test', wf.wf_secondlevel.lzout.second_level_nonparametric_test),
-        # ('second_level_nonparametric_plot', wf.wf_secondlevel.lzout.second_level_nonparametric_plot),    
+        # ('second_level_clusterthresholding_result', wf.wf_secondlevel.lzout.second_level_clusterthresholding_result),
+        # ('second_level_clusterthresholding_plot', wf.wf_secondlevel.lzout.second_level_clusterthresholding_plot),
+        # ('second_level_mc_result', wf.wf_secondlevel.lzout.second_level_mc_result),
+        # ('second_level_mc_plot', wf.wf_secondlevel.lzout.second_level_mc_plot),
+        # ('second_level_parametric_test', wf.wf_secondlevel.lzout.second_level_parametric_test),
+        # ('second_level_parametric_plot', wf.wf_secondlevel.lzout.second_level_parametric_plot),
+        ('second_level_nonparametric_test', wf.wf_secondlevel.lzout.second_level_nonparametric_test),
+        ('second_level_nonparametric_plot', wf.wf_secondlevel.lzout.second_level_nonparametric_plot),    
     ]
 )
 ```
