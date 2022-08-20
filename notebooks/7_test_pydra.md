@@ -90,10 +90,6 @@ def get_data(rawdata_url, fmriprep_url):
 #     rawdata_url = 'https://github.com/OpenNeuroDerivatives/ds000001-fmriprep.git',
 #     fmriprep_url = 'https://github.com/OpenNeuroDatasets/ds000001.git')
 # task1()
-```
-
-```{code-cell} ipython3
-:tags: []
 
 # result1 = task1.result()
 ```
@@ -127,10 +123,26 @@ def get_subj_file(subj_id, n_run, event_list, img_list, mask_list):
 ```{code-cell} ipython3
 :tags: []
 
-# task2 = get_subj_file(subj_id=[1,2,3], n_run=3, 
-#                       event_list=result1.output.event_list, 
-#                       img_list=result1.output.img_list, 
-#                       mask_list=result1.output.mask_list).split('subj_id')
+fmriprep_path = workflow_dir / '7_glm'/ 'data'
+rawdata_path = workflow_dir / '7_glm' / 'raw_data'
+
+event_list = glob.glob(os.path.join(rawdata_path, '*', 'func', '*events.tsv'))
+event_list.sort()
+
+img_list = glob.glob(os.path.join(fmriprep_path, '*', 'func', '*space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz'))
+img_list.sort()
+
+mask_list = glob.glob(os.path.join(fmriprep_path, '*', 'func', '*space-MNI152NLin2009cAsym_res-2_desc-brain_mask.nii.gz'))
+mask_list.sort()
+```
+
+```{code-cell} ipython3
+:tags: []
+
+# task2 = get_subj_file(subj_id=[1,2], n_run=3, 
+#                       event_list=event_list, 
+#                       img_list=img_list, 
+#                       mask_list=mask_list).split('subj_id')
 # task2()
 # result2 = task2.result()
 ```
@@ -301,6 +313,40 @@ def firstlevel_estimation(subj_id, subj_imgs, subj_masks, smoothing_fwhm, design
 ```
 
 ```{code-cell} ipython3
+# get cluster table 
+@pydra.mark.task
+@pydra.mark.annotate(
+    {'subj_id': int, 'z_map_path': str, 'return': {'output_file': str}}
+)
+def cluster_table(subj_id, z_map_path):
+    
+    import nibabel as nib
+    from nilearn.reporting import get_clusters_table
+    from scipy.stats import norm
+
+    stat_img = nib.load(z_map_path)
+    output_file = os.path.join(workflow_out_dir, 'sub-%s_cluster_table.csv' % subj_id+1)
+    df = get_clusters_table(
+        stat_img, stat_threshold=norm.isf(0.001), cluster_threshold=10
+    )
+    df.to_csv(output_file, index=None)
+    return output_file
+
+# get glm report
+@pydra.mark.task
+@pydra.mark.annotate(
+    {'subj_id': int, 'model': ty.Any, 'contrasts': ty.Any, 'return': {'output_file': str}}
+)
+def glm_report(subj_id, model, contrasts):
+    from nilearn.reporting import make_glm_report
+
+    output_file = os.path.join(workflow_out_dir, 'sub-%s_glm_report.html' % subj_id+1)
+    report = make_glm_report(model, contrasts)
+    report.save_as_html(output_file)
+    return output_file
+```
+
+```{code-cell} ipython3
 # task5 = firstlevel_estimation(
 #     subj_id=result2[0].output.subj_id, 
 #     subj_imgs=result2[0].output.subj_imgs, 
@@ -413,7 +459,7 @@ def get_secondlevel_dm(n_subj):
 ```
 
 ```{code-cell} ipython3
-# task6 = get_secondlevel_dm(n_subj=3)
+# task6 = get_secondlevel_dm(n_subj=2)
 # task6()
 # result6 = task6.result()
 ```
@@ -453,7 +499,7 @@ def secondlevel_estimation(second_level_input, design_matrix, firstlevel_contras
     stat_maps_dict = {}
     for index, (contrast_id, contrast_val) in enumerate(firstlevel_contrast[0].items()):
         print('  Contrast % 2i out of %i: %s' % (
-            index + 1, len(firstlevel_contrast[0]), contrast_id))
+            index + 1, len(firstlevel_contrast), contrast_id))
         # Estimate the contasts. Note that the model implicitly computes a fixed
         # effect across the two sessions
         z_map = second_level_model.compute_contrast(first_level_contrast=contrast_val, output_type='z_score')
@@ -512,17 +558,19 @@ def cluster_thresholding(stat_maps_dict, threshold, cluster_threshold):
 @pydra.mark.task
 @pydra.mark.annotate(
     {
-        'stat_maps_dict':dict,
-        'return': {'out':dict}
+        'in1':ty.Any,
+        'return': {'out':ty.Any}
     }
 )
-def test(stat_maps_dict):
+def test(in1):
     print("testing...")
     out = stat_maps_dict
     return out
 ```
 
 ```{code-cell} ipython3
+:tags: []
+
 wf = Workflow(
     name='wf',
     input_spec=['subj_id','rawdata_url', 'fmriprep_url', 'smoothing_fwhm', 'output_dir'],
@@ -572,7 +620,7 @@ wf.add(
 wf.add(
     test(
         name = "test",
-        stat_maps_dict = wf.secondlevel_estimation.lzout.stat_maps_dict, 
+        in1 = wf.secondlevel_estimation.lzout.stat_maps_dict, 
     )
 )
 # wf.add(
@@ -585,7 +633,9 @@ wf.add(
 
 wf.set_output(
     [
-        ('first_level_outputs', wf.wf_firstlevel.lzout.first_level_z_map_dict_list),
+        # ('first_level_model_list', wf.wf_firstlevel.lzout.first_level_model_list),
+        ('first_level_z_maps', wf.wf_firstlevel.lzout.first_level_z_map_dict_list),
+        ('second_level_stat_maps', wf.test.lzout.out)
         # ('second_level_clusterthresholding_result', wf.cluster_thresholding.lzout.thresholded_map_dict),
         # ('second_level_clusterthresholding_plot', wf.cluster_thresholding.lzout.plot_contrast_dict)
         
@@ -604,8 +654,4 @@ with Submitter(plugin='cf', n_procs=8) as submitter:
 results = wf.result()
 
 print(results)
-```
-
-```{code-cell} ipython3
-
 ```
