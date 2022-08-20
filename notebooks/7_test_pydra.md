@@ -64,19 +64,20 @@ def get_data(rawdata_url, fmriprep_url):
     # get events.tsv list
     event_list = glob.glob(os.path.join(rawdata_path, '*', 'func', '*events.tsv'))
     event_list.sort()
-    # for i in event_list:
-    #     dl.get(i, dataset=rawdata_path)
+    for i in event_list:
+        dl.get(i, dataset=rawdata_path)
+    
     # get img list
     img_list = glob.glob(os.path.join(fmriprep_path, '*', 'func', '*space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz'))
     img_list.sort()
-    # for i in img_list:
-    #     dl.get(i, dataset=fmriprep_path)
+    for i in img_list:
+        dl.get(i, dataset=fmriprep_path)
     
-     # get img list
+    # get img list
     mask_list = glob.glob(os.path.join(fmriprep_path, '*', 'func', '*space-MNI152NLin2009cAsym_res-2_desc-brain_mask.nii.gz'))
     mask_list.sort()
-    # for i in mask_list:
-    #     dl.get(i, dataset=fmriprep_path)
+    for i in mask_list:
+        dl.get(i, dataset=fmriprep_path)
 
     t2 = datetime.datetime.now()
     print(t2-t1)
@@ -123,17 +124,17 @@ def get_subj_file(subj_id, n_run, event_list, img_list, mask_list):
 ```{code-cell} ipython3
 :tags: []
 
-fmriprep_path = workflow_dir / '7_glm'/ 'data'
-rawdata_path = workflow_dir / '7_glm' / 'raw_data'
+# fmriprep_path = workflow_dir / '7_glm'/ 'data'
+# rawdata_path = workflow_dir / '7_glm' / 'raw_data'
 
-event_list = glob.glob(os.path.join(rawdata_path, '*', 'func', '*events.tsv'))
-event_list.sort()
+# event_list = glob.glob(os.path.join(rawdata_path, '*', 'func', '*events.tsv'))
+# event_list.sort()
 
-img_list = glob.glob(os.path.join(fmriprep_path, '*', 'func', '*space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz'))
-img_list.sort()
+# img_list = glob.glob(os.path.join(fmriprep_path, '*', 'func', '*space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz'))
+# img_list.sort()
 
-mask_list = glob.glob(os.path.join(fmriprep_path, '*', 'func', '*space-MNI152NLin2009cAsym_res-2_desc-brain_mask.nii.gz'))
-mask_list.sort()
+# mask_list = glob.glob(os.path.join(fmriprep_path, '*', 'func', '*space-MNI152NLin2009cAsym_res-2_desc-brain_mask.nii.gz'))
+# mask_list.sort()
 ```
 
 ```{code-cell} ipython3
