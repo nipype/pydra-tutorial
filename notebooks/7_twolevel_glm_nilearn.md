@@ -629,7 +629,7 @@ Now, let's connect all tasks and workflows together.
 
 Here we randomly choose **5** subjects to perform the analysis. 
 
-For computational time, we set `n_perm=1`.
+For computational time, we set `n_perm=100`.
 
 ```{code-cell} ipython3
 wf = Workflow(
@@ -640,7 +640,7 @@ wf = Workflow(
 wf.inputs.n_subj = 5
 
 # randomly choose subjects
-wf_firstlevel.inputs.subj_id = random.sample(range(16), wf.inputs.n_subj)
+wf_firstlevel.inputs.subj_id = random.sample(range(1,17), wf.inputs.n_subj)
 wf_firstlevel.inputs.tr = 2.3
 wf_firstlevel.inputs.n_scans = 300
 wf_firstlevel.inputs.hrf_model = 'glover'
@@ -691,7 +691,7 @@ wf.add(
         smoothing_fwhm = 5.0,
         design_matrix = wf.wf_secondlevel.lzout.second_level_designmatrix,
         firstlevel_contrast = wf.wf_firstlevel.lzout.first_level_contrast,
-        n_perm = 10,
+        n_perm = 100,
     )
 )
 
