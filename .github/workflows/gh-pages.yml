@@ -21,10 +21,9 @@ jobs:
         environment-file: etc/environment.yml
         python-version: ${{ matrix.python-version }}
         auto-activate-base: false
+      run: conda activate pydra-tutorial
     - name: Install dependencies
-      run: |
-        pip install --upgrade pip
-        pip install -r jupyterbook/requirements.txt
+      run: conda install -c conda-forge jupyter-book
     - name: Build JupyterBook
       run: jb build -W jupyterbook
     - uses: peaceiris/actions-gh-pages@v3
