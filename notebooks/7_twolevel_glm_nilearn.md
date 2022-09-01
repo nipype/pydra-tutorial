@@ -45,6 +45,7 @@ from pydra import Workflow
 from pydra.engine.specs import File, MultiInputFile, MultiOutputFile
 import typing as ty
 from pathlib import Path
+import datalad.api as dl
 
 # get current directory
 pydra_tutorial_dir = os.path.dirname(os.getcwd())
@@ -57,7 +58,13 @@ workflow_out_dir = workflow_dir / '7_glm' /'results'
 os.makedirs(workflow_out_dir, exist_ok=True)
 ```
 
-## Download the data
+## First-Level GLM
+
+We conduct the first level GLM for each run on every subject.
+
++++
+
+### Download the data
 
 [DataLad](http://handbook.datalad.org/en/latest/index.htmlhttp://handbook.datalad.org/en/latest/index.html) is often used in those cases to download data. Here we use its [Python API](http://docs.datalad.org/en/latest/modref.htmlhttp://docs.datalad.org/en/latest/modref.html).
 
@@ -65,7 +72,25 @@ We need the following data:
 
 1. event information (raw data)
 2. preprocessed image data (fmriprep)
-3. confounds (fmriprep)
+3. masks (fmriprep)
+4. confounds (fmriprep)
+
+```{code-cell} ipython3
+fmriprep_path = workflow_dir / '7_glm'/ 'data'
+rawdata_path = workflow_dir / '7_glm' / 'raw_data'
+
+# create the folders if not exit
+os.makedirs(fmriprep_path, exist_ok=True)
+os.makedirs(rawdata_path, exist_ok=True)
+
+# Install datasets to specific datapaths
+rawdata_url = 'https://github.com/OpenNeuroDerivatives/ds000001-fmriprep.git'
+fmriprep_url = 'https://github.com/OpenNeuroDatasets/ds000001.git'
+dl.install(source=rawdata_url, path=fmriprep_path)
+dl.install(source=fmriprep_url, path=rawdata_path)
+```
+
+### Get data for each subject
 
 By `datalad.api.install`, datalad downloads all symlinks without storing the actual data locally. We can then use `datalad.api.get` to get the data we need for our analysis. 
 We need to get four types of data from two folders:
@@ -76,88 +101,35 @@ We need to get four types of data from two folders:
 4. confounds: `*desc-confounds_timeseries.tsv` from `fmriprep_path` (this is implicitly needed by `load_confounds_strategy`)
 
 ```{code-cell} ipython3
-fmriprep_path = workflow_out_dir / 'data'
-rawdata_path = workflow_out_dir / 'raw_data'
-```
-
-```{code-cell} ipython3
-@pydra.mark.task
-@pydra.mark.annotate(
-    {
-        'rawdata_url': str,
-        'fmriprep_url': str,
-        'return': {'event_list': MultiOutputFile, 
-                   'img_list': MultiOutputFile, 
-                   'mask_list': MultiOutputFile, 
-                  },
-    }
-)
-def get_data(rawdata_url, fmriprep_url):
-    print("Download data...")
-    t1 = datetime.datetime.now()
-    print(t1)
-    import datalad.api as dl
-    fmriprep_path = workflow_dir / '7_glm'/ 'data'
-    rawdata_path = workflow_dir / '7_glm' / 'raw_data'
-    
-    # Install datasets to specific datapaths
-    dl.install(source=rawdata_url, path=fmriprep_path)
-    dl.install(source=fmriprep_url, path=rawdata_path)
-    
-    # get events.tsv list
-    event_list = glob.glob(os.path.join(rawdata_path, '*', 'func', '*events.tsv'))
-    event_list.sort()
-    for i in event_list:
-        dl.get(i, dataset=rawdata_path)
-    # get img list
-    img_list = glob.glob(os.path.join(fmriprep_path, '*', 'func', '*space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz'))
-    img_list.sort()
-    for i in img_list:
-        dl.get(i, dataset=fmriprep_path)
-    # get img list
-    mask_list = glob.glob(os.path.join(fmriprep_path, '*', 'func', '*space-MNI152NLin2009cAsym_res-2_desc-brain_mask.nii.gz'))
-    mask_list.sort()
-    for i in mask_list:
-        dl.get(i, dataset=fmriprep_path)
-    # get confounds list
-    confound_list = glob.glob(os.path.join(fmriprep_path, '*', 'func', '*desc-confounds_timeseries.tsv'))
-    confound_list.sort()
-    for i in mask_list:
-        dl.get(i, dataset=fmriprep_path)
-    
-    return event_list, img_list, mask_list
-```
-
-## First-Level GLM
-
-We conduct the first level GLM for each run on every subject.
-
-+++
-
-### Get events, preproc_bold, and masks for each subject
-
-each subject will have a list of three (run) of those files
-
-```{code-cell} ipython3
 @pydra.mark.task
 @pydra.mark.annotate(
     {
         'subj_id': int,
-        'n_run': int,
-        'event_list': list, 
-        'img_list': list, 
-        'mask_list': list,
         'return': {'subj_id': int, 'subj_events': list, 'subj_imgs':list, 'subj_masks':list},
     }
 )
-def get_subj_file(subj_id, n_run, event_list, img_list, mask_list):
-    print(f"\nGet subject-{subj_id+1} file...\n")
-    # subj_id starts from 0
-    start = subj_id*n_run
-    end = (subj_id+1)*n_run
-    subj_events = event_list[start:end]
-    subj_imgs = img_list[start:end]
-    subj_masks = mask_list[start:end]
+def get_data(subj_id):
+    print("Download data for sub-%02d" % subj_id)
+    # get events.tsv 
+    subj_events = glob.glob(os.path.join(rawdata_path, 'sub-%02d' % subj_id, 'func', '*events.tsv'))
+    subj_events.sort()
+    for i in subj_events:
+        dl.get(i, dataset=rawdata_path)
+    # get bold
+    subj_imgs = glob.glob(os.path.join(fmriprep_path, 'sub-%02d' % subj_id, 'func', '*space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz'))
+    subj_imgs.sort()
+    for i in subj_imgs:
+        dl.get(i, dataset=fmriprep_path)
+    # get mask
+    subj_masks = glob.glob(os.path.join(fmriprep_path, 'sub-%02d' % subj_id, 'func', '*space-MNI152NLin2009cAsym_res-2_desc-brain_mask.nii.gz'))
+    subj_masks.sort()
+    for i in subj_masks:
+        dl.get(i, dataset=fmriprep_path)
+    # get confounds list
+    subj_confounds = glob.glob(os.path.join(fmriprep_path, 'sub-%02d' % subj_id, 'func', '*desc-confounds_timeseries.tsv'))
+    subj_confounds.sort()
+    for i in subj_confounds:
+        dl.get(i, dataset=fmriprep_path)
     return subj_id, subj_events, subj_imgs, subj_masks
 ```
 
@@ -303,28 +275,21 @@ wf_firstlevel = Workflow(
     name='wf_firstlevel',
     input_spec=[
         'subj_id',
-        'n_run',
+        'rawdata_url',
+        'fmriprep_url',
         'tr',
         'n_scans',
         'hrf_model',
-        'event_list', 
-        'img_list', 
-        'mask_list',
-        'smoothing_fwhm',
-        'output_dir'
+        'smoothing_fwhm'
     ],
 )
 
 wf_firstlevel.split('subj_id')
 # add task - get_subj_file
 wf_firstlevel.add(
-    get_subj_file(
-        name = "get_subj_file",
+    get_data(
+        name = "get_data",
         subj_id = wf_firstlevel.lzin.subj_id, 
-        n_run = wf_firstlevel.lzin.n_run, 
-        event_list = wf_firstlevel.lzin.event_list, 
-        img_list = wf_firstlevel.lzin.img_list, 
-        mask_list = wf_firstlevel.lzin.mask_list
     )
 )
 
@@ -335,9 +300,9 @@ wf_firstlevel.add(
         tr = wf_firstlevel.lzin.tr, 
         n_scans = wf_firstlevel.lzin.n_scans, 
         hrf_model = wf_firstlevel.lzin.hrf_model, 
-        subj_id = wf_firstlevel.get_subj_file.lzout.subj_id, 
-        subj_imgs = wf_firstlevel.get_subj_file.lzout.subj_imgs, 
-        subj_events = wf_firstlevel.get_subj_file.lzout.subj_events, 
+        subj_id = wf_firstlevel.get_data.lzout.subj_id, 
+        subj_imgs = wf_firstlevel.get_data.lzout.subj_imgs, 
+        subj_events = wf_firstlevel.get_data.lzout.subj_events, 
     )
 )
 
@@ -345,7 +310,7 @@ wf_firstlevel.add(
 wf_firstlevel.add(
     set_contrast(
         name = "set_contrast",
-        subj_id = wf_firstlevel.get_subj_file.lzout.subj_id,
+        subj_id = wf_firstlevel.get_data.lzout.subj_id,
         design_matrices = wf_firstlevel.get_firstlevel_dm.lzout.design_matrices
     )
 )
@@ -354,9 +319,9 @@ wf_firstlevel.add(
 wf_firstlevel.add(
     firstlevel_estimation(
         name = "firstlevel_estimation",
-        subj_id = wf_firstlevel.get_subj_file.lzout.subj_id, 
-        subj_imgs = wf_firstlevel.get_subj_file.lzout.subj_imgs, 
-        subj_masks = wf_firstlevel.get_subj_file.lzout.subj_masks, 
+        subj_id = wf_firstlevel.get_data.lzout.subj_id, 
+        subj_imgs = wf_firstlevel.get_data.lzout.subj_imgs, 
+        subj_masks = wf_firstlevel.get_data.lzout.subj_masks, 
         smoothing_fwhm = wf_firstlevel.lzin.smoothing_fwhm, 
         design_matrices = wf_firstlevel.get_firstlevel_dm.lzout.design_matrices, 
         contrasts = wf_firstlevel.set_contrast.lzout.contrasts
@@ -664,40 +629,25 @@ Now, let's connect all tasks and workflows together.
 
 Here we randomly choose **5** subjects to perform the analysis. 
 
-For computational time, we set `n_perm=`.
+For computational time, we set `n_perm=1`.
 
 ```{code-cell} ipython3
 wf = Workflow(
     name='twolevel_glm',
-    input_spec=['subj_id', 'rawdata_url', 'fmriprep_url'],
+    input_spec=['n_subj'],
 )
 
-wf.inputs.rawdata_url = 'https://github.com/OpenNeuroDerivatives/ds000001-fmriprep.git'
-wf.inputs.fmriprep_url = 'https://github.com/OpenNeuroDatasets/ds000001.git'
-
-wf.add(
-    get_data(
-        name = "get_data",
-        rawdata_url = wf.lzin.rawdata_url, 
-        fmriprep_url = wf.lzin.fmriprep_url)
-)
-
-n_subj = 5
-
+wf.inputs.n_subj = 5
 
 # randomly choose subjects
-wf_firstlevel.inputs.subj_id = random.sample(range(16), n_subj)
-wf_firstlevel.inputs.n_run = 3
+wf_firstlevel.inputs.subj_id = random.sample(range(16), wf.inputs.n_subj)
 wf_firstlevel.inputs.tr = 2.3
 wf_firstlevel.inputs.n_scans = 300
 wf_firstlevel.inputs.hrf_model = 'glover'
-wf_firstlevel.inputs.event_list = wf.get_data.lzout.event_list
-wf_firstlevel.inputs.img_list = wf.get_data.lzout.img_list
-wf_firstlevel.inputs.mask_list = wf.get_data.lzout.mask_list
 wf_firstlevel.inputs.smoothing_fwhm = 5.0
 wf.add(wf_firstlevel)
 
-wf_secondlevel.inputs.n_subj = n_subj
+wf_secondlevel.inputs.n_subj = wf.inputs.n_subj
 wf_secondlevel.inputs.firstlevel_zmap_list = wf.wf_firstlevel.lzout.first_level_z_map_list 
 wf_secondlevel.inputs.firstlevel_contrast = wf.wf_firstlevel.lzout.first_level_contrast
 wf.add(wf_secondlevel)
@@ -741,7 +691,7 @@ wf.add(
         smoothing_fwhm = 5.0,
         design_matrix = wf.wf_secondlevel.lzout.second_level_designmatrix,
         firstlevel_contrast = wf.wf_firstlevel.lzout.first_level_contrast,
-        n_perm = 1,
+        n_perm = 10,
     )
 )
 
@@ -765,13 +715,13 @@ results = wf.result()
 print(results)
 ```
 
-# Let's Plot!
+## Let's Plot!
 
 We only use 5 subjects, so it's reasonable the following plots have nothing survived from testing.
 
 +++
 
-## Cluster Thresholding
+### Cluster Thresholding
 
 ```{code-cell} ipython3
 from IPython.display import Image
@@ -779,19 +729,21 @@ ct_list = glob.glob(os.path.join(workflow_out_dir, "secondlevel_cluster_threshol
 Image(filename=ct_list[0])
 ```
 
-## Multiple Comparison
+### Multiple Comparison
 
 ```{code-cell} ipython3
 mc_list = glob.glob(os.path.join(workflow_out_dir, "secondlevel_multiple_comp*.jpg"))
 Image(filename=mc_list[0])
 ```
 
-## Paramatric Test
+### Paramatric Test
 
 ```{code-cell} ipython3
 pt_list = glob.glob(os.path.join(workflow_out_dir, "secondlevel_paramatric*.jpg"))
 Image(filename=pt_list[0])
 ```
+
+### Nonparamatric Test
 
 ```{code-cell} ipython3
 npt_list = glob.glob(os.path.join(workflow_out_dir, "secondlevel_permutation*.jpg"))
