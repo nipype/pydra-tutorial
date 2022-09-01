@@ -243,12 +243,12 @@ def set_contrast(subj_id, design_matrices):
         }
     
     contrast_plot = []
-    for index, (contrast_id, contrast_val) in enumerate(contrasts.items()):
-        print('  Plot Contrast % 2i out of %i: %s' % (
-            index + 1, len(contrasts), contrast_id))
-        contrast_plot_path = os.path.join(workflow_out_dir, 'sub-%s_firstlevel_contrast-%s.jpg' % (subj_id, contrast_id))
-        plot_contrast_matrix(contrast_val, design_matrix, output_file=contrast_plot_path)
-        contrast_plot.append(contrast_plot_path)
+    # for index, (contrast_id, contrast_val) in enumerate(contrasts.items()):
+    #     print('  Plot Contrast % 2i out of %i: %s' % (
+    #         index + 1, len(contrasts), contrast_id))
+        # contrast_plot_path = os.path.join(workflow_out_dir, 'sub-%s_firstlevel_contrast-%s.jpg' % (subj_id, contrast_id))
+        # plot_contrast_matrix(contrast_val, design_matrix, output_file=contrast_plot_path)
+        # contrast_plot.append(contrast_plot_path)
     t2 = datetime.datetime.now()
     print(t2-t1)
     return contrasts, contrast_plot
