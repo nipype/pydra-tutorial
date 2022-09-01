@@ -151,7 +151,7 @@ The design matrix is a _M(row)_ x _N(columns)_ matrix. _M_ corresponds to the nu
     }
 )
 def get_firstlevel_dm(tr, n_scans, hrf_model, subj_id, subj_imgs, subj_events):
-    print(f"\nGet subject-{subj_id+1} firstlevel GLM ...\n")
+    print(f"\nGet subject-{subj_id} firstlevel GLM ...\n")
     import numpy as np
     import pandas as pd
     from nilearn.glm.first_level import make_first_level_design_matrix
@@ -181,7 +181,7 @@ def get_firstlevel_dm(tr, n_scans, hrf_model, subj_id, subj_imgs, subj_events):
         assert design_matrix.shape[1] == 52, "This design matrix has the wrong column number"
         # sort the column order alphabetical for contrasts
         design_matrix = design_matrix.reindex(sorted(design_matrix.columns), axis=1)
-        dm_path = os.path.join(workflow_out_dir, 'sub-%s_run-%s_designmatrix.csv' % (subj_id+1, index+1))
+        dm_path = os.path.join(workflow_out_dir, 'sub-%s_run-%s_designmatrix.csv' % (subj_id, index+1))
         design_matrix.to_csv(dm_path, index=None)
         design_matrices.append(design_matrix)
         dm_paths.append(dm_path)
@@ -201,7 +201,7 @@ def get_firstlevel_dm(tr, n_scans, hrf_model, subj_id, subj_imgs, subj_events):
 )
 def set_contrast(subj_id, design_matrices):
     t1 = datetime.datetime.now()
-    print(f"\nSet firstlevel contrast for subject-{subj_id+1} ...\n")
+    print(f"\nSet firstlevel contrast for subject-{subj_id} ...\n")
     
     import pandas as pd
     import numpy as np
@@ -236,7 +236,7 @@ def set_contrast(subj_id, design_matrices):
     }
 )
 def firstlevel_estimation(subj_id, subj_imgs, subj_masks, smoothing_fwhm, design_matrices, contrasts):
-    print(f"\nStart firstlevel estimation for subject-{subj_id+1} ...\n")
+    print(f"\nStart firstlevel estimation for subject-{subj_id} ...\n")
     import nibabel as nib
     from nilearn.image import math_img
     from nilearn.glm.first_level import FirstLevelModel
@@ -261,7 +261,7 @@ def firstlevel_estimation(subj_id, subj_imgs, subj_masks, smoothing_fwhm, design
             contrast_val, output_type='z_score')
 
         # write the resulting stat images to file
-        z_map_path = os.path.join(workflow_out_dir, 'sub-%s_contrast-%s_z_map.nii.gz' % (subj_id+1, contrast_id))
+        z_map_path = os.path.join(workflow_out_dir, 'sub-%s_contrast-%s_z_map.nii.gz' % (subj_id, contrast_id))
         z_map_path_dict[contrast_id] = z_map_path
         z_map.to_filename(z_map_path)
     return z_map_path_dict
