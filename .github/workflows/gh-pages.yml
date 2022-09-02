@@ -21,7 +21,6 @@ jobs:
         environment-file: etc/environment.yml
         python-version: ${{ matrix.python-version }}
         auto-activate-base: false
-      run: conda activate pydra-tutorial
     - name: Install dependencies
       run: conda install -c conda-forge jupyter-book
     - name: Build JupyterBook
