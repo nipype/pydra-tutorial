@@ -20,7 +20,7 @@ jobs:
     - name: Disable etelemetry
       run:  echo "NO_ET=TRUE" >> $GITHUB_ENV
     - name: Set up Python ${{ matrix.python-version }}
-    - uses: conda-incubator/setup-miniconda@v2
+      uses: conda-incubator/setup-miniconda@v2
       with:
         activate-environment: pydra-tutorial
         environment-file: etc/environment.yml
