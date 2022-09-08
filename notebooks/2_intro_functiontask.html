@@ -540,7 +540,7 @@ b = 5
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inputs(a=4, b=5, _func=b&#39;\x80\x05\x95\xc5\x01\x00\x00\x00\x00\x00\x00\x8c\x17cloudpickle.cloudpickle\x94\x8c\x0e_make_function\x94\x93\x94(h\x00\x8c\r_builtin_type\x94\x93\x94\x8c\x08CodeType\x94\x85\x94R\x94(K\x02K\x00K\x00K\x02K\x02KCC\x08|\x00|\x01\x17\x00S\x00\x94N\x85\x94)\x8c\x01a\x94\x8c\x01b\x94\x86\x94\x8c /tmp/ipykernel_7070/214681761.py\x94\x8c\x07add_var\x94K\x04C\x02\x00\x02\x94))t\x94R\x94}\x94(\x8c\x0b__package__\x94N\x8c\x08__name__\x94\x8c\x08__main__\x94uNNNt\x94R\x94\x8c\x1ccloudpickle.cloudpickle_fast\x94\x8c\x12_function_setstate\x94\x93\x94h\x17}\x94}\x94(h\x14h\x0e\x8c\x0c__qualname__\x94h\x0e\x8c\x0f__annotations__\x94}\x94\x8c\x0e__kwdefaults__\x94N\x8c\x0c__defaults__\x94N\x8c\n__module__\x94h\x15\x8c\x07__doc__\x94N\x8c\x0b__closure__\x94N\x8c\x17_cloudpickle_submodules\x94]\x94\x8c\x0b__globals__\x94}\x94u\x86\x94\x86R0.&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inputs(a=4, b=5, _func=b&#39;\x80\x05\x95\xc5\x01\x00\x00\x00\x00\x00\x00\x8c\x17cloudpickle.cloudpickle\x94\x8c\x0e_make_function\x94\x93\x94(h\x00\x8c\r_builtin_type\x94\x93\x94\x8c\x08CodeType\x94\x85\x94R\x94(K\x02K\x00K\x00K\x02K\x02KCC\x08|\x00|\x01\x17\x00S\x00\x94N\x85\x94)\x8c\x01a\x94\x8c\x01b\x94\x86\x94\x8c /tmp/ipykernel_7677/214681761.py\x94\x8c\x07add_var\x94K\x04C\x02\x08\x02\x94))t\x94R\x94}\x94(\x8c\x0b__package__\x94N\x8c\x08__name__\x94\x8c\x08__main__\x94uNNNt\x94R\x94\x8c\x1ccloudpickle.cloudpickle_fast\x94\x8c\x12_function_setstate\x94\x93\x94h\x17}\x94}\x94(h\x14h\x0e\x8c\x0c__qualname__\x94h\x0e\x8c\x0f__annotations__\x94}\x94\x8c\x0e__kwdefaults__\x94N\x8c\x0c__defaults__\x94N\x8c\n__module__\x94h\x15\x8c\x07__doc__\x94N\x8c\x0b__closure__\x94N\x8c\x17_cloudpickle_submodules\x94]\x94\x8c\x0b__globals__\x94}\x94u\x86\x94\x86R0.&#39;)
 </pre></div>
 </div>
 </div>
@@ -720,20 +720,20 @@ b = 5
 <span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">16</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">task3a</span><span class="p">()</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.9.13/x64/lib/python3.9/site-packages/pydra/engine/core.py:452,</span> in <span class="ni">TaskBase.__call__</span><span class="nt">(self, submitter, plugin, plugin_kwargs, rerun, **kwargs)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.10/site-packages/pydra/engine/core.py:452,</span> in <span class="ni">TaskBase.__call__</span><span class="nt">(self, submitter, plugin, plugin_kwargs, rerun, **kwargs)</span>
 <span class="g g-Whitespace">    </span><span class="mi">450</span>         <span class="n">res</span> <span class="o">=</span> <span class="n">sub</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">451</span> <span class="k">else</span><span class="p">:</span>  <span class="c1"># tasks without state could be run without a submitter</span>
 <span class="ne">--&gt; </span><span class="mi">452</span>     <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span><span class="n">rerun</span><span class="o">=</span><span class="n">rerun</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">453</span> <span class="k">return</span> <span class="n">res</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.9.13/x64/lib/python3.9/site-packages/pydra/engine/core.py:506,</span> in <span class="ni">TaskBase._run</span><span class="nt">(self, rerun, **kwargs)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.10/site-packages/pydra/engine/core.py:506,</span> in <span class="ni">TaskBase._run</span><span class="nt">(self, rerun, **kwargs)</span>
 <span class="g g-Whitespace">    </span><span class="mi">504</span> <span class="k">try</span><span class="p">:</span>
 <span class="g g-Whitespace">    </span><span class="mi">505</span>     <span class="bp">self</span><span class="o">.</span><span class="n">audit</span><span class="o">.</span><span class="n">monitor</span><span class="p">()</span>
 <span class="ne">--&gt; </span><span class="mi">506</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_run_task</span><span class="p">()</span>
 <span class="g g-Whitespace">    </span><span class="mi">507</span>     <span class="n">result</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_collect_outputs</span><span class="p">(</span><span class="n">output_dir</span><span class="o">=</span><span class="n">output_dir</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">508</span> <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.9.13/x64/lib/python3.9/site-packages/pydra/engine/task.py:192,</span> in <span class="ni">FunctionTask._run_task</span><span class="nt">(self)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.10/site-packages/pydra/engine/task.py:192,</span> in <span class="ni">FunctionTask._run_task</span><span class="nt">(self)</span>
 <span class="g g-Whitespace">    </span><span class="mi">190</span> <span class="k">del</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;_func&quot;</span><span class="p">]</span>
 <span class="g g-Whitespace">    </span><span class="mi">191</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="ne">--&gt; </span><span class="mi">192</span> <span class="n">output</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">_func</span><span class="p">)(</span><span class="o">**</span><span class="n">inputs</span><span class="p">)</span>
@@ -761,7 +761,7 @@ b = 5
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PosixPath(&#39;/tmp/tmpotbj3wtn/FunctionTask_50df396dcfc8e3c66967401d7f6cd9c11e8c24ca096c8ab6227d1c949d83ccdc&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PosixPath(&#39;/tmp/tmppnw_maw0/FunctionTask_b6d4a21bd018849b099301261cc9de5f4ccca8c5be8dae42b66858a8c3dd060b&#39;)
 </pre></div>
 </div>
 </div>
@@ -803,7 +803,7 @@ b = 5
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/tmpt5an1h5r/task4
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/tmp1b4jkd00/task4
 </pre></div>
 </div>
 </div>
@@ -846,7 +846,7 @@ b = 5
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PosixPath(&#39;/tmp/tmpt5an1h5r/task4/FunctionTask_a5f8e728244efa343afa9a9a632d5f4d189fdecb896fd272d1d78946c2213733&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PosixPath(&#39;/tmp/tmp1b4jkd00/task4/FunctionTask_11c38585996e6ae032598e69f18090e5e532327a9c1096f4a24f366ba8af87c7&#39;)
 </pre></div>
 </div>
 </div>
@@ -941,7 +941,7 @@ True
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PosixPath(&#39;/tmp/tmpdsuvjun7/task4b/FunctionTask_b7ed34e06145dcb28b822df2c77a4d30972ca971068127d2214c26babd31c3a3&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PosixPath(&#39;/tmp/tmp4yfu4fpx/task4b/FunctionTask_3d12538dd56b9f4a0bac0d2e699609421128aea9effb9813c385ec27d64886ee&#39;)
 </pre></div>
 </div>
 </div>
@@ -996,7 +996,7 @@ True
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(out=9), runtime=Runtime(rss_peak_gb=0.088985443359375, vms_peak_gb=0.851802826171875, cpu_peak_percent=196.9), errored=False)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(out=9), runtime=Runtime(rss_peak_gb=0.088741302734375, vms_peak_gb=0.83325958203125, cpu_peak_percent=246.6), errored=False)
 </pre></div>
 </div>
 </div>
@@ -1013,57 +1013,57 @@ True
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>id: 6383485353654fb596ffd854045a09ea
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>id: edb22a720dcb40bbae08bd022875caf2
 {
   &quot;@context&quot;: &quot;https://raw.githubusercontent.com/nipype/pydra/master/pydra/schema/context.jsonld&quot;,
-  &quot;@id&quot;: &quot;uid:d4803b99043c4e1c958474cc8884a15e&quot;,
+  &quot;@id&quot;: &quot;uid:98786c8cb8c74622aaa73e8bb85e7aae&quot;,
   &quot;@type&quot;: &quot;task&quot;,
-  &quot;startedAtTime&quot;: &quot;2022-09-06T19:58:26.202675&quot;
+  &quot;startedAtTime&quot;: &quot;2022-09-08T19:23:36.058911&quot;
 }
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>id: 598c3872f01e4f849cb168de5fcf12bd
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>id: 1e4d80f1d0a54c61a6bd5a48b5442a81
 {
   &quot;@context&quot;: &quot;https://raw.githubusercontent.com/nipype/pydra/master/pydra/schema/context.jsonld&quot;,
-  &quot;@id&quot;: &quot;uid:f9223790a3724885a6a32ce97ac48e17&quot;,
+  &quot;@id&quot;: &quot;uid:65f746e440a94e5f879039187ce1f5b5&quot;,
   &quot;@type&quot;: &quot;monitor&quot;,
-  &quot;startedAtTime&quot;: &quot;2022-09-06T19:58:26.408421&quot;,
-  &quot;wasStartedBy&quot;: &quot;uid:d4803b99043c4e1c958474cc8884a15e&quot;
+  &quot;startedAtTime&quot;: &quot;2022-09-08T19:23:36.264294&quot;,
+  &quot;wasStartedBy&quot;: &quot;uid:98786c8cb8c74622aaa73e8bb85e7aae&quot;
 }
-id: f74cf4678f394bba8b59daaeb3bb5615
+id: 092a99330f3f466d9dac4f44a6b640eb
 {
   &quot;@context&quot;: &quot;https://raw.githubusercontent.com/nipype/pydra/master/pydra/schema/context.jsonld&quot;,
-  &quot;@id&quot;: &quot;uid:f9223790a3724885a6a32ce97ac48e17&quot;,
-  &quot;endedAtTime&quot;: &quot;2022-09-06T19:58:26.438024&quot;,
-  &quot;wasEndedBy&quot;: &quot;uid:d4803b99043c4e1c958474cc8884a15e&quot;
+  &quot;@id&quot;: &quot;uid:65f746e440a94e5f879039187ce1f5b5&quot;,
+  &quot;endedAtTime&quot;: &quot;2022-09-08T19:23:36.292550&quot;,
+  &quot;wasEndedBy&quot;: &quot;uid:98786c8cb8c74622aaa73e8bb85e7aae&quot;
 }
-id: 4d4cf0882e424161ad96e4fca2c46508
+id: 776c45b1b5be478c9696dc85e0b0971c
 {
   &quot;@context&quot;: &quot;https://raw.githubusercontent.com/nipype/pydra/master/pydra/schema/context.jsonld&quot;,
-  &quot;rss_peak_gb&quot;: 0.08718490625,
-  &quot;vms_peak_gb&quot;: 0.851802826171875,
-  &quot;cpu_peak_percent&quot;: 218.7,
-  &quot;@id&quot;: &quot;uid:66f69b216978480cb8ef6d4199ac9557&quot;,
+  &quot;rss_peak_gb&quot;: 0.0887451171875,
+  &quot;vms_peak_gb&quot;: 0.83325958203125,
+  &quot;cpu_peak_percent&quot;: 243.1,
+  &quot;@id&quot;: &quot;uid:b3283a596b2546a4817afcc7fb4b12d4&quot;,
   &quot;@type&quot;: &quot;runtime&quot;,
-  &quot;prov:wasGeneratedBy&quot;: &quot;uid:d4803b99043c4e1c958474cc8884a15e&quot;
+  &quot;prov:wasGeneratedBy&quot;: &quot;uid:98786c8cb8c74622aaa73e8bb85e7aae&quot;
 }
-id: f82a0127e18441468843accc3a429bd1
+id: cf3310098d4d4d2bafbd04d28159b592
 {
   &quot;@context&quot;: &quot;https://raw.githubusercontent.com/nipype/pydra/master/pydra/schema/context.jsonld&quot;,
   &quot;@type&quot;: &quot;prov:Generation&quot;,
-  &quot;entity_generated&quot;: &quot;uid:66f69b216978480cb8ef6d4199ac9557&quot;,
-  &quot;hadActivity&quot;: &quot;uid:f9223790a3724885a6a32ce97ac48e17&quot;
+  &quot;entity_generated&quot;: &quot;uid:b3283a596b2546a4817afcc7fb4b12d4&quot;,
+  &quot;hadActivity&quot;: &quot;uid:65f746e440a94e5f879039187ce1f5b5&quot;
 }
-id: f572d335bd35495a82c8fef56f2d970e
+id: 0b0825e80029407a8c24fdac0c11ea78
 {
   &quot;@context&quot;: &quot;https://raw.githubusercontent.com/nipype/pydra/master/pydra/schema/context.jsonld&quot;,
-  &quot;@id&quot;: &quot;uid:d4803b99043c4e1c958474cc8884a15e&quot;,
-  &quot;endedAtTime&quot;: &quot;2022-09-06T19:58:26.438244&quot;,
+  &quot;@id&quot;: &quot;uid:98786c8cb8c74622aaa73e8bb85e7aae&quot;,
+  &quot;endedAtTime&quot;: &quot;2022-09-08T19:23:36.292997&quot;,
   &quot;errored&quot;: false
 }
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(out=9), runtime=Runtime(rss_peak_gb=0.08718490625, vms_peak_gb=0.851802826171875, cpu_peak_percent=218.7), errored=False)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(out=9), runtime=Runtime(rss_peak_gb=0.0887451171875, vms_peak_gb=0.83325958203125, cpu_peak_percent=243.1), errored=False)
 </pre></div>
 </div>
 </div>
