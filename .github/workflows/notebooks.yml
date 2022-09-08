@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 defaults:
   run:
-    shell: bash
+    shell: bash -l {0}
 
 jobs:
   build:
@@ -16,17 +16,18 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Disable etelemetry
-      run:  echo "NO_ET=TRUE" >> $GITHUB_ENV
-    - name: Set up Python ${{ matrix.python-version }}
-    - uses: conda-incubator/setup-miniconda@v2
+      run: echo "NO_ET=TRUE" >> $GITHUB_ENV
+    - name: Active conda env pydra-tutorial
+      uses: conda-incubator/setup-miniconda@v2
       with:
         activate-environment: pydra-tutorial
-        environment-file: etc/environment.yml
+        environment-file: environment.yml
         python-version: ${{ matrix.python-version }}
-        auto-activate-base: false
-      run: conda activate pydra-tutorial     
+    - run: conda info
+    - run: conda list
+    - run: conda config --show
     - name: Convert all md files to ipynb
       run: jupytext notebooks/*.md --to ipynb
     - name: Test notebooks with pytest
