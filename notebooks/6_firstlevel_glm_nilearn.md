@@ -23,9 +23,6 @@ This tutorial is based on the [Nilearn GLM tutorial](https://nilearn.github.io/s
 
 ```{code-cell} ipython3
 import nest_asyncio
-```
-
-```{code-cell} ipython3
 nest_asyncio.apply()
 ```
 
@@ -36,13 +33,38 @@ nest_asyncio.apply()
 Import packages that will be used globally and set up output directory
 
 ```{code-cell} ipython3
+import warnings
+import sys 
+if not sys.warnoptions:
+    warnings.simplefilter("ignore")
+    
 import os
-import pydra
-from pydra import Workflow
-from pydra.engine.specs import File
 import typing as ty
 from pathlib import Path
 
+import pydra
+from pydra import Workflow
+from pydra.engine.specs import File
+import pandas as pd
+from scipy.stats import norm
+
+import nibabel as nib
+from nilearn.datasets import (
+        fetch_openneuro_dataset_index,
+        fetch_openneuro_dataset,
+        select_from_index,
+    )
+from nilearn.interfaces.fsl import get_design_from_fslmat
+from nilearn.glm.first_level import first_level_from_bids
+from nilearn.reporting import get_clusters_table, make_glm_report
+from nilearn.plotting import (
+    plot_glass_brain,
+    plot_img_comparison,
+    plot_contrast_matrix,
+)
+```
+
+```{code-cell} ipython3
 # get current directory
 pydra_tutorial_dir = os.path.dirname(os.getcwd())
 
@@ -87,13 +109,6 @@ In this task, we do the following:
     }
 )
 def get_openneuro_dataset(exclusion_patterns, n_subjects):
-
-    from nilearn.datasets import (
-        fetch_openneuro_dataset_index,
-        fetch_openneuro_dataset,
-        select_from_index,
-    )
-
     _, urls = fetch_openneuro_dataset_index()
     urls = select_from_index(
         urls, exclusion_filters=exclusion_patterns, n_subjects=n_subjects
@@ -133,8 +148,6 @@ Those are inferred from the confounds.tsv files available in the BIDS dataset.
 def get_info_from_bids(
     data_dir, task_label, space_label, smoothing_fwhm, derivatives_folder
 ):
-    from nilearn.glm.first_level import first_level_from_bids
-
     (
         models,
         models_run_imgs,
@@ -172,9 +185,6 @@ This task does the following:
     {'data_dir': str, 'subject': str, 'return': {'dm_path': str}}
 )
 def get_designmatrix(data_dir, subject):
-
-    from nilearn.interfaces.fsl import get_design_from_fslmat
-
     fsl_design_matrix_path = os.path.join(
         data_dir,
         'derivatives',
@@ -217,8 +227,6 @@ What we are doing here is:
     }
 )
 def model_fit(model, imgs, dm_path, contrast):
-    import pandas as pd
-
     design_matrix = pd.read_csv(dm_path)
     model.fit(imgs, design_matrices=[design_matrix])
     z_map = model.compute_contrast(contrast)
@@ -237,10 +245,6 @@ For publication purposes, we obtain a cluster table and a summary report.
 @pydra.mark.task
 @pydra.mark.annotate({'z_map_path': str, 'return': {'output_file': str}})
 def cluster_table(z_map_path):
-    import nibabel as nib
-    from nilearn.reporting import get_clusters_table
-    from scipy.stats import norm
-
     stat_img = nib.load(z_map_path)
     output_file = os.path.join(workflow_out_dir, 'cluster_table.csv')
     df = get_clusters_table(
@@ -256,8 +260,6 @@ def cluster_table(z_map_path):
     {'model': ty.Any, 'contrasts': str, 'return': {'output_file': str}}
 )
 def glm_report(model, contrasts):
-    from nilearn.reporting import make_glm_report
-
     output_file = os.path.join(workflow_out_dir, 'glm_report.html')
     report = make_glm_report(model, contrasts)
     report.save_as_html(output_file)
@@ -292,24 +294,7 @@ You can also seperate this task into multiple sub-tasks. But it makes more sense
         },
     }
 )
-def plots(
-    data_dir,
-    dm_path,
-    z_map_path,
-    contrast,
-    subject,
-    masker,
-):
-    import pandas as pd
-    import nibabel as nib
-    from nilearn.plotting import (
-        plot_glass_brain,
-        plot_img_comparison,
-        plot_contrast_matrix,
-    )
-    import matplotlib.pyplot as plt
-    from scipy.stats import norm
-
+def plots(data_dir,dm_path,z_map_path,contrast,subject,masker):
     # plot and save nilearn z-map
     z_map = nib.load(z_map_path)
     output_file1 = os.path.join(workflow_out_dir, 'nilearn_z_map.jpg')
