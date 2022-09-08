@@ -12,7 +12,7 @@ kernelspec:
   name: python3
 ---
 
-# 7. Multilevel GLM (from Nilearn)
+# 7. Two Level GLM (from Nilearn)
 
 +++
 
@@ -34,8 +34,9 @@ Import packages that will be used globally and set up output directory
 
 ```{code-cell} ipython3
 import warnings
-warnings.filterwarnings('ignore')
-warnings.simplefilter('ignore')
+import sys 
+if not sys.warnoptions:
+    warnings.simplefilter("ignore")
 
 import os, glob
 import datetime
@@ -47,6 +48,17 @@ import typing as ty
 from pathlib import Path
 import datalad.api as dl
 
+import numpy as np
+import pandas as pd
+import nibabel as nib
+from nilearn.interfaces.fmriprep import load_confounds_strategy
+from nilearn.image import get_data, math_img, threshold_img
+from nilearn.glm.first_level import make_first_level_design_matrix, FirstLevelModel
+from nilearn.glm.second_level import SecondLevelModel, non_parametric_inference
+from nilearn.plotting import plot_stat_map
+```
+
+```{code-cell} ipython3
 # get current directory
 pydra_tutorial_dir = os.path.dirname(os.getcwd())
 
@@ -108,8 +120,8 @@ We need to get four types of data from two folders:
         'return': {'subj_id': int, 'subj_events': list, 'subj_imgs':list, 'subj_masks':list},
     }
 )
-def get_data(subj_id):
-    print("Download data for sub-%02d" % subj_id)
+def get_subjdata(subj_id):
+    print(f"\nDownload data for subject-{subj_id}")
     # get events.tsv 
     subj_events = glob.glob(os.path.join(rawdata_path, 'sub-%02d' % subj_id, 'func', '*events.tsv'))
     subj_events.sort()
@@ -147,15 +159,11 @@ The design matrix is a _M(row)_ x _N(columns)_ matrix. _M_ corresponds to the nu
         'subj_id': int,
         'subj_imgs': list,
         'subj_events':list,
-        'return': {'design_matrices': list, 'dm_paths':list},
+        'return': {'design_matrices': list},
     }
 )
 def get_firstlevel_dm(tr, n_scans, hrf_model, subj_id, subj_imgs, subj_events):
     print(f"\nGet subject-{subj_id} firstlevel GLM ...\n")
-    import numpy as np
-    import pandas as pd
-    from nilearn.glm.first_level import make_first_level_design_matrix
-    from nilearn.interfaces.fmriprep import load_confounds_strategy
     # read event file
     events = []
     imgs = []
@@ -166,10 +174,8 @@ def get_firstlevel_dm(tr, n_scans, hrf_model, subj_id, subj_imgs, subj_events):
     
     # get list of confounds directly from fmriprepped bold
     confounds = load_confounds_strategy(subj_imgs, denoise_strategy='simple')[0]
-    
     frame_times = np.arange(n_scans) * tr
     design_matrices = []
-    dm_paths = []
     for index, (ev, conf) in enumerate(zip(events, confounds)):
         design_matrix = make_first_level_design_matrix(frame_times, ev, 
                                                        hrf_model=hrf_model,
@@ -184,8 +190,7 @@ def get_firstlevel_dm(tr, n_scans, hrf_model, subj_id, subj_imgs, subj_events):
         dm_path = os.path.join(workflow_out_dir, 'sub-%s_run-%s_designmatrix.csv' % (subj_id, index+1))
         design_matrix.to_csv(dm_path, index=None)
         design_matrices.append(design_matrix)
-        dm_paths.append(dm_path)
-    return design_matrices, dm_paths
+    return design_matrices
 ```
 
 ### Set up the first-level contrasts
@@ -201,11 +206,7 @@ def get_firstlevel_dm(tr, n_scans, hrf_model, subj_id, subj_imgs, subj_events):
 )
 def set_contrast(subj_id, design_matrices):
     t1 = datetime.datetime.now()
-    print(f"\nSet firstlevel contrast for subject-{subj_id} ...\n")
-    
-    import pandas as pd
-    import numpy as np
-    
+    print(f"\nSet firstlevel contrast for subject-{subj_id} ...\n") 
     design_matrix = design_matrices[0]
     contrast_matrix = np.eye(design_matrix.shape[1])
     basic_contrasts = dict([(column, contrast_matrix[i])
@@ -237,9 +238,6 @@ def set_contrast(subj_id, design_matrices):
 )
 def firstlevel_estimation(subj_id, subj_imgs, subj_masks, smoothing_fwhm, design_matrices, contrasts):
     print(f"\nStart firstlevel estimation for subject-{subj_id} ...\n")
-    import nibabel as nib
-    from nilearn.image import math_img
-    from nilearn.glm.first_level import FirstLevelModel
     print('Compute firstlevel mask...')
     # average mask across three runs
     mean_mask = math_img('np.mean(img, axis=-1)', img=subj_masks)
@@ -249,7 +247,6 @@ def firstlevel_estimation(subj_id, subj_imgs, subj_masks, smoothing_fwhm, design
     # fit the (fixed-effects) firstlevel model with three runs simultaneously
     first_level_model = FirstLevelModel(mask_img=mask, smoothing_fwhm=smoothing_fwhm)
     first_level_model = first_level_model.fit(subj_imgs, design_matrices=design_matrices)
-    
     print('Computing contrasts...')
     z_map_path_dict = dict.fromkeys(contrasts.keys())
     for index, (contrast_id, contrast_val) in enumerate(contrasts.items()):
@@ -259,7 +256,6 @@ def firstlevel_estimation(subj_id, subj_imgs, subj_masks, smoothing_fwhm, design
         # effect across the two sessions
         z_map = first_level_model.compute_contrast(
             contrast_val, output_type='z_score')
-
         # write the resulting stat images to file
         z_map_path = os.path.join(workflow_out_dir, 'sub-%s_contrast-%s_z_map.nii.gz' % (subj_id, contrast_id))
         z_map_path_dict[contrast_id] = z_map_path
@@ -287,8 +283,8 @@ wf_firstlevel = Workflow(
 wf_firstlevel.split('subj_id')
 # add task - get_subj_file
 wf_firstlevel.add(
-    get_data(
-        name = "get_data",
+    get_subjdata(
+        name = "get_subjdata",
         subj_id = wf_firstlevel.lzin.subj_id, 
     )
 )
@@ -300,9 +296,9 @@ wf_firstlevel.add(
         tr = wf_firstlevel.lzin.tr, 
         n_scans = wf_firstlevel.lzin.n_scans, 
         hrf_model = wf_firstlevel.lzin.hrf_model, 
-        subj_id = wf_firstlevel.get_data.lzout.subj_id, 
-        subj_imgs = wf_firstlevel.get_data.lzout.subj_imgs, 
-        subj_events = wf_firstlevel.get_data.lzout.subj_events, 
+        subj_id = wf_firstlevel.get_subjdata.lzout.subj_id, 
+        subj_imgs = wf_firstlevel.get_subjdata.lzout.subj_imgs, 
+        subj_events = wf_firstlevel.get_subjdata.lzout.subj_events, 
     )
 )
 
@@ -310,7 +306,7 @@ wf_firstlevel.add(
 wf_firstlevel.add(
     set_contrast(
         name = "set_contrast",
-        subj_id = wf_firstlevel.get_data.lzout.subj_id,
+        subj_id = wf_firstlevel.get_subjdata.lzout.subj_id,
         design_matrices = wf_firstlevel.get_firstlevel_dm.lzout.design_matrices
     )
 )
@@ -319,9 +315,9 @@ wf_firstlevel.add(
 wf_firstlevel.add(
     firstlevel_estimation(
         name = "firstlevel_estimation",
-        subj_id = wf_firstlevel.get_data.lzout.subj_id, 
-        subj_imgs = wf_firstlevel.get_data.lzout.subj_imgs, 
-        subj_masks = wf_firstlevel.get_data.lzout.subj_masks, 
+        subj_id = wf_firstlevel.get_subjdata.lzout.subj_id, 
+        subj_imgs = wf_firstlevel.get_subjdata.lzout.subj_imgs, 
+        subj_masks = wf_firstlevel.get_subjdata.lzout.subj_masks, 
         smoothing_fwhm = wf_firstlevel.lzin.smoothing_fwhm, 
         design_matrices = wf_firstlevel.get_firstlevel_dm.lzout.design_matrices, 
         contrasts = wf_firstlevel.set_contrast.lzout.contrasts
@@ -361,7 +357,6 @@ The design matrix is a single column of ones, corresponding to the model interce
 def get_secondlevel_dm(n_subj):
     t1 = datetime.datetime.now()
     print(f"\nGet secondlevel design matrix ...\n")
-    import pandas as pd
     design_matrix = pd.DataFrame([1] * n_subj,columns=['intercept'])
     return design_matrix
 ```
@@ -376,16 +371,13 @@ Here, we use the list of FirstLevel z-maps as the input for the SecondLevelModel
     {'firstlevel_zmap_list': list, 'design_matrix': ty.Any, 'firstlevel_contrast':list, 
      'return': {'secondlevel_mask': ty.Any, 'stat_maps_dict': dict}}
 )
-def secondlevel_estimation(firstlevel_zmap_list, design_matrix, firstlevel_contrast):
-    import nibabel as nib
-    from nilearn.glm.second_level import SecondLevelModel
+def secondlevel_estimation(firstlevel_zmap_list, design_matrix, firstlevel_contrast):   
     print(f"\nStart secondlevel estimation ...\n")
     stat_maps_dict = dict.fromkeys(firstlevel_contrast[0].keys())
     for index, (contrast_id, contrast_val) in enumerate(firstlevel_contrast[0].items()):
         print(' Contrast % 2i out of %i: %s' % (
             index + 1, len(firstlevel_contrast[0]), contrast_id))
         second_level_input = [nib.load(z_map_dict[contrast_id]) for z_map_dict in firstlevel_zmap_list]
-        
         second_level_model = SecondLevelModel()
         second_level_model = second_level_model.fit(second_level_input, design_matrix=design_matrix)
         secondlevel_mask = second_level_model.masker_.mask_img_
@@ -464,8 +456,6 @@ Threshold the resulting map without multiple comparisons correction, abs(z) > 3.
 def cluster_thresholding(stat_maps_dict, threshold, cluster_threshold):
     t1 = datetime.datetime.now()
     print("\nStart cluster thresholding ...\n")
-    from nilearn.image import threshold_img
-    from nilearn.plotting import plot_stat_map
     thresholded_map_dict = dict.fromkeys(stat_maps_dict.keys())
     plot_contrast_dict = dict.fromkeys(stat_maps_dict.keys())
     for index, (stats_id, stats_val) in enumerate(stat_maps_dict.items()):
@@ -548,16 +538,13 @@ A nilearn example see [here](https://nilearn.github.io/dev/auto_examples/05_glm_
 )
 def parametric_test(stat_maps_dict, secondlevel_mask):
     print("\nStart parametric test ...\n")
-    import numpy as np
-    from nilearn.image import get_data, math_img
-    from nilearn.plotting import plot_stat_map
     thresholded_map_dict = dict.fromkeys(stat_maps_dict.keys())
     plot_contrast_dict = dict.fromkeys(stat_maps_dict.keys())
     for index, (stats_id, stats_val) in enumerate(stat_maps_dict.items()):
         print('Contrast % 2i out of %i: %s' % (
             index + 1, len(stat_maps_dict), stats_id))
         p_val = stats_val['p_value']
-        n_voxels = np.sum(get_data(secondlevel_mask))
+        n_voxels = np.sum(get_data(img=secondlevel_mask))
         # Correcting the p-values for multiple testing and taking negative logarithm
         neg_log_pval = math_img("-np.log10(np.minimum(1, img * {}))"
                                 .format(str(n_voxels)),
@@ -595,9 +582,6 @@ Here we compute the (corrected) negative log p-values with permutation test.
 )
 def nonparametric_test(firstlevel_zmap_list, smoothing_fwhm, design_matrix, firstlevel_contrast, n_perm):
     print(f"\nStart nonparametric test ...\n")
-    import nibabel as nib
-    from nilearn.glm.second_level import non_parametric_inference
-    from nilearn.plotting import plot_stat_map
     thresholded_map_dict = dict.fromkeys(firstlevel_contrast[0].keys())
     plot_contrast_dict = dict.fromkeys(firstlevel_contrast[0].keys())
     for index, (contrast_id, contrast_val) in enumerate(firstlevel_contrast[0].items()):
@@ -637,7 +621,7 @@ wf = Workflow(
     input_spec=['n_subj'],
 )
 
-wf.inputs.n_subj = 5
+wf.inputs.n_subj = 2
 
 # randomly choose subjects
 wf_firstlevel.inputs.subj_id = random.sample(range(1,17), wf.inputs.n_subj)
@@ -691,7 +675,7 @@ wf.add(
         smoothing_fwhm = 5.0,
         design_matrix = wf.wf_secondlevel.lzout.second_level_designmatrix,
         firstlevel_contrast = wf.wf_firstlevel.lzout.first_level_contrast,
-        n_perm = 100,
+        n_perm = 1,
     )
 )
 
