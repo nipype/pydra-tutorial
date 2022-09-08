@@ -4,24 +4,27 @@ on:
   push: {branches: [main, master]}
   pull_request: {branches: [main, master]}
 
+defaults:
+  run:
+    shell: bash -l {0}
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python: [3.9]
     steps:
     - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python }}
-    - name: Install dependencies
-      run: |
-        pip install --upgrade pip
-        pip install -r jupyterbook/requirements.txt
     - name: Disable etelemetry
       run: echo "NO_ET=TRUE" >> $GITHUB_ENV
+    - name: Active conda env pydra-tutorial
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        activate-environment: pydra-tutorial
+        environment-file: environment.yml
+    - run: conda info
+    - run: conda list
+    - run: conda config --show
+    - name: Install dependencies
+      run: pip install jupyter-book
     - name: Build JupyterBook
       run: jb build -W jupyterbook
     - uses: peaceiris/actions-gh-pages@v3

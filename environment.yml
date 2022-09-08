@@ -1,0 +1,25 @@
+name: pydra-tutorial
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - git-annex
+  - pip
+  - pip:
+    - datalad
+    - pydra
+    - jupyter
+    - jupyter_contrib_nbextensions
+    - jupytext
+    - jupyterlab
+    - matplotlib
+    - nbformat
+    - nbval
+    - nest_asyncio
+    - psutil
+    - pytest
+    - numpy
+    - pandas
+    - scipy
+    - nibabel
+    - nilearn
