@@ -188,7 +188,7 @@ def get_firstlevel_dm(tr, n_scans, hrf_model, subj_id, subj_imgs, subj_events):
         design_matrix = design_matrix.reindex(sorted(design_matrix.columns), axis=1)
         dm_path = os.path.join(workflow_out_dir, 'sub-%s_run-%s_designmatrix.csv' % (subj_id, index+1))
         design_matrix.to_csv(dm_path, index=None)
-        design_matrices.append(design_matrix)
+        design_matrices.append(dm_path)
     return design_matrices
 ```
 
@@ -204,9 +204,8 @@ def get_firstlevel_dm(tr, n_scans, hrf_model, subj_id, subj_imgs, subj_events):
     }
 )
 def set_contrast(subj_id, design_matrices):
-    t1 = datetime.datetime.now()
     print(f"\nSet firstlevel contrast for subject-{subj_id} ...\n") 
-    design_matrix = design_matrices[0]
+    design_matrix = pd.read_csv(design_matrices[0])
     contrast_matrix = np.eye(design_matrix.shape[1])
     basic_contrasts = dict([(column, contrast_matrix[i])
                       for i, column in enumerate(design_matrix.columns)])
@@ -245,7 +244,8 @@ def firstlevel_estimation(subj_id, subj_imgs, subj_masks, smoothing_fwhm, design
     print('Fit the firstlevel model...')
     # fit the (fixed-effects) firstlevel model with three runs simultaneously
     first_level_model = FirstLevelModel(mask_img=mask, smoothing_fwhm=smoothing_fwhm)
-    first_level_model = first_level_model.fit(subj_imgs, design_matrices=design_matrices)
+    dms = [pd.read_csv(pth) for pth in design_matrices]
+    first_level_model = first_level_model.fit(subj_imgs, design_matrices=dms)
     print('Computing contrasts...')
     z_map_path_dict = dict.fromkeys(contrasts.keys())
     for index, (contrast_id, contrast_val) in enumerate(contrasts.items()):
@@ -690,7 +690,7 @@ wf.set_output(
 
 from pydra import Submitter
 
-with Submitter(plugin='cf', n_procs=2) as submitter:
+with Submitter(plugin='cf', n_procs=4) as submitter:
     submitter(wf)
 
 results = wf.result()
