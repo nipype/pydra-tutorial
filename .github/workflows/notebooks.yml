@@ -28,8 +28,6 @@ jobs:
     - run: conda info
     - run: conda list
     - run: conda config --show
-    - name: Initialize Git-annex
-    - run: git annex init
     - name: Convert all md files to ipynb
       run: jupytext notebooks/*.md --to ipynb
     - name: Test notebooks with pytest
