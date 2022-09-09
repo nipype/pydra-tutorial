@@ -29,6 +29,10 @@ jobs:
     - run: conda list
     - run: conda config --show
     - run: datalad wtf
+    - name: Set git credentials
+      run: |
+        git config --global user.name "Fake user"
+        git config --global user.email "fake@email"
     - name: Convert all md files to ipynb
       run: jupytext notebooks/*.md --to ipynb
     - name: Test notebooks with pytest
