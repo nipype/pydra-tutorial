@@ -92,7 +92,6 @@ We need the following data:
 
 fmriprep_path = workflow_dir / '7_glm'/ 'data'
 rawdata_path = workflow_dir / '7_glm' / 'raw_data'
-
 os.makedirs(fmriprep_path, exist_ok=True)
 os.makedirs(rawdata_path, exist_ok=True)
 # Install datasets to specific datapaths
