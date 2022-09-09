@@ -94,11 +94,13 @@ fmriprep_path = workflow_dir / '7_glm'/ 'data'
 rawdata_path = workflow_dir / '7_glm' / 'raw_data'
 os.makedirs(fmriprep_path, exist_ok=True)
 os.makedirs(rawdata_path, exist_ok=True)
+assert len(os.listdir(fmriprep_path)) == 0
 # Install datasets to specific datapaths
 fmriprep_url = 'https://github.com/OpenNeuroDerivatives/ds000001-fmriprep.git'
 rawdata_url = 'https://github.com/OpenNeuroDatasets/ds000001.git'
 dl.install(source=rawdata_url, path=rawdata_path)
 dl.install(source=fmriprep_url, path=fmriprep_path)
+assert len(os.listdir(fmriprep_path)) != 0
 ```
 
 ### Get data for each subject
