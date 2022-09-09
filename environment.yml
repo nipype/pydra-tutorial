@@ -4,9 +4,9 @@ channels:
   - defaults
 dependencies:
   - git-annex
+  - datalad
   - pip
   - pip:
-    - datalad
     - pydra
     - jupyter
     - jupyter_contrib_nbextensions
