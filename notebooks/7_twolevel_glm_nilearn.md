@@ -66,7 +66,7 @@ pydra_tutorial_dir = os.path.dirname(os.getcwd())
 workflow_dir = Path(pydra_tutorial_dir) / 'outputs'
 workflow_out_dir = workflow_dir / '7_glm' /'results'
 
-# create the output directory if not exit
+# create folders if not exit
 os.makedirs(workflow_out_dir, exist_ok=True)
 ```
 
@@ -88,18 +88,18 @@ We need the following data:
 4. confounds (fmriprep)
 
 ```{code-cell} ipython3
+:tags: []
+
 fmriprep_path = workflow_dir / '7_glm'/ 'data'
 rawdata_path = workflow_dir / '7_glm' / 'raw_data'
 
-# create the folders if not exit
 os.makedirs(fmriprep_path, exist_ok=True)
 os.makedirs(rawdata_path, exist_ok=True)
-
 # Install datasets to specific datapaths
-rawdata_url = 'https://github.com/OpenNeuroDerivatives/ds000001-fmriprep.git'
-fmriprep_url = 'https://github.com/OpenNeuroDatasets/ds000001.git'
-dl.install(source=rawdata_url, path=fmriprep_path)
-dl.install(source=fmriprep_url, path=rawdata_path)
+fmriprep_url = 'https://github.com/OpenNeuroDerivatives/ds000001-fmriprep.git'
+rawdata_url = 'https://github.com/OpenNeuroDatasets/ds000001.git'
+dl.install(source=rawdata_url, path=rawdata_path)
+dl.install(source=fmriprep_url, path=fmriprep_path)
 ```
 
 ### Get data for each subject
