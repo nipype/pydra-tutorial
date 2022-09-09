@@ -6,6 +6,11 @@ defaults:
   run:
     shell: bash -l {0}
 
+env:
+  global:
+    - DATALAD_LOG_OUTPUTS=1
+    - DATALAD_LOG_LEVEL=DEBUG
+
 jobs:
   build:
     strategy:
@@ -28,11 +33,10 @@ jobs:
     - run: conda info
     - run: conda list
     - run: conda config --show
-    - run: datalad wtf
     - name: Set git credentials
       run: |
-        git config --global user.name "Fake user"
-        git config --global user.email "fake@email"
+        git config --global user.name "yibeichan"
+        git config --global user.email "yibeichan@gmail.com"
     - name: Convert all md files to ipynb
       run: jupytext notebooks/*.md --to ipynb
     - name: Test notebooks with pytest
