@@ -191,8 +191,6 @@ def get_firstlevel_dm(tr, n_scans, hrf_model, subj_id, subj_imgs, subj_events):
         dm_path = os.path.join(workflow_out_dir, 'sub-%s_run-%s_designmatrix.csv' % (subj_id, index+1))
         design_matrix.to_csv(dm_path, index=None)
         design_matrices.append(dm_path)
-    assert design_matrices == 3
-    assert design_matrices[0] == str
     return design_matrices
 ```
 
@@ -209,8 +207,6 @@ def get_firstlevel_dm(tr, n_scans, hrf_model, subj_id, subj_imgs, subj_events):
 )
 def set_contrast(subj_id, design_matrices):
     print(f"\nSet firstlevel contrast for subject-{subj_id} ...\n") 
-    assert len(design_matrices) == 3
-    assert design_matrices[0] == str
     design_matrix = pd.read_csv(design_matrices[0])
     contrast_matrix = np.eye(design_matrix.shape[1])
     basic_contrasts = dict([(column, contrast_matrix[i])
@@ -241,8 +237,6 @@ def set_contrast(subj_id, design_matrices):
     }
 )
 def firstlevel_estimation(subj_id, subj_imgs, subj_masks, smoothing_fwhm, design_matrices, contrasts):
-    assert len(design_matrices) == 3
-    assert design_matrices[0] == str
     print(f"\nStart firstlevel estimation for subject-{subj_id} ...\n")
     print('Compute firstlevel mask...')
     # average mask across three runs
