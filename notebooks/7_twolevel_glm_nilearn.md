@@ -692,7 +692,7 @@ wf.set_output(
 
 from pydra import Submitter
 
-with Submitter(plugin='cf', n_procs=2) as submitter:
+with Submitter(plugin='cf', n_procs=1) as submitter:
     submitter(wf)
 
 results = wf.result()
