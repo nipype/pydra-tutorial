@@ -103,7 +103,7 @@ dl.install(source=fmriprep_url, path=fmriprep_path)
 ```
 
 ```{code-cell} ipython3
-print(glob.globglob.glob(os.path.join(fmriprep_path, '*')))
+print(glob.glob(os.path.join(fmriprep_path, '*')))
 ```
 
 ### Get data for each subject
