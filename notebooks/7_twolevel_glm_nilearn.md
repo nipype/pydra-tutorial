@@ -100,7 +100,10 @@ fmriprep_url = 'https://github.com/OpenNeuroDerivatives/ds000001-fmriprep.git'
 rawdata_url = 'https://github.com/OpenNeuroDatasets/ds000001.git'
 dl.install(source=rawdata_url, path=rawdata_path)
 dl.install(source=fmriprep_url, path=fmriprep_path)
-assert len(os.listdir(fmriprep_path)) != 0
+```
+
+```{code-cell} ipython3
+print(glob.globglob.glob(os.path.join(fmriprep_path, '*')))
 ```
 
 ### Get data for each subject
@@ -692,7 +695,7 @@ wf.set_output(
 
 from pydra import Submitter
 
-with Submitter(plugin='cf', n_procs=1) as submitter:
+with Submitter(plugin='cf', n_procs=2) as submitter:
     submitter(wf)
 
 results = wf.result()
