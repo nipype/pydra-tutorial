@@ -102,10 +102,6 @@ dl.install(source=rawdata_url, path=rawdata_path)
 dl.install(source=fmriprep_url, path=fmriprep_path)
 ```
 
-```{code-cell} ipython3
-print(glob.glob(os.path.join(fmriprep_path, '*')))
-```
-
 ### Get data for each subject
 
 By `datalad.api.install`, datalad downloads all symlinks without storing the actual data locally. We can then use `datalad.api.get` to get the data we need for our analysis. 
