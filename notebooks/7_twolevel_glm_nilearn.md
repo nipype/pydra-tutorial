@@ -626,7 +626,7 @@ wf = Workflow(
     input_spec=['n_subj'],
 )
 
-wf.inputs.n_subj = 5
+wf.inputs.n_subj = 2
 
 # randomly choose subjects
 wf_firstlevel.inputs.subj_id = random.sample(range(1,17), wf.inputs.n_subj)
