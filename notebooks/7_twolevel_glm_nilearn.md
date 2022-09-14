@@ -41,6 +41,7 @@ if not sys.warnoptions:
 import os, glob
 import datetime
 import random
+from sh import gunzip
 import pydra
 from pydra import Workflow
 from pydra.engine.specs import File, MultiInputFile, MultiOutputFile
@@ -94,7 +95,6 @@ fmriprep_path = workflow_dir / '7_glm'/ 'data'
 rawdata_path = workflow_dir / '7_glm' / 'raw_data'
 os.makedirs(fmriprep_path, exist_ok=True)
 os.makedirs(rawdata_path, exist_ok=True)
-assert len(os.listdir(fmriprep_path)) == 0
 # Install datasets to specific datapaths
 fmriprep_url = 'https://github.com/OpenNeuroDerivatives/ds000001-fmriprep.git'
 rawdata_url = 'https://github.com/OpenNeuroDatasets/ds000001.git'
@@ -246,6 +246,9 @@ def firstlevel_estimation(subj_id, subj_imgs, subj_masks, smoothing_fwhm, design
     # fit the (fixed-effects) firstlevel model with three runs simultaneously
     first_level_model = FirstLevelModel(mask_img=mask, smoothing_fwhm=smoothing_fwhm)
     dms = [pd.read_csv(pth) for pth in design_matrices]
+    for img in subj_imgs:
+        gunzip(img)
+    # subj_imgs_unzip = [img.split('.gz')[0] for img in subj_imgs]
     first_level_model = first_level_model.fit(subj_imgs, design_matrices=dms)
     print('Computing contrasts...')
     z_map_path_dict = dict.fromkeys(contrasts.keys())
@@ -675,7 +678,7 @@ wf.add(
         smoothing_fwhm = 5.0,
         design_matrix = wf.wf_secondlevel.lzout.second_level_designmatrix,
         firstlevel_contrast = wf.wf_firstlevel.lzout.first_level_contrast,
-        n_perm = 1,
+        n_perm = 100,
     )
 )
 
