@@ -246,10 +246,10 @@ def firstlevel_estimation(subj_id, subj_imgs, subj_masks, smoothing_fwhm, design
     # fit the (fixed-effects) firstlevel model with three runs simultaneously
     first_level_model = FirstLevelModel(mask_img=mask, smoothing_fwhm=smoothing_fwhm)
     dms = [pd.read_csv(pth) for pth in design_matrices]
-    # for img in subj_imgs:
-    #     gunzip(img)
-    # subj_imgs_unzip = [img.split('.gz')[0] for img in subj_imgs]
-    first_level_model = first_level_model.fit(subj_imgs, design_matrices=dms)
+    for img in subj_imgs:
+        gunzip(img)
+    subj_imgs_unzip = [img.split('.gz')[0] for img in subj_imgs]
+    first_level_model = first_level_model.fit(subj_imgs_unzip, design_matrices=dms)
     print('Computing contrasts...')
     z_map_path_dict = dict.fromkeys(contrasts.keys())
     for index, (contrast_id, contrast_val) in enumerate(contrasts.items()):
