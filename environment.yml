@@ -3,7 +3,6 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - git-annex
   - datalad
   - pip
   - pip:
@@ -17,6 +16,7 @@ dependencies:
     - nbval
     - nest_asyncio
     - psutil
+    - sh
     - pytest
     - numpy
     - pandas
