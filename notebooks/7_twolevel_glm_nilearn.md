@@ -5,7 +5,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.13.8
+    jupytext_version: 1.14.1
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -41,7 +41,6 @@ if not sys.warnoptions:
 import os, glob
 import datetime
 import random
-from sh import gunzip
 import pydra
 from pydra import Workflow
 from pydra.engine.specs import File, MultiInputFile, MultiOutputFile
@@ -244,7 +243,7 @@ def firstlevel_estimation(subj_id, subj_imgs, subj_masks, smoothing_fwhm, design
     mask = math_img('img > 0', img=mean_mask)
     print('Fit the firstlevel model...')
     # fit the (fixed-effects) firstlevel model with three runs simultaneously
-    first_level_model = FirstLevelModel(mask_img=mask, smoothing_fwhm=smoothing_fwhm, n_job=-1)
+    first_level_model = FirstLevelModel(mask_img=mask, smoothing_fwhm=smoothing_fwhm)
     dms = [pd.read_csv(pth) for pth in design_matrices]
     first_level_model = first_level_model.fit(subj_imgs, design_matrices=dms)
     print('Computing contrasts...')
@@ -266,11 +265,8 @@ def firstlevel_estimation(subj_id, subj_imgs, subj_masks, smoothing_fwhm, design
 ### Create the first-level GLM workflow
 
 ```{code-cell} ipython3
----
-jupyter:
-  outputs_hidden: true
-tags: []
----
+:tags: []
+
 # initiate the first-level GLM workflow
 wf_firstlevel = Workflow(
     name='wf_firstlevel',
@@ -706,7 +702,7 @@ print(results)
 
 ## Let's Plot!
 
-We only use 5 subjects, so it's reasonable the following plots have nothing survived from testing.
+We only use 2 subjects, so it's reasonable the following plots have nothing survived from testing.
 
 +++
 
