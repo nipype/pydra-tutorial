@@ -383,7 +383,6 @@ def get_fixed_effcts(subj_id, subj_masks, contrasts, effect_size_path_dict_list,
 
 ### Create the fixed effect workflow
 
-
 ```{code-cell} ipython3
 # initiate the fixed effect GLM workflow
 wf_fixed_effect = Workflow(
@@ -482,7 +481,7 @@ def secondlevel_estimation(firstlevel_stats_list, design_matrix, firstlevel_cont
     stat_maps_dict = dict.fromkeys(firstlevel_contrast[0][0].keys())
     for index, (contrast_id, contrast_val) in enumerate(firstlevel_contrast[0][0].items()):
         print(' Contrast % 2i out of %i: %s' % (
-            index + 1, len(firstlevel_contrast[0]), contrast_id))
+            index + 1, len(firstlevel_contrast[0][0]), contrast_id))
         second_level_input = [nib.load(stats_dict[contrast_id]) for stats_dict in firstlevel_stats_list]
         second_level_model = SecondLevelModel()
         second_level_model = second_level_model.fit(second_level_input, design_matrix=design_matrix)
@@ -692,7 +691,7 @@ def nonparametric_test(firstlevel_stats_list, smoothing_fwhm, design_matrix, fir
     plot_contrast_dict = dict.fromkeys(firstlevel_contrast[0][0].keys())
     for index, (contrast_id, contrast_val) in enumerate(firstlevel_contrast[0][0].items()):
         print('  Contrast % 2i out of %i: %s' % (
-            index + 1, len(firstlevel_contrast[0]), contrast_id))
+            index + 1, len(firstlevel_contrast[0][0]), contrast_id))
         # here we set threshold as none to do voxel-level FWER-correction.
         second_level_input = [nib.load(stats_dict[contrast_id]) for stats_dict in firstlevel_stats_list]
         neg_log_pvals_permuted_ols_unmasked = \
@@ -808,7 +807,7 @@ print(results)
 
 ## Let's Plot!
 
-We only use 5 subjects, so it's reasonable the following plots have nothing survived from testing.
+We only use 2 subjects, so it's reasonable the following plots have nothing survived from testing.
 
 +++
 
