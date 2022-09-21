@@ -5,7 +5,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.13.8
+    jupytext_version: 1.14.1
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -726,7 +726,7 @@ wf = Workflow(
     input_spec=['n_subj'],
 )
 
-wf.inputs.n_subj = 5
+wf.inputs.n_subj = 2
 
 # randomly choose subjects
 wf_fixed_effect.inputs.subj_id = random.sample(range(1,17), wf.inputs.n_subj)
@@ -793,8 +793,11 @@ wf.set_output(
 ```
 
 ```{code-cell} ipython3
-:tags: []
-
+---
+jupyter:
+  outputs_hidden: true
+tags: []
+---
 from pydra import Submitter
 
 with Submitter(plugin='cf', n_procs=2) as submitter:
