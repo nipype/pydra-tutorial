@@ -5,7 +5,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.14.1
+    jupytext_version: 1.13.8
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -240,7 +240,7 @@ def firstlevel_estimation(subj_id, run_id, subj_imgs, subj_masks, smoothing_fwhm
     # fit the (fixed-effects) firstlevel model with three runs simultaneously
     run_img = subj_imgs[run_id-1]
     img = load_img(run_img)
-    img_data = get_data(run_img)[::2,::2,::2]
+    img_data = get_data(run_img)[::3,::3,::3]
     new_img = nib.Nifti1Image(img_data, img.affine)
     run_mask = subj_masks[run_id-1]
     first_level_model = FirstLevelModel(mask_img=run_mask, smoothing_fwhm=smoothing_fwhm)
@@ -800,7 +800,7 @@ wf.set_output(
 
 from pydra import Submitter
 
-with Submitter(plugin='cf', n_procs=2) as submitter:
+with Submitter(plugin='cf', n_procs=1) as submitter:
     submitter(wf)
 
 results = wf.result()
