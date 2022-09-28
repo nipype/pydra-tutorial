@@ -236,13 +236,14 @@ def set_contrast(subj_id, run_id, dm_path):
 )
 def firstlevel_estimation(subj_id, run_id, subj_imgs, subj_masks, smoothing_fwhm, dm_path, contrasts):
     print(f"\nStart firstlevel estimation for subject-{subj_id}, run-{run_id} ...\n")
-    print('Fit the firstlevel model...')
-    # fit the (fixed-effects) firstlevel model with three runs simultaneously
+    
+    # subsample img to reduce memory
     run_img = subj_imgs[run_id-1]
     img = load_img(run_img)
-    img_data = get_data(run_img)[::3,::3,::3]
+    img_data = get_data(run_img)[::2,::2,::2]
     new_img = nib.Nifti1Image(img_data, img.affine)
     run_mask = subj_masks[run_id-1]
+    print('Fit the firstlevel model...')
     first_level_model = FirstLevelModel(mask_img=run_mask, smoothing_fwhm=smoothing_fwhm)
     dm= pd.read_csv(dm_path)
     first_level_model = first_level_model.fit(new_img, design_matrices=dm)
