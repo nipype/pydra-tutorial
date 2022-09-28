@@ -52,7 +52,7 @@ import numpy as np
 import pandas as pd
 import nibabel as nib
 from nilearn.interfaces.fmriprep import load_confounds_strategy
-from nilearn.image import get_data, math_img, threshold_img
+from nilearn.image import load_img, get_data, math_img, threshold_img
 from nilearn.glm.first_level import make_first_level_design_matrix, FirstLevelModel
 from nilearn.glm.second_level import SecondLevelModel, non_parametric_inference
 from nilearn.glm.contrasts import compute_fixed_effects
@@ -239,10 +239,13 @@ def firstlevel_estimation(subj_id, run_id, subj_imgs, subj_masks, smoothing_fwhm
     print('Fit the firstlevel model...')
     # fit the (fixed-effects) firstlevel model with three runs simultaneously
     run_img = subj_imgs[run_id-1]
+    img = load_img(run_img)
+    img_data = get_data(run_img)[::2,::2,::2]
+    new_img = nib.Nifti1Image(img_data, img.affine)
     run_mask = subj_masks[run_id-1]
     first_level_model = FirstLevelModel(mask_img=run_mask, smoothing_fwhm=smoothing_fwhm)
     dm= pd.read_csv(dm_path)
-    first_level_model = first_level_model.fit(run_img, design_matrices=dm)
+    first_level_model = first_level_model.fit(new_img, design_matrices=dm)
     print('Computing contrasts...')
     effect_size_path_dict = dict.fromkeys(contrasts.keys())
     effect_variance_path_dict = dict.fromkeys(contrasts.keys())
@@ -793,11 +796,8 @@ wf.set_output(
 ```
 
 ```{code-cell} ipython3
----
-jupyter:
-  outputs_hidden: true
-tags: []
----
+:tags: []
+
 from pydra import Submitter
 
 with Submitter(plugin='cf', n_procs=2) as submitter:
