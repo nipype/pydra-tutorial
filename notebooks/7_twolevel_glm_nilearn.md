@@ -796,6 +796,8 @@ wf.set_output(
 )
 ```
 
+### Run Workflow Run
+
 ```{code-cell} ipython3
 ---
 jupyter:
@@ -846,3 +848,21 @@ Image(filename=pt_list[0])
 npt_list = glob.glob(os.path.join(workflow_out_dir, "secondlevel_permutation*.jpg"))
 Image(filename=npt_list[0])
 ```
+
+## Exercise #1
+
++++
+
+In this example, we conducted GLM on each run per subject separately and then used a fixed-effect model to average across runs. 
+
+Where did we put `.splitter` and `.combiner`. Why did we put it there?
+
++++
+
+## Exercise #2
+
++++
+
+Moreover, We choose this approach due to limited memory on GitHub. [FirstLevelModel](https://nilearn.github.io/stable/modules/generated/nilearn.glm.first_level.FirstLevelModel.html) in Nilearn also allows to compute multiple runs with a fixed-effect model simultanously. Here is an [example](https://nilearn.github.io/stable/auto_examples/04_glm_first_level/plot_fiac_analysis.html#sphx-glr-auto-examples-04-glm-first-level-plot-fiac-analysis-py). 
+
+Would you like to give it a try on your own?
