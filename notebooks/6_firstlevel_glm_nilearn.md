@@ -511,7 +511,7 @@ wf.set_output(
 ## Run Workflow Run
 
 ```{code-cell} ipython3
-:tags: []
+:tags: [hide-output]
 
 from pydra import Submitter
 

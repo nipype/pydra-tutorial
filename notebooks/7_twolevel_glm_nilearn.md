@@ -799,11 +799,8 @@ wf.set_output(
 ### Run Workflow Run
 
 ```{code-cell} ipython3
----
-jupyter:
-  outputs_hidden: true
-tags: []
----
+:tags: [hide-output]
+
 from pydra import Submitter
 
 with Submitter(plugin='cf', n_procs=1) as submitter:
@@ -816,13 +813,15 @@ print(results)
 
 ## Let's Plot!
 
-We only use 2 subjects, so it's reasonable the following plots have nothing survived from testing.
+We only use 5 subjects, so it's reasonable the following plots have nothing survived from testing.
 
 +++
 
 ### Cluster Thresholding
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 from IPython.display import Image
 ct_list = glob.glob(os.path.join(workflow_out_dir, "secondlevel_cluster_thresholded*.jpg"))
 Image(filename=ct_list[0])
@@ -831,6 +830,8 @@ Image(filename=ct_list[0])
 ### Multiple Comparison
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 mc_list = glob.glob(os.path.join(workflow_out_dir, "secondlevel_multiple_comp*.jpg"))
 Image(filename=mc_list[0])
 ```
@@ -838,6 +839,8 @@ Image(filename=mc_list[0])
 ### Paramatric Test
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 pt_list = glob.glob(os.path.join(workflow_out_dir, "secondlevel_paramatric*.jpg"))
 Image(filename=pt_list[0])
 ```
@@ -845,6 +848,8 @@ Image(filename=pt_list[0])
 ### Nonparamatric Test
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 npt_list = glob.glob(os.path.join(workflow_out_dir, "secondlevel_permutation*.jpg"))
 Image(filename=npt_list[0])
 ```
