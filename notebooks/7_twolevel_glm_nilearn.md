@@ -12,7 +12,7 @@ kernelspec:
   name: python3
 ---
 
-# 7. Three Level GLM (from Nilearn)
+# Two-Level GLM (from Nilearn)
 
 +++
 
@@ -83,7 +83,7 @@ We need the following data:
 4. confounds (fmriprep)
 
 ```{code-cell} ipython3
-:tags: []
+:tags: [remove-output]
 
 fmriprep_path = workflow_dir / '7_glm'/ 'data'
 rawdata_path = workflow_dir / '7_glm' / 'raw_data'
@@ -107,6 +107,8 @@ We need to get four types of data from two folders:
 4. confounds: `*desc-confounds_timeseries.tsv` from `fmriprep_path` (this is implicitly needed by `load_confounds_strategy`)
 
 ```{code-cell} ipython3
+:tags: []
+
 @pydra.mark.task
 @pydra.mark.annotate(
     {
@@ -141,7 +143,7 @@ def get_subjdata(subj_id):
 
 ## First-Level GLM
 
-The first-level GLM has two parts:
+The first level GLM has two parts:
 - conduct GLM for each run on every subject
 - average across runs for each subject with a fixed-effect model
 
@@ -190,7 +192,7 @@ def get_firstlevel_dm(tr, n_scans, hrf_model, subj_id, run_id, subj_imgs, subj_e
     return dm_path, run_id
 ```
 
-### Set up the first-level contrasts
+### Set up the first level contrasts
 
 ```{code-cell} ipython3
 @pydra.mark.task
@@ -267,7 +269,7 @@ def firstlevel_estimation(subj_id, run_id, subj_imgs, subj_masks, smoothing_fwhm
     return effect_size_path_dict, effect_variance_path_dict
 ```
 
-### Create the first-level GLM workflow
+### Create the first level GLM workflow
 
 This workflow include GLM for each run.
 
@@ -452,7 +454,7 @@ The second level GLM, as known as the group level, averages results across subje
 
 +++ {"tags": []}
 
-### Get second-level design matrix
+### Get the second level design matrix
 
 This is a one-group design. So we need a design matrix for a one-sample test.
 
@@ -496,10 +498,15 @@ def secondlevel_estimation(firstlevel_stats_list, design_matrix, firstlevel_cont
         z_image_path = os.path.join(workflow_out_dir, 'secondlevel_contrast-%s_z_map.nii.gz' % contrast_id)
         stat_maps_dict[contrast_id] = stats
         stats['z_score'].to_filename(z_image_path)
+        plot_path = os.path.join(workflow_out_dir, 
+                                   'secondlevel_unthresholded_contrast-%s_zmap.jpg' % stats_id)
+        plot_stat_map(thresholded_map,
+                               title='Unthresholded z map',
+                               output_file=plot_path)
     return secondlevel_mask, stat_maps_dict
 ```
 
-### Create the second-level GLM workflow
+### Create the second level GLM workflow
 
 ```{code-cell} ipython3
 # initiate the first-level GLM workflow
@@ -816,6 +823,17 @@ print(results)
 We only use 5 subjects, so it's reasonable the following plots have nothing survived from testing.
 
 +++
+
+### Unthresholded
+
+Let's plot the unthresholded image first.
+
+```{code-cell} ipython3
+:tags: [hide-input]
+from IPython.display import Image
+ut_list = glob.glob(os.path.join(workflow_out_dir, "secondlevel_unthresholded*.jpg"))
+Image(filename=ut_list[0])
+```
 
 ### Cluster Thresholding
 

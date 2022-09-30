@@ -13,7 +13,7 @@ kernelspec:
 
 +++ {"tags": []}
 
-# 6. First Level GLM (from Nilearn)
+# First Level GLM (from Nilearn)
 
 +++
 

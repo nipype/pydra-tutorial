@@ -11,7 +11,7 @@ kernelspec:
   name: python3
 ---
 
-# 5. ShellCommandTask
+# ShellCommandTask
 
 ```{code-cell}
 ---

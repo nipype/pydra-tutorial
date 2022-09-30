@@ -11,7 +11,7 @@ kernelspec:
   name: python3
 ---
 
-# 3. Tasks with States
+# Tasks with States
 
 Task might be run for a single set of input values or we can generate multiple sets, that will be called "states". If we want to run our `Task` multiple times we have to provide an input that is an iterable and specify the way we want to map values of the inputs to the specific states. In order to do it, we set so-called `splitter`.
 
