@@ -51,6 +51,7 @@ import datalad.api as dl
 import numpy as np
 import pandas as pd
 import nibabel as nib
+from scipy.stats import norm
 from nilearn.interfaces.fmriprep import load_confounds_strategy
 from nilearn.image import load_img, get_data, math_img, threshold_img
 from nilearn.glm.first_level import make_first_level_design_matrix, FirstLevelModel
@@ -500,6 +501,7 @@ def secondlevel_estimation(firstlevel_stats_list, design_matrix, firstlevel_cont
         stats['z_score'].to_filename(z_image_path)
         plot_path = os.path.join(workflow_out_dir, 'secondlevel_unthresholded_contrast-%s_zmap.jpg' % contrast_id)
         plot_glass_brain(stats['z_score'],
+                         colorbar=True,
                          threshold=norm.isf(0.001),
                          title='Unthresholded z map',
                          output_file=plot_path)
