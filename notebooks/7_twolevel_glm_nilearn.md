@@ -498,12 +498,11 @@ def secondlevel_estimation(firstlevel_stats_list, design_matrix, firstlevel_cont
         z_image_path = os.path.join(workflow_out_dir, 'secondlevel_contrast-%s_z_map.nii.gz' % contrast_id)
         stat_maps_dict[contrast_id] = stats
         stats['z_score'].to_filename(z_image_path)
-        plot_path = os.path.join(workflow_out_dir, 
-                                   'secondlevel_unthresholded_contrast-%s_zmap.jpg' % contrast_id)
+        plot_path = os.path.join(workflow_out_dir, 'secondlevel_unthresholded_contrast-%s_zmap.jpg' % contrast_id)
         plot_glass_brain(stats['z_score'],
-                      threshold=norm.isf(0.001),
-                      title='Unthresholded z map',
-                      output_file=plot_path)
+                         threshold=norm.isf(0.001),
+                         title='Unthresholded z map',
+                         output_file=plot_path)
     return secondlevel_mask, stat_maps_dict
 ```
 
