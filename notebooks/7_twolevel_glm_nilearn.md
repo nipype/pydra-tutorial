@@ -56,7 +56,7 @@ from nilearn.image import load_img, get_data, math_img, threshold_img
 from nilearn.glm.first_level import make_first_level_design_matrix, FirstLevelModel
 from nilearn.glm.second_level import SecondLevelModel, non_parametric_inference
 from nilearn.glm.contrasts import compute_fixed_effects
-from nilearn.plotting import plot_stat_map
+from nilearn.plotting import plot_stat_map, plot_glass_brain
 ```
 
 ```{code-cell} ipython3
@@ -499,10 +499,11 @@ def secondlevel_estimation(firstlevel_stats_list, design_matrix, firstlevel_cont
         stat_maps_dict[contrast_id] = stats
         stats['z_score'].to_filename(z_image_path)
         plot_path = os.path.join(workflow_out_dir, 
-                                   'secondlevel_unthresholded_contrast-%s_zmap.jpg' % stats_id)
-        plot_stat_map(thresholded_map,
-                               title='Unthresholded z map',
-                               output_file=plot_path)
+                                   'secondlevel_unthresholded_contrast-%s_zmap.jpg' % contrast_id)
+        plot_glass_brain(stats['z_score'],
+                      threshold=norm.isf(0.001),
+                      title='Unthresholded z map',
+                      output_file=plot_path)
     return secondlevel_mask, stat_maps_dict
 ```
 
@@ -830,6 +831,7 @@ Let's plot the unthresholded image first.
 
 ```{code-cell} ipython3
 :tags: [hide-input]
+
 from IPython.display import Image
 ut_list = glob.glob(os.path.join(workflow_out_dir, "secondlevel_unthresholded*.jpg"))
 Image(filename=ut_list[0])
