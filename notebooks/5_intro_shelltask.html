@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>5. ShellCommandTask &#8212; Pydra Tutorial</title>
+    <title>5. ShellCommandTask &#8212; Tutorials</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,7 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="6. First level GLM" href="6_glm_from_nilearn.html" />
+    <link rel="next" title="6. First Level GLM (from Nilearn)" href="6_firstlevel_glm_nilearn.html" />
     <link rel="prev" title="4. Workflow" href="4_intro_workflow.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -97,7 +97,7 @@ const thebe_selector_output = ".output, .cell_output"
       <img src="../_static/logo.jpg" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">Pydra Tutorial</h1>
+      <h1 class="site-logo" id="site-title">Tutorials</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -115,13 +115,13 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Tutorials
+  Basic Concepts
  </span>
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="1_intro_pydra.html">
-   1. Pydra
+   1. Intro to Pydra
   </a>
  </li>
  <li class="toctree-l1">
@@ -144,9 +144,21 @@ const thebe_selector_output = ".output, .cell_output"
    5. ShellCommandTask
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  General Linear Model
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="6_glm_from_nilearn.html">
-   6. First level GLM
+  <a class="reference internal" href="6_firstlevel_glm_nilearn.html">
+   6. First Level GLM (from Nilearn)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="7_twolevel_glm_nilearn.html">
+   7. Two-Level GLM (from Nilearn)
   </a>
  </li>
 </ul>
@@ -391,46 +403,46 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#commands-with-arguments-and-inputs">
-   Commands with arguments and inputs
+   5.1. Commands with arguments and inputs
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#using-args">
-     using args
+     5.1.1. using args
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#customized-input">
-   Customized input
+   5.2. Customized input
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#customized-output">
-   Customized output
+   5.3. Customized output
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#exercise-1">
-     Exercise 1
+     5.3.1. Exercise 1
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#dockertask">
-   DockerTask
+   5.4. DockerTask
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#exercise2">
-     Exercise2
+     5.4.1. Exercise2
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#using-shellcommandtask-with-container-info-argument">
-       Using
+       5.4.1.1. Using
        <code class="docutils literal notranslate">
         <span class="pre">
          ShellCommandTask
@@ -458,7 +470,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>5. ShellCommandTask</h1>
+                <h1>ShellCommandTask</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -470,46 +482,46 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#commands-with-arguments-and-inputs">
-   Commands with arguments and inputs
+   5.1. Commands with arguments and inputs
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#using-args">
-     using args
+     5.1.1. using args
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#customized-input">
-   Customized input
+   5.2. Customized input
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#customized-output">
-   Customized output
+   5.3. Customized output
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#exercise-1">
-     Exercise 1
+     5.3.1. Exercise 1
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#dockertask">
-   DockerTask
+   5.4. DockerTask
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#exercise2">
-     Exercise2
+     5.4.1. Exercise2
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#using-shellcommandtask-with-container-info-argument">
-       Using
+       5.4.1.1. Using
        <code class="docutils literal notranslate">
         <span class="pre">
          ShellCommandTask
@@ -539,7 +551,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="shellcommandtask">
-<h1>5. ShellCommandTask<a class="headerlink" href="#shellcommandtask" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">5. </span>ShellCommandTask<a class="headerlink" href="#shellcommandtask" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nest_asyncio</span>
@@ -592,14 +604,14 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(return_code=0, stdout=&#39;/tmp/tmpr91h3dlt/ShellCommandTask_50215383834238ce614b4428a1e9943ddff15f8580a384a0a57b34c760864b3a\n&#39;, stderr=&#39;&#39;), runtime=None, errored=False)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(return_code=0, stdout=&#39;/tmp/tmptlxft58s/ShellCommandTask_50215383834238ce614b4428a1e9943ddff15f8580a384a0a57b34c760864b3a\n&#39;, stderr=&#39;&#39;), runtime=None, errored=False)
 </pre></div>
 </div>
 </div>
 </div>
 <p>the result should have <code class="docutils literal notranslate"><span class="pre">return_code</span></code>, <code class="docutils literal notranslate"><span class="pre">stdout</span></code> and <code class="docutils literal notranslate"><span class="pre">stderr</span></code>. If everything goes well <code class="docutils literal notranslate"><span class="pre">return_code</span></code> should be <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">stdout</span></code> should point to the working directory and <code class="docutils literal notranslate"><span class="pre">stderr</span></code> should be an empty string.</p>
 <section id="commands-with-arguments-and-inputs">
-<h2>Commands with arguments and inputs<a class="headerlink" href="#commands-with-arguments-and-inputs" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">5.1. </span>Commands with arguments and inputs<a class="headerlink" href="#commands-with-arguments-and-inputs" title="Permalink to this headline">#</a></h2>
 <p>you can also use longer command by providing a list:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -623,7 +635,7 @@ title="Print to PDF"
 </div>
 </div>
 <section id="using-args">
-<h3>using args<a class="headerlink" href="#using-args" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">5.1.1. </span>using args<a class="headerlink" href="#using-args" title="Permalink to this headline">#</a></h3>
 <p>In addition to <code class="docutils literal notranslate"><span class="pre">executable</span></code>, we can also use <code class="docutils literal notranslate"><span class="pre">args</span></code>. Last example can be also rewritten:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -651,7 +663,7 @@ title="Print to PDF"
 </section>
 </section>
 <section id="customized-input">
-<h2>Customized input<a class="headerlink" href="#customized-input" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">5.2. </span>Customized input<a class="headerlink" href="#customized-input" title="Permalink to this headline">#</a></h2>
 <p>Pydra always checks <code class="docutils literal notranslate"><span class="pre">executable</span></code> and <code class="docutils literal notranslate"><span class="pre">args</span></code>, but we can also provide additional inputs, in order to do it, we have to modify <code class="docutils literal notranslate"><span class="pre">input_spec</span></code> first by using <code class="docutils literal notranslate"><span class="pre">SpecInfo</span></code> class:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -734,7 +746,7 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
 </div>
 </section>
 <section id="customized-output">
-<h2>Customized output<a class="headerlink" href="#customized-output" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">5.3. </span>Customized output<a class="headerlink" href="#customized-output" title="Permalink to this headline">#</a></h2>
 <p>We can also customized output if we want to return something more than the <code class="docutils literal notranslate"><span class="pre">stdout</span></code>, e.g. a file.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -767,13 +779,13 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cmndline =  touch newfile_tmp.txt
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(return_code=0, stdout=&#39;&#39;, stderr=&#39;&#39;, newfile=PosixPath(&#39;/tmp/tmpastfod5o/ShellCommandTask_76e73f8b52e6d5d1920bda2a22e309fb4fd89cec14e6ab25755e2caf66cf0294/newfile_tmp.txt&#39;)), runtime=None, errored=False)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(return_code=0, stdout=&#39;&#39;, stderr=&#39;&#39;, newfile=PosixPath(&#39;/tmp/tmp9f3hgega/ShellCommandTask_76e73f8b52e6d5d1920bda2a22e309fb4fd89cec14e6ab25755e2caf66cf0294/newfile_tmp.txt&#39;)), runtime=None, errored=False)
 </pre></div>
 </div>
 </div>
 </div>
 <section id="exercise-1">
-<h3>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">5.3.1. </span>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this headline">#</a></h3>
 <p>Write a task that creates two new files, use provided output spec.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -807,7 +819,7 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
 </section>
 </section>
 <section id="dockertask">
-<h2>DockerTask<a class="headerlink" href="#dockertask" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">5.4. </span>DockerTask<a class="headerlink" href="#dockertask" title="Permalink to this headline">#</a></h2>
 <p>all the commands can be also run in a docker container using <code class="docutils literal notranslate"><span class="pre">DockerTask</span></code>. Syntax is very similar, but additional argument <code class="docutils literal notranslate"><span class="pre">image</span></code> is required.</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
@@ -822,13 +834,13 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(return_code=0, stdout=&#39;root\n&#39;, stderr=&quot;Unable to find image &#39;busybox:latest&#39; locally\nlatest: Pulling from library/busybox\n2c39bef88607: Pulling fs layer\n2c39bef88607: Download complete\n2c39bef88607: Pull complete\nDigest: sha256:20142e89dab967c01765b0aea3be4cec3a5957cc330f061e5503ef6168ae6613\nStatus: Downloaded newer image for busybox:latest\n&quot;), runtime=None, errored=False)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(return_code=0, stdout=&#39;root\n&#39;, stderr=&quot;Unable to find image &#39;busybox:latest&#39; locally\nlatest: Pulling from library/busybox\nf5b7ce95afea: Pulling fs layer\nf5b7ce95afea: Verifying Checksum\nf5b7ce95afea: Download complete\nf5b7ce95afea: Pull complete\nDigest: sha256:9810966b5f712084ea05bf28fc8ba2c8fb110baa2531a10e2da52c1efc504698\nStatus: Downloaded newer image for busybox:latest\n&quot;), runtime=None, errored=False)
 </pre></div>
 </div>
 </div>
 </div>
 <section id="exercise2">
-<h3>Exercise2<a class="headerlink" href="#exercise2" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">5.4.1. </span>Exercise2<a class="headerlink" href="#exercise2" title="Permalink to this headline">#</a></h3>
 <p>Use splitter to run the same command in two different images:</p>
 <div class="cell tag_hide-cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
@@ -846,7 +858,7 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Result(output=Output(return_code=0, stdout=&#39;root\n&#39;, stderr=&#39;&#39;), runtime=None, errored=False),
- Result(output=Output(return_code=0, stdout=&#39;root\n&#39;, stderr=&quot;Unable to find image &#39;ubuntu:latest&#39; locally\nlatest: Pulling from library/ubuntu\n2b55860d4c66: Pulling fs layer\n2b55860d4c66: Verifying Checksum\n2b55860d4c66: Download complete\n2b55860d4c66: Pull complete\nDigest: sha256:20fa2d7bb4de7723f542be5923b06c4d704370f0390e4ae9e1c833c8785644c1\nStatus: Downloaded newer image for ubuntu:latest\n&quot;), runtime=None, errored=False)]
+ Result(output=Output(return_code=0, stdout=&#39;root\n&#39;, stderr=&quot;Unable to find image &#39;ubuntu:latest&#39; locally\nlatest: Pulling from library/ubuntu\ncf92e523b49e: Pulling fs layer\ncf92e523b49e: Verifying Checksum\ncf92e523b49e: Download complete\ncf92e523b49e: Pull complete\nDigest: sha256:35fb073f9e56eb84041b0745cb714eff0f7b225ea9e024f703cab56aaa5c7720\nStatus: Downloaded newer image for ubuntu:latest\n&quot;), runtime=None, errored=False)]
 </pre></div>
 </div>
 </div>
@@ -859,7 +871,7 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
 </div>
 </div>
 <section id="using-shellcommandtask-with-container-info-argument">
-<h4>Using <code class="docutils literal notranslate"><span class="pre">ShellCommandTask</span></code> with <code class="docutils literal notranslate"><span class="pre">container_info</span></code> argument:<a class="headerlink" href="#using-shellcommandtask-with-container-info-argument" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">5.4.1.1. </span>Using <code class="docutils literal notranslate"><span class="pre">ShellCommandTask</span></code> with <code class="docutils literal notranslate"><span class="pre">container_info</span></code> argument:<a class="headerlink" href="#using-shellcommandtask-with-container-info-argument" title="Permalink to this headline">#</a></h4>
 <p>You can run the shell command in a docker container by adding <code class="docutils literal notranslate"><span class="pre">container_info</span></code> argument to <code class="docutils literal notranslate"><span class="pre">ShellCommandTask</span></code>:</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
@@ -932,13 +944,13 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">4. Workflow</p>
+            <p class="prev-next-title"><span class="section-number">4. </span>Workflow</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="6_glm_from_nilearn.html" title="next page">
+    <a class='right-next' id="next-link" href="6_firstlevel_glm_nilearn.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">6. First level GLM</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>First Level GLM (from Nilearn)</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

@@ -11,7 +11,7 @@ kernelspec:
   name: python3
 ---
 
-# 2. FunctionTask
+# FunctionTask
 
 ```{code-cell}
 ---

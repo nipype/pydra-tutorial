@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>6. First level GLM &#8212; Pydra Tutorial</title>
+    <title>6. First Level GLM (from Nilearn) &#8212; Tutorials</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,7 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Team" href="../about/team.html" />
+    <link rel="next" title="7. Two-Level GLM (from Nilearn)" href="7_twolevel_glm_nilearn.html" />
     <link rel="prev" title="5. ShellCommandTask" href="5_intro_shelltask.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -97,7 +97,7 @@ const thebe_selector_output = ".output, .cell_output"
       <img src="../_static/logo.jpg" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">Pydra Tutorial</h1>
+      <h1 class="site-logo" id="site-title">Tutorials</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -115,13 +115,13 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Tutorials
+  Basic Concepts
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="1_intro_pydra.html">
-   1. Pydra
+   1. Intro to Pydra
   </a>
  </li>
  <li class="toctree-l1">
@@ -144,9 +144,21 @@ const thebe_selector_output = ".output, .cell_output"
    5. ShellCommandTask
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  General Linear Model
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   6. First level GLM
+   6. First Level GLM (from Nilearn)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="7_twolevel_glm_nilearn.html">
+   7. Two-Level GLM (from Nilearn)
   </a>
  </li>
 </ul>
@@ -225,7 +237,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/nipype/pydra-tutorial/master?urlpath=tree/jupyterbook/notebooks/6_glm_from_nilearn.md"
+        <a href="https://mybinder.org/v2/gh/nipype/pydra-tutorial/master?urlpath=tree/jupyterbook/notebooks/6_firstlevel_glm_nilearn.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -285,7 +297,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/nipype/pydra-tutorial/issues/new?title=Issue%20on%20page%20%2Fnotebooks/6_glm_from_nilearn.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/nipype/pydra-tutorial/issues/new?title=Issue%20on%20page%20%2Fnotebooks/6_firstlevel_glm_nilearn.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -313,7 +325,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/notebooks/6_glm_from_nilearn.ipynb"
+        <a href="../_sources/notebooks/6_firstlevel_glm_nilearn.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -330,7 +342,7 @@ title="Download notebook file"
       </li>
       
       <li>
-        <a href="../_sources/notebooks/6_glm_from_nilearn.md"
+        <a href="../_sources/notebooks/6_firstlevel_glm_nilearn.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -391,94 +403,94 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#preparation">
-   Preparation
+   6.1. Preparation
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#create-tasks">
-   Create tasks
+   6.2. Create tasks
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#fetch-openneuro-bids-dataset">
-     fetch openneuro BIDS dataset
+     6.2.1. fetch openneuro BIDS dataset
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#obtain-firstlevelmodel-objects-automatically-and-fit-arguments">
-     obtain FirstLevelModel objects automatically and fit arguments
+     6.2.2. obtain FirstLevelModel objects automatically and fit arguments
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#get-design-matrix">
-     Get design matrix
+     6.2.3. Get design matrix
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#fit-the-first-level-model">
-     Fit the first level model
+     6.2.4. Fit the first level model
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#get-cluster-table-and-glm-report">
-     Get cluster table and glm report
+     6.2.5. Get cluster table and glm report
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#make-plots">
-     Make plots
+     6.2.6. Make plots
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#make-a-workflow-from-tasks">
-   Make a workflow from tasks
+   6.3. Make a workflow from tasks
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-overaching-workflow">
-   The overaching workflow
+   6.4. The overaching workflow
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#run-workflow-run">
-   Run Workflow Run
+   6.5. Run Workflow Run
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#visualization">
-   Visualization
+   6.6. Visualization
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#examine-folder-structure">
-   Examine folder structure
+   6.7. Examine folder structure
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#plot-figures">
-     Plot figures
+     6.7.1. Plot figures
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#first-level-contrast">
-       First level contrast
+       6.7.1.1. First level contrast
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#nilearn-z-map">
-       Nilearn Z map
+       6.7.1.2. Nilearn Z map
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#fsl-z-map">
-       FSL Z map
+       6.7.1.3. FSL Z map
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#nilearn-fsl-comparison">
-       Nilearn FSL comparison
+       6.7.1.4. Nilearn FSL comparison
       </a>
      </li>
     </ul>
@@ -487,7 +499,7 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercise">
-   Exercise
+   6.8. Exercise
   </a>
  </li>
 </ul>
@@ -499,7 +511,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>6. First level GLM</h1>
+                <h1>First Level GLM (from Nilearn)</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -511,94 +523,94 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#preparation">
-   Preparation
+   6.1. Preparation
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#create-tasks">
-   Create tasks
+   6.2. Create tasks
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#fetch-openneuro-bids-dataset">
-     fetch openneuro BIDS dataset
+     6.2.1. fetch openneuro BIDS dataset
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#obtain-firstlevelmodel-objects-automatically-and-fit-arguments">
-     obtain FirstLevelModel objects automatically and fit arguments
+     6.2.2. obtain FirstLevelModel objects automatically and fit arguments
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#get-design-matrix">
-     Get design matrix
+     6.2.3. Get design matrix
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#fit-the-first-level-model">
-     Fit the first level model
+     6.2.4. Fit the first level model
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#get-cluster-table-and-glm-report">
-     Get cluster table and glm report
+     6.2.5. Get cluster table and glm report
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#make-plots">
-     Make plots
+     6.2.6. Make plots
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#make-a-workflow-from-tasks">
-   Make a workflow from tasks
+   6.3. Make a workflow from tasks
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-overaching-workflow">
-   The overaching workflow
+   6.4. The overaching workflow
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#run-workflow-run">
-   Run Workflow Run
+   6.5. Run Workflow Run
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#visualization">
-   Visualization
+   6.6. Visualization
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#examine-folder-structure">
-   Examine folder structure
+   6.7. Examine folder structure
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#plot-figures">
-     Plot figures
+     6.7.1. Plot figures
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#first-level-contrast">
-       First level contrast
+       6.7.1.1. First level contrast
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#nilearn-z-map">
-       Nilearn Z map
+       6.7.1.2. Nilearn Z map
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#fsl-z-map">
-       FSL Z map
+       6.7.1.3. FSL Z map
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#nilearn-fsl-comparison">
-       Nilearn FSL comparison
+       6.7.1.4. Nilearn FSL comparison
       </a>
      </li>
     </ul>
@@ -607,7 +619,7 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercise">
-   Exercise
+   6.8. Exercise
   </a>
  </li>
 </ul>
@@ -620,37 +632,59 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="first-level-glm">
-<h1>6. First level GLM<a class="headerlink" href="#first-level-glm" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="first-level-glm-from-nilearn">
+<h1><span class="section-number">6. </span>First Level GLM (from Nilearn)<a class="headerlink" href="#first-level-glm-from-nilearn" title="Permalink to this headline">#</a></h1>
 <p>In this tutorial, we will go through a simple workflow of the first level general linear modeling with a BIDS dataset from openneuro. This analysis is only performed on <strong>one</strong> subject.</p>
 <p>This tutorial is based on the <a class="reference external" href="https://nilearn.github.io/stable/auto_examples/04_glm_first_level/plot_bids_features.html#sphx-glr-auto-examples-04-glm-first-level-plot-bids-features-py">Nilearn GLM tutorial</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nest_asyncio</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nest_asyncio</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>
+<span class="n">nest_asyncio</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
 <section id="preparation">
-<h2>Preparation<a class="headerlink" href="#preparation" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">6.1. </span>Preparation<a class="headerlink" href="#preparation" title="Permalink to this headline">#</a></h2>
 <p>Import packages that will be used globally and set up output directory</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">pydra</span>
-<span class="kn">from</span> <span class="nn">pydra</span> <span class="kn">import</span> <span class="n">Workflow</span>
-<span class="kn">from</span> <span class="nn">pydra.engine.specs</span> <span class="kn">import</span> <span class="n">File</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">sys</span> 
+<span class="k">if</span> <span class="ow">not</span> <span class="n">sys</span><span class="o">.</span><span class="n">warnoptions</span><span class="p">:</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+    
+<span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">typing</span> <span class="k">as</span> <span class="nn">ty</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
-<span class="c1"># get current directory</span>
+<span class="kn">import</span> <span class="nn">pydra</span>
+<span class="kn">from</span> <span class="nn">pydra</span> <span class="kn">import</span> <span class="n">Workflow</span>
+<span class="kn">from</span> <span class="nn">pydra.engine.specs</span> <span class="kn">import</span> <span class="n">File</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
+<span class="kn">from</span> <span class="nn">nilearn.datasets</span> <span class="kn">import</span> <span class="p">(</span>
+        <span class="n">fetch_openneuro_dataset_index</span><span class="p">,</span>
+        <span class="n">fetch_openneuro_dataset</span><span class="p">,</span>
+        <span class="n">select_from_index</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="kn">from</span> <span class="nn">nilearn.interfaces.fsl</span> <span class="kn">import</span> <span class="n">get_design_from_fslmat</span>
+<span class="kn">from</span> <span class="nn">nilearn.glm.first_level</span> <span class="kn">import</span> <span class="n">first_level_from_bids</span>
+<span class="kn">from</span> <span class="nn">nilearn.reporting</span> <span class="kn">import</span> <span class="n">get_clusters_table</span><span class="p">,</span> <span class="n">make_glm_report</span>
+<span class="kn">from</span> <span class="nn">nilearn.plotting</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">plot_glass_brain</span><span class="p">,</span>
+    <span class="n">plot_img_comparison</span><span class="p">,</span>
+    <span class="n">plot_contrast_matrix</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get current directory</span>
 <span class="n">pydra_tutorial_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
 
 <span class="c1"># set up output directory</span>
@@ -665,7 +699,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="create-tasks">
-<h2>Create tasks<a class="headerlink" href="#create-tasks" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">6.2. </span>Create tasks<a class="headerlink" href="#create-tasks" title="Permalink to this headline">#</a></h2>
 <p>In this section, we converte major steps into tasks.
 Each pydra task can have multiple python functions. We recommand to put those logically more related functions into the same task.</p>
 <p>It is very <strong>important</strong> to keep in mind what adjacent tasks of your current task will be.</p>
@@ -674,7 +708,7 @@ Each pydra task can have multiple python functions. We recommand to put those lo
 <li><p>Your next task will be impacted by the returns in the current task</p></li>
 </ol>
 <section id="fetch-openneuro-bids-dataset">
-<h3>fetch openneuro BIDS dataset<a class="headerlink" href="#fetch-openneuro-bids-dataset" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">6.2.1. </span>fetch openneuro BIDS dataset<a class="headerlink" href="#fetch-openneuro-bids-dataset" title="Permalink to this headline">#</a></h3>
 <p>In this task, we do the following:</p>
 <ol class="simple">
 <li><p>get openneuro dataset index</p></li>
@@ -693,13 +727,6 @@ Each pydra task can have multiple python functions. We recommand to put those lo
     <span class="p">}</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">get_openneuro_dataset</span><span class="p">(</span><span class="n">exclusion_patterns</span><span class="p">,</span> <span class="n">n_subjects</span><span class="p">):</span>
-
-    <span class="kn">from</span> <span class="nn">nilearn.datasets</span> <span class="kn">import</span> <span class="p">(</span>
-        <span class="n">fetch_openneuro_dataset_index</span><span class="p">,</span>
-        <span class="n">fetch_openneuro_dataset</span><span class="p">,</span>
-        <span class="n">select_from_index</span><span class="p">,</span>
-    <span class="p">)</span>
-
     <span class="n">_</span><span class="p">,</span> <span class="n">urls</span> <span class="o">=</span> <span class="n">fetch_openneuro_dataset_index</span><span class="p">()</span>
     <span class="n">urls</span> <span class="o">=</span> <span class="n">select_from_index</span><span class="p">(</span>
         <span class="n">urls</span><span class="p">,</span> <span class="n">exclusion_filters</span><span class="o">=</span><span class="n">exclusion_patterns</span><span class="p">,</span> <span class="n">n_subjects</span><span class="o">=</span><span class="n">n_subjects</span>
@@ -712,7 +739,7 @@ Each pydra task can have multiple python functions. We recommand to put those lo
 </div>
 </section>
 <section id="obtain-firstlevelmodel-objects-automatically-and-fit-arguments">
-<h3>obtain FirstLevelModel objects automatically and fit arguments<a class="headerlink" href="#obtain-firstlevelmodel-objects-automatically-and-fit-arguments" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">6.2.2. </span>obtain FirstLevelModel objects automatically and fit arguments<a class="headerlink" href="#obtain-firstlevelmodel-objects-automatically-and-fit-arguments" title="Permalink to this headline">#</a></h3>
 <p>To get the first level model(s) we have to specify</p>
 <ol class="simple">
 <li><p>the dataset directory</p></li>
@@ -744,8 +771,6 @@ Then, for this model, we will obtain</p>
 <span class="k">def</span> <span class="nf">get_info_from_bids</span><span class="p">(</span>
     <span class="n">data_dir</span><span class="p">,</span> <span class="n">task_label</span><span class="p">,</span> <span class="n">space_label</span><span class="p">,</span> <span class="n">smoothing_fwhm</span><span class="p">,</span> <span class="n">derivatives_folder</span>
 <span class="p">):</span>
-    <span class="kn">from</span> <span class="nn">nilearn.glm.first_level</span> <span class="kn">import</span> <span class="n">first_level_from_bids</span>
-
     <span class="p">(</span>
         <span class="n">models</span><span class="p">,</span>
         <span class="n">models_run_imgs</span><span class="p">,</span>
@@ -772,7 +797,7 @@ Then, for this model, we will obtain</p>
 </div>
 </section>
 <section id="get-design-matrix">
-<h3>Get design matrix<a class="headerlink" href="#get-design-matrix" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">6.2.3. </span>Get design matrix<a class="headerlink" href="#get-design-matrix" title="Permalink to this headline">#</a></h3>
 <p>This task does the following:</p>
 <ol class="simple">
 <li><p>read the design matrix in <code class="docutils literal notranslate"><span class="pre">.mat</span></code></p></li>
@@ -787,9 +812,6 @@ Then, for this model, we will obtain</p>
     <span class="p">{</span><span class="s1">&#39;data_dir&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;subject&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;return&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;dm_path&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">}}</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">get_designmatrix</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">subject</span><span class="p">):</span>
-
-    <span class="kn">from</span> <span class="nn">nilearn.interfaces.fsl</span> <span class="kn">import</span> <span class="n">get_design_from_fslmat</span>
-
     <span class="n">fsl_design_matrix_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
         <span class="n">data_dir</span><span class="p">,</span>
         <span class="s1">&#39;derivatives&#39;</span><span class="p">,</span>
@@ -817,7 +839,7 @@ Then, for this model, we will obtain</p>
 </div>
 </section>
 <section id="fit-the-first-level-model">
-<h3>Fit the first level model<a class="headerlink" href="#fit-the-first-level-model" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">6.2.4. </span>Fit the first level model<a class="headerlink" href="#fit-the-first-level-model" title="Permalink to this headline">#</a></h3>
 <p>What we are doing here is:</p>
 <ol class="simple">
 <li><p>use the design matrix to fit the first level model</p></li>
@@ -837,8 +859,6 @@ Then, for this model, we will obtain</p>
     <span class="p">}</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">model_fit</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">imgs</span><span class="p">,</span> <span class="n">dm_path</span><span class="p">,</span> <span class="n">contrast</span><span class="p">):</span>
-    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-
     <span class="n">design_matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">dm_path</span><span class="p">)</span>
     <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">imgs</span><span class="p">,</span> <span class="n">design_matrices</span><span class="o">=</span><span class="p">[</span><span class="n">design_matrix</span><span class="p">])</span>
     <span class="n">z_map</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">compute_contrast</span><span class="p">(</span><span class="n">contrast</span><span class="p">)</span>
@@ -853,17 +873,13 @@ Then, for this model, we will obtain</p>
 </div>
 </section>
 <section id="get-cluster-table-and-glm-report">
-<h3>Get cluster table and glm report<a class="headerlink" href="#get-cluster-table-and-glm-report" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">6.2.5. </span>Get cluster table and glm report<a class="headerlink" href="#get-cluster-table-and-glm-report" title="Permalink to this headline">#</a></h3>
 <p>For publication purposes, we obtain a cluster table and a summary report.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
 <span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">({</span><span class="s1">&#39;z_map_path&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;return&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;output_file&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">}})</span>
 <span class="k">def</span> <span class="nf">cluster_table</span><span class="p">(</span><span class="n">z_map_path</span><span class="p">):</span>
-    <span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
-    <span class="kn">from</span> <span class="nn">nilearn.reporting</span> <span class="kn">import</span> <span class="n">get_clusters_table</span>
-    <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
-
     <span class="n">stat_img</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">z_map_path</span><span class="p">)</span>
     <span class="n">output_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s1">&#39;cluster_table.csv&#39;</span><span class="p">)</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">get_clusters_table</span><span class="p">(</span>
@@ -879,8 +895,6 @@ Then, for this model, we will obtain</p>
     <span class="p">{</span><span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="s1">&#39;contrasts&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;return&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;output_file&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">}}</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">glm_report</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">contrasts</span><span class="p">):</span>
-    <span class="kn">from</span> <span class="nn">nilearn.reporting</span> <span class="kn">import</span> <span class="n">make_glm_report</span>
-
     <span class="n">output_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s1">&#39;glm_report.html&#39;</span><span class="p">)</span>
     <span class="n">report</span> <span class="o">=</span> <span class="n">make_glm_report</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">contrasts</span><span class="p">)</span>
     <span class="n">report</span><span class="o">.</span><span class="n">save_as_html</span><span class="p">(</span><span class="n">output_file</span><span class="p">)</span>
@@ -891,7 +905,7 @@ Then, for this model, we will obtain</p>
 </div>
 </section>
 <section id="make-plots">
-<h3>Make plots<a class="headerlink" href="#make-plots" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">6.2.6. </span>Make plots<a class="headerlink" href="#make-plots" title="Permalink to this headline">#</a></h3>
 <p>Here we want to make some plots to display our results and compare the result from FSL.</p>
 <ol class="simple">
 <li><p>plot nilearn z-map</p></li>
@@ -919,24 +933,7 @@ Then, for this model, we will obtain</p>
         <span class="p">},</span>
     <span class="p">}</span>
 <span class="p">)</span>
-<span class="k">def</span> <span class="nf">plots</span><span class="p">(</span>
-    <span class="n">data_dir</span><span class="p">,</span>
-    <span class="n">dm_path</span><span class="p">,</span>
-    <span class="n">z_map_path</span><span class="p">,</span>
-    <span class="n">contrast</span><span class="p">,</span>
-    <span class="n">subject</span><span class="p">,</span>
-    <span class="n">masker</span><span class="p">,</span>
-<span class="p">):</span>
-    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-    <span class="kn">import</span> <span class="nn">nibabel</span> <span class="k">as</span> <span class="nn">nib</span>
-    <span class="kn">from</span> <span class="nn">nilearn.plotting</span> <span class="kn">import</span> <span class="p">(</span>
-        <span class="n">plot_glass_brain</span><span class="p">,</span>
-        <span class="n">plot_img_comparison</span><span class="p">,</span>
-        <span class="n">plot_contrast_matrix</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-    <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
-
+<span class="k">def</span> <span class="nf">plots</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span><span class="n">dm_path</span><span class="p">,</span><span class="n">z_map_path</span><span class="p">,</span><span class="n">contrast</span><span class="p">,</span><span class="n">subject</span><span class="p">,</span><span class="n">masker</span><span class="p">):</span>
     <span class="c1"># plot and save nilearn z-map</span>
     <span class="n">z_map</span> <span class="o">=</span> <span class="n">nib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">z_map_path</span><span class="p">)</span>
     <span class="n">output_file1</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s1">&#39;nilearn_z_map.jpg&#39;</span><span class="p">)</span>
@@ -998,7 +995,7 @@ Then, for this model, we will obtain</p>
 </section>
 </section>
 <section id="make-a-workflow-from-tasks">
-<h2>Make a workflow from tasks<a class="headerlink" href="#make-a-workflow-from-tasks" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">6.3. </span>Make a workflow from tasks<a class="headerlink" href="#make-a-workflow-from-tasks" title="Permalink to this headline">#</a></h2>
 <p>Now we have created all tasks we need for this first level analysis, and there are two choices for our next step.</p>
 <ol class="simple">
 <li><p>create one workflow to connect all tasks together</p></li>
@@ -1088,7 +1085,7 @@ Then, for this model, we will obtain</p>
 </div>
 </section>
 <section id="the-overaching-workflow">
-<h2>The overaching workflow<a class="headerlink" href="#the-overaching-workflow" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">6.4. </span>The overaching workflow<a class="headerlink" href="#the-overaching-workflow" title="Permalink to this headline">#</a></h2>
 <p>Connect other tasks and the above workflow into one</p>
 <p>Now we need to create the overaching glm workflow that connects the above workflow and other tasks (e.g., <code class="docutils literal notranslate"><span class="pre">get/read</span> <span class="pre">the</span> <span class="pre">data</span></code> and <code class="docutils literal notranslate"><span class="pre">plot</span> <span class="pre">the</span> <span class="pre">result</span></code>)</p>
 <div class="cell docutils container">
@@ -1156,8 +1153,8 @@ Then, for this model, we will obtain</p>
 </div>
 </section>
 <section id="run-workflow-run">
-<h2>Run Workflow Run<a class="headerlink" href="#run-workflow-run" title="Permalink to this headline">#</a></h2>
-<div class="cell docutils container">
+<h2><span class="section-number">6.5. </span>Run Workflow Run<a class="headerlink" href="#run-workflow-run" title="Permalink to this headline">#</a></h2>
+<div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pydra</span> <span class="kn">import</span> <span class="n">Submitter</span>
 
@@ -1183,7 +1180,13 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (2 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 31408128 of 58172802 bytes (54.0%,    0.9s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 55304192 of 58172802 bytes (95.1%,    0.1s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (4 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/README ...
@@ -1219,7 +1222,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/fmriprep/sub-10159/anat/sub-10159_T1w_brainmask.nii.gz ...
@@ -1255,7 +1258,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/fmriprep/sub-10159/anat/sub-10159_T1w_midthickness.L.surf.gii ...
@@ -1273,7 +1276,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/fmriprep/sub-10159/anat/sub-10159_T1w_pial.L.surf.gii ...
@@ -1300,7 +1303,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/fmriprep/sub-10159/anat/sub-10159_T1w_smoothwm.L.surf.gii ...
@@ -1318,7 +1321,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/fmriprep/sub-10159/anat/sub-10159_T1w_space-MNI152NLin2009cAsym_brainmask.nii.gz ...
@@ -1336,7 +1339,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/fmriprep/sub-10159/anat/sub-10159_T1w_space-MNI152NLin2009cAsym_class-GM_probtissue.nii.gz ...
@@ -1345,7 +1348,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/fmriprep/sub-10159/anat/sub-10159_T1w_space-MNI152NLin2009cAsym_class-WM_probtissue.nii.gz ...
@@ -1354,7 +1357,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/fmriprep/sub-10159/anat/sub-10159_T1w_space-MNI152NLin2009cAsym_preproc.nii.gz ...
@@ -1363,7 +1366,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/fmriprep/sub-10159/anat/sub-10159_T1w_space-MNI152NLin2009cAsym_warp.h5 ...
@@ -1372,10 +1375,10 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 97787904 of 102374780 bytes (95.5%,    0.0s remaining)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 67829760 of 102374780 bytes (66.3%,    0.5s remaining)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (2 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/fmriprep/sub-10159/func/sub-10159_task-stopsignal_bold_confounds.tsv ...
@@ -1402,10 +1405,10 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 95846400 of 120927302 bytes (79.3%,    0.3s remaining)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 55853056 of 120927302 bytes (46.2%,    1.2s remaining)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (2 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/task/sub-10159/bart.feat/.files/fsl.css ...
@@ -2341,7 +2344,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/task/sub-10159/bart.feat/stats/pe13.nii.gz ...
@@ -2566,6 +2569,9 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 50438144 of 59250229 bytes (85.1%,    0.2s remaining)
+</pre></div>
+</div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
@@ -2593,7 +2599,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/task/sub-10159/bart.feat/stats/tstat1.nii.gz ...
@@ -2755,7 +2761,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/task/sub-10159/bart.feat/stats/tstat4.nii.gz ...
@@ -3169,7 +3175,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/task/sub-10159/bart.feat/stats/zstat24.nii.gz ...
@@ -3178,7 +3184,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/task/sub-10159/bart.feat/stats/zstat3.nii.gz ...
@@ -3205,7 +3211,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (8 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/task/sub-10159/bart.feat/stats/zstat6.nii.gz ...
@@ -3601,7 +3607,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/task/sub-10159/stopsignal.feat/design.trg ...
@@ -4249,7 +4255,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/task/sub-10159/stopsignal.feat/stats/tstat1.nii.gz ...
@@ -6274,7 +6280,10 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 1556480 of 2553312 bytes (61.0%,    0.7s remaining)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (2 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/task/sub-10159/taskswitch.feat/stats/tstat1.nii.gz ...
@@ -7066,7 +7075,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/task/sub-10159/taskswitch.feat/stats/varcope46.nii.gz ...
@@ -7318,7 +7327,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/task/sub-10159/taskswitch.feat/stats/zstat28.nii.gz ...
@@ -7399,7 +7408,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/task/sub-10159/taskswitch.feat/stats/zstat36.nii.gz ...
@@ -7597,7 +7606,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/sub-10159/func/sub-10159_task-stopsignal_bold.json ...
@@ -7615,7 +7624,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/sub-10159/func/sub-10159_task-stopsignal_events.tsv ...
@@ -7663,26 +7672,6 @@ Then, for this model, we will obtain</p>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda/envs/pydra-tutorial/lib/python3.10/site-packages/nilearn/glm/__init__.py:55: FutureWarning: The nilearn.glm module is experimental. It may change in any future release of Nilearn.
-  warn(&#39;The nilearn.glm module is experimental. &#39;
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda/envs/pydra-tutorial/lib/python3.10/site-packages/nilearn/glm/first_level/first_level.py:940: UserWarning: SliceTimingRef not found in file /home/runner/nilearn_data/ds000030/ds000030_R1.0.4/uncompressed/sub-10159/func/sub-10159_task-stopsignal_bold.json. It will be assumed that the slice timing reference is 0.0 percent of the repetition time. If it is not the case it will need to be set manually in the generated list of models
-  warn(&#39;SliceTimingRef not found in file %s. It will be assumed&#39;
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda/envs/pydra-tutorial/lib/python3.10/site-packages/nilearn/glm/__init__.py:55: FutureWarning: The nilearn.glm module is experimental. It may change in any future release of Nilearn.
-  warn(&#39;The nilearn.glm module is experimental. &#39;
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda/envs/pydra-tutorial/lib/python3.10/site-packages/nilearn/glm/__init__.py:55: FutureWarning: The nilearn.glm module is experimental. It may change in any future release of Nilearn.
-  warn(&#39;The nilearn.glm module is experimental. &#39;
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda/envs/pydra-tutorial/lib/python3.10/site-packages/nilearn/plotting/img_plotting.py:300: FutureWarning: Default resolution of the MNI template will change from 2mm to 1mm in version 0.10.0
-  anat_img = load_mni152_template()
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(output1=&#39;/tmp/outputs/6_glm/nilearn_z_map.jpg&#39;, output2=&#39;/tmp/outputs/6_glm/fsl_z_map.jpg&#39;, output3=None, output4=&#39;/tmp/outputs/6_glm/firstlevel_contrast.jpg&#39;), runtime=None, errored=False)
 </pre></div>
 </div>
@@ -7690,11 +7679,11 @@ Then, for this model, we will obtain</p>
 </div>
 </section>
 <section id="visualization">
-<h2>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">6.6. </span>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">#</a></h2>
 <p>If you arrive here without any errors, yay, you just made your first pydra workflow for a first-level GLM!</p>
 </section>
 <section id="examine-folder-structure">
-<h2>Examine folder structure<a class="headerlink" href="#examine-folder-structure" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">6.7. </span>Examine folder structure<a class="headerlink" href="#examine-folder-structure" title="Permalink to this headline">#</a></h2>
 <p>Let’s take a look at what you have got.</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
@@ -7711,9 +7700,9 @@ firstlevel_contrast.jpg  glm_report.html
 </div>
 </div>
 <section id="plot-figures">
-<h3>Plot figures<a class="headerlink" href="#plot-figures" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">6.7.1. </span>Plot figures<a class="headerlink" href="#plot-figures" title="Permalink to this headline">#</a></h3>
 <section id="first-level-contrast">
-<h4>First level contrast<a class="headerlink" href="#first-level-contrast" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">6.7.1.1. </span>First level contrast<a class="headerlink" href="#first-level-contrast" title="Permalink to this headline">#</a></h4>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
@@ -7723,12 +7712,12 @@ firstlevel_contrast.jpg  glm_report.html
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6_glm_from_nilearn_31_0.jpg" src="../_images/6_glm_from_nilearn_31_0.jpg" />
+<img alt="../_images/6_firstlevel_glm_nilearn_31_0.jpg" src="../_images/6_firstlevel_glm_nilearn_31_0.jpg" />
 </div>
 </div>
 </section>
 <section id="nilearn-z-map">
-<h4>Nilearn Z map<a class="headerlink" href="#nilearn-z-map" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">6.7.1.2. </span>Nilearn Z map<a class="headerlink" href="#nilearn-z-map" title="Permalink to this headline">#</a></h4>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../outputs/6_glm/nilearn_z_map.jpg&#39;</span><span class="p">)</span>
@@ -7736,12 +7725,12 @@ firstlevel_contrast.jpg  glm_report.html
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6_glm_from_nilearn_33_0.jpg" src="../_images/6_glm_from_nilearn_33_0.jpg" />
+<img alt="../_images/6_firstlevel_glm_nilearn_33_0.jpg" src="../_images/6_firstlevel_glm_nilearn_33_0.jpg" />
 </div>
 </div>
 </section>
 <section id="fsl-z-map">
-<h4>FSL Z map<a class="headerlink" href="#fsl-z-map" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">6.7.1.3. </span>FSL Z map<a class="headerlink" href="#fsl-z-map" title="Permalink to this headline">#</a></h4>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../outputs/6_glm/fsl_z_map.jpg&#39;</span><span class="p">)</span>
@@ -7749,12 +7738,12 @@ firstlevel_contrast.jpg  glm_report.html
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6_glm_from_nilearn_35_0.jpg" src="../_images/6_glm_from_nilearn_35_0.jpg" />
+<img alt="../_images/6_firstlevel_glm_nilearn_35_0.jpg" src="../_images/6_firstlevel_glm_nilearn_35_0.jpg" />
 </div>
 </div>
 </section>
 <section id="nilearn-fsl-comparison">
-<h4>Nilearn FSL comparison<a class="headerlink" href="#nilearn-fsl-comparison" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">6.7.1.4. </span>Nilearn FSL comparison<a class="headerlink" href="#nilearn-fsl-comparison" title="Permalink to this headline">#</a></h4>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../outputs/6_glm/nilearn_fsl_comp.jpg&#39;</span><span class="p">)</span>
@@ -7762,14 +7751,14 @@ firstlevel_contrast.jpg  glm_report.html
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6_glm_from_nilearn_37_0.jpg" src="../_images/6_glm_from_nilearn_37_0.jpg" />
+<img alt="../_images/6_firstlevel_glm_nilearn_37_0.jpg" src="../_images/6_firstlevel_glm_nilearn_37_0.jpg" />
 </div>
 </div>
 </section>
 </section>
 </section>
 <section id="exercise">
-<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">6.8. </span>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">#</a></h2>
 <p>What if we need to run the first-level GLM on multiple subject? We will need the <code class="docutils literal notranslate"><span class="pre">splitter</span></code>.</p>
 <p>So, where should we add <code class="docutils literal notranslate"><span class="pre">.split</span></code>?</p>
 </section>
@@ -7806,13 +7795,13 @@ firstlevel_contrast.jpg  glm_report.html
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">5. ShellCommandTask</p>
+            <p class="prev-next-title"><span class="section-number">5. </span>ShellCommandTask</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../about/team.html" title="next page">
+    <a class='right-next' id="next-link" href="7_twolevel_glm_nilearn.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Team</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Two-Level GLM (from Nilearn)</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

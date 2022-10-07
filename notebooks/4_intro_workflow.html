@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>4. Workflow &#8212; Pydra Tutorial</title>
+    <title>4. Workflow &#8212; Tutorials</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -97,7 +97,7 @@ const thebe_selector_output = ".output, .cell_output"
       <img src="../_static/logo.jpg" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">Pydra Tutorial</h1>
+      <h1 class="site-logo" id="site-title">Tutorials</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -115,13 +115,13 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Tutorials
+  Basic Concepts
  </span>
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="1_intro_pydra.html">
-   1. Pydra
+   1. Intro to Pydra
   </a>
  </li>
  <li class="toctree-l1">
@@ -144,9 +144,21 @@ const thebe_selector_output = ".output, .cell_output"
    5. ShellCommandTask
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  General Linear Model
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="6_glm_from_nilearn.html">
-   6. First level GLM
+  <a class="reference internal" href="6_firstlevel_glm_nilearn.html">
+   6. First Level GLM (from Nilearn)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="7_twolevel_glm_nilearn.html">
+   7. Two-Level GLM (from Nilearn)
   </a>
  </li>
 </ul>
@@ -391,27 +403,27 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#connecting-tasks">
-   Connecting tasks
+   4.1. Connecting tasks
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#workflow-as-a-node">
-   Workflow as a node
+   4.2. Workflow as a node
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#workflow-with-a-splitter">
-   Workflow with a splitter
+   4.3. Workflow with a splitter
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#adding-a-combiner">
-   Adding a combiner
+   4.4. Adding a combiner
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#setting-a-splitter-for-nodes">
-   Setting a splitter for nodes
+   4.5. Setting a splitter for nodes
   </a>
  </li>
 </ul>
@@ -423,7 +435,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>4. Workflow</h1>
+                <h1>Workflow</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -435,27 +447,27 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#connecting-tasks">
-   Connecting tasks
+   4.1. Connecting tasks
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#workflow-as-a-node">
-   Workflow as a node
+   4.2. Workflow as a node
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#workflow-with-a-splitter">
-   Workflow with a splitter
+   4.3. Workflow with a splitter
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#adding-a-combiner">
-   Adding a combiner
+   4.4. Adding a combiner
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#setting-a-splitter-for-nodes">
-   Setting a splitter for nodes
+   4.5. Setting a splitter for nodes
   </a>
  </li>
 </ul>
@@ -469,7 +481,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="workflow">
-<h1>4. Workflow<a class="headerlink" href="#workflow" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">4. </span>Workflow<a class="headerlink" href="#workflow" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nest_asyncio</span>
@@ -520,7 +532,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pydra.engine.core.Workflow at 0x7f158fc758d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pydra.engine.core.Workflow at 0x7f1045b7a110&gt;
 </pre></div>
 </div>
 </div>
@@ -533,7 +545,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pydra.engine.task.FunctionTask at 0x7f158fc75a80&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pydra.engine.task.FunctionTask at 0x7f1040ae5990&gt;
 </pre></div>
 </div>
 </div>
@@ -594,7 +606,7 @@ title="Print to PDF"
 <p>In this example we had two tasks, that took inputs from the workflow input and pass the outputs to the workflow output:</p>
 <p><img alt="wf_2.png" src="../_images/wf_2.png" /></p>
 <section id="connecting-tasks">
-<h2>Connecting tasks<a class="headerlink" href="#connecting-tasks" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">4.1. </span>Connecting tasks<a class="headerlink" href="#connecting-tasks" title="Permalink to this headline">#</a></h2>
 <p>The previous example showed a workflow with two nodes, but they were not connected with each other.</p>
 <p>If we want to connect the tasks with each other, we have to set the input of the second task to the output of the first task, and we use again the <code class="docutils literal notranslate"><span class="pre">Lazy</span> <span class="pre">Output</span></code> concept:</p>
 <div class="cell docutils container">
@@ -661,7 +673,7 @@ title="Print to PDF"
 <p><img alt="wf_4.png" src="../_images/wf_4.png" /></p>
 </section>
 <section id="workflow-as-a-node">
-<h2>Workflow as a node<a class="headerlink" href="#workflow-as-a-node" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">4.2. </span>Workflow as a node<a class="headerlink" href="#workflow-as-a-node" title="Permalink to this headline">#</a></h2>
 <p>Previously we had workflows that had <code class="docutils literal notranslate"><span class="pre">Task</span></code>s as nodes, but <em>pydra</em> treats <code class="docutils literal notranslate"><span class="pre">Workflow</span></code> as any other <code class="docutils literal notranslate"><span class="pre">Task</span></code>, so the workflow could be used as a node.</p>
 <p>Let’s modify the previous workflow, and instead of <code class="docutils literal notranslate"><span class="pre">sum</span></code> and <code class="docutils literal notranslate"><span class="pre">power</span></code> tasks we use <code class="docutils literal notranslate"><span class="pre">wf2</span></code> as the first node:</p>
 <div class="cell docutils container">
@@ -700,7 +712,7 @@ title="Print to PDF"
 <p><img alt="wf_5.png" src="../_images/wf_5.png" /></p>
 </section>
 <section id="workflow-with-a-splitter">
-<h2>Workflow with a splitter<a class="headerlink" href="#workflow-with-a-splitter" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">4.3. </span>Workflow with a splitter<a class="headerlink" href="#workflow-with-a-splitter" title="Permalink to this headline">#</a></h2>
 <p>Workflow as any other task could also have a splitter. Let’s take one of our previous workflows and add a splitter for the workflow input by setting <code class="docutils literal notranslate"><span class="pre">splitter</span></code> using the <code class="docutils literal notranslate"><span class="pre">split</span></code> method.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -761,7 +773,7 @@ title="Print to PDF"
 <p><img alt="wf_7.png" src="../_images/wf_7.png" /></p>
 </section>
 <section id="adding-a-combiner">
-<h2>Adding a combiner<a class="headerlink" href="#adding-a-combiner" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">4.4. </span>Adding a combiner<a class="headerlink" href="#adding-a-combiner" title="Permalink to this headline">#</a></h2>
 <p>In the same way as we did for <code class="docutils literal notranslate"><span class="pre">Task</span></code>, we can add a <code class="docutils literal notranslate"><span class="pre">combiner</span></code> to the entire workflow:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -787,7 +799,7 @@ title="Print to PDF"
 <p><img alt="wf_8.png" src="../_images/wf_8.png" /></p>
 </section>
 <section id="setting-a-splitter-for-nodes">
-<h2>Setting a splitter for nodes<a class="headerlink" href="#setting-a-splitter-for-nodes" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">4.5. </span>Setting a splitter for nodes<a class="headerlink" href="#setting-a-splitter-for-nodes" title="Permalink to this headline">#</a></h2>
 <p>We presented how to set a <code class="docutils literal notranslate"><span class="pre">splitter</span></code> and a <code class="docutils literal notranslate"><span class="pre">combiner</span></code> for entire workflow, but we could also set a <code class="docutils literal notranslate"><span class="pre">splitter</span></code> and a <code class="docutils literal notranslate"><span class="pre">combiner</span></code> on the level of a single node.</p>
 <p>Let’s create a workflow that takes a list as an input, and pass this input to two nodes. One node can take entire list as its input and the second node splits the input:</p>
 <div class="cell docutils container">
@@ -853,13 +865,13 @@ title="Print to PDF"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">3. Tasks with States</p>
+            <p class="prev-next-title"><span class="section-number">3. </span>Tasks with States</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="5_intro_shelltask.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">5. ShellCommandTask</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>ShellCommandTask</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

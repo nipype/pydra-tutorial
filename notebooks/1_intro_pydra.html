@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>1. Pydra &#8212; Pydra Tutorial</title>
+    <title>1. Intro to Pydra &#8212; Tutorials</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -97,7 +97,7 @@ const thebe_selector_output = ".output, .cell_output"
       <img src="../_static/logo.jpg" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">Pydra Tutorial</h1>
+      <h1 class="site-logo" id="site-title">Tutorials</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -115,13 +115,13 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Tutorials
+  Basic Concepts
  </span>
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   1. Pydra
+   1. Intro to Pydra
   </a>
  </li>
  <li class="toctree-l1">
@@ -144,9 +144,21 @@ const thebe_selector_output = ".output, .cell_output"
    5. ShellCommandTask
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  General Linear Model
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="6_glm_from_nilearn.html">
-   6. First level GLM
+  <a class="reference internal" href="6_firstlevel_glm_nilearn.html">
+   6. First Level GLM (from Nilearn)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="7_twolevel_glm_nilearn.html">
+   7. Two-Level GLM (from Nilearn)
   </a>
  </li>
 </ul>
@@ -391,12 +403,12 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#pydra-computational-objects-tasks">
-   Pydra computational objects - Tasks
+   1.1. Pydra computational objects - Tasks
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#pydra-workers">
-   Pydra Workers
+   1.2. Pydra Workers
   </a>
  </li>
 </ul>
@@ -408,7 +420,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>1. Pydra</h1>
+                <h1>Intro to Pydra</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -420,12 +432,12 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#pydra-computational-objects-tasks">
-   Pydra computational objects - Tasks
+   1.1. Pydra computational objects - Tasks
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#pydra-workers">
-   Pydra Workers
+   1.2. Pydra Workers
   </a>
  </li>
 </ul>
@@ -438,8 +450,8 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="pydra">
-<h1>1. Pydra<a class="headerlink" href="#pydra" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="intro-to-pydra">
+<h1><span class="section-number">1. </span>Intro to Pydra<a class="headerlink" href="#intro-to-pydra" title="Permalink to this headline">#</a></h1>
 <p>Pydra is a lightweight, Python 3.7+ dataflow engine for computational graph construction, manipulation, and distributed execution.
 Designed as a general-purpose engine to support analytics in any scientific domain; created for <a class="reference external" href="https://github.com/nipy/nipype">Nipype</a>, and helps build reproducible, scalable, reusable, and fully automated, provenance tracked scientific workflows.
 The power of Pydra lies in ease of workflow creation
@@ -452,7 +464,7 @@ and execution for complex multiparameter map-reduce operations, and the use of g
 <li><p>Support for execution of Tasks in containerized environments</p></li>
 </ul>
 <section id="pydra-computational-objects-tasks">
-<h2>Pydra computational objects - Tasks<a class="headerlink" href="#pydra-computational-objects-tasks" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">1.1. </span>Pydra computational objects - Tasks<a class="headerlink" href="#pydra-computational-objects-tasks" title="Permalink to this headline">#</a></h2>
 <p>There are two main types of objects in <em>pydra</em>: <code class="docutils literal notranslate"><span class="pre">Task</span></code> and <code class="docutils literal notranslate"><span class="pre">Workflow</span></code>, that is also a type of <code class="docutils literal notranslate"><span class="pre">Task</span></code>, and can be used in a nested workflow.
 <img alt="nested_workflow.png" src="../_images/nested_workflow.png" /></p>
 <p><strong>These are the current <code class="docutils literal notranslate"><span class="pre">Task</span></code> implemented in Pydra:</strong></p>
@@ -472,7 +484,7 @@ and execution for complex multiparameter map-reduce operations, and the use of g
 </ul>
 </section>
 <section id="pydra-workers">
-<h2>Pydra Workers<a class="headerlink" href="#pydra-workers" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">1.2. </span>Pydra Workers<a class="headerlink" href="#pydra-workers" title="Permalink to this headline">#</a></h2>
 <p>Pydra supports multiple workers to execute <code class="docutils literal notranslate"><span class="pre">Tasks</span></code> and <code class="docutils literal notranslate"><span class="pre">Workflows</span></code>:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">ConcurrentFutures</span></code></p></li>
@@ -527,7 +539,7 @@ and execution for complex multiparameter map-reduce operations, and the use of g
     <a class='right-next' id="next-link" href="2_intro_functiontask.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">2. FunctionTask</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>FunctionTask</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

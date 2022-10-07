@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>3. Tasks with States &#8212; Pydra Tutorial</title>
+    <title>3. Tasks with States &#8212; Tutorials</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -97,7 +97,7 @@ const thebe_selector_output = ".output, .cell_output"
       <img src="../_static/logo.jpg" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">Pydra Tutorial</h1>
+      <h1 class="site-logo" id="site-title">Tutorials</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -115,13 +115,13 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Tutorials
+  Basic Concepts
  </span>
 </p>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="1_intro_pydra.html">
-   1. Pydra
+   1. Intro to Pydra
   </a>
  </li>
  <li class="toctree-l1">
@@ -144,9 +144,21 @@ const thebe_selector_output = ".output, .cell_output"
    5. ShellCommandTask
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  General Linear Model
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="6_glm_from_nilearn.html">
-   6. First level GLM
+  <a class="reference internal" href="6_firstlevel_glm_nilearn.html">
+   6. First Level GLM (from Nilearn)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="7_twolevel_glm_nilearn.html">
+   7. Two-Level GLM (from Nilearn)
   </a>
  </li>
 </ul>
@@ -391,39 +403,39 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#multiple-inputs-and-state-splitting">
-   Multiple inputs and state splitting
+   3.1. Multiple inputs and state splitting
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#scalar-splitter">
-     Scalar splitter
+     3.1.1. Scalar splitter
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#outer-splitter">
-     Outer splitter
+     3.1.2. Outer splitter
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#combining-the-output">
-   Combining the output
+   3.2. Combining the output
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#lists-as-an-input">
-   Lists as an input
+   3.3. Lists as an input
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercise-1">
-   Exercise 1
+   3.4. Exercise 1
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#parallel-execution">
-   Parallel execution
+   3.5. Parallel execution
   </a>
  </li>
 </ul>
@@ -435,7 +447,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>3. Tasks with States</h1>
+                <h1>Tasks with States</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -447,39 +459,39 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#multiple-inputs-and-state-splitting">
-   Multiple inputs and state splitting
+   3.1. Multiple inputs and state splitting
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#scalar-splitter">
-     Scalar splitter
+     3.1.1. Scalar splitter
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#outer-splitter">
-     Outer splitter
+     3.1.2. Outer splitter
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#combining-the-output">
-   Combining the output
+   3.2. Combining the output
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#lists-as-an-input">
-   Lists as an input
+   3.3. Lists as an input
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercise-1">
-   Exercise 1
+   3.4. Exercise 1
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#parallel-execution">
-   Parallel execution
+   3.5. Parallel execution
   </a>
  </li>
 </ul>
@@ -493,7 +505,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="tasks-with-states">
-<h1>3. Tasks with States<a class="headerlink" href="#tasks-with-states" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">3. </span>Tasks with States<a class="headerlink" href="#tasks-with-states" title="Permalink to this headline">#</a></h1>
 <p>Task might be run for a single set of input values or we can generate multiple sets, that will be called “states”. If we want to run our <code class="docutils literal notranslate"><span class="pre">Task</span></code> multiple times we have to provide an input that is an iterable and specify the way we want to map values of the inputs to the specific states. In order to do it, we set so-called <code class="docutils literal notranslate"><span class="pre">splitter</span></code>.</p>
 <p>Let’s start from a simple <code class="docutils literal notranslate"><span class="pre">FunctionTask</span></code> that takes a list as an input:</p>
 <div class="cell docutils container">
@@ -541,7 +553,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pydra.engine.task.FunctionTask at 0x7f914b8cf4c0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pydra.engine.task.FunctionTask at 0x7f07641eaa10&gt;
 </pre></div>
 </div>
 </div>
@@ -554,7 +566,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pydra.engine.state.State at 0x7f914b8cd6c0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pydra.engine.state.State at 0x7f0750f28250&gt;
 </pre></div>
 </div>
 </div>
@@ -635,7 +647,7 @@ title="Print to PDF"
 <p>For tasks with a state <em>pydra</em> prepare all sets of inputs and run the task for each of the set. We could simply represent this by the following figure:</p>
 <p><img alt="nd_spl_1.png" src="../_images/nd_spl_1.png" /></p>
 <section id="multiple-inputs-and-state-splitting">
-<h2>Multiple inputs and state splitting<a class="headerlink" href="#multiple-inputs-and-state-splitting" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.1. </span>Multiple inputs and state splitting<a class="headerlink" href="#multiple-inputs-and-state-splitting" title="Permalink to this headline">#</a></h2>
 <p>We can also use <code class="docutils literal notranslate"><span class="pre">State</span></code> for functions with multiple inputs:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -676,7 +688,7 @@ title="Print to PDF"
 <p>Now, we have two options to map the input values, we might want to run the task for two sets of values: (<code class="docutils literal notranslate"><span class="pre">a</span></code>=1, <code class="docutils literal notranslate"><span class="pre">b</span></code>=10) and (<code class="docutils literal notranslate"><span class="pre">a</span></code>=2, <code class="docutils literal notranslate"><span class="pre">b</span></code>=100), or we might want to run the task for four sets: (<code class="docutils literal notranslate"><span class="pre">a</span></code>=1, <code class="docutils literal notranslate"><span class="pre">b</span></code>=10), (<code class="docutils literal notranslate"><span class="pre">a</span></code>=1, <code class="docutils literal notranslate"><span class="pre">b</span></code>=100), (<code class="docutils literal notranslate"><span class="pre">a</span></code>=2, <code class="docutils literal notranslate"><span class="pre">b</span></code>=10) and (<code class="docutils literal notranslate"><span class="pre">a</span></code>=2, <code class="docutils literal notranslate"><span class="pre">b</span></code>=100).</p>
 <p><strong>The first situation will be represented by the so-called “scalar” splitter, the later by the so-called “outer” splitter.</strong></p>
 <section id="scalar-splitter">
-<h3>Scalar splitter<a class="headerlink" href="#scalar-splitter" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.1.1. </span>Scalar splitter<a class="headerlink" href="#scalar-splitter" title="Permalink to this headline">#</a></h3>
 <p>Let’s start from the scalar splitter, that uses parentheses in the syntax:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -698,7 +710,7 @@ title="Print to PDF"
 <p><img alt="nd_spl_4.png" src="../_images/nd_spl_4.png" /></p>
 </section>
 <section id="outer-splitter">
-<h3>Outer splitter<a class="headerlink" href="#outer-splitter" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.1.2. </span>Outer splitter<a class="headerlink" href="#outer-splitter" title="Permalink to this headline">#</a></h3>
 <p>For the outer splitter we will use brackets:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -786,7 +798,7 @@ title="Print to PDF"
 </section>
 </section>
 <section id="combining-the-output">
-<h2>Combining the output<a class="headerlink" href="#combining-the-output" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.2. </span>Combining the output<a class="headerlink" href="#combining-the-output" title="Permalink to this headline">#</a></h2>
 <p>When we use <code class="docutils literal notranslate"><span class="pre">splitter</span></code>, we can also define <code class="docutils literal notranslate"><span class="pre">combiner</span></code>, if we want to combine together the results.</p>
 <p>If we take the <code class="docutils literal notranslate"><span class="pre">task4</span></code> as an example and combine all results for each element of the input <code class="docutils literal notranslate"><span class="pre">b</span></code>, we can modify the task as follows:</p>
 <div class="cell docutils container">
@@ -891,7 +903,7 @@ title="Print to PDF"
 <p><img alt="nd_spl_3_comb3.png" src="../_images/nd_spl_3_comb3.png" /></p>
 </section>
 <section id="lists-as-an-input">
-<h2>Lists as an input<a class="headerlink" href="#lists-as-an-input" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.3. </span>Lists as an input<a class="headerlink" href="#lists-as-an-input" title="Permalink to this headline">#</a></h2>
 <p>Note that list can be used as an input even without using any splitter, there are functions that take a list as a single input value:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -915,7 +927,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="exercise-1">
-<h2>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.4. </span>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this headline">#</a></h2>
 <p>Let’s say we want to calculate squares and cubes of integers from 2 to 5, and combine separately all squares and all cubes:</p>
 <p>First we will define a function that returns powers:</p>
 <div class="cell tag_hide-cell docutils container">
@@ -968,7 +980,7 @@ cubes: [8, 27, 64, 125]
 </div>
 </section>
 <section id="parallel-execution">
-<h2>Parallel execution<a class="headerlink" href="#parallel-execution" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.5. </span>Parallel execution<a class="headerlink" href="#parallel-execution" title="Permalink to this headline">#</a></h2>
 <p>We run task multiple times for multiple sets of input, but we didn’t talk about the execution time. Let’s create a function that sleeps for a second and run for four values:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -990,7 +1002,7 @@ cubes: [8, 27, 64, 125]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total time: 2.2428345680236816
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total time: 2.224936008453369
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Result(output=Output(out=3), runtime=None, errored=False),
@@ -1017,7 +1029,7 @@ cubes: [8, 27, 64, 125]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total time: 2.2434890270233154
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total time: 2.226017951965332
 results: [Result(output=Output(out=3), runtime=None, errored=False), Result(output=Output(out=4), runtime=None, errored=False), Result(output=Output(out=5), runtime=None, errored=False), Result(output=Output(out=6), runtime=None, errored=False)]
 </pre></div>
 </div>
@@ -1036,7 +1048,7 @@ results: [Result(output=Output(out=3), runtime=None, errored=False), Result(outp
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total time: 2.244947910308838
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total time: 2.2182583808898926
 results: [Result(output=Output(out=3), runtime=None, errored=False), Result(output=Output(out=4), runtime=None, errored=False), Result(output=Output(out=5), runtime=None, errored=False), Result(output=Output(out=6), runtime=None, errored=False)]
 </pre></div>
 </div>
@@ -1056,7 +1068,7 @@ results: [Result(output=Output(out=3), runtime=None, errored=False), Result(outp
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total time: 2.230356454849243
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total time: 2.214682102203369
 results: [Result(output=Output(out=3), runtime=None, errored=False), Result(output=Output(out=4), runtime=None, errored=False), Result(output=Output(out=5), runtime=None, errored=False), Result(output=Output(out=6), runtime=None, errored=False)]
 </pre></div>
 </div>
@@ -1076,7 +1088,7 @@ results: [Result(output=Output(out=3), runtime=None, errored=False), Result(outp
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total time: 2.2242672443389893
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total time: 2.1972224712371826
 results: [Result(output=Output(out=3), runtime=None, errored=False), Result(output=Output(out=4), runtime=None, errored=False), Result(output=Output(out=5), runtime=None, errored=False), Result(output=Output(out=6), runtime=None, errored=False)]
 </pre></div>
 </div>
@@ -1118,13 +1130,13 @@ If you have 2 processors or less, you should not see any difference in the execu
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">2. FunctionTask</p>
+            <p class="prev-next-title"><span class="section-number">2. </span>FunctionTask</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="4_intro_workflow.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">4. Workflow</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Workflow</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
