@@ -1,17 +1,20 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: Pydra Tutorial
+title: Tutorials
 author: Pydra Developers
 logo: logo.jpg
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
+only_build_toc_files: true
+
 execute:
   execute_notebooks: cache
   run_in_temp: true
   allow_errors: true
   timeout: -1
+  only_build_toc_files: true
 
 # Define the name of the latex output file for PDF builds
 latex:

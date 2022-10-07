@@ -3,10 +3,9 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - git-annex
+  - datalad
   - pip
   - pip:
-    - datalad
     - pydra
     - jupyter
     - jupyter_contrib_nbextensions
@@ -17,6 +16,7 @@ dependencies:
     - nbval
     - nest_asyncio
     - psutil
+    - sh
     - pytest
     - numpy
     - pandas

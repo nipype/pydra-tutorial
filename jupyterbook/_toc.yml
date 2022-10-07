@@ -4,14 +4,19 @@
 format: jb-book
 root: welcome
 parts:
-  - caption: Tutorials
+  - caption: Basic Concepts
+    numbered: True
     chapters:
     - file: notebooks/1_intro_pydra
     - file: notebooks/2_intro_functiontask
     - file: notebooks/3_intro_functiontask_state
     - file: notebooks/4_intro_workflow
     - file: notebooks/5_intro_shelltask
-    - file: notebooks/6_glm_from_nilearn
+  - caption: General Linear Model
+    numbered: True
+    chapters:
+    - file: notebooks/6_firstlevel_glm_nilearn
+    - file: notebooks/7_twolevel_glm_nilearn
   - caption: About Pydra
     chapters:
     - file: about/team

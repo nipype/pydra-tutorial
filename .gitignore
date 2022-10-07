@@ -3,4 +3,6 @@ outputs/
 .DS_Store
 _build/
 *.ipynb
+*/*.ipynb
 .*.swp
+notebooks/*old*
