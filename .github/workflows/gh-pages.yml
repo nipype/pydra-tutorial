@@ -23,6 +23,10 @@ jobs:
     - run: conda info
     - run: conda list
     - run: conda config --show
+    - name: Set git credentials
+      run: |
+        git config --global user.name "fake user"
+        git config --global user.email "fake@email"
     - name: Install dependencies
       run: pip install jupyter-book
     - name: Build JupyterBook
