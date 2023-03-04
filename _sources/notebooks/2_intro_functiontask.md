@@ -158,7 +158,7 @@ If we don't specify the input, `attr.NOTHING` will be used as the default value
 task3a = add_var()
 task3a.inputs.a = 4
 
-# importing attr library, and checking the type pf `b`
+# importing attr library, and checking the type of `b`
 import attr
 
 task3a.inputs.b == attr.NOTHING
