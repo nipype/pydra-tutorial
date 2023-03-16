@@ -199,7 +199,7 @@ wf2a.set_output(
 
 wf5 = pydra.Workflow(name='wf5', input_spec=['x'], x=3)
 wf5.add(wf2a)
-# connecting wfa to the input from the main workflow
+# connecting wf2a to the input from the main workflow
 wf2a.inputs.x = wf5.lzin.x
 wf5.add(mult_var(name='mult', a=wf5.wf2a.lzout.out_s, b=wf5.wf2a.lzout.out_p))
 
