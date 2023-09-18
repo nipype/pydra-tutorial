@@ -128,6 +128,7 @@ task1a()
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
 # This usage is incorrect according to static type hints:
 task1b = add(a="hello", b="world")
 task1b()
@@ -152,6 +153,7 @@ task1c()
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
 # This usage is incorrect and will raise a runtime TypeError:
 task1d = add(a="hello", b="world")
 task1d()
@@ -178,6 +180,7 @@ task1e()
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
 # This will raise a ValueError
 task1f = sum_of_pairs(pairs=[(1, 2), (3, "4")])  
 task1f()
