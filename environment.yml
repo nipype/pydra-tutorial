@@ -6,7 +6,7 @@ dependencies:
   - datalad
   - pip
   - pip:
-    - pydra
+    - pydra==0.23.0a0
     - jupyter
     - jupyter_contrib_nbextensions
     - jupytext
