@@ -48,7 +48,8 @@ There are two main types of objects in *pydra*: `Task` and `Workflow`, that is a
 Pydra supports multiple workers to execute `Tasks` and `Workflows`:
 - `ConcurrentFutures`
 - `SLURM`
-- `Dask` (experimental)
+- `Dask`
+- `PSI/J`
 
 +++
 
