@@ -12,6 +12,7 @@ parts:
     - file: notebooks/3_intro_functiontask_state
     - file: notebooks/4_intro_workflow
     - file: notebooks/5_intro_shelltask
+    - file: notebooks/8_intro_workers
   - caption: General Linear Model
     numbered: True
     chapters:
