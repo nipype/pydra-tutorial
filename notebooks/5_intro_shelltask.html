@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,8 +38,9 @@
     <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -64,7 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/5_intro_shelltask';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="6. First Level GLM (from Nilearn)" href="6_firstlevel_glm_nilearn.html" />
+    <link rel="next" title="6. Workers in Pydra" href="8_intro_workers.html" />
     <link rel="prev" title="4. Workflow" href="4_intro_workflow.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -76,6 +77,15 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -163,11 +173,12 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="3_intro_functiontask_state.html">3. Tasks with States</a></li>
 <li class="toctree-l1"><a class="reference internal" href="4_intro_workflow.html">4. Workflow</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">5. ShellCommandTask</a></li>
+<li class="toctree-l1"><a class="reference internal" href="8_intro_workers.html">6. Workers in Pydra</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">General Linear Model</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="6_firstlevel_glm_nilearn.html">6. First Level GLM (from Nilearn)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="7_twolevel_glm_nilearn.html">7. Two-Level GLM (from Nilearn)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_firstlevel_glm_nilearn.html">7. First Level GLM (from Nilearn)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_twolevel_glm_nilearn.html">8. Two-Level GLM (from Nilearn)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">About Pydra</span></p>
 <ul class="nav bd-sidenav">
@@ -376,10 +387,10 @@ const thebe_selector_output = ".output, .cell_output"
 
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
@@ -387,7 +398,7 @@ document.write(`
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -495,7 +506,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(return_code=0, stdout=&#39;/tmp/tmpbm700g1j/ShellCommandTask_50215383834238ce614b4428a1e9943ddff15f8580a384a0a57b34c760864b3a\n&#39;, stderr=&#39;&#39;), runtime=None, errored=False)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(return_code=0, stdout=&#39;/tmp/tmpp_05tydy/ShellCommandTask_50215383834238ce614b4428a1e9943ddff15f8580a384a0a57b34c760864b3a\n&#39;, stderr=&#39;&#39;), runtime=None, errored=False)
 </pre></div>
 </div>
 </div>
@@ -670,7 +681,7 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cmndline =  touch newfile_tmp.txt
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(return_code=0, stdout=&#39;&#39;, stderr=&#39;&#39;, newfile=PosixPath(&#39;/tmp/tmpd9cnzpwn/ShellCommandTask_76e73f8b52e6d5d1920bda2a22e309fb4fd89cec14e6ab25755e2caf66cf0294/newfile_tmp.txt&#39;)), runtime=None, errored=False)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(return_code=0, stdout=&#39;&#39;, stderr=&#39;&#39;, newfile=PosixPath(&#39;/tmp/tmpih5_o4nv/ShellCommandTask_76e73f8b52e6d5d1920bda2a22e309fb4fd89cec14e6ab25755e2caf66cf0294/newfile_tmp.txt&#39;)), runtime=None, errored=False)
 </pre></div>
 </div>
 </div>
@@ -725,7 +736,7 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(return_code=0, stdout=&#39;root\n&#39;, stderr=&quot;Unable to find image &#39;busybox:latest&#39; locally\nlatest: Pulling from library/busybox\n1487bff95222: Pulling fs layer\n1487bff95222: Download complete\n1487bff95222: Pull complete\nDigest: sha256:c118f538365369207c12e5794c3cbfb7b042d950af590ae6c287ede74f29b7d4\nStatus: Downloaded newer image for busybox:latest\n&quot;), runtime=None, errored=False)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(return_code=0, stdout=&#39;root\n&#39;, stderr=&quot;Unable to find image &#39;busybox:latest&#39; locally\nlatest: Pulling from library/busybox\n3f4d90098f5b: Pulling fs layer\n3f4d90098f5b: Verifying Checksum\n3f4d90098f5b: Download complete\n3f4d90098f5b: Pull complete\nDigest: sha256:3fbc632167424a6d997e74f52b878d7cc478225cffac6bc977eedfe51c7f4e79\nStatus: Downloaded newer image for busybox:latest\n&quot;), runtime=None, errored=False)
 </pre></div>
 </div>
 </div>
@@ -754,7 +765,7 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Result(output=Output(return_code=0, stdout=&#39;root\n&#39;, stderr=&#39;&#39;), runtime=None, errored=False),
- Result(output=Output(return_code=0, stdout=&#39;root\n&#39;, stderr=&quot;Unable to find image &#39;ubuntu:latest&#39; locally\nlatest: Pulling from library/ubuntu\n2ab09b027e7f: Pulling fs layer\n2ab09b027e7f: Verifying Checksum\n2ab09b027e7f: Download complete\n2ab09b027e7f: Pull complete\nDigest: sha256:67211c14fa74f070d27cc59d69a7fa9aeff8e28ea118ef3babc295a0428a6d21\nStatus: Downloaded newer image for ubuntu:latest\n&quot;), runtime=None, errored=False)]
+ Result(output=Output(return_code=0, stdout=&#39;root\n&#39;, stderr=&quot;Unable to find image &#39;ubuntu:latest&#39; locally\nlatest: Pulling from library/ubuntu\naece8493d397: Pulling fs layer\naece8493d397: Verifying Checksum\naece8493d397: Download complete\naece8493d397: Pull complete\nDigest: sha256:2b7412e6465c3c7fc5bb21d3e6f1917c167358449fecac8176c6e496e5c1f05f\nStatus: Downloaded newer image for ubuntu:latest\n&quot;), runtime=None, errored=False)]
 </pre></div>
 </div>
 </div>
@@ -835,7 +846,9 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
@@ -848,11 +861,11 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
       </div>
     </a>
     <a class="right-next"
-       href="6_firstlevel_glm_nilearn.html"
+       href="8_intro_workers.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">6. </span>First Level GLM (from Nilearn)</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Workers in Pydra</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -895,7 +908,7 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
             
           </div>
           <footer class="bd-footer-content">
-            <div class="bd-footer-content__inner">
+            
 <div class="bd-footer-content__inner container">
   
   <div class="footer-item">
@@ -925,7 +938,7 @@ By Pydra Developers
     
   </div>
   
-</div></div>
+</div>
           </footer>
         
 
@@ -934,8 +947,8 @@ By Pydra Developers
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
 
   <footer class="bd-footer">
   </footer>

@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,8 +38,9 @@
     <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -76,6 +77,15 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -163,11 +173,12 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="3_intro_functiontask_state.html">3. Tasks with States</a></li>
 <li class="toctree-l1"><a class="reference internal" href="4_intro_workflow.html">4. Workflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="5_intro_shelltask.html">5. ShellCommandTask</a></li>
+<li class="toctree-l1"><a class="reference internal" href="8_intro_workers.html">6. Workers in Pydra</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">General Linear Model</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="6_firstlevel_glm_nilearn.html">6. First Level GLM (from Nilearn)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="7_twolevel_glm_nilearn.html">7. Two-Level GLM (from Nilearn)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_firstlevel_glm_nilearn.html">7. First Level GLM (from Nilearn)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_twolevel_glm_nilearn.html">8. Two-Level GLM (from Nilearn)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">About Pydra</span></p>
 <ul class="nav bd-sidenav">
@@ -376,10 +387,10 @@ const thebe_selector_output = ".output, .cell_output"
 
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
@@ -387,7 +398,7 @@ document.write(`
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -500,7 +511,7 @@ b = 5
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inputs(a=4, b=5, _func=b&#39;\x80\x05\x95\xd7\x01\x00\x00\x00\x00\x00\x00\x8c\x17cloudpickle.cloudpickle\x94\x8c\x0e_make_function\x94\x93\x94(h\x00\x8c\r_builtin_type\x94\x93\x94\x8c\x08CodeType\x94\x85\x94R\x94(K\x02K\x00K\x00K\x02K\x02K\x03C\x0c\x97\x00|\x00|\x01z\x00\x00\x00S\x00\x94N\x85\x94)\x8c\x01a\x94\x8c\x01b\x94\x86\x94\x8c /tmp/ipykernel_3323/214681761.py\x94\x8c\x07add_var\x94h\x0eK\x04C\x0b\x80\x00\xe0\x0b\x0c\x88q\x895\x80L\x94C\x00\x94))t\x94R\x94}\x94(\x8c\x0b__package__\x94N\x8c\x08__name__\x94\x8c\x08__main__\x94uNNNt\x94R\x94\x8c\x1ccloudpickle.cloudpickle_fast\x94\x8c\x12_function_setstate\x94\x93\x94h\x18}\x94}\x94(h\x15h\x0e\x8c\x0c__qualname__\x94h\x0e\x8c\x0f__annotations__\x94}\x94\x8c\x0e__kwdefaults__\x94N\x8c\x0c__defaults__\x94N\x8c\n__module__\x94h\x16\x8c\x07__doc__\x94N\x8c\x0b__closure__\x94N\x8c\x17_cloudpickle_submodules\x94]\x94\x8c\x0b__globals__\x94}\x94u\x86\x94\x86R0.&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inputs(a=4, b=5, _func=b&#39;\x80\x05\x95\xba\x01\x00\x00\x00\x00\x00\x00\x8c\x17cloudpickle.cloudpickle\x94\x8c\x0e_make_function\x94\x93\x94(h\x00\x8c\r_builtin_type\x94\x93\x94\x8c\x08CodeType\x94\x85\x94R\x94(K\x02K\x00K\x00K\x02K\x02K\x03C\x0c\x97\x00|\x00|\x01z\x00\x00\x00S\x00\x94N\x85\x94)\x8c\x01a\x94\x8c\x01b\x94\x86\x94\x8c /tmp/ipykernel_6599/214681761.py\x94\x8c\x07add_var\x94h\x0eK\x04C\x0b\x80\x00\xe0\x0b\x0c\x88q\x895\x80L\x94C\x00\x94))t\x94R\x94}\x94(\x8c\x0b__package__\x94N\x8c\x08__name__\x94\x8c\x08__main__\x94uNNNt\x94R\x94h\x00\x8c\x12_function_setstate\x94\x93\x94h\x18}\x94}\x94(h\x15h\x0e\x8c\x0c__qualname__\x94h\x0e\x8c\x0f__annotations__\x94}\x94\x8c\x0e__kwdefaults__\x94N\x8c\x0c__defaults__\x94N\x8c\n__module__\x94h\x16\x8c\x07__doc__\x94N\x8c\x0b__closure__\x94N\x8c\x17_cloudpickle_submodules\x94]\x94\x8c\x0b__globals__\x94}\x94u\x86\x94\x86R0.&#39;)
 </pre></div>
 </div>
 </div>
@@ -721,7 +732,7 @@ b = 5
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PosixPath(&#39;/tmp/tmp6278r6fi/FunctionTask_da886d9b132f5b8ee224a13fef24ca84314279de37ddc7cb281399e6850857dc&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PosixPath(&#39;/tmp/tmp8ijysl20/FunctionTask_a53ec5d131aa90b539e4f40f6a3d608ab3358aeef5c3958d15efd7fbbbb3ac99&#39;)
 </pre></div>
 </div>
 </div>
@@ -741,7 +752,7 @@ b = 5
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;_result.pklz&#39;, &#39;_task.pklz&#39;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;_task.pklz&#39;, &#39;_result.pklz&#39;]
 </pre></div>
 </div>
 </div>
@@ -763,7 +774,7 @@ b = 5
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/tmpf3ixvcdh/task4
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/tmps0j6k1tw/task4
 </pre></div>
 </div>
 </div>
@@ -806,7 +817,7 @@ b = 5
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PosixPath(&#39;/tmp/tmpf3ixvcdh/task4/FunctionTask_f7e451903757a143199726f7648cb5b0d0ed64850b83e9af032769ed149074e9&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PosixPath(&#39;/tmp/tmps0j6k1tw/task4/FunctionTask_44e56422e3f3d06f87f4bc9c4f0c1a79bd1a8113bd2374ce0e6bc7eed285b8ca&#39;)
 </pre></div>
 </div>
 </div>
@@ -901,7 +912,7 @@ True
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PosixPath(&#39;/tmp/tmptx2hetis/task4b/FunctionTask_825920ee554de6af450785e090b06392f7b36e1dc96724a9e78876b0419c2fe2&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PosixPath(&#39;/tmp/tmp5dih4clv/task4b/FunctionTask_ddcb8cfddf9a0fb53d6a5c6664a47145ab4953954f730a073fabdb9a9db7183a&#39;)
 </pre></div>
 </div>
 </div>
@@ -962,7 +973,7 @@ True
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(out=9), runtime=Runtime(rss_peak_gb=0.083473205078125, vms_peak_gb=0.82421112109375, cpu_peak_percent=90.9), errored=False)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(out=9), runtime=Runtime(rss_peak_gb=0.0845451357421875, vms_peak_gb=0.824581146484375, cpu_peak_percent=116.8), errored=False)
 </pre></div>
 </div>
 </div>
@@ -979,68 +990,68 @@ True
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>id: 07d884263dc34f839d682fe511b1937f
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>id: e9d78f7d9185430bb1682bb97b4eca6a
 {
   &quot;@context&quot;: &quot;https://raw.githubusercontent.com/nipype/pydra/master/pydra/schema/context.jsonld&quot;,
-  &quot;@id&quot;: &quot;uid:6b0b5ce7c6284817992836948e9d5b3e&quot;,
+  &quot;@id&quot;: &quot;uid:b3199d9283de41b98d806f169279e9b9&quot;,
   &quot;@type&quot;: &quot;task&quot;,
-  &quot;startedAtTime&quot;: &quot;2023-03-16T21:00:03.650458&quot;,
-  &quot;executedBy&quot;: &quot;uid:ccbec004c7f74776b9eb6eded56135b0&quot;
+  &quot;startedAtTime&quot;: &quot;2023-10-16T17:25:07.281871&quot;,
+  &quot;executedBy&quot;: &quot;uid:1954132e391a412eb145bf5b48ddbe15&quot;
 }
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>id: 7be0ac44ab094f8d904dad9afcafb409
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>id: 59af3193222e4df9945dba12b176a072
 {
   &quot;@context&quot;: &quot;https://raw.githubusercontent.com/nipype/pydra/master/pydra/schema/context.jsonld&quot;,
-  &quot;@id&quot;: &quot;uid:6b0b5ce7c6284817992836948e9d5b3e&quot;,
+  &quot;@id&quot;: &quot;uid:b3199d9283de41b98d806f169279e9b9&quot;,
   &quot;@type&quot;: &quot;task&quot;,
   &quot;Label&quot;: &quot;add_var&quot;,
   &quot;Command&quot;: null,
-  &quot;StartedAtTime&quot;: &quot;2023-03-16T21:00:03.854141&quot;,
+  &quot;StartedAtTime&quot;: &quot;2023-10-16T17:25:07.486831&quot;,
   &quot;AssociatedWith&quot;: null
 }
-id: d6c72c34d7c749fa86f112909ef53dd0
+id: f84b125412414d41b0ef98c5d7852d1f
 {
   &quot;@context&quot;: &quot;https://raw.githubusercontent.com/nipype/pydra/master/pydra/schema/context.jsonld&quot;,
-  &quot;@id&quot;: &quot;uid:33222904b17b4cbbaba27ed61af43b9d&quot;,
+  &quot;@id&quot;: &quot;uid:00d2db0b3033432eb4ae8d5e89b79d5b&quot;,
   &quot;@type&quot;: &quot;monitor&quot;,
-  &quot;startedAtTime&quot;: &quot;2023-03-16T21:00:03.854610&quot;,
-  &quot;wasStartedBy&quot;: &quot;uid:6b0b5ce7c6284817992836948e9d5b3e&quot;
+  &quot;startedAtTime&quot;: &quot;2023-10-16T17:25:07.487468&quot;,
+  &quot;wasStartedBy&quot;: &quot;uid:b3199d9283de41b98d806f169279e9b9&quot;
 }
-id: f4fa628c8fba4d17b9e6912f35f7ced7
+id: 781b75544b14434c850800e8468d667f
 {
   &quot;@context&quot;: &quot;https://raw.githubusercontent.com/nipype/pydra/master/pydra/schema/context.jsonld&quot;,
-  &quot;@id&quot;: &quot;uid:33222904b17b4cbbaba27ed61af43b9d&quot;,
-  &quot;endedAtTime&quot;: &quot;2023-03-16T21:00:03.885498&quot;,
-  &quot;wasEndedBy&quot;: &quot;uid:6b0b5ce7c6284817992836948e9d5b3e&quot;
+  &quot;@id&quot;: &quot;uid:00d2db0b3033432eb4ae8d5e89b79d5b&quot;,
+  &quot;endedAtTime&quot;: &quot;2023-10-16T17:25:07.531611&quot;,
+  &quot;wasEndedBy&quot;: &quot;uid:b3199d9283de41b98d806f169279e9b9&quot;
 }
-id: 67a5911755084bc29a33966588116397
+id: 083b8a34eeb541b49b20670273def216
 {
   &quot;@context&quot;: &quot;https://raw.githubusercontent.com/nipype/pydra/master/pydra/schema/context.jsonld&quot;,
-  &quot;rss_peak_gb&quot;: 0.083473205078125,
-  &quot;vms_peak_gb&quot;: 0.825172423828125,
-  &quot;cpu_peak_percent&quot;: 294.9,
-  &quot;@id&quot;: &quot;uid:5f0985dfe73d40da897b4219f0a91ff3&quot;,
+  &quot;rss_peak_gb&quot;: 0.0845451357421875,
+  &quot;vms_peak_gb&quot;: 0.824581146484375,
+  &quot;cpu_peak_percent&quot;: 121.7,
+  &quot;@id&quot;: &quot;uid:ffbfd2a569c64ada8dc122adb75449a8&quot;,
   &quot;@type&quot;: &quot;runtime&quot;,
-  &quot;prov:wasGeneratedBy&quot;: &quot;uid:6b0b5ce7c6284817992836948e9d5b3e&quot;
+  &quot;prov:wasGeneratedBy&quot;: &quot;uid:b3199d9283de41b98d806f169279e9b9&quot;
 }
-id: 60b73ee3853f4588bd7673827cdc1cb8
+id: bba42b782b4a45d9bbf0f93fe6229436
 {
   &quot;@context&quot;: &quot;https://raw.githubusercontent.com/nipype/pydra/master/pydra/schema/context.jsonld&quot;,
   &quot;@type&quot;: &quot;prov:Generation&quot;,
-  &quot;entity_generated&quot;: &quot;uid:5f0985dfe73d40da897b4219f0a91ff3&quot;,
-  &quot;hadActivity&quot;: &quot;uid:33222904b17b4cbbaba27ed61af43b9d&quot;
+  &quot;entity_generated&quot;: &quot;uid:ffbfd2a569c64ada8dc122adb75449a8&quot;,
+  &quot;hadActivity&quot;: &quot;uid:00d2db0b3033432eb4ae8d5e89b79d5b&quot;
 }
-id: 74f72d7874d041b38246e180174cdfaf
+id: b7347c8bd26949d2ab0b73e9ac4ff126
 {
   &quot;@context&quot;: &quot;https://raw.githubusercontent.com/nipype/pydra/master/pydra/schema/context.jsonld&quot;,
-  &quot;@id&quot;: &quot;uid:6b0b5ce7c6284817992836948e9d5b3e&quot;,
-  &quot;endedAtTime&quot;: &quot;2023-03-16T21:00:03.885670&quot;,
+  &quot;@id&quot;: &quot;uid:b3199d9283de41b98d806f169279e9b9&quot;,
+  &quot;endedAtTime&quot;: &quot;2023-10-16T17:25:07.531900&quot;,
   &quot;errored&quot;: false
 }
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(out=9), runtime=Runtime(rss_peak_gb=0.083473205078125, vms_peak_gb=0.825172423828125, cpu_peak_percent=294.9), errored=False)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(out=9), runtime=Runtime(rss_peak_gb=0.0845451357421875, vms_peak_gb=0.824581146484375, cpu_peak_percent=121.7), errored=False)
 </pre></div>
 </div>
 </div>
@@ -1073,7 +1084,9 @@ id: 74f72d7874d041b38246e180174cdfaf
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
@@ -1124,7 +1137,7 @@ id: 74f72d7874d041b38246e180174cdfaf
             
           </div>
           <footer class="bd-footer-content">
-            <div class="bd-footer-content__inner">
+            
 <div class="bd-footer-content__inner container">
   
   <div class="footer-item">
@@ -1154,7 +1167,7 @@ By Pydra Developers
     
   </div>
   
-</div></div>
+</div>
           </footer>
         
 
@@ -1163,8 +1176,8 @@ By Pydra Developers
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
 
   <footer class="bd-footer">
   </footer>
