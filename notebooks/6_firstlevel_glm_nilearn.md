@@ -4,14 +4,12 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.13.8
+    jupytext_version: 1.15.0
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
 ---
-
-+++ {"tags": []}
 
 # First Level GLM (from Nilearn)
 
@@ -25,8 +23,6 @@ This tutorial is based on the [Nilearn GLM tutorial](https://nilearn.github.io/s
 import nest_asyncio
 nest_asyncio.apply()
 ```
-
-+++ {"tags": []}
 
 ## Preparation
 
@@ -76,7 +72,9 @@ workflow_out_dir = workflow_dir / '6_glm'
 os.makedirs(workflow_out_dir, exist_ok=True)
 ```
 
-+++ {"tags": []}
+```{code-cell} ipython3
+workflow_out_dir
+```
 
 ## Create tasks
 
@@ -214,6 +212,7 @@ What we are doing here is:
 1. use the design matrix to fit the first level model
 2. compute the contrast
 3. save the z_map and masker for futher use
+4. generate a glm report (HTML file)
 
 ```{code-cell} ipython3
 @pydra.mark.task
@@ -223,7 +222,7 @@ What we are doing here is:
         'imgs': ty.Any,
         'dm_path': ty.Any,
         'contrast': str,
-        'return': {'model': ty.Any, 'z_map_path': str, 'masker': ty.Any},
+        'return': {'model': ty.Any, 'z_map_path': str, 'masker': ty.Any, 'glm_report_file': str},
     }
 )
 def model_fit(model, imgs, dm_path, contrast):
@@ -234,12 +233,15 @@ def model_fit(model, imgs, dm_path, contrast):
     z_map.to_filename(z_map_path)
     masker_path = os.path.join(workflow_out_dir, 'firstlevel_masker.nii.gz')
     masker = model.masker_
-    return model, z_map_path, masker
+    glm_report_file = os.path.join(workflow_out_dir, 'glm_report.html')
+    report = make_glm_report(model, contrast)
+    report.save_as_html(glm_report_file)
+    return model, z_map_path, masker, glm_report_file
 ```
 
-### Get cluster table and glm report
+### Get cluster table
 
-For publication purposes, we obtain a cluster table and a summary report.
+For publication purposes, we obtain a cluster table.
 
 ```{code-cell} ipython3
 @pydra.mark.task
@@ -251,18 +253,6 @@ def cluster_table(z_map_path):
         stat_img, stat_threshold=norm.isf(0.001), cluster_threshold=10
     )
     df.to_csv(output_file, index=None)
-    return output_file
-
-
-# get glm report
-@pydra.mark.task
-@pydra.mark.annotate(
-    {'model': ty.Any, 'contrasts': str, 'return': {'output_file': str}}
-)
-def glm_report(model, contrasts):
-    output_file = os.path.join(workflow_out_dir, 'glm_report.html')
-    report = make_glm_report(model, contrasts)
-    report.save_as_html(output_file)
     return output_file
 ```
 
@@ -342,7 +332,9 @@ def plots(data_dir,dm_path,z_map_path,contrast,subject,masker):
     )
     old = os.path.join(workflow_out_dir, '0000.png')
     new = os.path.join(workflow_out_dir, 'nilearn_fsl_comp.jpg')
-    output_file3 = os.rename(old, new)
+    os.rename(old, new)
+    output_file3 = new
+    print(output_file3)
 
     # plot and save design matrix contrast
     design_matrix = pd.read_csv(dm_path)
@@ -350,8 +342,6 @@ def plots(data_dir,dm_path,z_map_path,contrast,subject,masker):
     plot_contrast_matrix(contrast, design_matrix, output_file=output_file4)
     return output_file1, output_file2, output_file3, output_file4
 ```
-
-+++ {"tags": []}
 
 ## Make a workflow from tasks
 
@@ -419,14 +409,6 @@ wf_firstlevel.add(
         z_map_path=wf_firstlevel.l1estimation.lzout.z_map_path,
     )
 )
-# add task - glm_report
-wf_firstlevel.add(
-    glm_report(
-        name='glm_report',
-        model=wf_firstlevel.l1estimation.lzout.model,
-        contrasts=wf_firstlevel.lzin.contrast,
-    )
-)
 # specify output
 wf_firstlevel.set_output(
     [
@@ -435,12 +417,10 @@ wf_firstlevel.set_output(
         ('subject', wf_firstlevel.get_info_from_bids.lzout.subject),
         ('dm_path', wf_firstlevel.get_designmatrix.lzout.dm_path),
         ('cluster_table', wf_firstlevel.cluster_table.lzout.output_file),
-        ('glm_report', wf_firstlevel.glm_report.lzout.output_file),
+        ('glm_report', wf_firstlevel.l1estimation.lzout.glm_report_file),
     ]
 )
 ```
-
-+++ {"tags": []}
 
 ## The overaching workflow
 
@@ -523,8 +503,6 @@ results = wf.result()
 print(results)
 ```
 
-+++ {"tags": []}
-
 ## Visualization
 
 +++
@@ -580,8 +558,6 @@ Image(filename='../outputs/6_glm/fsl_z_map.jpg')
 
 Image(filename='../outputs/6_glm/nilearn_fsl_comp.jpg')
 ```
-
-+++ {"tags": []}
 
 ## Exercise
 

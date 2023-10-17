@@ -4,16 +4,16 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.14.0
+    jupytext_version: 1.15.0
 kernelspec:
-  display_name: Python 3
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
 ---
 
 # Workflow
 
-```{code-cell}
+```{code-cell} ipython3
 ---
 jupyter:
   outputs_hidden: false
@@ -27,7 +27,7 @@ import nest_asyncio
 nest_asyncio.apply()
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 import pydra
 
 # functions used later in the notebook:
@@ -52,25 +52,25 @@ In order to run multiple tasks within one pipeline, we use another *pydra* class
 
 Let's start from a workflow with a single task that has one input `x`. When we create a `Workflow`, we have to specify `input_spec` that contains all of the workflow inputs:
 
-```{code-cell}
+```{code-cell} ipython3
 wf1 = pydra.Workflow(name='wf1', input_spec=['x'], x=3)
 ```
 
 Now, we can add a task and specify that `x` will be taken from the workflow input by using so-called *Lazy Input*, `x=wf1.lzin.x`. We should also add the `name` to the task we are using in the `Workflow`.
 
-```{code-cell}
+```{code-cell} ipython3
 wf1.add(add_two(name='sum', x=wf1.lzin.x))
 ```
 
 Now, we can access the task by using the task name:
 
-```{code-cell}
+```{code-cell} ipython3
 wf1.sum
 ```
 
 We have to also specify what would be the workflow output, for this one-task workflow, we simply take the output of `sum` and we use *Lazy Output* to set it to `wf.output.out`:
 
-```{code-cell}
+```{code-cell} ipython3
 wf1.set_output([('out', wf1.sum.lzout.out)])
 ```
 
@@ -80,7 +80,7 @@ We could also use dictionary to set the output - `wf1.set_output({"out": wf1.sum
 
 Now, we are ready to run the workflow:
 
-```{code-cell}
+```{code-cell} ipython3
 with pydra.Submitter(plugin='cf') as sub:
     sub(wf1)
 
@@ -99,7 +99,7 @@ We could think about the workflow as follows: the workflow has an input `x` that
 
 You can add as many tasks as you want to the workflow and return multiple variables:
 
-```{code-cell}
+```{code-cell} ipython3
 wf2 = pydra.Workflow(name='wf2', input_spec=['x'], x=3)
 wf2.add(add_two(name='add_two', x=wf2.lzin.x))
 wf2.add(power(name='power', a=wf2.lzin.x))
@@ -129,7 +129,7 @@ The previous example showed a workflow with two nodes, but they were not connect
 
 If we want to connect the tasks with each other, we have to set the input of the second task to the output of the first task, and we use again the `Lazy Output` concept:
 
-```{code-cell}
+```{code-cell} ipython3
 wf3 = pydra.Workflow(name='wf3', input_spec=['x'], x=3)
 wf3.add(add_two(name='sum', x=wf3.lzin.x))
 # by setting a=wf3.sum.lzout.out we create a connection
@@ -145,7 +145,7 @@ wf3.result()
 
 Now, we could see that the second task took an input from the first one:
 
-```{code-cell}
+```{code-cell} ipython3
 wf3.power.inputs.a
 ```
 
@@ -159,7 +159,7 @@ So this time the workflow graph will look like this:
 
 The node can be connected to multiple nodes, we can modify `wf` to add additional node that uses `mult_var` to multiple the outputs of two previous tasks:
 
-```{code-cell}
+```{code-cell} ipython3
 wf4 = pydra.Workflow(name='wf4', input_spec=['x'], x=3)
 wf4.add(add_two(name='add_two', x=wf4.lzin.x))
 wf4.add(power(name='power', a=wf4.lzin.x))
@@ -187,7 +187,7 @@ Previously we had workflows that had `Task`s as nodes, but *pydra* treats `Workf
 
 Let's modify the previous workflow, and instead of `sum` and `power` tasks we use `wf2` as the first node:
 
-```{code-cell}
+```{code-cell} ipython3
 wf2a = pydra.Workflow(name='wf2a', input_spec=['x'])
 wf2a.add(add_two(name='add_two', x=wf2a.lzin.x))
 wf2a.add(power(name='power', a=wf2a.lzin.x))
@@ -223,7 +223,7 @@ We should get exactly the same result as previously, but this time we run `wf2a`
 
 Workflow as any other task could also have a splitter. Let's take one of our previous workflows and add a splitter for the workflow input by setting `splitter` using the `split` method.
 
-```{code-cell}
+```{code-cell} ipython3
 wf6 = pydra.Workflow(name='wf6', input_spec=['x'])
 # setting a plitter for the entire workflow
 wf6.split('x', x=[3, 5])
@@ -251,7 +251,7 @@ Behind the scene *pydra* expanded two workflows for two values of the workflow i
 
 Let's create a new workflow that has two inputs and more complicated splitter.
 
-```{code-cell}
+```{code-cell} ipython3
 wf7 = pydra.Workflow(name='wf7', input_spec=['x', 'y'])
 wf7.split(['x', 'y'], x=[3, 5], y=[2, 3])
 wf7.add(add_two(name='sum', x=wf7.lzin.x))
@@ -278,7 +278,7 @@ We should have four results for four sets of inputs, and the graph should look l
 
 In the same way as we did for `Task`, we can add a `combiner` to the entire workflow:
 
-```{code-cell}
+```{code-cell} ipython3
 wf7.combine('x')
 
 with pydra.Submitter(plugin='cf') as sub:
@@ -301,7 +301,7 @@ We presented how to set a `splitter` and a `combiner` for entire workflow, but w
 
 Let's create a workflow that takes a list as an input, and pass this input to two nodes. One node can take entire list as its input and the second node splits the input:
 
-```{code-cell}
+```{code-cell} ipython3
 @pydra.mark.task
 def mean(x_list):
     return sum(x_list) / len(x_list)
@@ -310,7 +310,7 @@ def mean(x_list):
 wf8 = pydra.Workflow(name='wf8', input_spec=['x'], x=[3, 5, 7])
 wf8.add(mean(name='mean', x_list=wf8.lzin.x))
 # adding a task that has its own splitter
-wf8.add(power(name='power', a=wf8.lzin.x).split('a'))
+wf8.add(power(name='power', a=wf8.lzin.x).split('a', a=wf8.lzin.x))
 
 wf8.set_output([('out_m', wf8.mean.lzout.out), ('out_p', wf8.power.lzout.out)])
 
