@@ -27,7 +27,7 @@ You'll also construct basic `Workflow`s that link multiple tasks together. Furth
 
 +++
 
-**Before going to the main notebooks, let's check if pydra is properly installed.** If you have any issues running the following cell, please revisit the Installation section. TODO-LINK
+**Let's check if pydra is properly installed.** If you have any issues running the following cell, please revisit the Installation section. TODO-LINK
 
 ```{code-cell} ipython3
 import pydra
@@ -42,4 +42,4 @@ At the beginning of each tutorial you will see:
 import nest_asyncio
 nest_asyncio.apply()
 ```
-This is run because both *Jupyter* and *Pydra* use `asyncio` and in some cases you can see `RuntimeError: This event loop is already running` if `nest_asyncio` is not used. **This part is not needed if Pydra is used outside the Jupyter environment.**
+This is because both *Jupyter* and *Pydra* use `asyncio` and you can get `RuntimeError: This event loop is already running` if `nest_asyncio` is not used. **This part is not needed if Pydra is used outside of Jupyter Notebook/Lab.**

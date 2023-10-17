@@ -28,7 +28,7 @@ nest_asyncio.apply()
 
 +++
 
-In this tutorial, you will generate your initial *pydra* `Task`, which is a fundamental *pydra*'s component capable of processing data. You will start from a `FunctionTask`, a type of `Task` that can be created from every *python* function by using *pydra* decorator: `pydra.mark.task`:
+In this tutorial, you will generate your initial *Pydra* `Task`, which is a fundamental *Pydra*'s component capable of processing data. You will start from a `FunctionTask`, a type of `Task` that can be created from every *python* function by using *Pydra* decorator: `pydra.mark.task`:
 
 ```{code-cell} ipython3
 import pydra
@@ -38,7 +38,7 @@ def add_var(a, b):
     return a + b
 ```
 
-Now that we decorated the function, we can create a pydra `Task` and specify the input, for this example values for `a` and `b` are needed.
+After decorating the function, you can create a Pydra `Task` and specify the input. In this example, values for `a` and `b` are needed.
 
 ```{code-cell} ipython3
 task0 = add_var(a=4, b=5)
@@ -93,7 +93,7 @@ If you want to practice, change the values of `a` and `b` and run the task again
 +++
 
 ## Customizing output names
-Note, that "out" is the default name for the task output, but you can always customize it by using *python* function annotation.
+Note, that `out` from `result.output.out` is the default name for the task output, but you can always customize it by using *python* function annotation.
 
 ```{code-cell} ipython3
 import typing as ty
@@ -169,7 +169,7 @@ os.listdir(task3.output_dir)
 ```
 
 But you can also provide the path where you want to store the results. 
-**Note that if the same path is provided when you run the task again, pydra will use the cached results instead of recomputing the result.** 
+**Note that if the same path is provided when you run the task again, Pydra will use the cached results instead of recomputing the result.** 
 
 Let's create a temporary directory and a specific subdirectory "task4":
 
@@ -220,9 +220,9 @@ task4a = add_var_wait(a=4, b=6, cache_dir=cache_dir_tmp)
 task4a()
 ```
 
-This time the result should be ready right away! *pydra* uses available results and do not recompute the task. The wall time provided by `%%tinme` should be in milliseconds.
+This time the result should be ready right away! *Pydra* uses available results and do not recompute the task. The wall time provided by `%%tinme` should be in milliseconds.
 
-*pydra* not only checks for the results in `cache_dir`, but you can provide a list of other locations that should be checked. Let's create another directory that will be used as `cache_dir` and previous working directory will be used in `cache_locations`.
+*Pydra* not only checks for the results in `cache_dir`, but you can provide a list of other locations that should be checked. Let's create another directory that will be used as `cache_dir` and previous working directory will be used in `cache_locations`.
 
 ```{code-cell} ipython3
 cache_dir_tmp_new = Path(mkdtemp()) / 'task4b'
