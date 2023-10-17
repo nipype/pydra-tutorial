@@ -5,7 +5,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.13.8
+    jupytext_version: 1.15.0
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -66,7 +66,7 @@ pydra_tutorial_dir = os.path.dirname(os.getcwd())
 
 # set up output directory
 workflow_dir = Path(pydra_tutorial_dir) / 'outputs'
-workflow_out_dir = workflow_dir / '7_glm' /'results'
+workflow_out_dir = workflow_dir / '9_glm' /'results'
 
 # create folders if not exit
 os.makedirs(workflow_out_dir, exist_ok=True)
@@ -108,8 +108,6 @@ We need to get four types of data from two folders:
 4. confounds: `*desc-confounds_timeseries.tsv` from `fmriprep_path` (this is implicitly needed by `load_confounds_strategy`)
 
 ```{code-cell} ipython3
-:tags: []
-
 @pydra.mark.task
 @pydra.mark.annotate(
     {
@@ -275,8 +273,6 @@ def firstlevel_estimation(subj_id, run_id, subj_imgs, subj_masks, smoothing_fwhm
 This workflow include GLM for each run.
 
 ```{code-cell} ipython3
-:tags: []
-
 # initiate the first-level GLM workflow
 wf_firstlevel = Workflow(
     name='wf_firstlevel',
@@ -293,7 +289,7 @@ wf_firstlevel = Workflow(
     ],
 )
 
-wf_firstlevel.split('run_id')
+wf_firstlevel.split('run_id', run_id = wf_firstlevel.lzin.run_id)
 # add task - get_firstlevel_dm
 wf_firstlevel.add(
     get_firstlevel_dm(
@@ -360,7 +356,7 @@ Before we move to the second(group) level, we need to average results from all t
     }
 )
 def get_fixed_effcts(subj_id, subj_masks, contrasts, effect_size_path_dict_list, effect_variance_path_dict_list):
-    
+    print(f"contrast:{contrast}")
     print(f'Compute fixed effects for subject-{subj_id}...')
     # average mask across three runs
     mean_mask = math_img('np.mean(img, axis=-1)', img=subj_masks)
@@ -404,7 +400,7 @@ wf_fixed_effect = Workflow(
     ],
 )
 
-wf_fixed_effect.split('subj_id')
+wf_fixed_effect.split('subj_id', subj_id = wf_fixed_effect.lzin.subj_id)
 # add task - get_subj_file
 wf_fixed_effect.add(
     get_subjdata(
@@ -444,6 +440,8 @@ wf_fixed_effect.set_output(
         ('fx_t_test_list', wf_fixed_effect.get_fixed_effcts.lzout.fixed_fx_ttest_path_dict),
     ]
 )
+
+print(wf_fixed_effect.lzout.first_level_contrast)
 ```
 
 ## Second-Level GLM
@@ -453,7 +451,7 @@ The second level GLM, as known as the group level, averages results across subje
 - fit the second-level GLM
 - statistical testing
 
-+++ {"tags": []}
++++
 
 ### Get the second level design matrix
 
@@ -739,11 +737,11 @@ wf = Workflow(
     input_spec=['n_subj'],
 )
 
-wf.inputs.n_subj = 5
+wf.inputs.n_subj = 2
 
 # randomly choose subjects
 wf_fixed_effect.inputs.subj_id = random.sample(range(1,17), wf.inputs.n_subj)
-wf_fixed_effect.inputs.run_id =[1,2,3]
+wf_fixed_effect.inputs.run_id =[1,2]
 wf_fixed_effect.inputs.tr = 2.3
 wf_fixed_effect.inputs.n_scans = 300
 wf_fixed_effect.inputs.hrf_model = 'glover'
