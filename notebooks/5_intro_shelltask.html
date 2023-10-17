@@ -506,7 +506,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(return_code=0, stdout=&#39;/tmp/tmp88lqcpae/ShellCommandTask_50215383834238ce614b4428a1e9943ddff15f8580a384a0a57b34c760864b3a\n&#39;, stderr=&#39;&#39;), runtime=None, errored=False)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(return_code=0, stdout=&#39;/tmp/tmpvdlo4t4p/ShellCommandTask_617121258bf6bc240a2d201f488975df\n&#39;, stderr=&#39;&#39;), runtime=None, errored=False)
 </pre></div>
 </div>
 </div>
@@ -681,7 +681,7 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cmndline =  touch newfile_tmp.txt
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(return_code=0, stdout=&#39;&#39;, stderr=&#39;&#39;, newfile=PosixPath(&#39;/tmp/tmptbn4470z/ShellCommandTask_76e73f8b52e6d5d1920bda2a22e309fb4fd89cec14e6ab25755e2caf66cf0294/newfile_tmp.txt&#39;)), runtime=None, errored=False)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(return_code=0, stdout=&#39;&#39;, stderr=&#39;&#39;, newfile=File(&#39;/tmp/tmp08mnff5c/ShellCommandTask_291a745f54ab54d29f6c45c6c4efb950/newfile_tmp.txt&#39;)), runtime=None, errored=False)
 </pre></div>
 </div>
 </div>
@@ -764,8 +764,26 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Result(output=Output(return_code=0, stdout=&#39;root\n&#39;, stderr=&#39;&#39;), runtime=None, errored=False),
- Result(output=Output(return_code=0, stdout=&#39;root\n&#39;, stderr=&quot;Unable to find image &#39;ubuntu:latest&#39; locally\nlatest: Pulling from library/ubuntu\naece8493d397: Pulling fs layer\naece8493d397: Verifying Checksum\naece8493d397: Download complete\naece8493d397: Pull complete\nDigest: sha256:2b7412e6465c3c7fc5bb21d3e6f1917c167358449fecac8176c6e496e5c1f05f\nStatus: Downloaded newer image for ubuntu:latest\n&quot;), runtime=None, errored=False)]
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">14</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">cmd</span> <span class="o">=</span> <span class="s1">&#39;whoami&#39;</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">docky</span> <span class="o">=</span> <span class="n">pydra</span><span class="o">.</span><span class="n">DockerTask</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;docky&#39;</span><span class="p">,</span> <span class="n">executable</span><span class="o">=</span><span class="n">cmd</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;busybox&#39;</span><span class="p">,</span> <span class="s1">&#39;ubuntu&#39;</span><span class="p">]</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;image&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="k">with</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Submitter</span><span class="p">()</span> <span class="k">as</span> <span class="n">sub</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">docky</span><span class="p">(</span><span class="n">submitter</span><span class="o">=</span><span class="n">sub</span><span class="p">)</span>
+
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/core.py:605,</span> in <span class="ni">TaskBase.split</span><span class="nt">(self, splitter, overwrite, cont_dim, **inputs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">603</span>     <span class="n">missing</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">missing</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">m</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)]</span>
+<span class="g g-Whitespace">    </span><span class="mi">604</span>     <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">605</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">606</span>             <span class="sa">f</span><span class="s2">&quot;Split is missing values for the following fields </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">607</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">608</span> <span class="n">splitter</span> <span class="o">=</span> <span class="n">hlpst</span><span class="o">.</span><span class="n">add_name_splitter</span><span class="p">(</span><span class="n">splitter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">609</span> <span class="c1"># if user want to update the splitter, overwrite has to be True</span>
+
+<span class="ne">ValueError</span>: Split is missing values for the following fields [&#39;image&#39;]
 </pre></div>
 </div>
 </div>

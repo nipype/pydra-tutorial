@@ -431,7 +431,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#obtain-firstlevelmodel-objects-automatically-and-fit-arguments">7.2.2. obtain FirstLevelModel objects automatically and fit arguments</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-design-matrix">7.2.3. Get design matrix</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-the-first-level-model">7.2.4. Fit the first level model</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-cluster-table-and-glm-report">7.2.5. Get cluster table and glm report</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-cluster-table">7.2.5. Get cluster table</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#make-plots">7.2.6. Make plots</a></li>
 </ul>
 </li>
@@ -522,6 +522,18 @@ document.write(`
 
 <span class="c1"># create the output directory if not exit</span>
 <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">workflow_out_dir</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PosixPath(&#39;/tmp/outputs/6_glm&#39;)
 </pre></div>
 </div>
 </div>
@@ -674,6 +686,7 @@ Then, for this model, we will obtain</p>
 <li><p>use the design matrix to fit the first level model</p></li>
 <li><p>compute the contrast</p></li>
 <li><p>save the z_map and masker for futher use</p></li>
+<li><p>generate a glm report (HTML file)</p></li>
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -684,7 +697,7 @@ Then, for this model, we will obtain</p>
         <span class="s1">&#39;imgs&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
         <span class="s1">&#39;dm_path&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
         <span class="s1">&#39;contrast&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="s1">&#39;return&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="s1">&#39;z_map_path&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;masker&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">},</span>
+        <span class="s1">&#39;return&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="s1">&#39;z_map_path&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;masker&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="s1">&#39;glm_report_file&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">},</span>
     <span class="p">}</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">model_fit</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">imgs</span><span class="p">,</span> <span class="n">dm_path</span><span class="p">,</span> <span class="n">contrast</span><span class="p">):</span>
@@ -695,15 +708,18 @@ Then, for this model, we will obtain</p>
     <span class="n">z_map</span><span class="o">.</span><span class="n">to_filename</span><span class="p">(</span><span class="n">z_map_path</span><span class="p">)</span>
     <span class="n">masker_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s1">&#39;firstlevel_masker.nii.gz&#39;</span><span class="p">)</span>
     <span class="n">masker</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">masker_</span>
-    <span class="k">return</span> <span class="n">model</span><span class="p">,</span> <span class="n">z_map_path</span><span class="p">,</span> <span class="n">masker</span>
+    <span class="n">glm_report_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s1">&#39;glm_report.html&#39;</span><span class="p">)</span>
+    <span class="n">report</span> <span class="o">=</span> <span class="n">make_glm_report</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">contrast</span><span class="p">)</span>
+    <span class="n">report</span><span class="o">.</span><span class="n">save_as_html</span><span class="p">(</span><span class="n">glm_report_file</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">model</span><span class="p">,</span> <span class="n">z_map_path</span><span class="p">,</span> <span class="n">masker</span><span class="p">,</span> <span class="n">glm_report_file</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="get-cluster-table-and-glm-report">
-<h3><span class="section-number">7.2.5. </span>Get cluster table and glm report<a class="headerlink" href="#get-cluster-table-and-glm-report" title="Permalink to this heading">#</a></h3>
-<p>For publication purposes, we obtain a cluster table and a summary report.</p>
+<section id="get-cluster-table">
+<h3><span class="section-number">7.2.5. </span>Get cluster table<a class="headerlink" href="#get-cluster-table" title="Permalink to this heading">#</a></h3>
+<p>For publication purposes, we obtain a cluster table.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
@@ -715,18 +731,6 @@ Then, for this model, we will obtain</p>
         <span class="n">stat_img</span><span class="p">,</span> <span class="n">stat_threshold</span><span class="o">=</span><span class="n">norm</span><span class="o">.</span><span class="n">isf</span><span class="p">(</span><span class="mf">0.001</span><span class="p">),</span> <span class="n">cluster_threshold</span><span class="o">=</span><span class="mi">10</span>
     <span class="p">)</span>
     <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">output_file</span>
-
-
-<span class="c1"># get glm report</span>
-<span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
-<span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
-    <span class="p">{</span><span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">ty</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="s1">&#39;contrasts&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;return&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;output_file&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">}}</span>
-<span class="p">)</span>
-<span class="k">def</span> <span class="nf">glm_report</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">contrasts</span><span class="p">):</span>
-    <span class="n">output_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s1">&#39;glm_report.html&#39;</span><span class="p">)</span>
-    <span class="n">report</span> <span class="o">=</span> <span class="n">make_glm_report</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">contrasts</span><span class="p">)</span>
-    <span class="n">report</span><span class="o">.</span><span class="n">save_as_html</span><span class="p">(</span><span class="n">output_file</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">output_file</span>
 </pre></div>
 </div>
@@ -810,7 +814,9 @@ Then, for this model, we will obtain</p>
     <span class="p">)</span>
     <span class="n">old</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s1">&#39;0000.png&#39;</span><span class="p">)</span>
     <span class="n">new</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s1">&#39;nilearn_fsl_comp.jpg&#39;</span><span class="p">)</span>
-    <span class="n">output_file3</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">)</span>
+    <span class="n">output_file3</span> <span class="o">=</span> <span class="n">new</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">output_file3</span><span class="p">)</span>
 
     <span class="c1"># plot and save design matrix contrast</span>
     <span class="n">design_matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">dm_path</span><span class="p">)</span>
@@ -889,14 +895,6 @@ Then, for this model, we will obtain</p>
         <span class="n">z_map_path</span><span class="o">=</span><span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">l1estimation</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">z_map_path</span><span class="p">,</span>
     <span class="p">)</span>
 <span class="p">)</span>
-<span class="c1"># add task - glm_report</span>
-<span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
-    <span class="n">glm_report</span><span class="p">(</span>
-        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;glm_report&#39;</span><span class="p">,</span>
-        <span class="n">model</span><span class="o">=</span><span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">l1estimation</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">model</span><span class="p">,</span>
-        <span class="n">contrasts</span><span class="o">=</span><span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">contrast</span><span class="p">,</span>
-    <span class="p">)</span>
-<span class="p">)</span>
 <span class="c1"># specify output</span>
 <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">set_output</span><span class="p">(</span>
     <span class="p">[</span>
@@ -905,7 +903,7 @@ Then, for this model, we will obtain</p>
         <span class="p">(</span><span class="s1">&#39;subject&#39;</span><span class="p">,</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">get_info_from_bids</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">subject</span><span class="p">),</span>
         <span class="p">(</span><span class="s1">&#39;dm_path&#39;</span><span class="p">,</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">get_designmatrix</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">dm_path</span><span class="p">),</span>
         <span class="p">(</span><span class="s1">&#39;cluster_table&#39;</span><span class="p">,</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">cluster_table</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">output_file</span><span class="p">),</span>
-        <span class="p">(</span><span class="s1">&#39;glm_report&#39;</span><span class="p">,</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">glm_report</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">output_file</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;glm_report&#39;</span><span class="p">,</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">l1estimation</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">glm_report_file</span><span class="p">),</span>
     <span class="p">]</span>
 <span class="p">)</span>
 </pre></div>
@@ -1014,7 +1012,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (2 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (3 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/README ...
@@ -1077,7 +1075,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/fmriprep/sub-10159/anat/sub-10159_T1w_inflated.R.surf.gii ...
@@ -1086,7 +1084,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/fmriprep/sub-10159/anat/sub-10159_T1w_midthickness.L.surf.gii ...
@@ -1095,7 +1093,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/fmriprep/sub-10159/anat/sub-10159_T1w_midthickness.R.surf.gii ...
@@ -1104,7 +1102,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/fmriprep/sub-10159/anat/sub-10159_T1w_pial.L.surf.gii ...
@@ -1113,7 +1111,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/fmriprep/sub-10159/anat/sub-10159_T1w_pial.R.surf.gii ...
@@ -1122,7 +1120,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/fmriprep/sub-10159/anat/sub-10159_T1w_preproc.nii.gz ...
@@ -1140,7 +1138,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/fmriprep/sub-10159/anat/sub-10159_T1w_smoothwm.R.surf.gii ...
@@ -1149,7 +1147,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/fmriprep/sub-10159/anat/sub-10159_T1w_space-MNI152NLin2009cAsym_brainmask.nii.gz ...
@@ -1167,7 +1165,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/fmriprep/sub-10159/anat/sub-10159_T1w_space-MNI152NLin2009cAsym_class-GM_probtissue.nii.gz ...
@@ -1185,7 +1183,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/fmriprep/sub-10159/anat/sub-10159_T1w_space-MNI152NLin2009cAsym_preproc.nii.gz ...
@@ -1194,7 +1192,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/fmriprep/sub-10159/anat/sub-10159_T1w_space-MNI152NLin2009cAsym_warp.h5 ...
@@ -1203,10 +1201,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 46055424 of 102374780 bytes (45.0%,    1.3s remaining)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 96542720 of 102374780 bytes (94.3%,    0.1s remaining)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 37560320 of 102374780 bytes (36.7%,    1.7s remaining)
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (2 seconds, 0 min)
@@ -1236,13 +1231,13 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 37683200 of 120927302 bytes (31.2%,    2.3s remaining)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 50487296 of 120927302 bytes (41.8%,    1.4s remaining)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 75440128 of 120927302 bytes (62.4%,    1.3s remaining)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloaded 119111680 of 120927302 bytes (98.5%,    0.0s remaining)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (3 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (2 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/task/sub-10159/bart.feat/.files/fsl.css ...
@@ -1638,7 +1633,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/task/sub-10159/bart.feat/design.trg ...
@@ -2430,7 +2425,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/task/sub-10159/bart.feat/stats/tstat1.nii.gz ...
@@ -2826,7 +2821,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/task/sub-10159/bart.feat/stats/varcope6.nii.gz ...
@@ -3483,7 +3478,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/task/sub-10159/stopsignal.feat/logs/feat0 ...
@@ -4032,7 +4027,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/task/sub-10159/stopsignal.feat/stats/pe8.nii.gz ...
@@ -4086,7 +4081,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/task/sub-10159/stopsignal.feat/stats/tstat1.nii.gz ...
@@ -4167,7 +4162,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/task/sub-10159/stopsignal.feat/stats/tstat3.nii.gz ...
@@ -4365,7 +4360,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/task/sub-10159/stopsignal.feat/stats/varcope9.nii.gz ...
@@ -4509,7 +4504,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/task/sub-10159/stopsignal.feat/stats/zstat9.nii.gz ...
@@ -4977,7 +4972,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/task/sub-10159/taskswitch.feat/design.trg ...
@@ -5382,7 +5377,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/task/sub-10159/taskswitch.feat/stats/cope23.nii.gz ...
@@ -5922,7 +5917,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/task/sub-10159/taskswitch.feat/stats/pe32.nii.gz ...
@@ -6111,7 +6106,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/task/sub-10159/taskswitch.feat/stats/tstat1.nii.gz ...
@@ -7362,7 +7357,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/derivatives/task/sub-10159/taskswitch.feat/stats/zstat5.nii.gz ...
@@ -7434,7 +7429,7 @@ Then, for this model, we will obtain</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (1 seconds, 0 min)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://s3.amazonaws.com/openneuro/ds000030/ds000030_R1.0.4/uncompressed/sub-10159/func/sub-10159_task-stopsignal_bold.json ...
@@ -7500,7 +7495,13 @@ Then, for this model, we will obtain</p>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ...done. (0 seconds, 0 min)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(output1=&#39;/tmp/outputs/6_glm/nilearn_z_map.jpg&#39;, output2=&#39;/tmp/outputs/6_glm/fsl_z_map.jpg&#39;, output3=None, output4=&#39;/tmp/outputs/6_glm/firstlevel_contrast.jpg&#39;), runtime=None, errored=False)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/outputs/6_glm/nilearn_fsl_comp.jpg
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(output1=&#39;/tmp/outputs/6_glm/nilearn_z_map.jpg&#39;, output2=&#39;/tmp/outputs/6_glm/fsl_z_map.jpg&#39;, output3=&#39;/tmp/outputs/6_glm/nilearn_fsl_comp.jpg&#39;, output4=&#39;/tmp/outputs/6_glm/firstlevel_contrast.jpg&#39;), runtime=None, errored=False)
 </pre></div>
 </div>
 </div>
@@ -7692,7 +7693,7 @@ firstlevel_contrast.jpg  glm_report.html
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#obtain-firstlevelmodel-objects-automatically-and-fit-arguments">7.2.2. obtain FirstLevelModel objects automatically and fit arguments</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-design-matrix">7.2.3. Get design matrix</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-the-first-level-model">7.2.4. Fit the first level model</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-cluster-table-and-glm-report">7.2.5. Get cluster table and glm report</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-cluster-table">7.2.5. Get cluster table</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#make-plots">7.2.6. Make plots</a></li>
 </ul>
 </li>

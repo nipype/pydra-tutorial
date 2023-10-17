@@ -536,7 +536,7 @@ Basic information about this dataset:</p>
 
 <span class="c1"># set up output directory</span>
 <span class="n">workflow_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">pydra_tutorial_dir</span><span class="p">)</span> <span class="o">/</span> <span class="s1">&#39;outputs&#39;</span>
-<span class="n">workflow_out_dir</span> <span class="o">=</span> <span class="n">workflow_dir</span> <span class="o">/</span> <span class="s1">&#39;7_glm&#39;</span> <span class="o">/</span><span class="s1">&#39;results&#39;</span>
+<span class="n">workflow_out_dir</span> <span class="o">=</span> <span class="n">workflow_dir</span> <span class="o">/</span> <span class="s1">&#39;9_glm&#39;</span> <span class="o">/</span><span class="s1">&#39;results&#39;</span>
 
 <span class="c1"># create folders if not exit</span>
 <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -777,7 +777,7 @@ We need to get four types of data from two folders:</p>
     <span class="p">],</span>
 <span class="p">)</span>
 
-<span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;run_id&#39;</span><span class="p">)</span>
+<span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;run_id&#39;</span><span class="p">,</span> <span class="n">run_id</span> <span class="o">=</span> <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">run_id</span><span class="p">)</span>
 <span class="c1"># add task - get_firstlevel_dm</span>
 <span class="n">wf_firstlevel</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
     <span class="n">get_firstlevel_dm</span><span class="p">(</span>
@@ -847,7 +847,7 @@ We need to get four types of data from two folders:</p>
     <span class="p">}</span>
 <span class="p">)</span>
 <span class="k">def</span> <span class="nf">get_fixed_effcts</span><span class="p">(</span><span class="n">subj_id</span><span class="p">,</span> <span class="n">subj_masks</span><span class="p">,</span> <span class="n">contrasts</span><span class="p">,</span> <span class="n">effect_size_path_dict_list</span><span class="p">,</span> <span class="n">effect_variance_path_dict_list</span><span class="p">):</span>
-    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;contrast:</span><span class="si">{</span><span class="n">contrast</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Compute fixed effects for subject-</span><span class="si">{</span><span class="n">subj_id</span><span class="si">}</span><span class="s1">...&#39;</span><span class="p">)</span>
     <span class="c1"># average mask across three runs</span>
     <span class="n">mean_mask</span> <span class="o">=</span> <span class="n">math_img</span><span class="p">(</span><span class="s1">&#39;np.mean(img, axis=-1)&#39;</span><span class="p">,</span> <span class="n">img</span><span class="o">=</span><span class="n">subj_masks</span><span class="p">)</span>
@@ -895,7 +895,7 @@ We need to get four types of data from two folders:</p>
     <span class="p">],</span>
 <span class="p">)</span>
 
-<span class="n">wf_fixed_effect</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;subj_id&#39;</span><span class="p">)</span>
+<span class="n">wf_fixed_effect</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;subj_id&#39;</span><span class="p">,</span> <span class="n">subj_id</span> <span class="o">=</span> <span class="n">wf_fixed_effect</span><span class="o">.</span><span class="n">lzin</span><span class="o">.</span><span class="n">subj_id</span><span class="p">)</span>
 <span class="c1"># add task - get_subj_file</span>
 <span class="n">wf_fixed_effect</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
     <span class="n">get_subjdata</span><span class="p">(</span>
@@ -935,6 +935,16 @@ We need to get four types of data from two folders:</p>
         <span class="p">(</span><span class="s1">&#39;fx_t_test_list&#39;</span><span class="p">,</span> <span class="n">wf_fixed_effect</span><span class="o">.</span><span class="n">get_fixed_effcts</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">fixed_fx_ttest_path_dict</span><span class="p">),</span>
     <span class="p">]</span>
 <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">wf_fixed_effect</span><span class="o">.</span><span class="n">lzout</span><span class="o">.</span><span class="n">first_level_contrast</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LazyOutField(name=&#39;wf_fixed_effect&#39;, field=&#39;first_level_contrast&#39;, type=typing.List[typing.List[dict]], splits=frozenset(), cast_from=None)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -1252,11 +1262,11 @@ We need to get four types of data from two folders:</p>
     <span class="n">input_spec</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;n_subj&#39;</span><span class="p">],</span>
 <span class="p">)</span>
 
-<span class="n">wf</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">n_subj</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">wf</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">n_subj</span> <span class="o">=</span> <span class="mi">2</span>
 
 <span class="c1"># randomly choose subjects</span>
 <span class="n">wf_fixed_effect</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">subj_id</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">17</span><span class="p">),</span> <span class="n">wf</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">n_subj</span><span class="p">)</span>
-<span class="n">wf_fixed_effect</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">run_id</span> <span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">wf_fixed_effect</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">run_id</span> <span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
 <span class="n">wf_fixed_effect</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">tr</span> <span class="o">=</span> <span class="mf">2.3</span>
 <span class="n">wf_fixed_effect</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">n_scans</span> <span class="o">=</span> <span class="mi">300</span>
 <span class="n">wf_fixed_effect</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">hrf_model</span> <span class="o">=</span> <span class="s1">&#39;glover&#39;</span>
@@ -1341,7 +1351,7 @@ We need to get four types of data from two folders:</p>
 <span class="expanded">Hide code cell output</span>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Download data for subject-3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Download data for subject-7
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -1356,7 +1366,7 @@ We need to get four types of data from two folders:</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-03/func/sub-03_task-balloonanalogrisktask_run-1_space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz (
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-07/func/sub-07_task-balloonanalogrisktask_run-1_space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz (
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
@@ -1377,7 +1387,7 @@ We need to get four types of data from two folders:</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-03/func/sub-03_task-balloonanalogrisktask_run-2_space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz (
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-07/func/sub-07_task-balloonanalogrisktask_run-2_space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz (
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
@@ -1398,7 +1408,7 @@ We need to get four types of data from two folders:</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-03/func/sub-03_task-balloonanalogrisktask_run-3_space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz (
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-07/func/sub-07_task-balloonanalogrisktask_run-3_space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz (
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
@@ -1419,7 +1429,7 @@ We need to get four types of data from two folders:</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-03/func/sub-03_task-balloonanalogrisktask_run-1_space-MNI152NLin2009cAsym_res-2_desc-brain_mask.nii.gz (
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-07/func/sub-07_task-balloonanalogrisktask_run-1_space-MNI152NLin2009cAsym_res-2_desc-brain_mask.nii.gz (
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
@@ -1440,7 +1450,7 @@ We need to get four types of data from two folders:</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-03/func/sub-03_task-balloonanalogrisktask_run-2_space-MNI152NLin2009cAsym_res-2_desc-brain_mask.nii.gz (
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-07/func/sub-07_task-balloonanalogrisktask_run-2_space-MNI152NLin2009cAsym_res-2_desc-brain_mask.nii.gz (
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
@@ -1461,7 +1471,7 @@ We need to get four types of data from two folders:</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-03/func/sub-03_task-balloonanalogrisktask_run-3_space-MNI152NLin2009cAsym_res-2_desc-brain_mask.nii.gz (
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-07/func/sub-07_task-balloonanalogrisktask_run-3_space-MNI152NLin2009cAsym_res-2_desc-brain_mask.nii.gz (
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
@@ -1482,7 +1492,7 @@ We need to get four types of data from two folders:</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-03/func/sub-03_task-balloonanalogrisktask_run-1_desc-confounds_timeseries.tsv (
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-07/func/sub-07_task-balloonanalogrisktask_run-1_desc-confounds_timeseries.tsv (
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
@@ -1503,7 +1513,7 @@ We need to get four types of data from two folders:</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-03/func/sub-03_task-balloonanalogrisktask_run-2_desc-confounds_timeseries.tsv (
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-07/func/sub-07_task-balloonanalogrisktask_run-2_desc-confounds_timeseries.tsv (
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
@@ -1524,202 +1534,7 @@ We need to get four types of data from two folders:</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-03/func/sub-03_task-balloonanalogrisktask_run-3_desc-confounds_timeseries.tsv (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Download data for subject-14
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-14/func/sub-14_task-balloonanalogrisktask_run-1_space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-14/func/sub-14_task-balloonanalogrisktask_run-2_space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-14/func/sub-14_task-balloonanalogrisktask_run-3_space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-14/func/sub-14_task-balloonanalogrisktask_run-1_space-MNI152NLin2009cAsym_res-2_desc-brain_mask.nii.gz (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-14/func/sub-14_task-balloonanalogrisktask_run-2_space-MNI152NLin2009cAsym_res-2_desc-brain_mask.nii.gz (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-14/func/sub-14_task-balloonanalogrisktask_run-3_space-MNI152NLin2009cAsym_res-2_desc-brain_mask.nii.gz (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-14/func/sub-14_task-balloonanalogrisktask_run-1_desc-confounds_timeseries.tsv (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-14/func/sub-14_task-balloonanalogrisktask_run-2_desc-confounds_timeseries.tsv (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-14/func/sub-14_task-balloonanalogrisktask_run-3_desc-confounds_timeseries.tsv (
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-07/func/sub-07_task-balloonanalogrisktask_run-3_desc-confounds_timeseries.tsv (
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
@@ -1926,427 +1741,13 @@ We need to get four types of data from two folders:</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Download data for subject-5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Get subject-7, run-1 firstlevel GLM design matrix...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-05/func/sub-05_task-balloonanalogrisktask_run-1_space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-05/func/sub-05_task-balloonanalogrisktask_run-2_space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-05/func/sub-05_task-balloonanalogrisktask_run-3_space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-05/func/sub-05_task-balloonanalogrisktask_run-1_space-MNI152NLin2009cAsym_res-2_desc-brain_mask.nii.gz (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-05/func/sub-05_task-balloonanalogrisktask_run-2_space-MNI152NLin2009cAsym_res-2_desc-brain_mask.nii.gz (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-05/func/sub-05_task-balloonanalogrisktask_run-3_space-MNI152NLin2009cAsym_res-2_desc-brain_mask.nii.gz (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-05/func/sub-05_task-balloonanalogrisktask_run-1_desc-confounds_timeseries.tsv (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-05/func/sub-05_task-balloonanalogrisktask_run-2_desc-confounds_timeseries.tsv (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-05/func/sub-05_task-balloonanalogrisktask_run-3_desc-confounds_timeseries.tsv (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Download data for subject-2
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-02/func/sub-02_task-balloonanalogrisktask_run-1_space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-02/func/sub-02_task-balloonanalogrisktask_run-2_space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-02/func/sub-02_task-balloonanalogrisktask_run-3_space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-02/func/sub-02_task-balloonanalogrisktask_run-1_space-MNI152NLin2009cAsym_res-2_desc-brain_mask.nii.gz (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-02/func/sub-02_task-balloonanalogrisktask_run-2_space-MNI152NLin2009cAsym_res-2_desc-brain_mask.nii.gz (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-02/func/sub-02_task-balloonanalogrisktask_run-3_space-MNI152NLin2009cAsym_res-2_desc-brain_mask.nii.gz (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-02/func/sub-02_task-balloonanalogrisktask_run-1_desc-confounds_timeseries.tsv (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-02/func/sub-02_task-balloonanalogrisktask_run-2_desc-confounds_timeseries.tsv (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-02/func/sub-02_task-balloonanalogrisktask_run-3_desc-confounds_timeseries.tsv (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Get subject-3, run-1 firstlevel GLM design matrix...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Get subject-3, run-2 firstlevel GLM design matrix...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Get subject-3, run-3 firstlevel GLM design matrix...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Get subject-14, run-1 firstlevel GLM design matrix...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Get subject-14, run-2 firstlevel GLM design matrix...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Get subject-14, run-3 firstlevel GLM design matrix...
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Get subject-7, run-2 firstlevel GLM design matrix...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -2364,79 +1765,13 @@ We need to get four types of data from two folders:</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Get subject-15, run-3 firstlevel GLM design matrix...
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set firstlevel contrast for subject-7, run-1 ...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Get subject-5, run-1 firstlevel GLM design matrix...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Get subject-5, run-2 firstlevel GLM design matrix...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Get subject-5, run-3 firstlevel GLM design matrix...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Get subject-2, run-1 firstlevel GLM design matrix...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Get subject-2, run-2 firstlevel GLM design matrix...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Get subject-2, run-3 firstlevel GLM design matrix...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set firstlevel contrast for subject-3, run-1 ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set firstlevel contrast for subject-3, run-2 ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set firstlevel contrast for subject-3, run-3 ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set firstlevel contrast for subject-14, run-1 ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set firstlevel contrast for subject-14, run-2 ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set firstlevel contrast for subject-14, run-3 ...
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set firstlevel contrast for subject-7, run-2 ...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -2454,49 +1789,7 @@ We need to get four types of data from two folders:</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set firstlevel contrast for subject-15, run-3 ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set firstlevel contrast for subject-5, run-1 ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set firstlevel contrast for subject-5, run-2 ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set firstlevel contrast for subject-5, run-3 ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set firstlevel contrast for subject-2, run-1 ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set firstlevel contrast for subject-2, run-2 ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set firstlevel contrast for subject-2, run-3 ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Start firstlevel estimation for subject-3, run-1 ...
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Start firstlevel estimation for subject-7, run-1 ...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -2544,199 +1837,7 @@ We need to get four types of data from two folders:</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Start firstlevel estimation for subject-3, run-2 ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fit the firstlevel model...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing contrasts...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  1 out of 5: pumps-control
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  2 out of 5: control-pumps
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  3 out of 5: pumps-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  4 out of 5: cash-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  5 out of 5: explode-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Start firstlevel estimation for subject-3, run-3 ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fit the firstlevel model...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing contrasts...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  1 out of 5: pumps-control
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  2 out of 5: control-pumps
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  3 out of 5: pumps-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  4 out of 5: cash-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  5 out of 5: explode-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Start firstlevel estimation for subject-14, run-1 ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fit the firstlevel model...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing contrasts...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  1 out of 5: pumps-control
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  2 out of 5: control-pumps
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  3 out of 5: pumps-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  4 out of 5: cash-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  5 out of 5: explode-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Start firstlevel estimation for subject-14, run-2 ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fit the firstlevel model...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing contrasts...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  1 out of 5: pumps-control
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  2 out of 5: control-pumps
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  3 out of 5: pumps-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  4 out of 5: cash-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  5 out of 5: explode-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Start firstlevel estimation for subject-14, run-3 ...
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Start firstlevel estimation for subject-7, run-2 ...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -2880,736 +1981,283 @@ We need to get four types of data from two folders:</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Start firstlevel estimation for subject-15, run-3 ...
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task exception was never retrieved
+future: &lt;Task finished name=&#39;Task-2&#39; coro=&lt;load_and_run_async() done, defined at /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/helpers.py:579&gt; exception=TypeError(&quot;Cannot coerce {&#39;pumps-control&#39;: array([ 0.,  0., -1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,\n        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,\n        1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,\n        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.]), &#39;control-pumps&#39;: array([ 0.,  0., -1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,\n        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,\n        1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,\n        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.]), &#39;pumps-baseline&#39;: array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0., 0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0.,\n       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0.]), &#39;cash-baseline&#39;: array([1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0.]), &#39;explode-baseline&#39;: array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0.])} into &lt;class &#39;list&#39;&gt; as the coercion doesn&#39;t match any of the explicit inclusion criteria: Sequence -&gt; Sequence, Mapping -&gt; Mapping, Path -&gt; PathLike, str -&gt; PathLike, PathLike -&gt; Path, PathLike -&gt; str, Any -&gt; MultiInputObj, int -&gt; float, integer -&gt; int, floating -&gt; float, bool_ -&gt; bool, integer -&gt; float, character -&gt; str, complexfloating -&gt; complex, bytes_ -&gt; bytes, ndarray -&gt; Sequence, Sequence -&gt; ndarray&quot;)&gt;
+Traceback (most recent call last):
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/asyncio/tasks.py&quot;, line 277, in __step
+    result = coro.send(None)
+             ^^^^^^^^^^^^^^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/helpers.py&quot;, line 585, in load_and_run_async
+    await task._run(submitter=submitter, rerun=rerun, **kwargs)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/core.py&quot;, line 1236, in _run
+    await self._run_task(submitter, rerun=rerun)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/core.py&quot;, line 1264, in _run_task
+    await submitter.expand_workflow(self, rerun=rerun)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/submitter.py&quot;, line 193, in expand_workflow
+    task.inputs.retrieve_values(wf)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/specs.py&quot;, line 110, in retrieve_values
+    setattr(self, field, val)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/attr/_make.py&quot;, line 1068, in __setattr__
+    nval = hook(self, a, val)
+           ^^^^^^^^^^^^^^^^^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/attr/setters.py&quot;, line 66, in convert
+    return c(new_value)
+           ^^^^^^^^^^^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py&quot;, line 152, in __call__
+    coerced = StateArray(self(o) for o in obj)  # type: ignore[assignment]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py&quot;, line 152, in &lt;genexpr&gt;
+    coerced = StateArray(self(o) for o in obj)  # type: ignore[assignment]
+                         ^^^^^^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py&quot;, line 154, in __call__
+    coerced = self.coerce(obj)
+              ^^^^^^^^^^^^^^^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py&quot;, line 294, in coerce
+    return expand_and_coerce(object_, self.pattern)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py&quot;, line 167, in expand_and_coerce
+    return coerce_basic(obj, pattern)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py&quot;, line 203, in coerce_basic
+    self.check_coercible(obj, pattern)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py&quot;, line 470, in check_coercible
+    raise TypeError(
+TypeError: Cannot coerce {&#39;pumps-control&#39;: array([ 0.,  0., -1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,
+        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,
+        1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,
+        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.]), &#39;control-pumps&#39;: array([ 0.,  0., -1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,
+        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,
+        1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,
+        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.]), &#39;pumps-baseline&#39;: array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0.]), &#39;cash-baseline&#39;: array([1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0.]), &#39;explode-baseline&#39;: array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0.])} into &lt;class &#39;list&#39;&gt; as the coercion doesn&#39;t match any of the explicit inclusion criteria: Sequence -&gt; Sequence, Mapping -&gt; Mapping, Path -&gt; PathLike, str -&gt; PathLike, PathLike -&gt; Path, PathLike -&gt; str, Any -&gt; MultiInputObj, int -&gt; float, integer -&gt; int, floating -&gt; float, bool_ -&gt; bool, integer -&gt; float, character -&gt; str, complexfloating -&gt; complex, bytes_ -&gt; bytes, ndarray -&gt; Sequence, Sequence -&gt; ndarray
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task exception was never retrieved
+future: &lt;Task finished name=&#39;Task-3&#39; coro=&lt;load_and_run_async() done, defined at /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/helpers.py:579&gt; exception=TypeError(&quot;Cannot coerce {&#39;pumps-control&#39;: array([ 0.,  0., -1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,\n        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,\n        1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,\n        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.]), &#39;control-pumps&#39;: array([ 0.,  0., -1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,\n        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,\n        1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,\n        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.]), &#39;pumps-baseline&#39;: array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0., 0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0.,\n       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0.]), &#39;cash-baseline&#39;: array([1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0.]), &#39;explode-baseline&#39;: array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0.])} into &lt;class &#39;list&#39;&gt; as the coercion doesn&#39;t match any of the explicit inclusion criteria: Sequence -&gt; Sequence, Mapping -&gt; Mapping, Path -&gt; PathLike, str -&gt; PathLike, PathLike -&gt; Path, PathLike -&gt; str, Any -&gt; MultiInputObj, int -&gt; float, integer -&gt; int, floating -&gt; float, bool_ -&gt; bool, integer -&gt; float, character -&gt; str, complexfloating -&gt; complex, bytes_ -&gt; bytes, ndarray -&gt; Sequence, Sequence -&gt; ndarray&quot;)&gt;
+Traceback (most recent call last):
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/asyncio/tasks.py&quot;, line 277, in __step
+    result = coro.send(None)
+             ^^^^^^^^^^^^^^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/helpers.py&quot;, line 585, in load_and_run_async
+    await task._run(submitter=submitter, rerun=rerun, **kwargs)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/core.py&quot;, line 1236, in _run
+    await self._run_task(submitter, rerun=rerun)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/core.py&quot;, line 1264, in _run_task
+    await submitter.expand_workflow(self, rerun=rerun)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/submitter.py&quot;, line 193, in expand_workflow
+    task.inputs.retrieve_values(wf)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/specs.py&quot;, line 110, in retrieve_values
+    setattr(self, field, val)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/attr/_make.py&quot;, line 1068, in __setattr__
+    nval = hook(self, a, val)
+           ^^^^^^^^^^^^^^^^^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/attr/setters.py&quot;, line 66, in convert
+    return c(new_value)
+           ^^^^^^^^^^^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py&quot;, line 152, in __call__
+    coerced = StateArray(self(o) for o in obj)  # type: ignore[assignment]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py&quot;, line 152, in &lt;genexpr&gt;
+    coerced = StateArray(self(o) for o in obj)  # type: ignore[assignment]
+                         ^^^^^^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py&quot;, line 154, in __call__
+    coerced = self.coerce(obj)
+              ^^^^^^^^^^^^^^^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py&quot;, line 294, in coerce
+    return expand_and_coerce(object_, self.pattern)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py&quot;, line 167, in expand_and_coerce
+    return coerce_basic(obj, pattern)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py&quot;, line 203, in coerce_basic
+    self.check_coercible(obj, pattern)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py&quot;, line 470, in check_coercible
+    raise TypeError(
+TypeError: Cannot coerce {&#39;pumps-control&#39;: array([ 0.,  0., -1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,
+        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,
+        1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,
+        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.]), &#39;control-pumps&#39;: array([ 0.,  0., -1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,
+        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,
+        1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,
+        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.]), &#39;pumps-baseline&#39;: array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0.]), &#39;cash-baseline&#39;: array([1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0.]), &#39;explode-baseline&#39;: array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0.])} into &lt;class &#39;list&#39;&gt; as the coercion doesn&#39;t match any of the explicit inclusion criteria: Sequence -&gt; Sequence, Mapping -&gt; Mapping, Path -&gt; PathLike, str -&gt; PathLike, PathLike -&gt; Path, PathLike -&gt; str, Any -&gt; MultiInputObj, int -&gt; float, integer -&gt; int, floating -&gt; float, bool_ -&gt; bool, integer -&gt; float, character -&gt; str, complexfloating -&gt; complex, bytes_ -&gt; bytes, ndarray -&gt; Sequence, Sequence -&gt; ndarray
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fit the firstlevel model...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing contrasts...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  1 out of 5: pumps-control
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  2 out of 5: control-pumps
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  3 out of 5: pumps-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  4 out of 5: cash-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  5 out of 5: explode-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Start firstlevel estimation for subject-5, run-1 ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fit the firstlevel model...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing contrasts...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  1 out of 5: pumps-control
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  2 out of 5: control-pumps
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  3 out of 5: pumps-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  4 out of 5: cash-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  5 out of 5: explode-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Start firstlevel estimation for subject-5, run-2 ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fit the firstlevel model...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing contrasts...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  1 out of 5: pumps-control
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  2 out of 5: control-pumps
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  3 out of 5: pumps-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  4 out of 5: cash-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  5 out of 5: explode-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Start firstlevel estimation for subject-5, run-3 ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fit the firstlevel model...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing contrasts...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  1 out of 5: pumps-control
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  2 out of 5: control-pumps
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  3 out of 5: pumps-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  4 out of 5: cash-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  5 out of 5: explode-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Start firstlevel estimation for subject-2, run-1 ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fit the firstlevel model...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing contrasts...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  1 out of 5: pumps-control
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  2 out of 5: control-pumps
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  3 out of 5: pumps-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  4 out of 5: cash-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  5 out of 5: explode-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Start firstlevel estimation for subject-2, run-2 ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fit the firstlevel model...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing contrasts...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  1 out of 5: pumps-control
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  2 out of 5: control-pumps
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  3 out of 5: pumps-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  4 out of 5: cash-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  5 out of 5: explode-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Start firstlevel estimation for subject-2, run-3 ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fit the firstlevel model...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing contrasts...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  1 out of 5: pumps-control
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  2 out of 5: control-pumps
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  3 out of 5: pumps-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  4 out of 5: cash-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  5 out of 5: explode-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Compute fixed effects for subject-3...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Contrast  1 out of 5: pumps-control
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Contrast  2 out of 5: control-pumps
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Contrast  3 out of 5: pumps-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Contrast  4 out of 5: cash-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Contrast  5 out of 5: explode-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Compute fixed effects for subject-14...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Contrast  1 out of 5: pumps-control
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Contrast  2 out of 5: control-pumps
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Contrast  3 out of 5: pumps-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Contrast  4 out of 5: cash-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Contrast  5 out of 5: explode-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Compute fixed effects for subject-15...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Contrast  1 out of 5: pumps-control
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Contrast  2 out of 5: control-pumps
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Contrast  3 out of 5: pumps-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Contrast  4 out of 5: cash-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Contrast  5 out of 5: explode-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Compute fixed effects for subject-5...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Contrast  1 out of 5: pumps-control
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Contrast  2 out of 5: control-pumps
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Contrast  3 out of 5: pumps-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Contrast  4 out of 5: cash-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Contrast  5 out of 5: explode-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Compute fixed effects for subject-2...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Contrast  1 out of 5: pumps-control
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Contrast  2 out of 5: control-pumps
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Contrast  3 out of 5: pumps-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Contrast  4 out of 5: cash-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Contrast  5 out of 5: explode-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Get secondlevel design matrix ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Start secondlevel estimation ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Contrast  1 out of 5: pumps-control
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Contrast  2 out of 5: control-pumps
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Contrast  3 out of 5: pumps-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Contrast  4 out of 5: cash-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Contrast  5 out of 5: explode-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Start nonparametric test ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Unexpected exception formatting exception. Falling back to standard exception
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  1 out of 5: pumps-control
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  2 out of 5: control-pumps
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  3 out of 5: pumps-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  4 out of 5: cash-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  5 out of 5: explode-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Permutation is done
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Start multiple comparison ...
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Contrast  1 out of 5: pumps-control
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Contrast  2 out of 5: control-pumps
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Contrast  3 out of 5: pumps-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Contrast  4 out of 5: cash-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/core.py&quot;, line 1365, in _collect_outputs
+    val_out = val.get_value(self)
+              ^^^^^^^^^^^^^^^^^^^
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Contrast  5 out of 5: explode-baseline
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/specs.py&quot;, line 1030, in get_value
+    value = get_nested_results(result, depth=split_depth)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/specs.py&quot;, line 1020, in get_nested_results
+    raise ValueError(
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiple comparison is done
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ValueError: Cannot retrieve value for second_level_stats_map from wf_secondlevel as the node errored
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>During handling of the above exception, another exception occurred:
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Start parametric test ...
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/IPython/core/interactiveshell.py&quot;, line 3526, in run_code
+    exec(code_obj, self.user_global_ns, self.user_ns)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Contrast  1 out of 5: pumps-control
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/tmp/ipykernel_11543/3577572311.py&quot;, line 4, in &lt;module&gt;
+    submitter(wf)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/submitter.py&quot;, line 42, in __call__
+    self.loop.run_until_complete(self.submit_from_call(runnable, rerun))
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Contrast  2 out of 5: control-pumps
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/nest_asyncio.py&quot;, line 99, in run_until_complete
+    return f.result()
+           ^^^^^^^^^^
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/asyncio/futures.py&quot;, line 203, in result
+    raise self._exception.with_traceback(self._exception_tb)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Contrast  3 out of 5: pumps-baseline
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/asyncio/tasks.py&quot;, line 277, in __step
+    result = coro.send(None)
+             ^^^^^^^^^^^^^^^
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/submitter.py&quot;, line 68, in submit_from_call
+    await runnable._run(self, rerun=rerun)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Contrast  4 out of 5: cash-baseline
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/core.py&quot;, line 1237, in _run
+    result.output = self._collect_outputs()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/core.py&quot;, line 1371, in _collect_outputs
+    raise ValueError(
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Contrast  5 out of 5: explode-baseline
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ValueError: Tasks [&#39;wf_fixed_effect&#39;] raised an error
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>During handling of the above exception, another exception occurred:
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Parametric test is done
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/IPython/core/interactiveshell.py&quot;, line 2120, in showtraceback
+    stb = self.InteractiveTB.structured_traceback(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Start cluster thresholding ...
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/IPython/core/ultratb.py&quot;, line 1435, in structured_traceback
+    return FormattedTB.structured_traceback(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/IPython/core/ultratb.py&quot;, line 1326, in structured_traceback
+    return VerboseTB.structured_traceback(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Contrast  1 out of 5: pumps-control
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/IPython/core/ultratb.py&quot;, line 1173, in structured_traceback
+    formatted_exception = self.format_exception_as_a_whole(etype, evalue, etb, number_of_lines_of_context,
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/IPython/core/ultratb.py&quot;, line 1063, in format_exception_as_a_whole
+    self.get_records(etb, number_of_lines_of_context, tb_offset) if etb else []
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Contrast  2 out of 5: control-pumps
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/IPython/core/ultratb.py&quot;, line 1160, in get_records
+    res = list(stack_data.FrameInfo.stack_data(etb, options=options))[tb_offset:]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/stack_data/core.py&quot;, line 597, in stack_data
+    yield from collapse_repeated(
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Contrast  3 out of 5: pumps-baseline
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/stack_data/utils.py&quot;, line 83, in collapse_repeated
+    yield from map(mapper, original_group)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/stack_data/core.py&quot;, line 587, in mapper
+    return cls(f, options)
+           ^^^^^^^^^^^^^^^
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Contrast  4 out of 5: cash-baseline
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/stack_data/core.py&quot;, line 551, in __init__
+    self.executing = Source.executing(frame_or_tb)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/executing/executing.py&quot;, line 264, in executing
+    source = cls.for_frame(frame)
+             ^^^^^^^^^^^^^^^^^^^^
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Contrast  5 out of 5: explode-baseline
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/executing/executing.py&quot;, line 183, in for_frame
+    return cls.for_filename(frame.f_code.co_filename, frame.f_globals or {}, use_cache)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/executing/executing.py&quot;, line 212, in for_filename
+    return cls._for_filename_and_lines(filename, tuple(lines))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cluster thresholding is done
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/executing/executing.py&quot;, line 223, in _for_filename_and_lines
+    result = source_cache[(filename, lines)] = cls(filename, lines)
+                                               ^^^^^^^^^^^^^^^^^^^^
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/executing/executing.py&quot;, line 163, in __init__
+    self.tree = ast.parse(self.text, filename=filename)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(second_level_stats_map={&#39;pumps-control&#39;: {&#39;z_score&#39;: &lt;nibabel.nifti1.Nifti1Image object at 0x7f4926336c50&gt;, &#39;stat&#39;: &lt;nibabel.nifti1.Nifti1Image object at 0x7f4924002650&gt;, &#39;p_value&#39;: &lt;nibabel.nifti1.Nifti1Image object at 0x7f4924000ad0&gt;, &#39;effect_size&#39;: &lt;nibabel.nifti1.Nifti1Image object at 0x7f4924003290&gt;, &#39;effect_variance&#39;: &lt;nibabel.nifti1.Nifti1Image object at 0x7f49240013d0&gt;}, &#39;control-pumps&#39;: {&#39;z_score&#39;: &lt;nibabel.nifti1.Nifti1Image object at 0x7f4924003310&gt;, &#39;stat&#39;: &lt;nibabel.nifti1.Nifti1Image object at 0x7f4924002010&gt;, &#39;p_value&#39;: &lt;nibabel.nifti1.Nifti1Image object at 0x7f4924002b50&gt;, &#39;effect_size&#39;: &lt;nibabel.nifti1.Nifti1Image object at 0x7f49240029d0&gt;, &#39;effect_variance&#39;: &lt;nibabel.nifti1.Nifti1Image object at 0x7f4924002390&gt;}, &#39;pumps-baseline&#39;: {&#39;z_score&#39;: &lt;nibabel.nifti1.Nifti1Image object at 0x7f4924003650&gt;, &#39;stat&#39;: &lt;nibabel.nifti1.Nifti1Image object at 0x7f4926380110&gt;, &#39;p_value&#39;: &lt;nibabel.nifti1.Nifti1Image object at 0x7f4926380b90&gt;, &#39;effect_size&#39;: &lt;nibabel.nifti1.Nifti1Image object at 0x7f492636e110&gt;, &#39;effect_variance&#39;: &lt;nibabel.nifti1.Nifti1Image object at 0x7f4923ea5550&gt;}, &#39;cash-baseline&#39;: {&#39;z_score&#39;: &lt;nibabel.nifti1.Nifti1Image object at 0x7f4923ea4c10&gt;, &#39;stat&#39;: &lt;nibabel.nifti1.Nifti1Image object at 0x7f49264ff490&gt;, &#39;p_value&#39;: &lt;nibabel.nifti1.Nifti1Image object at 0x7f4926409f90&gt;, &#39;effect_size&#39;: &lt;nibabel.nifti1.Nifti1Image object at 0x7f4923f70f10&gt;, &#39;effect_variance&#39;: &lt;nibabel.nifti1.Nifti1Image object at 0x7f4923f72fd0&gt;}, &#39;explode-baseline&#39;: {&#39;z_score&#39;: &lt;nibabel.nifti1.Nifti1Image object at 0x7f49262144d0&gt;, &#39;stat&#39;: &lt;nibabel.nifti1.Nifti1Image object at 0x7f49262156d0&gt;, &#39;p_value&#39;: &lt;nibabel.nifti1.Nifti1Image object at 0x7f4926215ad0&gt;, &#39;effect_size&#39;: &lt;nibabel.nifti1.Nifti1Image object at 0x7f4926215b10&gt;, &#39;effect_variance&#39;: &lt;nibabel.nifti1.Nifti1Image object at 0x7f492622f650&gt;}}), runtime=None, errored=False)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/ast.py&quot;, line 50, in parse
+    return compile(source, filename, mode, flags,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SystemError: AST constructor recursion depth mismatch (before=129, after=183)
 </pre></div>
 </div>
 </div>
@@ -3638,7 +2286,16 @@ We need to get four types of data from two folders:</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/e91369bc31ffaaa9420af2598cb92ff796174db3728d31d30da5b1b24ac80a80.jpg" src="../_images/e91369bc31ffaaa9420af2598cb92ff796174db3728d31d30da5b1b24ac80a80.jpg" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">21</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">ut_list</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s2">&quot;secondlevel_unthresholded*.jpg&quot;</span><span class="p">))</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ut_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="ne">IndexError</span>: list index out of range
+</pre></div>
+</div>
 </div>
 </div>
 </section>
@@ -3659,7 +2316,16 @@ We need to get four types of data from two folders:</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/ac610e866b075f342d24843631e51fe2233a23de4aace8e1630222dd200678d4.jpg" src="../_images/ac610e866b075f342d24843631e51fe2233a23de4aace8e1630222dd200678d4.jpg" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">22</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">ct_list</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s2">&quot;secondlevel_cluster_thresholded*.jpg&quot;</span><span class="p">))</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">ct_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="ne">IndexError</span>: list index out of range
+</pre></div>
+</div>
 </div>
 </div>
 </section>
@@ -3679,7 +2345,15 @@ We need to get four types of data from two folders:</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/ac177e6e39334789fa1b5965be5936f6d4a9137f118b34a5d78d214f39ccd04e.jpg" src="../_images/ac177e6e39334789fa1b5965be5936f6d4a9137f118b34a5d78d214f39ccd04e.jpg" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">23</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">mc_list</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s2">&quot;secondlevel_multiple_comp*.jpg&quot;</span><span class="p">))</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">mc_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="ne">IndexError</span>: list index out of range
+</pre></div>
+</div>
 </div>
 </div>
 </section>
@@ -3699,7 +2373,15 @@ We need to get four types of data from two folders:</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/dfeaf1190b84c0a779652f3d8631891575fcab56df6a338c3041a702ba5756b3.jpg" src="../_images/dfeaf1190b84c0a779652f3d8631891575fcab56df6a338c3041a702ba5756b3.jpg" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">24</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">pt_list</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s2">&quot;secondlevel_paramatric*.jpg&quot;</span><span class="p">))</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">pt_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="ne">IndexError</span>: list index out of range
+</pre></div>
+</div>
 </div>
 </div>
 </section>
@@ -3719,7 +2401,15 @@ We need to get four types of data from two folders:</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/f89d21b69c06a7b369a7f7b6cc53c5d5978b5346dc76395732cf11530091f42a.jpg" src="../_images/f89d21b69c06a7b369a7f7b6cc53c5d5978b5346dc76395732cf11530091f42a.jpg" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">25</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">npt_list</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">workflow_out_dir</span><span class="p">,</span> <span class="s2">&quot;secondlevel_permutation*.jpg&quot;</span><span class="p">))</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">npt_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="ne">IndexError</span>: list index out of range
+</pre></div>
+</div>
 </div>
 </div>
 </section>

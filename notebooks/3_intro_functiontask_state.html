@@ -486,15 +486,15 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Now, we can set the <code class="docutils literal notranslate"><span class="pre">splitter</span></code> by using the <code class="docutils literal notranslate"><span class="pre">split</span></code> method. Since our task has only one input, there is only one option to create a set of inputs, i.e. <code class="docutils literal notranslate"><span class="pre">splitter=&quot;x&quot;</span></code>:</p>
+<p>Now, we can set the <code class="docutils literal notranslate"><span class="pre">splitter</span></code> using the <code class="docutils literal notranslate"><span class="pre">split</span></code> method. Since our task has only one input, there is only one option to create a set of inputs, i.e. <code class="docutils literal notranslate"><span class="pre">split(splitter='x',</span> <span class="pre">x=[1,</span> <span class="pre">2,</span> <span class="pre">3])</span></code>; make sure you define the value of <code class="docutils literal notranslate"><span class="pre">x</span></code> in the splitter as you did in <code class="docutils literal notranslate"><span class="pre">task</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task1</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task1</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pydra.engine.task.FunctionTask at 0x7fe98cf1f050&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pydra.engine.task.FunctionTask at 0x7f6ef4de3e50&gt;
 </pre></div>
 </div>
 </div>
@@ -507,7 +507,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pydra.engine.state.State at 0x7fe98cdb3450&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pydra.engine.state.State at 0x7f6ef4d76390&gt;
 </pre></div>
 </div>
 </div>
@@ -602,7 +602,7 @@ document.write(`
 <p>Now we have more options to define <code class="docutils literal notranslate"><span class="pre">splitter</span></code>, it depends on the type of inputs and on our application. For example, we could have <code class="docutils literal notranslate"><span class="pre">a</span></code> that is a list, <code class="docutils literal notranslate"><span class="pre">b</span></code> that is a single value, and split over <code class="docutils literal notranslate"><span class="pre">a</span></code> values:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task2</span> <span class="o">=</span> <span class="n">add_var</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task2</span> <span class="o">=</span> <span class="n">add_var</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
 <span class="n">task2</span><span class="p">()</span>
 <span class="n">task2</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
 </pre></div>
@@ -633,7 +633,7 @@ document.write(`
 <p>Let’s start from the scalar splitter, that uses parentheses in the syntax:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task3</span><span class="o">.</span><span class="n">split</span><span class="p">((</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task3</span><span class="o">.</span><span class="n">split</span><span class="p">((</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">),</span> <span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
 <span class="n">task3</span><span class="p">()</span>
 <span class="n">task3</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
 </pre></div>
@@ -656,7 +656,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task4</span> <span class="o">=</span> <span class="n">add_var</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
-<span class="n">task4</span><span class="o">.</span><span class="n">split</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">])</span>
+<span class="n">task4</span><span class="o">.</span><span class="n">split</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">],</span> <span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
 <span class="n">task4</span><span class="p">()</span>
 <span class="n">task4</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
 </pre></div>
@@ -676,7 +676,7 @@ document.write(`
 <p>Note, that once you set the splitter, you will get error when you try to set the splitter again. However, you can always set <code class="docutils literal notranslate"><span class="pre">overwrite</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> if you really intend to change the splitter.</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task4</span><span class="o">.</span><span class="n">split</span><span class="p">((</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task4</span><span class="o">.</span><span class="n">split</span><span class="p">((</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">),</span> <span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -684,17 +684,17 @@ document.write(`
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">Exception</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
 <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">16</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">task4</span><span class="o">.</span><span class="n">split</span><span class="p">((</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">))</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">task4</span><span class="o">.</span><span class="n">split</span><span class="p">((</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">),</span> <span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
 
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/core.py:562,</span> in <span class="ni">TaskBase.split</span><span class="nt">(self, splitter, overwrite, cont_dim, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">560</span> <span class="c1"># if user want to update the splitter, overwrite has to be True</span>
-<span class="g g-Whitespace">    </span><span class="mi">561</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">overwrite</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">splitter</span> <span class="o">!=</span> <span class="n">splitter</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">562</span>     <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">563</span>         <span class="s2">&quot;splitter has been already set, &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">564</span>         <span class="s2">&quot;if you want to overwrite it - use overwrite=True&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">565</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">566</span> <span class="k">if</span> <span class="n">cont_dim</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">567</span>     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">vel</span> <span class="ow">in</span> <span class="n">cont_dim</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/core.py:611,</span> in <span class="ni">TaskBase.split</span><span class="nt">(self, splitter, overwrite, cont_dim, **inputs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">609</span> <span class="c1"># if user want to update the splitter, overwrite has to be True</span>
+<span class="g g-Whitespace">    </span><span class="mi">610</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">overwrite</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">splitter</span> <span class="o">!=</span> <span class="n">splitter</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">611</span>     <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">612</span>         <span class="s2">&quot;splitter has been already set, &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">613</span>         <span class="s2">&quot;if you want to overwrite it - use overwrite=True&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">614</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">615</span> <span class="k">if</span> <span class="n">cont_dim</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">616</span>     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">vel</span> <span class="ow">in</span> <span class="n">cont_dim</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
 
 <span class="ne">Exception</span>: splitter has been already set, if you want to overwrite it - use overwrite=True
 </pre></div>
@@ -718,7 +718,8 @@ document.write(`
     <span class="n">x2</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span>
     <span class="n">y2</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="n">task5</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">splitter</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;x1&#39;</span><span class="p">,</span> <span class="s1">&#39;y1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;x2&#39;</span><span class="p">,</span> <span class="s1">&#39;y2&#39;</span><span class="p">)])</span>
+<span class="n">task5</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">splitter</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;x1&#39;</span><span class="p">,</span> <span class="s1">&#39;y1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;x2&#39;</span><span class="p">,</span> <span class="s1">&#39;y2&#39;</span><span class="p">)],</span>
+            <span class="n">x1</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span> <span class="n">y1</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">x2</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="n">y2</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">])</span>
 <span class="n">task5</span><span class="p">()</span>
 <span class="n">task5</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
 </pre></div>
@@ -745,7 +746,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task5</span> <span class="o">=</span> <span class="n">add_var</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
-<span class="n">task5</span><span class="o">.</span><span class="n">split</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">])</span>
+<span class="n">task5</span><span class="o">.</span><span class="n">split</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">],</span> <span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
 <span class="c1"># adding combiner</span>
 <span class="n">task5</span><span class="o">.</span><span class="n">combine</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
 <span class="n">task5</span><span class="p">()</span>
@@ -784,7 +785,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task6</span> <span class="o">=</span> <span class="n">add_var</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
-<span class="n">task6</span><span class="o">.</span><span class="n">split</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">])</span>
+<span class="n">task6</span><span class="o">.</span><span class="n">split</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">],</span> <span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
 <span class="c1"># changing the combiner</span>
 <span class="n">task6</span><span class="o">.</span><span class="n">combine</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">)</span>
 <span class="n">task6</span><span class="p">()</span>
@@ -823,7 +824,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task7</span> <span class="o">=</span> <span class="n">add_var</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
-<span class="n">task7</span><span class="o">.</span><span class="n">split</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">])</span>
+<span class="n">task7</span><span class="o">.</span><span class="n">split</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">],</span> <span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
 <span class="c1"># combining all inputs</span>
 <span class="n">task7</span><span class="o">.</span><span class="n">combine</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">])</span>
 <span class="n">task7</span><span class="p">()</span>
@@ -894,7 +895,7 @@ document.write(`
 <span class="expanded">Hide code cell content</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task_ex1</span> <span class="o">=</span> <span class="n">power</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">n</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">split</span><span class="p">([</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">combine</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task_ex1</span> <span class="o">=</span> <span class="n">power</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">n</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">split</span><span class="p">([</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">],</span> <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">n</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">combine</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
 <span class="n">task_ex1</span><span class="p">()</span>
 <span class="n">task_ex1</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
 </pre></div>
@@ -952,7 +953,7 @@ cubes: [8, 27, 64, 125]
     <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
 
 
-<span class="n">task9</span> <span class="o">=</span> <span class="n">add_two_sleep</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">task9</span> <span class="o">=</span> <span class="n">add_two_sleep</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">task9</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;total time: </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -961,7 +962,7 @@ cubes: [8, 27, 64, 125]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total time: 2.3384249210357666
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total time: 2.0389251708984375
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Result(output=Output(out=3), runtime=None, errored=False),
@@ -977,7 +978,7 @@ cubes: [8, 27, 64, 125]
 <p>We could also create a <code class="docutils literal notranslate"><span class="pre">Submitter</span></code> first, and than use it to run the task:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task10</span> <span class="o">=</span> <span class="n">add_two_sleep</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task10</span> <span class="o">=</span> <span class="n">add_two_sleep</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
 
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="k">with</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Submitter</span><span class="p">(</span><span class="n">plugin</span><span class="o">=</span><span class="s1">&#39;cf&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">sub</span><span class="p">:</span>
@@ -988,7 +989,7 @@ cubes: [8, 27, 64, 125]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total time: 2.335334300994873
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total time: 2.0372164249420166
 results: [Result(output=Output(out=3), runtime=None, errored=False), Result(output=Output(out=4), runtime=None, errored=False), Result(output=Output(out=5), runtime=None, errored=False), Result(output=Output(out=6), runtime=None, errored=False)]
 </pre></div>
 </div>
@@ -997,7 +998,7 @@ results: [Result(output=Output(out=3), runtime=None, errored=False), Result(outp
 <p>or we can provide the name of the plugin:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task11</span> <span class="o">=</span> <span class="n">add_two_sleep</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task11</span> <span class="o">=</span> <span class="n">add_two_sleep</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
 
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="n">task11</span><span class="p">(</span><span class="n">plugin</span><span class="o">=</span><span class="s1">&#39;cf&#39;</span><span class="p">)</span>
@@ -1007,7 +1008,7 @@ results: [Result(output=Output(out=3), runtime=None, errored=False), Result(outp
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total time: 2.336702585220337
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total time: 2.0366358757019043
 results: [Result(output=Output(out=3), runtime=None, errored=False), Result(output=Output(out=4), runtime=None, errored=False), Result(output=Output(out=5), runtime=None, errored=False), Result(output=Output(out=6), runtime=None, errored=False)]
 </pre></div>
 </div>
@@ -1016,7 +1017,7 @@ results: [Result(output=Output(out=3), runtime=None, errored=False), Result(outp
 <p>The last option for running the task is to create a <code class="docutils literal notranslate"><span class="pre">Submitter</span></code> first and run the submitter (<code class="docutils literal notranslate"><span class="pre">Submitter</span></code> is also a callable object) with the task as  a <code class="docutils literal notranslate"><span class="pre">runnable</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task12</span> <span class="o">=</span> <span class="n">add_two_sleep</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task12</span> <span class="o">=</span> <span class="n">add_two_sleep</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
 
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="k">with</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Submitter</span><span class="p">(</span><span class="n">plugin</span><span class="o">=</span><span class="s1">&#39;cf&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">sub</span><span class="p">:</span>
@@ -1027,7 +1028,7 @@ results: [Result(output=Output(out=3), runtime=None, errored=False), Result(outp
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total time: 2.3200018405914307
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total time: 2.038112163543701
 results: [Result(output=Output(out=3), runtime=None, errored=False), Result(output=Output(out=4), runtime=None, errored=False), Result(output=Output(out=5), runtime=None, errored=False), Result(output=Output(out=6), runtime=None, errored=False)]
 </pre></div>
 </div>
@@ -1036,7 +1037,7 @@ results: [Result(output=Output(out=3), runtime=None, errored=False), Result(outp
 <p>All of the execution time should be similar, since all tasks are run by <em>pydra</em> in the same way, i.e. <em>pydra</em> creates a submitter with <code class="docutils literal notranslate"><span class="pre">ConcurrentFutures</span></code> worker, if a number of processors is not provided, <code class="docutils literal notranslate"><span class="pre">ConcurrentFutures</span></code> takes all available processors as <code class="docutils literal notranslate"><span class="pre">max_workers</span></code>. However, if we want to set a specific number of processors, we can set it using <code class="docutils literal notranslate"><span class="pre">n_procs</span></code> when creating a <code class="docutils literal notranslate"><span class="pre">Submitter</span></code>. Let’s see how the execution time changes when we use <code class="docutils literal notranslate"><span class="pre">n_procs=2</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task13</span> <span class="o">=</span> <span class="n">add_two_sleep</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task13</span> <span class="o">=</span> <span class="n">add_two_sleep</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
 
 <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 <span class="k">with</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Submitter</span><span class="p">(</span><span class="n">plugin</span><span class="o">=</span><span class="s1">&#39;cf&#39;</span><span class="p">,</span> <span class="n">n_procs</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="n">sub</span><span class="p">:</span>
@@ -1047,7 +1048,7 @@ results: [Result(output=Output(out=3), runtime=None, errored=False), Result(outp
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total time: 2.318612575531006
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total time: 2.040262222290039
 results: [Result(output=Output(out=3), runtime=None, errored=False), Result(output=Output(out=4), runtime=None, errored=False), Result(output=Output(out=5), runtime=None, errored=False), Result(output=Output(out=6), runtime=None, errored=False)]
 </pre></div>
 </div>
