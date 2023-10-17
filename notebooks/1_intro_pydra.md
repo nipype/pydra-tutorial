@@ -4,9 +4,9 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.14.0
+    jupytext_version: 1.15.2
 kernelspec:
-  display_name: Python 3
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
 ---
@@ -15,46 +15,31 @@ kernelspec:
 
 +++
 
-Pydra is a lightweight, Python 3.7+ dataflow engine for computational graph construction, manipulation, and distributed execution.
-Designed as a general-purpose engine to support analytics in any scientific domain; created for [Nipype](https://github.com/nipy/nipype), and helps build reproducible, scalable, reusable, and fully automated, provenance tracked scientific workflows.
-The power of Pydra lies in ease of workflow creation
-and execution for complex multiparameter map-reduce operations, and the use of global cache.
+Pydra is a lightweight, Python 3.7+ dataflow engine. While it originated within the neuroimaging community, its versatile design makes it suitable as a general-purpose engine to facilitate analytics across various scientific fields.
 
-Pydra's key features are:
-- Consistent API for Task and Workflow
-- Splitting & combining semantics on Task/Workflow level
-- Global cache support to reduce recomputation
-- Support for execution of Tasks in containerized environments
+
+You can discover a more in-depth explanation of the concept behind Pydra here. TODO-LINK
 
 +++
 
-## Pydra computational objects - Tasks
-There are two main types of objects in *pydra*: `Task` and `Workflow`, that is also a type of `Task`, and can be used in a nested workflow.
-![nested_workflow.png](../figures/nested_workflow.png)
-
-
-
-**These are the current `Task` implemented in Pydra:**
-- `Workflow`: connects multiple `Task`s withing a graph
-- `FunctionTask`: wrapper for Python functions
-- `ShellCommandTask`: wrapper for shell commands
-    - `ContainerTask`: wrapper for shell commands run within containers
-      - `DockerTask`: `ContainerTask` that uses Docker
-      - `SingularityTask`: `ContainerTask` that uses Singularity
+In this tutorial you will create and execute your first `Task`s from standard Python functions and shell commands. 
+You'll also construct basic `Workflow`s that link multiple tasks together. Furthermore, you'll have the opportunity to produce `Task`s and `Workflow`s capable of automatically running for multiple inputs values.
 
 +++
 
-## Pydra Workers
-Pydra supports multiple workers to execute `Tasks` and `Workflows`:
-- `ConcurrentFutures`
-- `SLURM`
-- `Dask`
-- `PSI/J`
+**Let's check if pydra is properly installed.** If you have any issues running the following cell, please revisit the Installation section. TODO-LINK
 
-+++
-
-**Before going to next notebooks, let's check if pydra is properly installed**
-
-```{code-cell}
+```{code-cell} ipython3
 import pydra
 ```
+
+### Additional notes
+
++++
+
+At the beginning of each tutorial you will see:
+```
+import nest_asyncio
+nest_asyncio.apply()
+```
+This is because both *Jupyter* and *Pydra* use `asyncio` and you can get `RuntimeError: This event loop is already running` if `nest_asyncio` is not used. **This part is not needed if Pydra is used outside of Jupyter Notebook/Lab.**
