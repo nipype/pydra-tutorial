@@ -6,3 +6,5 @@ _build/
 */*.ipynb
 .*.swp
 notebooks/*old*
+__pycache__/
+.vscode/
