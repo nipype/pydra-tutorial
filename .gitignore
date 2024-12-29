@@ -8,3 +8,4 @@ _build/
 notebooks/*old*
 __pycache__/
 .vscode/
+.venv
