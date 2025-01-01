@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>5. ShellCommandTask &#8212; Tutorials</title>
   
@@ -15,53 +14,52 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-  
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
-  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/5_intro_shelltask';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -69,6 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="prev" title="4. Workflow" href="4_intro_workflow.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -76,32 +75,16 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -109,7 +92,6 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -117,16 +99,25 @@ const thebe_selector_output = ".output, .cell_output"
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -139,9 +130,13 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
+  
+    
   
 
 <a class="navbar-brand logo" href="../welcome.html">
+  
   
   
   
@@ -151,12 +146,19 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../_static/logo.jpg" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/logo.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/logo.jpg" class="logo__image only-light" alt="Tutorials - Home"/>
+    <img src="../_static/logo.jpg" class="logo__image only-dark pst-js-only" alt="Tutorials - Home"/>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -192,14 +194,19 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -208,14 +215,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -240,14 +247,14 @@ const thebe_selector_output = ".output, .cell_output"
       
       <li><a href="https://mybinder.org/v2/gh/nipype/pydra-tutorial/master?urlpath=tree/jupyterbook/notebooks/5_intro_shelltask.md" target="_blank"
    class="btn btn-sm dropdown-item"
-   title="Launch onBinder"
+   title="Launch on Binder"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
 <span class="btn__icon-container">
   
-    <img src="../_static/images/logo_binder.svg">
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
   </span>
 <span class="btn__text-container">Binder</span>
 </a>
@@ -385,26 +392,20 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script>
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -450,10 +451,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="shellcommandtask">
-<h1><span class="section-number">5. </span>ShellCommandTask<a class="headerlink" href="#shellcommandtask" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">5. </span>ShellCommandTask<a class="headerlink" href="#shellcommandtask" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nest_asyncio</span>
@@ -506,14 +507,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(return_code=0, stdout=&#39;/tmp/tmpvdlo4t4p/ShellCommandTask_617121258bf6bc240a2d201f488975df\n&#39;, stderr=&#39;&#39;), runtime=None, errored=False)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(return_code=0, stdout=&#39;/tmp/tmp2qe7iuqo/ShellCommandTask_617121258bf6bc240a2d201f488975df\n&#39;, stderr=&#39;&#39;), runtime=None, errored=False)
 </pre></div>
 </div>
 </div>
 </div>
 <p>the result should have <code class="docutils literal notranslate"><span class="pre">return_code</span></code>, <code class="docutils literal notranslate"><span class="pre">stdout</span></code> and <code class="docutils literal notranslate"><span class="pre">stderr</span></code>. If everything goes well <code class="docutils literal notranslate"><span class="pre">return_code</span></code> should be <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">stdout</span></code> should point to the working directory and <code class="docutils literal notranslate"><span class="pre">stderr</span></code> should be an empty string.</p>
 <section id="commands-with-arguments-and-inputs">
-<h2><span class="section-number">5.1. </span>Commands with arguments and inputs<a class="headerlink" href="#commands-with-arguments-and-inputs" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">5.1. </span>Commands with arguments and inputs<a class="headerlink" href="#commands-with-arguments-and-inputs" title="Link to this heading">#</a></h2>
 <p>you can also use longer command by providing a list:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -537,7 +538,7 @@ document.write(`
 </div>
 </div>
 <section id="using-args">
-<h3><span class="section-number">5.1.1. </span>using args<a class="headerlink" href="#using-args" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">5.1.1. </span>using args<a class="headerlink" href="#using-args" title="Link to this heading">#</a></h3>
 <p>In addition to <code class="docutils literal notranslate"><span class="pre">executable</span></code>, we can also use <code class="docutils literal notranslate"><span class="pre">args</span></code>. Last example can be also rewritten:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -565,7 +566,7 @@ document.write(`
 </section>
 </section>
 <section id="customized-input">
-<h2><span class="section-number">5.2. </span>Customized input<a class="headerlink" href="#customized-input" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">5.2. </span>Customized input<a class="headerlink" href="#customized-input" title="Link to this heading">#</a></h2>
 <p>Pydra always checks <code class="docutils literal notranslate"><span class="pre">executable</span></code> and <code class="docutils literal notranslate"><span class="pre">args</span></code>, but we can also provide additional inputs, in order to do it, we have to modify <code class="docutils literal notranslate"><span class="pre">input_spec</span></code> first by using <code class="docutils literal notranslate"><span class="pre">SpecInfo</span></code> class:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -648,7 +649,7 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
 </div>
 </section>
 <section id="customized-output">
-<h2><span class="section-number">5.3. </span>Customized output<a class="headerlink" href="#customized-output" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">5.3. </span>Customized output<a class="headerlink" href="#customized-output" title="Link to this heading">#</a></h2>
 <p>We can also customized output if we want to return something more than the <code class="docutils literal notranslate"><span class="pre">stdout</span></code>, e.g. a file.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -681,13 +682,13 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cmndline =  touch newfile_tmp.txt
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(return_code=0, stdout=&#39;&#39;, stderr=&#39;&#39;, newfile=File(&#39;/tmp/tmp08mnff5c/ShellCommandTask_291a745f54ab54d29f6c45c6c4efb950/newfile_tmp.txt&#39;)), runtime=None, errored=False)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(return_code=0, stdout=&#39;&#39;, stderr=&#39;&#39;, newfile=&lt;bound method type_name of &lt;class &#39;fileformats.generic.file.File&#39;&gt;&gt;(&#39;/tmp/tmpzt6yodbj/ShellCommandTask_291a745f54ab54d29f6c45c6c4efb950/newfile_tmp.txt&#39;)), runtime=None, errored=False)
 </pre></div>
 </div>
 </div>
 </div>
 <section id="exercise-1">
-<h3><span class="section-number">5.3.1. </span>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">5.3.1. </span>Exercise 1<a class="headerlink" href="#exercise-1" title="Link to this heading">#</a></h3>
 <p>Write a task that creates two new files, use provided output spec.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -721,7 +722,7 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
 </section>
 </section>
 <section id="dockertask">
-<h2><span class="section-number">5.4. </span>DockerTask<a class="headerlink" href="#dockertask" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">5.4. </span>DockerTask<a class="headerlink" href="#dockertask" title="Link to this heading">#</a></h2>
 <p>all the commands can be also run in a docker container using <code class="docutils literal notranslate"><span class="pre">DockerTask</span></code>. Syntax is very similar, but additional argument <code class="docutils literal notranslate"><span class="pre">image</span></code> is required.</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
@@ -736,13 +737,13 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(return_code=0, stdout=&#39;root\n&#39;, stderr=&quot;Unable to find image &#39;busybox:latest&#39; locally\nlatest: Pulling from library/busybox\n3f4d90098f5b: Pulling fs layer\n3f4d90098f5b: Verifying Checksum\n3f4d90098f5b: Download complete\n3f4d90098f5b: Pull complete\nDigest: sha256:3fbc632167424a6d997e74f52b878d7cc478225cffac6bc977eedfe51c7f4e79\nStatus: Downloaded newer image for busybox:latest\n&quot;), runtime=None, errored=False)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(return_code=0, stdout=&#39;root\n&#39;, stderr=&quot;Unable to find image &#39;busybox:latest&#39; locally\nlatest: Pulling from library/busybox\n9c0abc9c5bd3: Pulling fs layer\n9c0abc9c5bd3: Download complete\n9c0abc9c5bd3: Pull complete\nDigest: sha256:2919d0172f7524b2d8df9e50066a682669e6d170ac0f6a49676d54358fe970b5\nStatus: Downloaded newer image for busybox:latest\n&quot;), runtime=None, errored=False)
 </pre></div>
 </div>
 </div>
 </div>
 <section id="exercise2">
-<h3><span class="section-number">5.4.1. </span>Exercise2<a class="headerlink" href="#exercise2" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">5.4.1. </span>Exercise2<a class="headerlink" href="#exercise2" title="Link to this heading">#</a></h3>
 <p>Use splitter to run the same command in two different images:</p>
 <div class="cell tag_hide-cell tag_raises-exception docutils container">
 <details class="hide above-input">
@@ -774,7 +775,7 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
 <span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="k">with</span> <span class="n">pydra</span><span class="o">.</span><span class="n">Submitter</span><span class="p">()</span> <span class="k">as</span> <span class="n">sub</span><span class="p">:</span>
 <span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">docky</span><span class="p">(</span><span class="n">submitter</span><span class="o">=</span><span class="n">sub</span><span class="p">)</span>
 
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/core.py:605,</span> in <span class="ni">TaskBase.split</span><span class="nt">(self, splitter, overwrite, cont_dim, **inputs)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py:605,</span> in <span class="ni">TaskBase.split</span><span class="nt">(self, splitter, overwrite, cont_dim, **inputs)</span>
 <span class="g g-Whitespace">    </span><span class="mi">603</span>     <span class="n">missing</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">missing</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">m</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)]</span>
 <span class="g g-Whitespace">    </span><span class="mi">604</span>     <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
 <span class="ne">--&gt; </span><span class="mi">605</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
@@ -797,7 +798,7 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
 </div>
 </div>
 <section id="using-shellcommandtask-with-container-info-argument">
-<h4><span class="section-number">5.4.1.1. </span>Using <code class="docutils literal notranslate"><span class="pre">ShellCommandTask</span></code> with <code class="docutils literal notranslate"><span class="pre">container_info</span></code> argument:<a class="headerlink" href="#using-shellcommandtask-with-container-info-argument" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">5.4.1.1. </span>Using <code class="docutils literal notranslate"><span class="pre">ShellCommandTask</span></code> with <code class="docutils literal notranslate"><span class="pre">container_info</span></code> argument:<a class="headerlink" href="#using-shellcommandtask-with-container-info-argument" title="Link to this heading">#</a></h4>
 <p>You can run the shell command in a docker container by adding <code class="docutils literal notranslate"><span class="pre">container_info</span></code> argument to <code class="docutils literal notranslate"><span class="pre">ShellCommandTask</span></code>:</p>
 <div class="cell tag_raises-exception docutils container">
 <div class="cell_input docutils container">
@@ -866,8 +867,8 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
               
               
               
-                <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                <footer class="prev-next-footer d-print-none">
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="4_intro_workflow.html"
@@ -894,7 +895,9 @@ perhaps the simplest syntax is the last one, that contains <code class="docutils
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -939,9 +942,10 @@ By Pydra Developers
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -965,8 +969,8 @@ By Pydra Developers
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>

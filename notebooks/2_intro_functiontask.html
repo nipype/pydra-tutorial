@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>2. FunctionTask &#8212; Tutorials</title>
   
@@ -15,53 +14,52 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-  
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
-  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/2_intro_functiontask';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -69,6 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="prev" title="1. Intro to Pydra" href="1_intro_pydra.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -76,32 +75,16 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -109,7 +92,6 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -117,16 +99,25 @@ const thebe_selector_output = ".output, .cell_output"
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -139,9 +130,13 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
+  
+    
   
 
 <a class="navbar-brand logo" href="../welcome.html">
+  
   
   
   
@@ -151,12 +146,19 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../_static/logo.jpg" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/logo.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/logo.jpg" class="logo__image only-light" alt="Tutorials - Home"/>
+    <img src="../_static/logo.jpg" class="logo__image only-dark pst-js-only" alt="Tutorials - Home"/>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -192,14 +194,19 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -208,14 +215,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -240,14 +247,14 @@ const thebe_selector_output = ".output, .cell_output"
       
       <li><a href="https://mybinder.org/v2/gh/nipype/pydra-tutorial/master?urlpath=tree/jupyterbook/notebooks/2_intro_functiontask.md" target="_blank"
    class="btn btn-sm dropdown-item"
-   title="Launch onBinder"
+   title="Launch on Binder"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
 <span class="btn__icon-container">
   
-    <img src="../_static/images/logo_binder.svg">
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
   </span>
 <span class="btn__text-container">Binder</span>
 </a>
@@ -385,26 +392,20 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script>
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -452,10 +453,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="functiontask">
-<h1><span class="section-number">2. </span>FunctionTask<a class="headerlink" href="#functiontask" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">2. </span>FunctionTask<a class="headerlink" href="#functiontask" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nest_asyncio</span>
@@ -521,7 +522,7 @@ b = 5
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inputs(a=4, b=5, _func=b&#39;\x80\x05\x95\xbb\x01\x00\x00\x00\x00\x00\x00\x8c\x17cloudpickle.cloudpickle\x94\x8c\x0e_make_function\x94\x93\x94(h\x00\x8c\r_builtin_type\x94\x93\x94\x8c\x08CodeType\x94\x85\x94R\x94(K\x02K\x00K\x00K\x02K\x02K\x03C\x0c\x97\x00|\x00|\x01z\x00\x00\x00S\x00\x94N\x85\x94)\x8c\x01a\x94\x8c\x01b\x94\x86\x94\x8c!/tmp/ipykernel_6452/3542708107.py\x94\x8c\x07add_var\x94h\x0eK\x03C\x0b\x80\x00\xe0\x0b\x0c\x88q\x895\x80L\x94C\x00\x94))t\x94R\x94}\x94(\x8c\x0b__package__\x94N\x8c\x08__name__\x94\x8c\x08__main__\x94uNNNt\x94R\x94h\x00\x8c\x12_function_setstate\x94\x93\x94h\x18}\x94}\x94(h\x15h\x0e\x8c\x0c__qualname__\x94h\x0e\x8c\x0f__annotations__\x94}\x94\x8c\x0e__kwdefaults__\x94N\x8c\x0c__defaults__\x94N\x8c\n__module__\x94h\x16\x8c\x07__doc__\x94N\x8c\x0b__closure__\x94N\x8c\x17_cloudpickle_submodules\x94]\x94\x8c\x0b__globals__\x94}\x94u\x86\x94\x86R0.&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inputs(a=4, b=5, _func=b&#39;\x80\x05\x95\xcf\x01\x00\x00\x00\x00\x00\x00\x8c\x17cloudpickle.cloudpickle\x94\x8c\x0e_make_function\x94\x93\x94(h\x00\x8c\r_builtin_type\x94\x93\x94\x8c\x08CodeType\x94\x85\x94R\x94(K\x02K\x00K\x00K\x02K\x02K\x03C\n\x95\x00X\x01-\x00\x00\x00$\x00\x94N\x85\x94)\x8c\x01a\x94\x8c\x01b\x94\x86\x94\x8c!/tmp/ipykernel_2291/3542708107.py\x94\x8c\x07add_var\x94\x8c\x07add_var\x94K\x03C\t\x80\x00\xe0\x0b\x0c\x895\x80L\x94C\x00\x94))t\x94R\x94}\x94(\x8c\x0b__package__\x94N\x8c\x08__name__\x94\x8c\x08__main__\x94uNNNt\x94R\x94h\x00\x8c\x12_function_setstate\x94\x93\x94h\x19}\x94}\x94(h\x16\x8c\x07add_var\x94\x8c\x0c__qualname__\x94\x8c\x07add_var\x94\x8c\x0f__annotations__\x94}\x94\x8c\x0e__kwdefaults__\x94N\x8c\x0c__defaults__\x94N\x8c\n__module__\x94h\x17\x8c\x07__doc__\x94N\x8c\x0b__closure__\x94N\x8c\x17_cloudpickle_submodules\x94]\x94\x8c\x0b__globals__\x94}\x94u\x86\x94\x86R0.&#39;)
 </pre></div>
 </div>
 </div>
@@ -582,13 +583,13 @@ b = 5
 </div>
 </div>
 <section id="type-checking">
-<h2><span class="section-number">2.1. </span>Type-checking<a class="headerlink" href="#type-checking" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.1. </span>Type-checking<a class="headerlink" href="#type-checking" title="Link to this heading">#</a></h2>
 <section id="what-is-type-checking">
-<h3><span class="section-number">2.1.1. </span>What is Type-checking?<a class="headerlink" href="#what-is-type-checking" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">2.1.1. </span>What is Type-checking?<a class="headerlink" href="#what-is-type-checking" title="Link to this heading">#</a></h3>
 <p>Type-checking is verifying the type of a value at compile or run time. It ensures that operations or assignments to variables are semantically meaningful and can be executed without type errors, enhancing code reliability and maintainability.</p>
 </section>
 <section id="why-use-type-checking">
-<h3><span class="section-number">2.1.2. </span>Why Use Type-checking?<a class="headerlink" href="#why-use-type-checking" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">2.1.2. </span>Why Use Type-checking?<a class="headerlink" href="#why-use-type-checking" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p><strong>Error Prevention</strong>: Type-checking helps catch type mismatches early, preventing potential runtime errors.</p></li>
 <li><p><strong>Improved Readability</strong>: Type annotations make understanding what types of values a function expects and returns more straightforward.</p></li>
@@ -597,9 +598,9 @@ b = 5
 </ol>
 </section>
 <section id="how-is-type-checking-implemented-in-pydra">
-<h3><span class="section-number">2.1.3. </span>How is Type-checking Implemented in Pydra?<a class="headerlink" href="#how-is-type-checking-implemented-in-pydra" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">2.1.3. </span>How is Type-checking Implemented in Pydra?<a class="headerlink" href="#how-is-type-checking-implemented-in-pydra" title="Link to this heading">#</a></h3>
 <section id="static-type-checking">
-<h4><span class="section-number">2.1.3.1. </span>Static Type-Checking<a class="headerlink" href="#static-type-checking" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">2.1.3.1. </span>Static Type-Checking<a class="headerlink" href="#static-type-checking" title="Link to this heading">#</a></h4>
 <p>Static type-checking is done using Python’s type annotations. You annotate the types of your function arguments and the return type and then use a tool like <code class="docutils literal notranslate"><span class="pre">mypy</span></code> to statically check if you’re using the function correctly according to those annotations.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -640,12 +641,12 @@ b = 5
 <span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">task1b</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s2">&quot;world&quot;</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">task1b</span><span class="p">()</span>
 
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/mark/functions.py:46,</span> in <span class="ni">task.&lt;locals&gt;.decorate</span><span class="nt">(**kwargs)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/mark/functions.py:46,</span> in <span class="ni">task.&lt;locals&gt;.decorate</span><span class="nt">(**kwargs)</span>
 <span class="g g-Whitespace">     </span><span class="mi">44</span> <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">45</span> <span class="k">def</span> <span class="nf">decorate</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="ne">---&gt; </span><span class="mi">46</span>     <span class="k">return</span> <span class="n">FunctionTask</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">func</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/task.py:155,</span> in <span class="ni">FunctionTask.__init__</span><span class="nt">(self, func, audit_flags, cache_dir, cache_locations, input_spec, cont_dim, messenger_args, messengers, name, output_spec, rerun, **kwargs)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/task.py:155,</span> in <span class="ni">FunctionTask.__init__</span><span class="nt">(self, func, audit_flags, cache_dir, cache_locations, input_spec, cont_dim, messenger_args, messengers, name, output_spec, rerun, **kwargs)</span>
 <span class="g g-Whitespace">    </span><span class="mi">153</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 <span class="g g-Whitespace">    </span><span class="mi">154</span>     <span class="n">name</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span>
 <span class="ne">--&gt; </span><span class="mi">155</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
@@ -662,17 +663,17 @@ b = 5
 <span class="g g-Whitespace">    </span><span class="mi">166</span> <span class="k">if</span> <span class="n">output_spec</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 <span class="g g-Whitespace">    </span><span class="mi">167</span>     <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Output&quot;</span>
 
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/core.py:175,</span> in <span class="ni">TaskBase.__init__</span><span class="nt">(self, name, audit_flags, cache_dir, cache_locations, inputs, cont_dim, messenger_args, messengers, rerun)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py:175,</span> in <span class="ni">TaskBase.__init__</span><span class="nt">(self, name, audit_flags, cache_dir, cache_locations, inputs, cont_dim, messenger_args, messengers, rerun)</span>
 <span class="g g-Whitespace">    </span><span class="mi">172</span>             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown input set </span><span class="si">{</span><span class="n">inputs</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">173</span>         <span class="n">inputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_sets</span><span class="p">[</span><span class="n">inputs</span><span class="p">]</span>
 <span class="ne">--&gt; </span><span class="mi">175</span> <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">evolve</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="o">**</span><span class="n">inputs</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">177</span> <span class="c1"># checking if metadata is set properly</span>
 <span class="g g-Whitespace">    </span><span class="mi">178</span> <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">check_metadata</span><span class="p">()</span>
 
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/attr/_funcs.py:413,</span> in <span class="ni">evolve</span><span class="nt">(*args, **changes)</span>
-<span class="g g-Whitespace">    </span><span class="mi">410</span>     <span class="k">if</span> <span class="n">init_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">changes</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">411</span>         <span class="n">changes</span><span class="p">[</span><span class="n">init_name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">413</span> <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">changes</span><span class="p">)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/attr/_make.py:624,</span> in <span class="ni">evolve</span><span class="nt">(*args, **changes)</span>
+<span class="g g-Whitespace">    </span><span class="mi">621</span>     <span class="k">if</span> <span class="n">init_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">changes</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">622</span>         <span class="n">changes</span><span class="p">[</span><span class="n">init_name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">624</span> <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">changes</span><span class="p">)</span>
 
 <span class="nn">File &lt;attrs generated init pydra.engine.helpers.Inputs&gt;:3,</span> in <span class="ni">__init__</span><span class="nt">(self, a, b, func)</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">attr_dict</span><span class="p">[</span><span class="s1">&#39;_func&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span><span class="p">):</span>
@@ -681,13 +682,13 @@ b = 5
 <span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">_setattr</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">__attr_converter_b</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
 <span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">_setattr</span><span class="p">(</span><span class="s1">&#39;_func&#39;</span><span class="p">,</span> <span class="n">__attr_converter__func</span><span class="p">(</span><span class="n">func</span><span class="p">))</span>
 
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py:154,</span> in <span class="ni">TypeParser.__call__</span><span class="nt">(self, obj)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/utils/typing.py:154,</span> in <span class="ni">TypeParser.__call__</span><span class="nt">(self, obj)</span>
 <span class="g g-Whitespace">    </span><span class="mi">152</span>     <span class="n">coerced</span> <span class="o">=</span> <span class="n">StateArray</span><span class="p">(</span><span class="bp">self</span><span class="p">(</span><span class="n">o</span><span class="p">)</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">obj</span><span class="p">)</span>  <span class="c1"># type: ignore[assignment]</span>
 <span class="g g-Whitespace">    </span><span class="mi">153</span> <span class="k">else</span><span class="p">:</span>
 <span class="ne">--&gt; </span><span class="mi">154</span>     <span class="n">coerced</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coerce</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">155</span> <span class="k">return</span> <span class="n">coerced</span>
 
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py:294,</span> in <span class="ni">TypeParser.coerce</span><span class="nt">(self, object_)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/utils/typing.py:294,</span> in <span class="ni">TypeParser.coerce</span><span class="nt">(self, object_)</span>
 <span class="g g-Whitespace">    </span><span class="mi">287</span>         <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
 <span class="g g-Whitespace">    </span><span class="mi">288</span>             <span class="sa">f</span><span class="s2">&quot; (part of coercion from </span><span class="si">{</span><span class="n">object_</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="g g-Whitespace">    </span><span class="mi">289</span>             <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">object_</span>
@@ -696,20 +697,20 @@ b = 5
 <span class="g g-Whitespace">    </span><span class="mi">292</span>         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot coerce </span><span class="si">{</span><span class="n">obj</span><span class="si">!r}</span><span class="s2"> into </span><span class="si">{</span><span class="n">type_</span><span class="si">}{</span><span class="n">msg</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
 <span class="ne">--&gt; </span><span class="mi">294</span> <span class="k">return</span> <span class="n">expand_and_coerce</span><span class="p">(</span><span class="n">object_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="p">)</span>
 
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py:167,</span> in <span class="ni">TypeParser.coerce.&lt;locals&gt;.expand_and_coerce</span><span class="nt">(obj, pattern)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/utils/typing.py:167,</span> in <span class="ni">TypeParser.coerce.&lt;locals&gt;.expand_and_coerce</span><span class="nt">(obj, pattern)</span>
 <span class="g g-Whitespace">    </span><span class="mi">165</span>     <span class="k">return</span> <span class="n">attr</span><span class="o">.</span><span class="n">NOTHING</span>
 <span class="g g-Whitespace">    </span><span class="mi">166</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
 <span class="ne">--&gt; </span><span class="mi">167</span>     <span class="k">return</span> <span class="n">coerce_basic</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">pattern</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">168</span> <span class="n">origin</span><span class="p">,</span> <span class="n">pattern_args</span> <span class="o">=</span> <span class="n">pattern</span>
 <span class="g g-Whitespace">    </span><span class="mi">169</span> <span class="k">if</span> <span class="n">origin</span> <span class="ow">is</span> <span class="n">ty</span><span class="o">.</span><span class="n">Union</span><span class="p">:</span>
 
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py:203,</span> in <span class="ni">TypeParser.coerce.&lt;locals&gt;.coerce_basic</span><span class="nt">(obj, pattern)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/utils/typing.py:203,</span> in <span class="ni">TypeParser.coerce.&lt;locals&gt;.coerce_basic</span><span class="nt">(obj, pattern)</span>
 <span class="g g-Whitespace">    </span><span class="mi">201</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_instance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
 <span class="g g-Whitespace">    </span><span class="mi">202</span>     <span class="k">return</span> <span class="n">obj</span>
 <span class="ne">--&gt; </span><span class="mi">203</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_coercible</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">pattern</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">204</span> <span class="k">return</span> <span class="n">coerce_obj</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">pattern</span><span class="p">)</span>
 
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py:470,</span> in <span class="ni">TypeParser.check_coercible</span><span class="nt">(self, source, target)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/utils/typing.py:470,</span> in <span class="ni">TypeParser.check_coercible</span><span class="nt">(self, source, target)</span>
 <span class="g g-Whitespace">    </span><span class="mi">467</span>         <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">_name</span>  <span class="c1"># typing generics for Python &lt; 3.10</span>
 <span class="g g-Whitespace">    </span><span class="mi">469</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">matches_criteria</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coercible</span><span class="p">):</span>
 <span class="ne">--&gt; </span><span class="mi">470</span>     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
@@ -722,14 +723,14 @@ b = 5
 <span class="g g-Whitespace">    </span><span class="mi">477</span> <span class="n">matches_not_coercible</span> <span class="o">=</span> <span class="n">matches_criteria</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">not_coercible</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">478</span> <span class="k">if</span> <span class="n">matches_not_coercible</span><span class="p">:</span>
 
-<span class="ne">TypeError</span>: Cannot coerce &#39;hello&#39; into &lt;class &#39;int&#39;&gt; as the coercion doesn&#39;t match any of the explicit inclusion criteria: Sequence -&gt; Sequence, Mapping -&gt; Mapping, Path -&gt; PathLike, str -&gt; PathLike, PathLike -&gt; Path, PathLike -&gt; str, Any -&gt; MultiInputObj, int -&gt; float, integer -&gt; int, floating -&gt; float, bool_ -&gt; bool, integer -&gt; float, character -&gt; str, complexfloating -&gt; complex, bytes_ -&gt; bytes, ndarray -&gt; Sequence, Sequence -&gt; ndarray
+<span class="ne">TypeError</span>: Cannot coerce &#39;hello&#39; into &lt;class &#39;int&#39;&gt; as the coercion doesn&#39;t match any of the explicit inclusion criteria: Sequence -&gt; Sequence, Mapping -&gt; Mapping, Path -&gt; PathLike, str -&gt; PathLike, PathLike -&gt; Path, PathLike -&gt; str, Any -&gt; MultiInputObj, int -&gt; float, integer -&gt; int, floating -&gt; float, bool -&gt; bool, integer -&gt; float, character -&gt; str, complexfloating -&gt; complex, bytes_ -&gt; bytes, ndarray -&gt; Sequence, Sequence -&gt; ndarray
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="dynamic-type-checking">
-<h4><span class="section-number">2.1.3.2. </span>Dynamic Type-Checking<a class="headerlink" href="#dynamic-type-checking" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">2.1.3.2. </span>Dynamic Type-Checking<a class="headerlink" href="#dynamic-type-checking" title="Link to this heading">#</a></h4>
 <p>Dynamic type-checking is done at runtime. Add dynamic type checks if you want to enforce types when the function is executed.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -772,20 +773,20 @@ b = 5
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">task1d</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s2">&quot;world&quot;</span><span class="p">)</span>
 <span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">task1d</span><span class="p">()</span>
 
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/core.py:454,</span> in <span class="ni">TaskBase.__call__</span><span class="nt">(self, submitter, plugin, plugin_kwargs, rerun, **kwargs)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py:454,</span> in <span class="ni">TaskBase.__call__</span><span class="nt">(self, submitter, plugin, plugin_kwargs, rerun, **kwargs)</span>
 <span class="g g-Whitespace">    </span><span class="mi">452</span>         <span class="n">res</span> <span class="o">=</span> <span class="n">sub</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">453</span> <span class="k">else</span><span class="p">:</span>  <span class="c1"># tasks without state could be run without a submitter</span>
 <span class="ne">--&gt; </span><span class="mi">454</span>     <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span><span class="n">rerun</span><span class="o">=</span><span class="n">rerun</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">455</span> <span class="k">return</span> <span class="n">res</span>
 
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/core.py:529,</span> in <span class="ni">TaskBase._run</span><span class="nt">(self, rerun, **kwargs)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py:529,</span> in <span class="ni">TaskBase._run</span><span class="nt">(self, rerun, **kwargs)</span>
 <span class="g g-Whitespace">    </span><span class="mi">527</span> <span class="k">try</span><span class="p">:</span>
 <span class="g g-Whitespace">    </span><span class="mi">528</span>     <span class="bp">self</span><span class="o">.</span><span class="n">audit</span><span class="o">.</span><span class="n">monitor</span><span class="p">()</span>
 <span class="ne">--&gt; </span><span class="mi">529</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_run_task</span><span class="p">()</span>
 <span class="g g-Whitespace">    </span><span class="mi">530</span>     <span class="n">result</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_collect_outputs</span><span class="p">(</span><span class="n">output_dir</span><span class="o">=</span><span class="n">output_dir</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">531</span> <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/task.py:202,</span> in <span class="ni">FunctionTask._run_task</span><span class="nt">(self)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/task.py:202,</span> in <span class="ni">FunctionTask._run_task</span><span class="nt">(self)</span>
 <span class="g g-Whitespace">    </span><span class="mi">200</span> <span class="k">del</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;_func&quot;</span><span class="p">]</span>
 <span class="g g-Whitespace">    </span><span class="mi">201</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="ne">--&gt; </span><span class="mi">202</span> <span class="n">output</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">_func</span><span class="p">)(</span><span class="o">**</span><span class="n">inputs</span><span class="p">)</span>
@@ -806,7 +807,7 @@ b = 5
 </div>
 </section>
 <section id="checking-complex-types">
-<h4><span class="section-number">2.1.3.3. </span>Checking Complex Types<a class="headerlink" href="#checking-complex-types" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">2.1.3.3. </span>Checking Complex Types<a class="headerlink" href="#checking-complex-types" title="Link to this heading">#</a></h4>
 <p>For more complex types like lists, dictionaries, or custom objects, we can use type hints combined with dynamic checks.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -851,12 +852,12 @@ b = 5
 <span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">task1f</span> <span class="o">=</span> <span class="n">sum_of_pairs</span><span class="p">(</span><span class="n">pairs</span><span class="o">=</span><span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">)])</span>  
 <span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">task1f</span><span class="p">()</span>
 
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/mark/functions.py:46,</span> in <span class="ni">task.&lt;locals&gt;.decorate</span><span class="nt">(**kwargs)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/mark/functions.py:46,</span> in <span class="ni">task.&lt;locals&gt;.decorate</span><span class="nt">(**kwargs)</span>
 <span class="g g-Whitespace">     </span><span class="mi">44</span> <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">45</span> <span class="k">def</span> <span class="nf">decorate</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="ne">---&gt; </span><span class="mi">46</span>     <span class="k">return</span> <span class="n">FunctionTask</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">func</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/task.py:155,</span> in <span class="ni">FunctionTask.__init__</span><span class="nt">(self, func, audit_flags, cache_dir, cache_locations, input_spec, cont_dim, messenger_args, messengers, name, output_spec, rerun, **kwargs)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/task.py:155,</span> in <span class="ni">FunctionTask.__init__</span><span class="nt">(self, func, audit_flags, cache_dir, cache_locations, input_spec, cont_dim, messenger_args, messengers, name, output_spec, rerun, **kwargs)</span>
 <span class="g g-Whitespace">    </span><span class="mi">153</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 <span class="g g-Whitespace">    </span><span class="mi">154</span>     <span class="n">name</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span>
 <span class="ne">--&gt; </span><span class="mi">155</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
@@ -873,17 +874,17 @@ b = 5
 <span class="g g-Whitespace">    </span><span class="mi">166</span> <span class="k">if</span> <span class="n">output_spec</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 <span class="g g-Whitespace">    </span><span class="mi">167</span>     <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Output&quot;</span>
 
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/core.py:175,</span> in <span class="ni">TaskBase.__init__</span><span class="nt">(self, name, audit_flags, cache_dir, cache_locations, inputs, cont_dim, messenger_args, messengers, rerun)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py:175,</span> in <span class="ni">TaskBase.__init__</span><span class="nt">(self, name, audit_flags, cache_dir, cache_locations, inputs, cont_dim, messenger_args, messengers, rerun)</span>
 <span class="g g-Whitespace">    </span><span class="mi">172</span>             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown input set </span><span class="si">{</span><span class="n">inputs</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">173</span>         <span class="n">inputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_sets</span><span class="p">[</span><span class="n">inputs</span><span class="p">]</span>
 <span class="ne">--&gt; </span><span class="mi">175</span> <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span> <span class="o">=</span> <span class="n">attr</span><span class="o">.</span><span class="n">evolve</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="o">**</span><span class="n">inputs</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">177</span> <span class="c1"># checking if metadata is set properly</span>
 <span class="g g-Whitespace">    </span><span class="mi">178</span> <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">check_metadata</span><span class="p">()</span>
 
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/attr/_funcs.py:413,</span> in <span class="ni">evolve</span><span class="nt">(*args, **changes)</span>
-<span class="g g-Whitespace">    </span><span class="mi">410</span>     <span class="k">if</span> <span class="n">init_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">changes</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">411</span>         <span class="n">changes</span><span class="p">[</span><span class="n">init_name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">413</span> <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">changes</span><span class="p">)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/attr/_make.py:624,</span> in <span class="ni">evolve</span><span class="nt">(*args, **changes)</span>
+<span class="g g-Whitespace">    </span><span class="mi">621</span>     <span class="k">if</span> <span class="n">init_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">changes</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">622</span>         <span class="n">changes</span><span class="p">[</span><span class="n">init_name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">624</span> <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">changes</span><span class="p">)</span>
 
 <span class="nn">File &lt;attrs generated init pydra.engine.helpers.Inputs-1&gt;:3,</span> in <span class="ni">__init__</span><span class="nt">(self, pairs, func)</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">pairs</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="n">attr_dict</span><span class="p">[</span><span class="s1">&#39;_func&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">default</span><span class="p">):</span>
@@ -891,13 +892,13 @@ b = 5
 <span class="ne">----&gt; </span><span class="mi">3</span>     <span class="n">_setattr</span><span class="p">(</span><span class="s1">&#39;pairs&#39;</span><span class="p">,</span> <span class="n">__attr_converter_pairs</span><span class="p">(</span><span class="n">pairs</span><span class="p">))</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">_setattr</span><span class="p">(</span><span class="s1">&#39;_func&#39;</span><span class="p">,</span> <span class="n">__attr_converter__func</span><span class="p">(</span><span class="n">func</span><span class="p">))</span>
 
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py:154,</span> in <span class="ni">TypeParser.__call__</span><span class="nt">(self, obj)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/utils/typing.py:154,</span> in <span class="ni">TypeParser.__call__</span><span class="nt">(self, obj)</span>
 <span class="g g-Whitespace">    </span><span class="mi">152</span>     <span class="n">coerced</span> <span class="o">=</span> <span class="n">StateArray</span><span class="p">(</span><span class="bp">self</span><span class="p">(</span><span class="n">o</span><span class="p">)</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">obj</span><span class="p">)</span>  <span class="c1"># type: ignore[assignment]</span>
 <span class="g g-Whitespace">    </span><span class="mi">153</span> <span class="k">else</span><span class="p">:</span>
 <span class="ne">--&gt; </span><span class="mi">154</span>     <span class="n">coerced</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coerce</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">155</span> <span class="k">return</span> <span class="n">coerced</span>
 
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py:294,</span> in <span class="ni">TypeParser.coerce</span><span class="nt">(self, object_)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/utils/typing.py:294,</span> in <span class="ni">TypeParser.coerce</span><span class="nt">(self, object_)</span>
 <span class="g g-Whitespace">    </span><span class="mi">287</span>         <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span>
 <span class="g g-Whitespace">    </span><span class="mi">288</span>             <span class="sa">f</span><span class="s2">&quot; (part of coercion from </span><span class="si">{</span><span class="n">object_</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="g g-Whitespace">    </span><span class="mi">289</span>             <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">object_</span>
@@ -906,27 +907,20 @@ b = 5
 <span class="g g-Whitespace">    </span><span class="mi">292</span>         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot coerce </span><span class="si">{</span><span class="n">obj</span><span class="si">!r}</span><span class="s2"> into </span><span class="si">{</span><span class="n">type_</span><span class="si">}{</span><span class="n">msg</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
 <span class="ne">--&gt; </span><span class="mi">294</span> <span class="k">return</span> <span class="n">expand_and_coerce</span><span class="p">(</span><span class="n">object_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pattern</span><span class="p">)</span>
 
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py:194,</span> in <span class="ni">TypeParser.coerce.&lt;locals&gt;.expand_and_coerce</span><span class="nt">(obj, pattern)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/utils/typing.py:194,</span> in <span class="ni">TypeParser.coerce.&lt;locals&gt;.expand_and_coerce</span><span class="nt">(obj, pattern)</span>
 <span class="g g-Whitespace">    </span><span class="mi">192</span>     <span class="k">return</span> <span class="n">coerce_tuple</span><span class="p">(</span><span class="n">type_</span><span class="p">,</span> <span class="n">obj_args</span><span class="p">,</span> <span class="n">pattern_args</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">193</span> <span class="k">if</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">origin</span><span class="p">,</span> <span class="n">ty</span><span class="o">.</span><span class="n">Iterable</span><span class="p">):</span>
 <span class="ne">--&gt; </span><span class="mi">194</span>     <span class="k">return</span> <span class="n">coerce_sequence</span><span class="p">(</span><span class="n">type_</span><span class="p">,</span> <span class="n">obj_args</span><span class="p">,</span> <span class="n">pattern_args</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">195</span> <span class="k">assert</span> <span class="kc">False</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Coercion from </span><span class="si">{</span><span class="n">obj</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">pattern</span><span class="si">}</span><span class="s2"> is not handled&quot;</span>
 
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py:270,</span> in <span class="ni">TypeParser.coerce.&lt;locals&gt;.coerce_sequence</span><span class="nt">(type_, obj_args, pattern_args)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/utils/typing.py:270,</span> in <span class="ni">TypeParser.coerce.&lt;locals&gt;.coerce_sequence</span><span class="nt">(type_, obj_args, pattern_args)</span>
 <span class="g g-Whitespace">    </span><span class="mi">267</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Coerce a non-tuple sequence object (e.g. list, ...)&quot;&quot;&quot;</span>
 <span class="g g-Whitespace">    </span><span class="mi">268</span> <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern_args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
 <span class="g g-Whitespace">    </span><span class="mi">269</span> <span class="k">return</span> <span class="n">coerce_obj</span><span class="p">(</span>
 <span class="ne">--&gt; </span><span class="mi">270</span>     <span class="p">[</span><span class="n">expand_and_coerce</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">pattern_args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">obj_args</span><span class="p">],</span> <span class="n">type_</span>
 <span class="g g-Whitespace">    </span><span class="mi">271</span> <span class="p">)</span>
 
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py:270,</span> in <span class="ni">&lt;listcomp&gt;</span><span class="nt">(.0)</span>
-<span class="g g-Whitespace">    </span><span class="mi">267</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Coerce a non-tuple sequence object (e.g. list, ...)&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">268</span> <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern_args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
-<span class="g g-Whitespace">    </span><span class="mi">269</span> <span class="k">return</span> <span class="n">coerce_obj</span><span class="p">(</span>
-<span class="ne">--&gt; </span><span class="mi">270</span>     <span class="p">[</span><span class="n">expand_and_coerce</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">pattern_args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">obj_args</span><span class="p">],</span> <span class="n">type_</span>
-<span class="g g-Whitespace">    </span><span class="mi">271</span> <span class="p">)</span>
-
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py:192,</span> in <span class="ni">TypeParser.coerce.&lt;locals&gt;.expand_and_coerce</span><span class="nt">(obj, pattern)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/utils/typing.py:192,</span> in <span class="ni">TypeParser.coerce.&lt;locals&gt;.expand_and_coerce</span><span class="nt">(obj, pattern)</span>
 <span class="g g-Whitespace">    </span><span class="mi">188</span>     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
 <span class="g g-Whitespace">    </span><span class="mi">189</span>         <span class="sa">f</span><span class="s2">&quot;Could not coerce to </span><span class="si">{</span><span class="n">type_</span><span class="si">}</span><span class="s2"> as </span><span class="si">{</span><span class="n">obj</span><span class="si">}</span><span class="s2"> is not iterable</span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="g g-Whitespace">    </span><span class="mi">190</span>     <span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
@@ -935,7 +929,7 @@ b = 5
 <span class="g g-Whitespace">    </span><span class="mi">193</span> <span class="k">if</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">origin</span><span class="p">,</span> <span class="n">ty</span><span class="o">.</span><span class="n">Iterable</span><span class="p">):</span>
 <span class="g g-Whitespace">    </span><span class="mi">194</span>     <span class="k">return</span> <span class="n">coerce_sequence</span><span class="p">(</span><span class="n">type_</span><span class="p">,</span> <span class="n">obj_args</span><span class="p">,</span> <span class="n">pattern_args</span><span class="p">)</span>
 
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py:261,</span> in <span class="ni">TypeParser.coerce.&lt;locals&gt;.coerce_tuple</span><span class="nt">(type_, obj_args, pattern_args)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/utils/typing.py:261,</span> in <span class="ni">TypeParser.coerce.&lt;locals&gt;.coerce_tuple</span><span class="nt">(type_, obj_args, pattern_args)</span>
 <span class="g g-Whitespace">    </span><span class="mi">255</span> <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern_args</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">obj_args</span><span class="p">):</span>
 <span class="g g-Whitespace">    </span><span class="mi">256</span>     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
 <span class="g g-Whitespace">    </span><span class="mi">257</span>         <span class="sa">f</span><span class="s2">&quot;Incorrect number of items in tuple, expected &quot;</span>
@@ -945,30 +939,20 @@ b = 5
 <span class="ne">--&gt; </span><span class="mi">261</span>     <span class="p">[</span><span class="n">expand_and_coerce</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">o</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">obj_args</span><span class="p">,</span> <span class="n">pattern_args</span><span class="p">)],</span> <span class="n">type_</span>
 <span class="g g-Whitespace">    </span><span class="mi">262</span> <span class="p">)</span>
 
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py:261,</span> in <span class="ni">&lt;listcomp&gt;</span><span class="nt">(.0)</span>
-<span class="g g-Whitespace">    </span><span class="mi">255</span> <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern_args</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">obj_args</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">256</span>     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">257</span>         <span class="sa">f</span><span class="s2">&quot;Incorrect number of items in tuple, expected &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">258</span>         <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pattern_args</span><span class="p">)</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">obj_args</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">259</span>     <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">260</span> <span class="k">return</span> <span class="n">coerce_obj</span><span class="p">(</span>
-<span class="ne">--&gt; </span><span class="mi">261</span>     <span class="p">[</span><span class="n">expand_and_coerce</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">o</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">obj_args</span><span class="p">,</span> <span class="n">pattern_args</span><span class="p">)],</span> <span class="n">type_</span>
-<span class="g g-Whitespace">    </span><span class="mi">262</span> <span class="p">)</span>
-
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py:167,</span> in <span class="ni">TypeParser.coerce.&lt;locals&gt;.expand_and_coerce</span><span class="nt">(obj, pattern)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/utils/typing.py:167,</span> in <span class="ni">TypeParser.coerce.&lt;locals&gt;.expand_and_coerce</span><span class="nt">(obj, pattern)</span>
 <span class="g g-Whitespace">    </span><span class="mi">165</span>     <span class="k">return</span> <span class="n">attr</span><span class="o">.</span><span class="n">NOTHING</span>
 <span class="g g-Whitespace">    </span><span class="mi">166</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
 <span class="ne">--&gt; </span><span class="mi">167</span>     <span class="k">return</span> <span class="n">coerce_basic</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">pattern</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">168</span> <span class="n">origin</span><span class="p">,</span> <span class="n">pattern_args</span> <span class="o">=</span> <span class="n">pattern</span>
 <span class="g g-Whitespace">    </span><span class="mi">169</span> <span class="k">if</span> <span class="n">origin</span> <span class="ow">is</span> <span class="n">ty</span><span class="o">.</span><span class="n">Union</span><span class="p">:</span>
 
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py:203,</span> in <span class="ni">TypeParser.coerce.&lt;locals&gt;.coerce_basic</span><span class="nt">(obj, pattern)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/utils/typing.py:203,</span> in <span class="ni">TypeParser.coerce.&lt;locals&gt;.coerce_basic</span><span class="nt">(obj, pattern)</span>
 <span class="g g-Whitespace">    </span><span class="mi">201</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_instance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
 <span class="g g-Whitespace">    </span><span class="mi">202</span>     <span class="k">return</span> <span class="n">obj</span>
 <span class="ne">--&gt; </span><span class="mi">203</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_coercible</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">pattern</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">204</span> <span class="k">return</span> <span class="n">coerce_obj</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">pattern</span><span class="p">)</span>
 
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py:470,</span> in <span class="ni">TypeParser.check_coercible</span><span class="nt">(self, source, target)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/utils/typing.py:470,</span> in <span class="ni">TypeParser.check_coercible</span><span class="nt">(self, source, target)</span>
 <span class="g g-Whitespace">    </span><span class="mi">467</span>         <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">_name</span>  <span class="c1"># typing generics for Python &lt; 3.10</span>
 <span class="g g-Whitespace">    </span><span class="mi">469</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">matches_criteria</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coercible</span><span class="p">):</span>
 <span class="ne">--&gt; </span><span class="mi">470</span>     <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
@@ -981,7 +965,7 @@ b = 5
 <span class="g g-Whitespace">    </span><span class="mi">477</span> <span class="n">matches_not_coercible</span> <span class="o">=</span> <span class="n">matches_criteria</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">not_coercible</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">478</span> <span class="k">if</span> <span class="n">matches_not_coercible</span><span class="p">:</span>
 
-<span class="ne">TypeError</span>: Cannot coerce &#39;4&#39; into &lt;class &#39;int&#39;&gt; as the coercion doesn&#39;t match any of the explicit inclusion criteria: Sequence -&gt; Sequence, Mapping -&gt; Mapping, Path -&gt; PathLike, str -&gt; PathLike, PathLike -&gt; Path, PathLike -&gt; str, Any -&gt; MultiInputObj, int -&gt; float, integer -&gt; int, floating -&gt; float, bool_ -&gt; bool, integer -&gt; float, character -&gt; str, complexfloating -&gt; complex, bytes_ -&gt; bytes, ndarray -&gt; Sequence, Sequence -&gt; ndarray
+<span class="ne">TypeError</span>: Cannot coerce &#39;4&#39; into &lt;class &#39;int&#39;&gt; as the coercion doesn&#39;t match any of the explicit inclusion criteria: Sequence -&gt; Sequence, Mapping -&gt; Mapping, Path -&gt; PathLike, str -&gt; PathLike, PathLike -&gt; Path, PathLike -&gt; str, Any -&gt; MultiInputObj, int -&gt; float, integer -&gt; int, floating -&gt; float, bool -&gt; bool, integer -&gt; float, character -&gt; str, complexfloating -&gt; complex, bytes_ -&gt; bytes, ndarray -&gt; Sequence, Sequence -&gt; ndarray
 </pre></div>
 </div>
 </div>
@@ -990,7 +974,7 @@ b = 5
 </section>
 </section>
 <section id="customizing-output-names">
-<h2><span class="section-number">2.2. </span>Customizing output names<a class="headerlink" href="#customizing-output-names" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.2. </span>Customizing output names<a class="headerlink" href="#customizing-output-names" title="Link to this heading">#</a></h2>
 <p>Note, that “out” is the default name for the task output, but we can always customize it. There are two ways of doing it: using <em>python</em> function annotation and using another <em>pydra</em> decorator:</p>
 <p>Let’s start from the function annotation:</p>
 <div class="cell docutils container">
@@ -1058,7 +1042,7 @@ b = 5
 <p><strong>Note, that the order of the pydra decorators is important!</strong></p>
 </section>
 <section id="setting-the-input">
-<h2><span class="section-number">2.3. </span>Setting the input<a class="headerlink" href="#setting-the-input" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.3. </span>Setting the input<a class="headerlink" href="#setting-the-input" title="Link to this heading">#</a></h2>
 <p>We don’t have to provide the input when we create a task, we can always set it later:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1107,20 +1091,20 @@ b = 5
 <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">25</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">task3a</span><span class="p">()</span>
 
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/core.py:454,</span> in <span class="ni">TaskBase.__call__</span><span class="nt">(self, submitter, plugin, plugin_kwargs, rerun, **kwargs)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py:454,</span> in <span class="ni">TaskBase.__call__</span><span class="nt">(self, submitter, plugin, plugin_kwargs, rerun, **kwargs)</span>
 <span class="g g-Whitespace">    </span><span class="mi">452</span>         <span class="n">res</span> <span class="o">=</span> <span class="n">sub</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">453</span> <span class="k">else</span><span class="p">:</span>  <span class="c1"># tasks without state could be run without a submitter</span>
 <span class="ne">--&gt; </span><span class="mi">454</span>     <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span><span class="n">rerun</span><span class="o">=</span><span class="n">rerun</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">455</span> <span class="k">return</span> <span class="n">res</span>
 
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/core.py:529,</span> in <span class="ni">TaskBase._run</span><span class="nt">(self, rerun, **kwargs)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py:529,</span> in <span class="ni">TaskBase._run</span><span class="nt">(self, rerun, **kwargs)</span>
 <span class="g g-Whitespace">    </span><span class="mi">527</span> <span class="k">try</span><span class="p">:</span>
 <span class="g g-Whitespace">    </span><span class="mi">528</span>     <span class="bp">self</span><span class="o">.</span><span class="n">audit</span><span class="o">.</span><span class="n">monitor</span><span class="p">()</span>
 <span class="ne">--&gt; </span><span class="mi">529</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_run_task</span><span class="p">()</span>
 <span class="g g-Whitespace">    </span><span class="mi">530</span>     <span class="n">result</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_collect_outputs</span><span class="p">(</span><span class="n">output_dir</span><span class="o">=</span><span class="n">output_dir</span><span class="p">)</span>
 <span class="g g-Whitespace">    </span><span class="mi">531</span> <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 
-<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/task.py:202,</span> in <span class="ni">FunctionTask._run_task</span><span class="nt">(self)</span>
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/task.py:202,</span> in <span class="ni">FunctionTask._run_task</span><span class="nt">(self)</span>
 <span class="g g-Whitespace">    </span><span class="mi">200</span> <span class="k">del</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;_func&quot;</span><span class="p">]</span>
 <span class="g g-Whitespace">    </span><span class="mi">201</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="ne">--&gt; </span><span class="mi">202</span> <span class="n">output</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">_func</span><span class="p">)(</span><span class="o">**</span><span class="n">inputs</span><span class="p">)</span>
@@ -1139,7 +1123,7 @@ b = 5
 </div>
 </section>
 <section id="output-directory-and-caching-the-results">
-<h2><span class="section-number">2.4. </span>Output directory and caching the results<a class="headerlink" href="#output-directory-and-caching-the-results" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.4. </span>Output directory and caching the results<a class="headerlink" href="#output-directory-and-caching-the-results" title="Link to this heading">#</a></h2>
 <p>After running the task, we can check where the output directory with the results was created:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1148,7 +1132,7 @@ b = 5
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PosixPath(&#39;/tmp/tmpgccjsdko/FunctionTask_c3a2dd2f4d8f08f1286f136c748dd2ed&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PosixPath(&#39;/tmp/tmpfo5ssr1m/FunctionTask_0ab49877e31f8ae515d5f2431b40cdab&#39;)
 </pre></div>
 </div>
 </div>
@@ -1190,7 +1174,7 @@ b = 5
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/tmpqm3swbu2/task4
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/tmp49shyr4y/task4
 </pre></div>
 </div>
 </div>
@@ -1232,7 +1216,7 @@ b = 5
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PosixPath(&#39;/tmp/tmpqm3swbu2/task4/FunctionTask_3f42c96bdca5034892978e28d2f91773&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PosixPath(&#39;/tmp/tmp49shyr4y/task4/FunctionTask_a18730eaae7bc52020f7e092e2d90915&#39;)
 </pre></div>
 </div>
 </div>
@@ -1327,14 +1311,14 @@ True
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PosixPath(&#39;/tmp/tmpk0srwvs8/task4b/FunctionTask_db43fd653c264ada9ddc5dae0774d20c&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PosixPath(&#39;/tmp/tmpf31gm_vr/task4b/FunctionTask_2fad104f53ca0af5dc6a027e2002a5ad&#39;)
 </pre></div>
 </div>
 </div>
 </div>
 <p>This is because, the checksum changes when we change either input or function.</p>
 <section id="exercise-1">
-<h3><span class="section-number">2.4.1. </span>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">2.4.1. </span>Exercise 1<a class="headerlink" href="#exercise-1" title="Link to this heading">#</a></h3>
 <p>Create a task that take a list of numbers as an input and returns two fields: <code class="docutils literal notranslate"><span class="pre">mean</span></code> with the mean value and <code class="docutils literal notranslate"><span class="pre">std</span></code> with the standard deviation value.</p>
 <div class="cell tag_hide-cell docutils container">
 <details class="hide above-input">
@@ -1373,7 +1357,7 @@ True
 </section>
 </section>
 <section id="using-audit">
-<h2><span class="section-number">2.5. </span>Using Audit<a class="headerlink" href="#using-audit" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.5. </span>Using Audit<a class="headerlink" href="#using-audit" title="Link to this heading">#</a></h2>
 <p><em>pydra</em> can record various run time information, including the workflow provenance, by setting <code class="docutils literal notranslate"><span class="pre">audit_flags</span></code> and the type of messengers.</p>
 <p><code class="docutils literal notranslate"><span class="pre">AuditFlag.RESOURCE</span></code> allows you to monitor resource usage for the <code class="docutils literal notranslate"><span class="pre">Task</span></code>, while <code class="docutils literal notranslate"><span class="pre">AuditFlag.PROV</span></code> tracks the provenance of the <code class="docutils literal notranslate"><span class="pre">Task</span></code>.</p>
 <div class="cell docutils container">
@@ -1387,7 +1371,7 @@ True
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(out=9), runtime=Runtime(rss_peak_gb=0.10631561328125, vms_peak_gb=0.9318733212890625, cpu_peak_percent=247.5), errored=False)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(out=9), runtime=Runtime(rss_peak_gb=0.0990180966796875, vms_peak_gb=1.0483818056640626, cpu_peak_percent=0.0), errored=False)
 </pre></div>
 </div>
 </div>
@@ -1404,68 +1388,68 @@ True
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>id: 12044c5660c34c0ba99f19556758dda0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>id: 1d9cd9752e4d453f83dba3a8c6e99f2a
 {
   &quot;@context&quot;: &quot;https://raw.githubusercontent.com/nipype/pydra/master/pydra/schema/context.jsonld&quot;,
-  &quot;@id&quot;: &quot;uid:c9be22ea8057457e9e67a664d4bb8820&quot;,
+  &quot;@id&quot;: &quot;uid:82d37ce4d019459cbb9ad594a9072e38&quot;,
   &quot;@type&quot;: &quot;task&quot;,
-  &quot;startedAtTime&quot;: &quot;2023-10-17T01:16:48.268073&quot;,
-  &quot;executedBy&quot;: &quot;uid:aebfcf9b75f140ef819dbf29363d7b3d&quot;
+  &quot;startedAtTime&quot;: &quot;2025-01-01T03:04:04.641844&quot;,
+  &quot;executedBy&quot;: &quot;uid:0d7cad86c28d403490e6e83f4b615902&quot;
 }
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>id: d1a3bd088a2b408ba4ad723b00e2296a
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>id: ec9e37e5f43b4a72828a988a267270b8
 {
   &quot;@context&quot;: &quot;https://raw.githubusercontent.com/nipype/pydra/master/pydra/schema/context.jsonld&quot;,
-  &quot;@id&quot;: &quot;uid:c9be22ea8057457e9e67a664d4bb8820&quot;,
+  &quot;@id&quot;: &quot;uid:82d37ce4d019459cbb9ad594a9072e38&quot;,
   &quot;@type&quot;: &quot;task&quot;,
   &quot;Label&quot;: &quot;add_var&quot;,
   &quot;Command&quot;: null,
-  &quot;StartedAtTime&quot;: &quot;2023-10-17T01:16:48.473775&quot;,
+  &quot;StartedAtTime&quot;: &quot;2025-01-01T03:04:04.845686&quot;,
   &quot;AssociatedWith&quot;: null
 }
-id: 5d9aae9e266848d6b7bf33b130ca0c58
+id: 9ddc305096984eb29a0d1fbe2d9eda3e
 {
   &quot;@context&quot;: &quot;https://raw.githubusercontent.com/nipype/pydra/master/pydra/schema/context.jsonld&quot;,
-  &quot;@id&quot;: &quot;uid:a0cb069945ca4a218c7a2c53dbf2dc86&quot;,
+  &quot;@id&quot;: &quot;uid:bdfa25c356fd47e896cf69232d18d2ab&quot;,
   &quot;@type&quot;: &quot;monitor&quot;,
-  &quot;startedAtTime&quot;: &quot;2023-10-17T01:16:48.474343&quot;,
-  &quot;wasStartedBy&quot;: &quot;uid:c9be22ea8057457e9e67a664d4bb8820&quot;
+  &quot;startedAtTime&quot;: &quot;2025-01-01T03:04:04.846159&quot;,
+  &quot;wasStartedBy&quot;: &quot;uid:82d37ce4d019459cbb9ad594a9072e38&quot;
 }
-id: 1ac55861990243e69606c502a96af1e2
+id: ee691f97668c40629237442eec583744
 {
   &quot;@context&quot;: &quot;https://raw.githubusercontent.com/nipype/pydra/master/pydra/schema/context.jsonld&quot;,
-  &quot;@id&quot;: &quot;uid:a0cb069945ca4a218c7a2c53dbf2dc86&quot;,
-  &quot;endedAtTime&quot;: &quot;2023-10-17T01:16:48.480454&quot;,
-  &quot;wasEndedBy&quot;: &quot;uid:c9be22ea8057457e9e67a664d4bb8820&quot;
+  &quot;@id&quot;: &quot;uid:bdfa25c356fd47e896cf69232d18d2ab&quot;,
+  &quot;endedAtTime&quot;: &quot;2025-01-01T03:04:04.852519&quot;,
+  &quot;wasEndedBy&quot;: &quot;uid:82d37ce4d019459cbb9ad594a9072e38&quot;
 }
-id: a5f28a1da9ac47d48b1c089a67dd8721
+id: 352a8b5d22c84437ae49a6a288eef6e8
 {
   &quot;@context&quot;: &quot;https://raw.githubusercontent.com/nipype/pydra/master/pydra/schema/context.jsonld&quot;,
-  &quot;rss_peak_gb&quot;: 0.1045722958984375,
-  &quot;vms_peak_gb&quot;: 0.9318733212890625,
-  &quot;cpu_peak_percent&quot;: 209.4,
-  &quot;@id&quot;: &quot;uid:691bac5b2d3646fbab79d3cc4c9cc896&quot;,
+  &quot;rss_peak_gb&quot;: 0.0990180966796875,
+  &quot;vms_peak_gb&quot;: 1.0483818056640626,
+  &quot;cpu_peak_percent&quot;: 0.0,
+  &quot;@id&quot;: &quot;uid:95231d93c1504bef828f0b69bf7a774d&quot;,
   &quot;@type&quot;: &quot;runtime&quot;,
-  &quot;prov:wasGeneratedBy&quot;: &quot;uid:c9be22ea8057457e9e67a664d4bb8820&quot;
+  &quot;prov:wasGeneratedBy&quot;: &quot;uid:82d37ce4d019459cbb9ad594a9072e38&quot;
 }
-id: ee03402db48942978a0eaeeb02562932
+id: 39ec0658c4434fca8ee33a6c88f32b7a
 {
   &quot;@context&quot;: &quot;https://raw.githubusercontent.com/nipype/pydra/master/pydra/schema/context.jsonld&quot;,
   &quot;@type&quot;: &quot;prov:Generation&quot;,
-  &quot;entity_generated&quot;: &quot;uid:691bac5b2d3646fbab79d3cc4c9cc896&quot;,
-  &quot;hadActivity&quot;: &quot;uid:a0cb069945ca4a218c7a2c53dbf2dc86&quot;
+  &quot;entity_generated&quot;: &quot;uid:95231d93c1504bef828f0b69bf7a774d&quot;,
+  &quot;hadActivity&quot;: &quot;uid:bdfa25c356fd47e896cf69232d18d2ab&quot;
 }
-id: 14d62803aca246839b6f49e7c578051c
+id: 6975a200859a438f99d2e4d6545e2b35
 {
   &quot;@context&quot;: &quot;https://raw.githubusercontent.com/nipype/pydra/master/pydra/schema/context.jsonld&quot;,
-  &quot;@id&quot;: &quot;uid:c9be22ea8057457e9e67a664d4bb8820&quot;,
-  &quot;endedAtTime&quot;: &quot;2023-10-17T01:16:48.480634&quot;,
+  &quot;@id&quot;: &quot;uid:82d37ce4d019459cbb9ad594a9072e38&quot;,
+  &quot;endedAtTime&quot;: &quot;2025-01-01T03:04:04.852642&quot;,
   &quot;errored&quot;: false
 }
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(out=9), runtime=Runtime(rss_peak_gb=0.1045722958984375, vms_peak_gb=0.9318733212890625, cpu_peak_percent=209.4), errored=False)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result(output=Output(out=9), runtime=Runtime(rss_peak_gb=0.0990180966796875, vms_peak_gb=1.0483818056640626, cpu_peak_percent=0.0), errored=False)
 </pre></div>
 </div>
 </div>
@@ -1500,8 +1484,8 @@ id: 14d62803aca246839b6f49e7c578051c
               
               
               
-                <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                <footer class="prev-next-footer d-print-none">
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="1_intro_pydra.html"
@@ -1528,7 +1512,9 @@ id: 14d62803aca246839b6f49e7c578051c
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -1575,9 +1561,10 @@ By Pydra Developers
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -1601,8 +1588,8 @@ By Pydra Developers
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>

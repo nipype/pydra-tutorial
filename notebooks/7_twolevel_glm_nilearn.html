@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>8. Two-Level GLM (from Nilearn) &#8212; Tutorials</title>
   
@@ -15,53 +14,52 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-  
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
-  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/7_twolevel_glm_nilearn';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -69,6 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="prev" title="7. First Level GLM (from Nilearn)" href="6_firstlevel_glm_nilearn.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -76,32 +75,16 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
-    <i class="fa-solid fa-arrow-up"></i>
-    Back to top
-  </button>
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -109,7 +92,6 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -117,16 +99,25 @@ const thebe_selector_output = ".output, .cell_output"
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -139,9 +130,13 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
+  
+    
   
 
 <a class="navbar-brand logo" href="../welcome.html">
+  
   
   
   
@@ -151,12 +146,19 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../_static/logo.jpg" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/logo.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/logo.jpg" class="logo__image only-light" alt="Tutorials - Home"/>
+    <img src="../_static/logo.jpg" class="logo__image only-dark pst-js-only" alt="Tutorials - Home"/>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -192,14 +194,19 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
 
@@ -208,14 +215,14 @@ const thebe_selector_output = ".output, .cell_output"
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -240,14 +247,14 @@ const thebe_selector_output = ".output, .cell_output"
       
       <li><a href="https://mybinder.org/v2/gh/nipype/pydra-tutorial/master?urlpath=tree/jupyterbook/notebooks/7_twolevel_glm_nilearn.md" target="_blank"
    class="btn btn-sm dropdown-item"
-   title="Launch onBinder"
+   title="Launch on Binder"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
 <span class="btn__icon-container">
   
-    <img src="../_static/images/logo_binder.svg">
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
   </span>
 <span class="btn__text-container">Binder</span>
 </a>
@@ -385,26 +392,20 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
-  </button>
-`);
-</script>
 
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -475,10 +476,10 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="two-level-glm-from-nilearn">
-<h1><span class="section-number">8. </span>Two-Level GLM (from Nilearn)<a class="headerlink" href="#two-level-glm-from-nilearn" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">8. </span>Two-Level GLM (from Nilearn)<a class="headerlink" href="#two-level-glm-from-nilearn" title="Link to this heading">#</a></h1>
 <p>In this tutorial, we demonstrate how to write pydra tasks for the first level (subject-level) GLM and the second level (group-level) GLM in Nilearn. We use the data from <a class="reference external" href="https://openneuro.org/datasets/ds000001/versions/1.0.0">Balloon Analog Risk-taking Task</a>.
 Basic information about this dataset:</p>
 <ul class="simple">
@@ -496,7 +497,7 @@ Basic information about this dataset:</p>
 </div>
 </div>
 <section id="preparation">
-<h2><span class="section-number">8.1. </span>Preparation<a class="headerlink" href="#preparation" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.1. </span>Preparation<a class="headerlink" href="#preparation" title="Link to this heading">#</a></h2>
 <p>Import packages that will be used globally and set up output directory</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -528,6 +529,45 @@ Basic information about this dataset:</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">14</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="kn">import</span> <span class="nn">typing</span> <span class="k">as</span> <span class="nn">ty</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="ne">---&gt; </span><span class="mi">14</span> <span class="kn">import</span> <span class="nn">datalad.api</span> <span class="k">as</span> <span class="nn">dl</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">miniconda</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">pydra</span><span class="o">-</span><span class="n">tutorial</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">datalad</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">23</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">_seed</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="c1"># Other imports are interspersed with lgr.debug to ease troubleshooting startup</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="c1"># delays etc.</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span> 
+<span class="g g-Whitespace">     </span><span class="mi">22</span> <span class="c1"># If there is a bundled git, make sure GitPython uses it too:</span>
+<span class="ne">---&gt; </span><span class="mi">23</span> <span class="kn">from</span> <span class="nn">datalad.cmd</span> <span class="kn">import</span> <span class="n">GitRunner</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="n">GitRunner</span><span class="o">.</span><span class="n">_check_git_path</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span> <span class="k">if</span> <span class="n">GitRunner</span><span class="o">.</span><span class="n">_GIT_PATH</span><span class="p">:</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">miniconda</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">pydra</span><span class="o">-</span><span class="n">tutorial</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">datalad</span><span class="o">/</span><span class="n">cmd</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">35</span>
+<span class="g g-Whitespace">     </span><span class="mi">32</span> <span class="kn">from</span> <span class="nn">.support.exceptions</span> <span class="kn">import</span> <span class="n">CommandError</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span> <span class="kn">from</span> <span class="nn">.support.protocol</span> <span class="kn">import</span> <span class="n">NullProtocol</span><span class="p">,</span> <span class="n">DryRunProtocol</span><span class="p">,</span> \
+<span class="g g-Whitespace">     </span><span class="mi">34</span>     <span class="n">ExecutionTimeProtocol</span><span class="p">,</span> <span class="n">ExecutionTimeExternalsProtocol</span>
+<span class="ne">---&gt; </span><span class="mi">35</span> <span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">on_windows</span><span class="p">,</span> <span class="n">get_tempfile_kwargs</span><span class="p">,</span> <span class="n">assure_unicode</span>
+<span class="g g-Whitespace">     </span><span class="mi">36</span> <span class="kn">from</span> <span class="nn">.dochelpers</span> <span class="kn">import</span> <span class="n">borrowdoc</span>
+<span class="g g-Whitespace">     </span><span class="mi">38</span> <span class="n">lgr</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;datalad.cmd&#39;</span><span class="p">)</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">miniconda</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">pydra</span><span class="o">-</span><span class="n">tutorial</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">datalad</span><span class="o">/</span><span class="n">utils</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">29</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
+<span class="g g-Whitespace">     </span><span class="mi">28</span> <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+<span class="ne">---&gt; </span><span class="mi">29</span> <span class="kn">from</span> <span class="nn">inspect</span> <span class="kn">import</span> <span class="n">getargspec</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span> <span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">sep</span> <span class="k">as</span> <span class="n">dirsep</span>
+<span class="g g-Whitespace">     </span><span class="mi">32</span> <span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">commonprefix</span>
+
+<span class="ne">ImportError</span>: cannot import name &#39;getargspec&#39; from &#39;inspect&#39; (/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/inspect.py)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -545,7 +585,7 @@ Basic information about this dataset:</p>
 </div>
 </div>
 <section id="download-the-data">
-<h3><span class="section-number">8.1.1. </span>Download the data<a class="headerlink" href="#download-the-data" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.1.1. </span>Download the data<a class="headerlink" href="#download-the-data" title="Link to this heading">#</a></h3>
 <p><a class="reference external" href="http://handbook.datalad.org/en/latest/index.htmlhttp://handbook.datalad.org/en/latest/index.html">DataLad</a> is often used in those cases to download data. Here we use its <a class="reference external" href="http://docs.datalad.org/en/latest/modref.htmlhttp://docs.datalad.org/en/latest/modref.html">Python API</a>.</p>
 <p>We need the following data:</p>
 <ol class="arabic simple">
@@ -571,7 +611,7 @@ Basic information about this dataset:</p>
 </div>
 </section>
 <section id="get-data-for-each-subject">
-<h3><span class="section-number">8.1.2. </span>Get data for each subject<a class="headerlink" href="#get-data-for-each-subject" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.1.2. </span>Get data for each subject<a class="headerlink" href="#get-data-for-each-subject" title="Link to this heading">#</a></h3>
 <p>By <code class="docutils literal notranslate"><span class="pre">datalad.api.install</span></code>, datalad downloads all symlinks without storing the actual data locally. We can then use <code class="docutils literal notranslate"><span class="pre">datalad.api.get</span></code> to get the data we need for our analysis.
 We need to get four types of data from two folders:</p>
 <ol class="arabic simple">
@@ -619,14 +659,14 @@ We need to get four types of data from two folders:</p>
 </section>
 </section>
 <section id="first-level-glm">
-<h2><span class="section-number">8.2. </span>First-Level GLM<a class="headerlink" href="#first-level-glm" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.2. </span>First-Level GLM<a class="headerlink" href="#first-level-glm" title="Link to this heading">#</a></h2>
 <p>The first level GLM has two parts:</p>
 <ul class="simple">
 <li><p>conduct GLM for each run on every subject</p></li>
 <li><p>average across runs for each subject with a fixed-effect model</p></li>
 </ul>
 <section id="get-the-first-level-design-matrix">
-<h3><span class="section-number">8.2.1. </span>Get the first-level design matrix<a class="headerlink" href="#get-the-first-level-design-matrix" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.2.1. </span>Get the first-level design matrix<a class="headerlink" href="#get-the-first-level-design-matrix" title="Link to this heading">#</a></h3>
 <p>The design matrix is a <em>M(row)</em> x <em>N(columns)</em> matrix. <em>M</em> corresponds to the number of <em>tr</em>, while <em>N</em> corresponds to event conditions + confounds.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -672,7 +712,7 @@ We need to get four types of data from two folders:</p>
 </div>
 </section>
 <section id="set-up-the-first-level-contrasts">
-<h3><span class="section-number">8.2.2. </span>Set up the first level contrasts<a class="headerlink" href="#set-up-the-first-level-contrasts" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.2.2. </span>Set up the first level contrasts<a class="headerlink" href="#set-up-the-first-level-contrasts" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
@@ -704,7 +744,7 @@ We need to get four types of data from two folders:</p>
 </div>
 </section>
 <section id="fit-the-first-level-glm">
-<h3><span class="section-number">8.2.3. </span>Fit the first level GLM<a class="headerlink" href="#fit-the-first-level-glm" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.2.3. </span>Fit the first level GLM<a class="headerlink" href="#fit-the-first-level-glm" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@pydra</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">task</span>
@@ -757,7 +797,7 @@ We need to get four types of data from two folders:</p>
 </div>
 </section>
 <section id="create-the-first-level-glm-workflow">
-<h3><span class="section-number">8.2.4. </span>Create the first level GLM workflow<a class="headerlink" href="#create-the-first-level-glm-workflow" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.2.4. </span>Create the first level GLM workflow<a class="headerlink" href="#create-the-first-level-glm-workflow" title="Link to this heading">#</a></h3>
 <p>This workflow include GLM for each run.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -832,7 +872,7 @@ We need to get four types of data from two folders:</p>
 </div>
 </section>
 <section id="compute-fixed-effects">
-<h3><span class="section-number">8.2.5. </span>Compute fixed effects<a class="headerlink" href="#compute-fixed-effects" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.2.5. </span>Compute fixed effects<a class="headerlink" href="#compute-fixed-effects" title="Link to this heading">#</a></h3>
 <p>Before we move to the second(group) level, we need to average results from all three runs from a fixed effect model</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -879,7 +919,7 @@ We need to get four types of data from two folders:</p>
 </div>
 </section>
 <section id="create-the-fixed-effect-workflow">
-<h3><span class="section-number">8.2.6. </span>Create the fixed effect workflow<a class="headerlink" href="#create-the-fixed-effect-workflow" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.2.6. </span>Create the fixed effect workflow<a class="headerlink" href="#create-the-fixed-effect-workflow" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initiate the fixed effect GLM workflow</span>
@@ -944,15 +984,12 @@ We need to get four types of data from two folders:</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LazyOutField(name=&#39;wf_fixed_effect&#39;, field=&#39;first_level_contrast&#39;, type=typing.List[typing.List[dict]], splits=frozenset(), cast_from=None)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
 </div>
 </div>
 </section>
 </section>
 <section id="second-level-glm">
-<h2><span class="section-number">8.3. </span>Second-Level GLM<a class="headerlink" href="#second-level-glm" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.3. </span>Second-Level GLM<a class="headerlink" href="#second-level-glm" title="Link to this heading">#</a></h2>
 <p>The second level GLM, as known as the group level, averages results across subjects, containing the following steps:</p>
 <ul class="simple">
 <li><p>construct design matrix</p></li>
@@ -960,7 +997,7 @@ We need to get four types of data from two folders:</p>
 <li><p>statistical testing</p></li>
 </ul>
 <section id="get-the-second-level-design-matrix">
-<h3><span class="section-number">8.3.1. </span>Get the second level design matrix<a class="headerlink" href="#get-the-second-level-design-matrix" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.3.1. </span>Get the second level design matrix<a class="headerlink" href="#get-the-second-level-design-matrix" title="Link to this heading">#</a></h3>
 <p>This is a one-group design. So we need a design matrix for a one-sample test.</p>
 <p>The design matrix is a single column of ones, corresponding to the model intercept.</p>
 <div class="cell docutils container">
@@ -980,7 +1017,7 @@ We need to get four types of data from two folders:</p>
 </div>
 </section>
 <section id="fit-the-second-level-glm">
-<h3><span class="section-number">8.3.2. </span>Fit the second level GLM<a class="headerlink" href="#fit-the-second-level-glm" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.3.2. </span>Fit the second level GLM<a class="headerlink" href="#fit-the-second-level-glm" title="Link to this heading">#</a></h3>
 <p>Here, we use the list of FirstLevel z-maps as the input for the SecondLevelModel.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1018,7 +1055,7 @@ We need to get four types of data from two folders:</p>
 </div>
 </section>
 <section id="create-the-second-level-glm-workflow">
-<h3><span class="section-number">8.3.3. </span>Create the second level GLM workflow<a class="headerlink" href="#create-the-second-level-glm-workflow" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.3.3. </span>Create the second level GLM workflow<a class="headerlink" href="#create-the-second-level-glm-workflow" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initiate the first-level GLM workflow</span>
@@ -1065,7 +1102,7 @@ We need to get four types of data from two folders:</p>
 </section>
 </section>
 <section id="statistical-testing">
-<h2><span class="section-number">8.4. </span>Statistical Testing<a class="headerlink" href="#statistical-testing" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.4. </span>Statistical Testing<a class="headerlink" href="#statistical-testing" title="Link to this heading">#</a></h2>
 <p>In this section, we present different ways of doing statistical testing</p>
 <ol class="arabic simple">
 <li><p>Cluster-thresholding without multiple comparison</p></li>
@@ -1074,7 +1111,7 @@ We need to get four types of data from two folders:</p>
 <li><p>Nonparamatric testing</p></li>
 </ol>
 <section id="cluster-thresholding-and-plot-without-multiple-comparison">
-<h3><span class="section-number">8.4.1. </span>Cluster-thresholding and Plot without multiple comparison<a class="headerlink" href="#cluster-thresholding-and-plot-without-multiple-comparison" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.4.1. </span>Cluster-thresholding and Plot without multiple comparison<a class="headerlink" href="#cluster-thresholding-and-plot-without-multiple-comparison" title="Link to this heading">#</a></h3>
 <p>Threshold the resulting map without multiple comparisons correction, abs(z) &gt; 3.29 (equivalent to p &lt; 0.001), cluster size &gt; 10 voxels.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1114,7 +1151,7 @@ We need to get four types of data from two folders:</p>
 </div>
 </section>
 <section id="multiple-comparison-and-plot">
-<h3><span class="section-number">8.4.2. </span>Multiple comparison and Plot<a class="headerlink" href="#multiple-comparison-and-plot" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.4.2. </span>Multiple comparison and Plot<a class="headerlink" href="#multiple-comparison-and-plot" title="Link to this heading">#</a></h3>
 <p>We have the following choices:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">fdr</span></code>: False Discovery Rate (FDR &lt;.05) and no cluster-level threshold</p></li>
@@ -1161,7 +1198,7 @@ We need to get four types of data from two folders:</p>
 </div>
 </section>
 <section id="paramatric-test-plot">
-<h3><span class="section-number">8.4.3. </span>Paramatric test &amp; Plot<a class="headerlink" href="#paramatric-test-plot" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.4.3. </span>Paramatric test &amp; Plot<a class="headerlink" href="#paramatric-test-plot" title="Link to this heading">#</a></h3>
 <p>We threshold the second level contrast at uncorrected p &lt; 0.001.</p>
 <p>A nilearn example see <a class="reference external" href="https://nilearn.github.io/dev/auto_examples/05_glm_second_level/plot_second_level_one_sample_test.html">here</a></p>
 <div class="cell docutils container">
@@ -1210,7 +1247,7 @@ We need to get four types of data from two folders:</p>
 </div>
 </section>
 <section id="non-paramatric-test-plot">
-<h3><span class="section-number">8.4.4. </span>Non-paramatric test &amp; Plot<a class="headerlink" href="#non-paramatric-test-plot" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.4.4. </span>Non-paramatric test &amp; Plot<a class="headerlink" href="#non-paramatric-test-plot" title="Link to this heading">#</a></h3>
 <p>Here we compute the (corrected) negative log p-values with permutation test.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1251,7 +1288,7 @@ We need to get four types of data from two folders:</p>
 </section>
 </section>
 <section id="the-ultimate-workflow">
-<h2><span class="section-number">8.5. </span>The Ultimate Workflow<a class="headerlink" href="#the-ultimate-workflow" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.5. </span>The Ultimate Workflow<a class="headerlink" href="#the-ultimate-workflow" title="Link to this heading">#</a></h2>
 <p>Now, let’s connect all tasks and workflows together.</p>
 <p>Here we randomly choose <strong>5</strong> subjects to perform the analysis.</p>
 <p>For computational time, we set <code class="docutils literal notranslate"><span class="pre">n_perm=100</span></code>.</p>
@@ -1331,7 +1368,7 @@ We need to get four types of data from two folders:</p>
 </div>
 </div>
 <section id="run-workflow-run">
-<h3><span class="section-number">8.5.1. </span>Run Workflow Run<a class="headerlink" href="#run-workflow-run" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.5.1. </span>Run Workflow Run<a class="headerlink" href="#run-workflow-run" title="Link to this heading">#</a></h3>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pydra</span> <span class="kn">import</span> <span class="n">Submitter</span>
@@ -1351,913 +1388,468 @@ We need to get four types of data from two folders:</p>
 <span class="expanded">Hide code cell output</span>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Download data for subject-7
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Download data for subject-1
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-07/func/sub-07_task-balloonanalogrisktask_run-1_space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Download data for subject-4
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-07/func/sub-07_task-balloonanalogrisktask_run-2_space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Get subject-1, run-1 firstlevel GLM design matrix...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-07/func/sub-07_task-balloonanalogrisktask_run-3_space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-07/func/sub-07_task-balloonanalogrisktask_run-1_space-MNI152NLin2009cAsym_res-2_desc-brain_mask.nii.gz (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-07/func/sub-07_task-balloonanalogrisktask_run-2_space-MNI152NLin2009cAsym_res-2_desc-brain_mask.nii.gz (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-07/func/sub-07_task-balloonanalogrisktask_run-3_space-MNI152NLin2009cAsym_res-2_desc-brain_mask.nii.gz (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-07/func/sub-07_task-balloonanalogrisktask_run-1_desc-confounds_timeseries.tsv (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-07/func/sub-07_task-balloonanalogrisktask_run-2_desc-confounds_timeseries.tsv (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-07/func/sub-07_task-balloonanalogrisktask_run-3_desc-confounds_timeseries.tsv (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Download data for subject-15
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-15/func/sub-15_task-balloonanalogrisktask_run-1_space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-15/func/sub-15_task-balloonanalogrisktask_run-2_space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-15/func/sub-15_task-balloonanalogrisktask_run-3_space-MNI152NLin2009cAsym_res-2_desc-preproc_bold.nii.gz (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-15/func/sub-15_task-balloonanalogrisktask_run-1_space-MNI152NLin2009cAsym_res-2_desc-brain_mask.nii.gz (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-15/func/sub-15_task-balloonanalogrisktask_run-2_space-MNI152NLin2009cAsym_res-2_desc-brain_mask.nii.gz (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-15/func/sub-15_task-balloonanalogrisktask_run-3_space-MNI152NLin2009cAsym_res-2_desc-brain_mask.nii.gz (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-15/func/sub-15_task-balloonanalogrisktask_run-1_desc-confounds_timeseries.tsv (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-15/func/sub-15_task-balloonanalogrisktask_run-2_desc-confounds_timeseries.tsv (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>get
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ok
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>): sub-15/func/sub-15_task-balloonanalogrisktask_run-3_desc-confounds_timeseries.tsv (
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>file
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>) [from openneuro-derivatives...]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Get subject-7, run-1 firstlevel GLM design matrix...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Get subject-7, run-2 firstlevel GLM design matrix...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Get subject-15, run-1 firstlevel GLM design matrix...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Get subject-15, run-2 firstlevel GLM design matrix...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set firstlevel contrast for subject-7, run-1 ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set firstlevel contrast for subject-7, run-2 ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set firstlevel contrast for subject-15, run-1 ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Set firstlevel contrast for subject-15, run-2 ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Start firstlevel estimation for subject-7, run-1 ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fit the firstlevel model...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing contrasts...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  1 out of 5: pumps-control
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  2 out of 5: control-pumps
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  3 out of 5: pumps-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  4 out of 5: cash-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  5 out of 5: explode-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Start firstlevel estimation for subject-7, run-2 ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fit the firstlevel model...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing contrasts...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  1 out of 5: pumps-control
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  2 out of 5: control-pumps
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  3 out of 5: pumps-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  4 out of 5: cash-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  5 out of 5: explode-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Start firstlevel estimation for subject-15, run-1 ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fit the firstlevel model...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing contrasts...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  1 out of 5: pumps-control
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  2 out of 5: control-pumps
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  3 out of 5: pumps-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  4 out of 5: cash-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  5 out of 5: explode-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Start firstlevel estimation for subject-15, run-2 ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fit the firstlevel model...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computing contrasts...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  1 out of 5: pumps-control
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  2 out of 5: control-pumps
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  3 out of 5: pumps-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  4 out of 5: cash-baseline
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Contrast  5 out of 5: explode-baseline
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Get subject-1, run-2 firstlevel GLM design matrix...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task exception was never retrieved
-future: &lt;Task finished name=&#39;Task-2&#39; coro=&lt;load_and_run_async() done, defined at /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/helpers.py:579&gt; exception=TypeError(&quot;Cannot coerce {&#39;pumps-control&#39;: array([ 0.,  0., -1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,\n        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,\n        1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,\n        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.]), &#39;control-pumps&#39;: array([ 0.,  0., -1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,\n        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,\n        1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,\n        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.]), &#39;pumps-baseline&#39;: array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0., 0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0.,\n       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0.]), &#39;cash-baseline&#39;: array([1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0.]), &#39;explode-baseline&#39;: array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0.])} into &lt;class &#39;list&#39;&gt; as the coercion doesn&#39;t match any of the explicit inclusion criteria: Sequence -&gt; Sequence, Mapping -&gt; Mapping, Path -&gt; PathLike, str -&gt; PathLike, PathLike -&gt; Path, PathLike -&gt; str, Any -&gt; MultiInputObj, int -&gt; float, integer -&gt; int, floating -&gt; float, bool_ -&gt; bool, integer -&gt; float, character -&gt; str, complexfloating -&gt; complex, bytes_ -&gt; bytes, ndarray -&gt; Sequence, Sequence -&gt; ndarray&quot;)&gt;
+future: &lt;Task finished name=&#39;Task-8&#39; coro=&lt;ConcurrentFuturesWorker.exec_as_coro() done, defined at /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/workers.py:173&gt; exception=IndexError(&#39;list index out of range&#39;)&gt;
+concurrent.futures.process._RemoteTraceback: 
+&quot;&quot;&quot;
 Traceback (most recent call last):
-  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/asyncio/tasks.py&quot;, line 277, in __step
-    result = coro.send(None)
-             ^^^^^^^^^^^^^^^
-  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/helpers.py&quot;, line 585, in load_and_run_async
-    await task._run(submitter=submitter, rerun=rerun, **kwargs)
-  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/core.py&quot;, line 1236, in _run
-    await self._run_task(submitter, rerun=rerun)
-  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/core.py&quot;, line 1264, in _run_task
-    await submitter.expand_workflow(self, rerun=rerun)
-  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/submitter.py&quot;, line 193, in expand_workflow
-    task.inputs.retrieve_values(wf)
-  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/specs.py&quot;, line 110, in retrieve_values
-    setattr(self, field, val)
-  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/attr/_make.py&quot;, line 1068, in __setattr__
-    nval = hook(self, a, val)
-           ^^^^^^^^^^^^^^^^^^
-  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/attr/setters.py&quot;, line 66, in convert
-    return c(new_value)
-           ^^^^^^^^^^^^
-  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py&quot;, line 152, in __call__
-    coerced = StateArray(self(o) for o in obj)  # type: ignore[assignment]
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py&quot;, line 152, in &lt;genexpr&gt;
-    coerced = StateArray(self(o) for o in obj)  # type: ignore[assignment]
-                         ^^^^^^^
-  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py&quot;, line 154, in __call__
-    coerced = self.coerce(obj)
-              ^^^^^^^^^^^^^^^^
-  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py&quot;, line 294, in coerce
-    return expand_and_coerce(object_, self.pattern)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py&quot;, line 167, in expand_and_coerce
-    return coerce_basic(obj, pattern)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py&quot;, line 203, in coerce_basic
-    self.check_coercible(obj, pattern)
-  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py&quot;, line 470, in check_coercible
-    raise TypeError(
-TypeError: Cannot coerce {&#39;pumps-control&#39;: array([ 0.,  0., -1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,
-        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,
-        1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,
-        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.]), &#39;control-pumps&#39;: array([ 0.,  0., -1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,
-        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,
-        1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,
-        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.]), &#39;pumps-baseline&#39;: array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
-       0., 0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0.,
-       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
-       0.]), &#39;cash-baseline&#39;: array([1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
-       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
-       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
-       0.]), &#39;explode-baseline&#39;: array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
-       0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0., 0.,
-       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
-       0.])} into &lt;class &#39;list&#39;&gt; as the coercion doesn&#39;t match any of the explicit inclusion criteria: Sequence -&gt; Sequence, Mapping -&gt; Mapping, Path -&gt; PathLike, str -&gt; PathLike, PathLike -&gt; Path, PathLike -&gt; str, Any -&gt; MultiInputObj, int -&gt; float, integer -&gt; int, floating -&gt; float, bool_ -&gt; bool, integer -&gt; float, character -&gt; str, complexfloating -&gt; complex, bytes_ -&gt; bytes, ndarray -&gt; Sequence, Sequence -&gt; ndarray
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task exception was never retrieved
-future: &lt;Task finished name=&#39;Task-3&#39; coro=&lt;load_and_run_async() done, defined at /usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/helpers.py:579&gt; exception=TypeError(&quot;Cannot coerce {&#39;pumps-control&#39;: array([ 0.,  0., -1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,\n        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,\n        1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,\n        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.]), &#39;control-pumps&#39;: array([ 0.,  0., -1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,\n        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,\n        1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,\n        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.]), &#39;pumps-baseline&#39;: array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0., 0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0.,\n       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0.]), &#39;cash-baseline&#39;: array([1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0.]), &#39;explode-baseline&#39;: array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,\n       0.])} into &lt;class &#39;list&#39;&gt; as the coercion doesn&#39;t match any of the explicit inclusion criteria: Sequence -&gt; Sequence, Mapping -&gt; Mapping, Path -&gt; PathLike, str -&gt; PathLike, PathLike -&gt; Path, PathLike -&gt; str, Any -&gt; MultiInputObj, int -&gt; float, integer -&gt; int, floating -&gt; float, bool_ -&gt; bool, integer -&gt; float, character -&gt; str, complexfloating -&gt; complex, bytes_ -&gt; bytes, ndarray -&gt; Sequence, Sequence -&gt; ndarray&quot;)&gt;
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/concurrent/futures/process.py&quot;, line 254, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py&quot;, line 529, in _run
+    self._run_task()
+    ~~~~~~~~~~~~~~^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/task.py&quot;, line 202, in _run_task
+    output = cp.loads(self.inputs._func)(**inputs)
+  File &quot;/tmp/ipykernel_2815/2321826732.py&quot;, line 17, in get_firstlevel_dm
+    run_img = subj_imgs[run_id-1]
+              ~~~~~~~~~^^^^^^^^^^
+IndexError: list index out of range
+&quot;&quot;&quot;
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
-  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/asyncio/tasks.py&quot;, line 277, in __step
-    result = coro.send(None)
-             ^^^^^^^^^^^^^^^
-  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/helpers.py&quot;, line 585, in load_and_run_async
-    await task._run(submitter=submitter, rerun=rerun, **kwargs)
-  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/core.py&quot;, line 1236, in _run
-    await self._run_task(submitter, rerun=rerun)
-  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/core.py&quot;, line 1264, in _run_task
-    await submitter.expand_workflow(self, rerun=rerun)
-  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/submitter.py&quot;, line 193, in expand_workflow
-    task.inputs.retrieve_values(wf)
-  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/specs.py&quot;, line 110, in retrieve_values
-    setattr(self, field, val)
-  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/attr/_make.py&quot;, line 1068, in __setattr__
-    nval = hook(self, a, val)
-           ^^^^^^^^^^^^^^^^^^
-  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/attr/setters.py&quot;, line 66, in convert
-    return c(new_value)
-           ^^^^^^^^^^^^
-  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py&quot;, line 152, in __call__
-    coerced = StateArray(self(o) for o in obj)  # type: ignore[assignment]
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py&quot;, line 152, in &lt;genexpr&gt;
-    coerced = StateArray(self(o) for o in obj)  # type: ignore[assignment]
-                         ^^^^^^^
-  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py&quot;, line 154, in __call__
-    coerced = self.coerce(obj)
-              ^^^^^^^^^^^^^^^^
-  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py&quot;, line 294, in coerce
-    return expand_and_coerce(object_, self.pattern)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py&quot;, line 167, in expand_and_coerce
-    return coerce_basic(obj, pattern)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py&quot;, line 203, in coerce_basic
-    self.check_coercible(obj, pattern)
-  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/utils/typing.py&quot;, line 470, in check_coercible
-    raise TypeError(
-TypeError: Cannot coerce {&#39;pumps-control&#39;: array([ 0.,  0., -1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,
-        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,
-        1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,
-        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.]), &#39;control-pumps&#39;: array([ 0.,  0., -1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,
-        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,
-        1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,
-        0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.]), &#39;pumps-baseline&#39;: array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
-       0., 0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0.,
-       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
-       0.]), &#39;cash-baseline&#39;: array([1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
-       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
-       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
-       0.]), &#39;explode-baseline&#39;: array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
-       0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0., 0.,
-       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
-       0.])} into &lt;class &#39;list&#39;&gt; as the coercion doesn&#39;t match any of the explicit inclusion criteria: Sequence -&gt; Sequence, Mapping -&gt; Mapping, Path -&gt; PathLike, str -&gt; PathLike, PathLike -&gt; Path, PathLike -&gt; str, Any -&gt; MultiInputObj, int -&gt; float, integer -&gt; int, floating -&gt; float, bool_ -&gt; bool, integer -&gt; float, character -&gt; str, complexfloating -&gt; complex, bytes_ -&gt; bytes, ndarray -&gt; Sequence, Sequence -&gt; ndarray
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Unexpected exception formatting exception. Falling back to standard exception
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/core.py&quot;, line 1365, in _collect_outputs
-    val_out = val.get_value(self)
-              ^^^^^^^^^^^^^^^^^^^
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/specs.py&quot;, line 1030, in get_value
-    value = get_nested_results(result, depth=split_depth)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/specs.py&quot;, line 1020, in get_nested_results
-    raise ValueError(
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ValueError: Cannot retrieve value for second_level_stats_map from wf_secondlevel as the node errored
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>During handling of the above exception, another exception occurred:
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/IPython/core/interactiveshell.py&quot;, line 3526, in run_code
-    exec(code_obj, self.user_global_ns, self.user_ns)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/tmp/ipykernel_11543/3577572311.py&quot;, line 4, in &lt;module&gt;
-    submitter(wf)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/submitter.py&quot;, line 42, in __call__
-    self.loop.run_until_complete(self.submit_from_call(runnable, rerun))
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/nest_asyncio.py&quot;, line 99, in run_until_complete
-    return f.result()
-           ^^^^^^^^^^
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/asyncio/futures.py&quot;, line 203, in result
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/asyncio/tasks.py&quot;, line 306, in __step_run_and_handle_result
+    result = coro.throw(exc)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/workers.py&quot;, line 176, in exec_as_coro
+    res = await self.loop.run_in_executor(self.pool, runnable._run, rerun)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/asyncio/futures.py&quot;, line 286, in __await__
+    yield self  # This tells Task to wait for completion.
+    ^^^^^^^^^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/asyncio/tasks.py&quot;, line 375, in __wakeup
+    future.result()
+    ~~~~~~~~~~~~~^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/asyncio/futures.py&quot;, line 199, in result
     raise self._exception.with_traceback(self._exception_tb)
+IndexError: list index out of range
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/asyncio/tasks.py&quot;, line 277, in __step
-    result = coro.send(None)
-             ^^^^^^^^^^^^^^^
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Get subject-4, run-1 firstlevel GLM design matrix...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/submitter.py&quot;, line 68, in submit_from_call
-    await runnable._run(self, rerun=rerun)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/core.py&quot;, line 1237, in _run
-    result.output = self._collect_outputs()
-                    ^^^^^^^^^^^^^^^^^^^^^^^
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task exception was never retrieved
+future: &lt;Task finished name=&#39;Task-9&#39; coro=&lt;ConcurrentFuturesWorker.exec_as_coro() done, defined at /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/workers.py:173&gt; exception=IndexError(&#39;list index out of range&#39;)&gt;
+concurrent.futures.process._RemoteTraceback: 
+&quot;&quot;&quot;
+Traceback (most recent call last):
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/concurrent/futures/process.py&quot;, line 254, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py&quot;, line 529, in _run
+    self._run_task()
+    ~~~~~~~~~~~~~~^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/task.py&quot;, line 202, in _run_task
+    output = cp.loads(self.inputs._func)(**inputs)
+  File &quot;/tmp/ipykernel_2815/2321826732.py&quot;, line 17, in get_firstlevel_dm
+    run_img = subj_imgs[run_id-1]
+              ~~~~~~~~~^^^^^^^^^^
+IndexError: list index out of range
+&quot;&quot;&quot;
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/asyncio/tasks.py&quot;, line 306, in __step_run_and_handle_result
+    result = coro.throw(exc)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/workers.py&quot;, line 176, in exec_as_coro
+    res = await self.loop.run_in_executor(self.pool, runnable._run, rerun)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/asyncio/futures.py&quot;, line 286, in __await__
+    yield self  # This tells Task to wait for completion.
+    ^^^^^^^^^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/asyncio/tasks.py&quot;, line 375, in __wakeup
+    future.result()
+    ~~~~~~~~~~~~~^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/asyncio/futures.py&quot;, line 199, in result
+    raise self._exception.with_traceback(self._exception_tb)
+IndexError: list index out of range
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/pydra/engine/core.py&quot;, line 1371, in _collect_outputs
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Get subject-4, run-2 firstlevel GLM design matrix...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task exception was never retrieved
+future: &lt;Task finished name=&#39;Task-7&#39; coro=&lt;load_and_run_async() done, defined at /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/helpers.py:579&gt; exception=ValueError(&quot;Tasks [&#39;get_firstlevel_dm&#39;] raised an error&quot;)&gt;
+Traceback (most recent call last):
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py&quot;, line 1365, in _collect_outputs
+    val_out = val.get_value(self)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/specs.py&quot;, line 1030, in get_value
+    value = get_nested_results(result, depth=split_depth)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/specs.py&quot;, line 1020, in get_nested_results
     raise ValueError(
+    ...&lt;2 lines&gt;...
+    )
+ValueError: Cannot retrieve value for contrasts from set_contrast as the node errored
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/asyncio/tasks.py&quot;, line 304, in __step_run_and_handle_result
+    result = coro.send(None)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/helpers.py&quot;, line 585, in load_and_run_async
+    await task._run(submitter=submitter, rerun=rerun, **kwargs)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py&quot;, line 1237, in _run
+    result.output = self._collect_outputs()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py&quot;, line 1371, in _collect_outputs
+    raise ValueError(
+        f&quot;Tasks {getattr(self, val.name)._errored} raised an error&quot;
+    )
+ValueError: Tasks [&#39;get_firstlevel_dm&#39;] raised an error
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ValueError: Tasks [&#39;wf_fixed_effect&#39;] raised an error
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task exception was never retrieved
+future: &lt;Task finished name=&#39;Task-6&#39; coro=&lt;load_and_run_async() done, defined at /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/helpers.py:579&gt; exception=ValueError(&quot;Tasks [&#39;get_firstlevel_dm&#39;] raised an error&quot;)&gt;
+Traceback (most recent call last):
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py&quot;, line 1365, in _collect_outputs
+    val_out = val.get_value(self)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/specs.py&quot;, line 1030, in get_value
+    value = get_nested_results(result, depth=split_depth)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/specs.py&quot;, line 1020, in get_nested_results
+    raise ValueError(
+    ...&lt;2 lines&gt;...
+    )
+ValueError: Cannot retrieve value for contrasts from set_contrast as the node errored
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/asyncio/tasks.py&quot;, line 304, in __step_run_and_handle_result
+    result = coro.send(None)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/helpers.py&quot;, line 585, in load_and_run_async
+    await task._run(submitter=submitter, rerun=rerun, **kwargs)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py&quot;, line 1237, in _run
+    result.output = self._collect_outputs()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py&quot;, line 1371, in _collect_outputs
+    raise ValueError(
+        f&quot;Tasks {getattr(self, val.name)._errored} raised an error&quot;
+    )
+ValueError: Tasks [&#39;get_firstlevel_dm&#39;] raised an error
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>During handling of the above exception, another exception occurred:
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task exception was never retrieved
+future: &lt;Task finished name=&#39;Task-12&#39; coro=&lt;ConcurrentFuturesWorker.exec_as_coro() done, defined at /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/workers.py:173&gt; exception=IndexError(&#39;list index out of range&#39;)&gt;
+concurrent.futures.process._RemoteTraceback: 
+&quot;&quot;&quot;
+Traceback (most recent call last):
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/concurrent/futures/process.py&quot;, line 254, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py&quot;, line 529, in _run
+    self._run_task()
+    ~~~~~~~~~~~~~~^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/task.py&quot;, line 202, in _run_task
+    output = cp.loads(self.inputs._func)(**inputs)
+  File &quot;/tmp/ipykernel_2815/2321826732.py&quot;, line 17, in get_firstlevel_dm
+    run_img = subj_imgs[run_id-1]
+              ~~~~~~~~~^^^^^^^^^^
+IndexError: list index out of range
+&quot;&quot;&quot;
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/asyncio/tasks.py&quot;, line 306, in __step_run_and_handle_result
+    result = coro.throw(exc)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/workers.py&quot;, line 176, in exec_as_coro
+    res = await self.loop.run_in_executor(self.pool, runnable._run, rerun)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/asyncio/futures.py&quot;, line 286, in __await__
+    yield self  # This tells Task to wait for completion.
+    ^^^^^^^^^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/asyncio/tasks.py&quot;, line 375, in __wakeup
+    future.result()
+    ~~~~~~~~~~~~~^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/asyncio/futures.py&quot;, line 199, in result
+    raise self._exception.with_traceback(self._exception_tb)
+IndexError: list index out of range
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Traceback (most recent call last):
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task exception was never retrieved
+future: &lt;Task finished name=&#39;Task-2&#39; coro=&lt;load_and_run_async() done, defined at /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/helpers.py:579&gt; exception=ValueError(&quot;Task wf_firstlevel raised an error, full crash report is here: [PosixPath(&#39;/tmp/tmp7a1mu_1l/Workflow_0eb6e0463a0ceca0072d995523b692ee/_error.pklz&#39;), PosixPath(&#39;/tmp/tmp7a1mu_1l/Workflow_83f3b6ebcd3806f5c736a327e7dfa59f/_error.pklz&#39;)]&quot;)&gt;
+Traceback (most recent call last):
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py&quot;, line 1365, in _collect_outputs
+    val_out = val.get_value(self)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/specs.py&quot;, line 1030, in get_value
+    value = get_nested_results(result, depth=split_depth)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/specs.py&quot;, line 1015, in get_nested_results
+    val = StateArray[self.type](
+        get_nested_results(res=r, depth=depth - 1) for r in res
+    )
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/specs.py&quot;, line 1016, in &lt;genexpr&gt;
+    get_nested_results(res=r, depth=depth - 1) for r in res
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/specs.py&quot;, line 1020, in get_nested_results
+    raise ValueError(
+    ...&lt;2 lines&gt;...
+    )
+ValueError: Cannot retrieve value for first_level_contrast from wf_firstlevel as the node errored
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/asyncio/tasks.py&quot;, line 304, in __step_run_and_handle_result
+    result = coro.send(None)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/helpers.py&quot;, line 585, in load_and_run_async
+    await task._run(submitter=submitter, rerun=rerun, **kwargs)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py&quot;, line 1237, in _run
+    result.output = self._collect_outputs()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py&quot;, line 1386, in _collect_outputs
+    raise ValueError(
+    ...&lt;2 lines&gt;...
+    )
+ValueError: Task wf_firstlevel raised an error, full crash report is here: [PosixPath(&#39;/tmp/tmp7a1mu_1l/Workflow_0eb6e0463a0ceca0072d995523b692ee/_error.pklz&#39;), PosixPath(&#39;/tmp/tmp7a1mu_1l/Workflow_83f3b6ebcd3806f5c736a327e7dfa59f/_error.pklz&#39;)]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/IPython/core/interactiveshell.py&quot;, line 2120, in showtraceback
-    stb = self.InteractiveTB.structured_traceback(
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task exception was never retrieved
+future: &lt;Task finished name=&#39;Task-13&#39; coro=&lt;ConcurrentFuturesWorker.exec_as_coro() done, defined at /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/workers.py:173&gt; exception=IndexError(&#39;list index out of range&#39;)&gt;
+concurrent.futures.process._RemoteTraceback: 
+&quot;&quot;&quot;
+Traceback (most recent call last):
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/concurrent/futures/process.py&quot;, line 254, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py&quot;, line 529, in _run
+    self._run_task()
+    ~~~~~~~~~~~~~~^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/task.py&quot;, line 202, in _run_task
+    output = cp.loads(self.inputs._func)(**inputs)
+  File &quot;/tmp/ipykernel_2815/2321826732.py&quot;, line 17, in get_firstlevel_dm
+    run_img = subj_imgs[run_id-1]
+              ~~~~~~~~~^^^^^^^^^^
+IndexError: list index out of range
+&quot;&quot;&quot;
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/asyncio/tasks.py&quot;, line 306, in __step_run_and_handle_result
+    result = coro.throw(exc)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/workers.py&quot;, line 176, in exec_as_coro
+    res = await self.loop.run_in_executor(self.pool, runnable._run, rerun)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/asyncio/futures.py&quot;, line 286, in __await__
+    yield self  # This tells Task to wait for completion.
+    ^^^^^^^^^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/asyncio/tasks.py&quot;, line 375, in __wakeup
+    future.result()
+    ~~~~~~~~~~~~~^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/asyncio/futures.py&quot;, line 199, in result
+    raise self._exception.with_traceback(self._exception_tb)
+IndexError: list index out of range
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/IPython/core/ultratb.py&quot;, line 1435, in structured_traceback
-    return FormattedTB.structured_traceback(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task exception was never retrieved
+future: &lt;Task finished name=&#39;Task-11&#39; coro=&lt;load_and_run_async() done, defined at /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/helpers.py:579&gt; exception=ValueError(&quot;Tasks [&#39;get_firstlevel_dm&#39;] raised an error&quot;)&gt;
+Traceback (most recent call last):
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py&quot;, line 1365, in _collect_outputs
+    val_out = val.get_value(self)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/specs.py&quot;, line 1030, in get_value
+    value = get_nested_results(result, depth=split_depth)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/specs.py&quot;, line 1020, in get_nested_results
+    raise ValueError(
+    ...&lt;2 lines&gt;...
+    )
+ValueError: Cannot retrieve value for contrasts from set_contrast as the node errored
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/asyncio/tasks.py&quot;, line 304, in __step_run_and_handle_result
+    result = coro.send(None)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/helpers.py&quot;, line 585, in load_and_run_async
+    await task._run(submitter=submitter, rerun=rerun, **kwargs)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py&quot;, line 1237, in _run
+    result.output = self._collect_outputs()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py&quot;, line 1371, in _collect_outputs
+    raise ValueError(
+        f&quot;Tasks {getattr(self, val.name)._errored} raised an error&quot;
+    )
+ValueError: Tasks [&#39;get_firstlevel_dm&#39;] raised an error
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/IPython/core/ultratb.py&quot;, line 1326, in structured_traceback
-    return VerboseTB.structured_traceback(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task exception was never retrieved
+future: &lt;Task finished name=&#39;Task-10&#39; coro=&lt;load_and_run_async() done, defined at /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/helpers.py:579&gt; exception=ValueError(&quot;Tasks [&#39;get_firstlevel_dm&#39;] raised an error&quot;)&gt;
+Traceback (most recent call last):
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py&quot;, line 1365, in _collect_outputs
+    val_out = val.get_value(self)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/specs.py&quot;, line 1030, in get_value
+    value = get_nested_results(result, depth=split_depth)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/specs.py&quot;, line 1020, in get_nested_results
+    raise ValueError(
+    ...&lt;2 lines&gt;...
+    )
+ValueError: Cannot retrieve value for contrasts from set_contrast as the node errored
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/asyncio/tasks.py&quot;, line 304, in __step_run_and_handle_result
+    result = coro.send(None)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/helpers.py&quot;, line 585, in load_and_run_async
+    await task._run(submitter=submitter, rerun=rerun, **kwargs)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py&quot;, line 1237, in _run
+    result.output = self._collect_outputs()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py&quot;, line 1371, in _collect_outputs
+    raise ValueError(
+        f&quot;Tasks {getattr(self, val.name)._errored} raised an error&quot;
+    )
+ValueError: Tasks [&#39;get_firstlevel_dm&#39;] raised an error
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/IPython/core/ultratb.py&quot;, line 1173, in structured_traceback
-    formatted_exception = self.format_exception_as_a_whole(etype, evalue, etb, number_of_lines_of_context,
-                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Task exception was never retrieved
+future: &lt;Task finished name=&#39;Task-3&#39; coro=&lt;load_and_run_async() done, defined at /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/helpers.py:579&gt; exception=ValueError(&quot;Task wf_firstlevel raised an error, full crash report is here: [PosixPath(&#39;/tmp/tmp7a1mu_1l/Workflow_520f5ffd532f544f2f8a063b589ffe05/_error.pklz&#39;), PosixPath(&#39;/tmp/tmp7a1mu_1l/Workflow_1d94891ef83024fd873d1a94e35071cc/_error.pklz&#39;)]&quot;)&gt;
+Traceback (most recent call last):
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py&quot;, line 1365, in _collect_outputs
+    val_out = val.get_value(self)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/specs.py&quot;, line 1030, in get_value
+    value = get_nested_results(result, depth=split_depth)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/specs.py&quot;, line 1015, in get_nested_results
+    val = StateArray[self.type](
+        get_nested_results(res=r, depth=depth - 1) for r in res
+    )
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/specs.py&quot;, line 1016, in &lt;genexpr&gt;
+    get_nested_results(res=r, depth=depth - 1) for r in res
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/specs.py&quot;, line 1020, in get_nested_results
+    raise ValueError(
+    ...&lt;2 lines&gt;...
+    )
+ValueError: Cannot retrieve value for first_level_contrast from wf_firstlevel as the node errored
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/asyncio/tasks.py&quot;, line 304, in __step_run_and_handle_result
+    result = coro.send(None)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/helpers.py&quot;, line 585, in load_and_run_async
+    await task._run(submitter=submitter, rerun=rerun, **kwargs)
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py&quot;, line 1237, in _run
+    result.output = self._collect_outputs()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py&quot;, line 1386, in _collect_outputs
+    raise ValueError(
+    ...&lt;2 lines&gt;...
+    )
+ValueError: Task wf_firstlevel raised an error, full crash report is here: [PosixPath(&#39;/tmp/tmp7a1mu_1l/Workflow_520f5ffd532f544f2f8a063b589ffe05/_error.pklz&#39;), PosixPath(&#39;/tmp/tmp7a1mu_1l/Workflow_1d94891ef83024fd873d1a94e35071cc/_error.pklz&#39;)]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/IPython/core/ultratb.py&quot;, line 1063, in format_exception_as_a_whole
-    self.get_records(etb, number_of_lines_of_context, tb_offset) if etb else []
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/IPython/core/ultratb.py&quot;, line 1160, in get_records
-    res = list(stack_data.FrameInfo.stack_data(etb, options=options))[tb_offset:]
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/stack_data/core.py&quot;, line 597, in stack_data
-    yield from collapse_repeated(
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/stack_data/utils.py&quot;, line 83, in collapse_repeated
-    yield from map(mapper, original_group)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/stack_data/core.py&quot;, line 587, in mapper
-    return cls(f, options)
-           ^^^^^^^^^^^^^^^
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/stack_data/core.py&quot;, line 551, in __init__
-    self.executing = Source.executing(frame_or_tb)
-                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/executing/executing.py&quot;, line 264, in executing
-    source = cls.for_frame(frame)
-             ^^^^^^^^^^^^^^^^^^^^
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/executing/executing.py&quot;, line 183, in for_frame
-    return cls.for_filename(frame.f_code.co_filename, frame.f_globals or {}, use_cache)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/executing/executing.py&quot;, line 212, in for_filename
-    return cls._for_filename_and_lines(filename, tuple(lines))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/executing/executing.py&quot;, line 223, in _for_filename_and_lines
-    result = source_cache[(filename, lines)] = cls(filename, lines)
-                                               ^^^^^^^^^^^^^^^^^^^^
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/site-packages/executing/executing.py&quot;, line 163, in __init__
-    self.tree = ast.parse(self.text, filename=filename)
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  File &quot;/usr/share/miniconda/envs/pydra-tutorial/lib/python3.11/ast.py&quot;, line 50, in parse
-    return compile(source, filename, mode, flags,
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SystemError: AST constructor recursion depth mismatch (before=129, after=183)
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py:1365,</span> in <span class="ni">Workflow._collect_outputs</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1364</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1365</span>     <span class="n">val_out</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1366</span>     <span class="n">output_wf</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">val_out</span>
+
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/specs.py:1030,</span> in <span class="ni">LazyOutField.get_value</span><span class="nt">(self, wf, state_index)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1028</span>     <span class="k">return</span> <span class="n">val</span>
+<span class="ne">-&gt; </span><span class="mi">1030</span> <span class="n">value</span> <span class="o">=</span> <span class="n">get_nested_results</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="n">split_depth</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1031</span> <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apply_cast</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/specs.py:1020,</span> in <span class="ni">LazyOutField.get_value.&lt;locals&gt;.get_nested_results</span><span class="nt">(res, depth)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1019</span> <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">errored</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1020</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1021</span>         <span class="sa">f</span><span class="s2">&quot;Cannot retrieve value for </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="si">}</span><span class="s2"> from </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> as &quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1022</span>         <span class="s2">&quot;the node errored&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1023</span>     <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1024</span> <span class="n">val</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">get_output_field</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">)</span>
+
+<span class="ne">ValueError</span>: Cannot retrieve value for second_level_stats_map from wf_secondlevel as the node errored
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">20</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">pydra</span> <span class="kn">import</span> <span class="n">Submitter</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="k">with</span> <span class="n">Submitter</span><span class="p">(</span><span class="n">plugin</span><span class="o">=</span><span class="s1">&#39;cf&#39;</span><span class="p">,</span> <span class="n">n_procs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="k">as</span> <span class="n">submitter</span><span class="p">:</span>
+<span class="ne">----&gt; </span><span class="mi">4</span>     <span class="n">submitter</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">results</span> <span class="o">=</span> <span class="n">wf</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/submitter.py:42,</span> in <span class="ni">Submitter.__call__</span><span class="nt">(self, runnable, cache_locations, rerun)</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span> <span class="k">if</span> <span class="n">cache_locations</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">41</span>     <span class="n">runnable</span><span class="o">.</span><span class="n">cache_locations</span> <span class="o">=</span> <span class="n">cache_locations</span>
+<span class="ne">---&gt; </span><span class="mi">42</span> <span class="bp">self</span><span class="o">.</span><span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">submit_from_call</span><span class="p">(</span><span class="n">runnable</span><span class="p">,</span> <span class="n">rerun</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span> <span class="k">return</span> <span class="n">runnable</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/nest_asyncio.py:98,</span> in <span class="ni">_patch_loop.&lt;locals&gt;.run_until_complete</span><span class="nt">(self, future)</span>
+<span class="g g-Whitespace">     </span><span class="mi">95</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">f</span><span class="o">.</span><span class="n">done</span><span class="p">():</span>
+<span class="g g-Whitespace">     </span><span class="mi">96</span>     <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">97</span>         <span class="s1">&#39;Event loop stopped before Future completed.&#39;</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">98</span> <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/asyncio/futures.py:199,</span> in <span class="ni">Future.result</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">197</span> <span class="bp">self</span><span class="o">.</span><span class="n">__log_traceback</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="g g-Whitespace">    </span><span class="mi">198</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exception</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">199</span>     <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exception</span><span class="o">.</span><span class="n">with_traceback</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_exception_tb</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">200</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_result</span>
+
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/asyncio/tasks.py:304,</span> in <span class="ni">Task.__step_run_and_handle_result</span><span class="nt">(***failed resolving arguments***)</span>
+<span class="g g-Whitespace">    </span><span class="mi">300</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">301</span>     <span class="k">if</span> <span class="n">exc</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">302</span>         <span class="c1"># We use the `send` method directly, because coroutines</span>
+<span class="g g-Whitespace">    </span><span class="mi">303</span>         <span class="c1"># don&#39;t have `__iter__` and `__next__` methods.</span>
+<span class="ne">--&gt; </span><span class="mi">304</span>         <span class="n">result</span> <span class="o">=</span> <span class="n">coro</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">305</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">306</span>         <span class="n">result</span> <span class="o">=</span> <span class="n">coro</span><span class="o">.</span><span class="n">throw</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span>
+
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/submitter.py:68,</span> in <span class="ni">Submitter.submit_from_call</span><span class="nt">(self, runnable, rerun)</span>
+<span class="g g-Whitespace">     </span><span class="mi">66</span> <span class="c1"># 1</span>
+<span class="g g-Whitespace">     </span><span class="mi">67</span> <span class="k">if</span> <span class="n">runnable</span><span class="o">.</span><span class="n">state</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">68</span>     <span class="k">await</span> <span class="n">runnable</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rerun</span><span class="o">=</span><span class="n">rerun</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">69</span> <span class="c1"># 3</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">71</span>     <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">expand_runnable</span><span class="p">(</span><span class="n">runnable</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rerun</span><span class="o">=</span><span class="n">rerun</span><span class="p">)</span>
+
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py:1237,</span> in <span class="ni">Workflow._run</span><span class="nt">(self, submitter, rerun, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1235</span>     <span class="bp">self</span><span class="o">.</span><span class="n">audit</span><span class="o">.</span><span class="n">monitor</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1236</span>     <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run_task</span><span class="p">(</span><span class="n">submitter</span><span class="p">,</span> <span class="n">rerun</span><span class="o">=</span><span class="n">rerun</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1237</span>     <span class="n">result</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_collect_outputs</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1238</span> <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1239</span>     <span class="n">etype</span><span class="p">,</span> <span class="nb">eval</span><span class="p">,</span> <span class="n">etr</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()</span>
+
+<span class="nn">File /usr/share/miniconda/envs/pydra-tutorial/lib/python3.13/site-packages/pydra/engine/core.py:1371,</span> in <span class="ni">Workflow._collect_outputs</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1369</span> <span class="c1"># checking if the tasks has predecessors that raises error</span>
+<span class="g g-Whitespace">   </span><span class="mi">1370</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">_errored</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1371</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1372</span>         <span class="sa">f</span><span class="s2">&quot;Tasks </span><span class="si">{</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">val</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">_errored</span><span class="si">}</span><span class="s2"> raised an error&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1373</span>     <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1374</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1375</span>     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+
+<span class="ne">ValueError</span>: Tasks [&#39;wf_fixed_effect&#39;] raised an error
 </pre></div>
 </div>
 </div>
@@ -2266,10 +1858,10 @@ TypeError: Cannot coerce {&#39;pumps-control&#39;: array([ 0.,  0., -1.,  0.,  0
 </section>
 </section>
 <section id="let-s-plot">
-<h2><span class="section-number">8.6. </span>Let’s Plot!<a class="headerlink" href="#let-s-plot" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.6. </span>Let’s Plot!<a class="headerlink" href="#let-s-plot" title="Link to this heading">#</a></h2>
 <p>We only use 5 subjects, so it’s reasonable the following plots have nothing survived from testing.</p>
 <section id="unthresholded">
-<h3><span class="section-number">8.6.1. </span>Unthresholded<a class="headerlink" href="#unthresholded" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.6.1. </span>Unthresholded<a class="headerlink" href="#unthresholded" title="Link to this heading">#</a></h3>
 <p>Let’s plot the unthresholded image first.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -2300,7 +1892,7 @@ TypeError: Cannot coerce {&#39;pumps-control&#39;: array([ 0.,  0., -1.,  0.,  0
 </div>
 </section>
 <section id="cluster-thresholding">
-<h3><span class="section-number">8.6.2. </span>Cluster Thresholding<a class="headerlink" href="#cluster-thresholding" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.6.2. </span>Cluster Thresholding<a class="headerlink" href="#cluster-thresholding" title="Link to this heading">#</a></h3>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -2330,7 +1922,7 @@ TypeError: Cannot coerce {&#39;pumps-control&#39;: array([ 0.,  0., -1.,  0.,  0
 </div>
 </section>
 <section id="multiple-comparison">
-<h3><span class="section-number">8.6.3. </span>Multiple Comparison<a class="headerlink" href="#multiple-comparison" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.6.3. </span>Multiple Comparison<a class="headerlink" href="#multiple-comparison" title="Link to this heading">#</a></h3>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -2358,7 +1950,7 @@ TypeError: Cannot coerce {&#39;pumps-control&#39;: array([ 0.,  0., -1.,  0.,  0
 </div>
 </section>
 <section id="paramatric-test">
-<h3><span class="section-number">8.6.4. </span>Paramatric Test<a class="headerlink" href="#paramatric-test" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.6.4. </span>Paramatric Test<a class="headerlink" href="#paramatric-test" title="Link to this heading">#</a></h3>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -2386,7 +1978,7 @@ TypeError: Cannot coerce {&#39;pumps-control&#39;: array([ 0.,  0., -1.,  0.,  0
 </div>
 </section>
 <section id="nonparamatric-test">
-<h3><span class="section-number">8.6.5. </span>Nonparamatric Test<a class="headerlink" href="#nonparamatric-test" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">8.6.5. </span>Nonparamatric Test<a class="headerlink" href="#nonparamatric-test" title="Link to this heading">#</a></h3>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -2415,12 +2007,12 @@ TypeError: Cannot coerce {&#39;pumps-control&#39;: array([ 0.,  0., -1.,  0.,  0
 </section>
 </section>
 <section id="exercise-1">
-<h2><span class="section-number">8.7. </span>Exercise #1<a class="headerlink" href="#exercise-1" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.7. </span>Exercise #1<a class="headerlink" href="#exercise-1" title="Link to this heading">#</a></h2>
 <p>In this example, we conducted GLM on each run per subject separately and then used a fixed-effect model to average across runs.</p>
 <p>Where did we put <code class="docutils literal notranslate"><span class="pre">.splitter</span></code> and <code class="docutils literal notranslate"><span class="pre">.combiner</span></code>. Why did we put it there?</p>
 </section>
 <section id="exercise-2">
-<h2><span class="section-number">8.8. </span>Exercise #2<a class="headerlink" href="#exercise-2" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.8. </span>Exercise #2<a class="headerlink" href="#exercise-2" title="Link to this heading">#</a></h2>
 <p>Moreover, We choose this approach due to limited memory on GitHub. <a class="reference external" href="https://nilearn.github.io/stable/modules/generated/nilearn.glm.first_level.FirstLevelModel.html">FirstLevelModel</a> in Nilearn also allows to compute multiple runs with a fixed-effect model simultanously. Here is an <a class="reference external" href="https://nilearn.github.io/stable/auto_examples/04_glm_first_level/plot_fiac_analysis.html#sphx-glr-auto-examples-04-glm-first-level-plot-fiac-analysis-py">example</a>.</p>
 <p>Would you like to give it a try on your own?</p>
 </section>
@@ -2453,8 +2045,8 @@ TypeError: Cannot coerce {&#39;pumps-control&#39;: array([ 0.,  0., -1.,  0.,  0
               
               
               
-                <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                <footer class="prev-next-footer d-print-none">
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="6_firstlevel_glm_nilearn.html"
@@ -2481,7 +2073,9 @@ TypeError: Cannot coerce {&#39;pumps-control&#39;: array([ 0.,  0., -1.,  0.,  0
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
 
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
@@ -2551,9 +2145,10 @@ By Pydra Developers
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -2577,8 +2172,8 @@ By Pydra Developers
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>
